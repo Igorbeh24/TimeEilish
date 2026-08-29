@@ -35,7 +35,7 @@
   --font-body:'Inter',sans-serif;
   --font-mono:'Space Mono',monospace;
 
-  /* TAMANHO DOS CARDS — REDUZIDO 10% */
+  /* CARD ORIGINAL 300px → IMAGEM/CARD 10% MENOR */
   --event-size:270px;
 
   --connector-h:22px;
@@ -67,7 +67,7 @@
 @media(max-width:800px){
 
   :root{
-    --event-size:212px;
+    --event-size:211.5px;
     --connector-h:20px;
     --card-gap:370px;
   }
@@ -78,7 +78,7 @@
 @media(max-width:560px){
 
   :root{
-    --event-size:167px;
+    --event-size:166.5px;
     --connector-h:18px;
     --card-gap:285px;
 
@@ -103,78 +103,52 @@
 
 html,
 body{
-
   width:100%;
   height:100%;
-
   overflow:hidden;
-
   background:var(--background);
-
 }
 
 
 body{
-
   font-family:var(--font-body);
-
   color:var(--text);
-
   -webkit-font-smoothing:antialiased;
-
   overscroll-behavior:none;
-
 }
 
 
 img{
-
   display:block;
-
   max-width:100%;
-
 }
 
 
 button{
-
   font-family:inherit;
-
   border:none;
-
   background:none;
-
   color:inherit;
-
   cursor:pointer;
-
 }
 
 
 a{
-
   color:inherit;
-
 }
 
 
 ::selection{
-
   background:var(--primary);
-
   color:var(--background);
-
 }
 
 
 button:focus-visible,
 a:focus-visible,
 [tabindex]:focus-visible{
-
   outline:2px solid var(--primary);
-
   outline-offset:3px;
-
 }
 
 
@@ -183,11 +157,8 @@ a:focus-visible,
    ========================================================= */
 
 .bg-layer{
-
   position:fixed;
-
   inset:0;
-
   z-index:0;
 
   background-image:
@@ -200,7 +171,6 @@ a:focus-visible,
     url('https://picsum.photos/seed/billie-bg/1800/1200');
 
   background-size:cover;
-
   background-position:center;
 
   filter:
@@ -211,18 +181,13 @@ a:focus-visible,
   will-change:transform;
 
   transition:filter 1s ease;
-
 }
 
 
 .bg-vignette{
-
   position:fixed;
-
   inset:0;
-
   z-index:1;
-
   pointer-events:none;
 
   background:
@@ -231,26 +196,19 @@ a:focus-visible,
       transparent 40%,
       rgba(0,0,0,.6) 100%
     );
-
 }
 
 
 .bg-grain{
-
   position:fixed;
-
   inset:0;
-
   z-index:2;
-
   pointer-events:none;
-
   opacity:.045;
 
   background-image:url(
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
   );
-
 }
 
 
@@ -259,102 +217,65 @@ a:focus-visible,
    ========================================================= */
 
 #loading-screen{
-
   position:fixed;
-
   inset:0;
-
   z-index:100;
 
   background:var(--background);
 
   display:flex;
-
   flex-direction:column;
-
   align-items:center;
-
   justify-content:center;
 
   gap:18px;
 
   transition:opacity .7s ease;
-
 }
 
 
 #loading-screen.hide{
-
   opacity:0;
-
   pointer-events:none;
-
 }
 
 
 .loading-name{
-
   font-family:var(--font-title);
-
   font-weight:600;
-
   letter-spacing:.04em;
-
   font-size:clamp(28px,5vw,44px);
-
   color:var(--text);
-
 }
 
 
 .loading-sub{
-
   font-family:var(--font-mono);
-
   font-size:12px;
-
   letter-spacing:.18em;
-
   color:var(--muted);
-
   text-transform:uppercase;
-
 }
 
 
 .loading-bar{
-
   width:220px;
-
   height:1px;
-
   background:var(--secondary);
-
   position:relative;
-
   overflow:hidden;
-
 }
 
 
 .loading-bar::after{
-
   content:'';
-
   position:absolute;
-
   left:-40%;
-
   top:0;
-
   bottom:0;
-
   width:40%;
-
   background:var(--primary);
-
   animation:loadmove 1.1s ease-in-out infinite;
-
 }
 
 
@@ -380,9 +301,7 @@ a:focus-visible,
    ========================================================= */
 
 .site-header{
-
   position:fixed;
-
   top:0;
   left:0;
   right:0;
@@ -390,9 +309,7 @@ a:focus-visible,
   z-index:40;
 
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 
   padding:
@@ -409,49 +326,33 @@ a:focus-visible,
     );
 
   backdrop-filter:blur(6px);
-
   -webkit-backdrop-filter:blur(6px);
-
 }
 
 
 .brand{
-
   font-family:var(--font-title);
-
   font-weight:600;
-
   font-size:18px;
-
   letter-spacing:.05em;
-
 }
 
 
 .brand span{
-
   color:var(--primary);
-
 }
 
 
 .main-nav{
-
   display:flex;
-
   gap:clamp(16px,3vw,32px);
-
 }
 
 
 .main-nav button{
-
   font-family:var(--font-mono);
-
   font-size:11px;
-
   letter-spacing:.14em;
-
   text-transform:uppercase;
 
   color:var(--muted);
@@ -461,27 +362,20 @@ a:focus-visible,
   position:relative;
 
   transition:color .3s;
-
 }
 
 
 .main-nav button:hover{
-
   color:var(--text);
-
 }
 
 
 .main-nav button::after{
-
   content:'';
 
   position:absolute;
-
   left:0;
-
   right:100%;
-
   bottom:0;
 
   height:1px;
@@ -489,23 +383,18 @@ a:focus-visible,
   background:var(--primary);
 
   transition:right .3s ease;
-
 }
 
 
 .main-nav button:hover::after{
-
   right:0;
-
 }
 
 
 @media(max-width:620px){
 
   .main-nav{
-
     display:none;
-
   }
 
 }
@@ -516,23 +405,18 @@ a:focus-visible,
    ========================================================= */
 
 .menu-toggle{
-
   position:fixed;
 
   top:20px;
-
   right:20px;
 
   z-index:70;
 
   width:38px;
-
   height:38px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
   font-size:18px;
@@ -540,22 +424,18 @@ a:focus-visible,
   color:var(--text);
 
   border:1px solid var(--event-border);
-
   border-radius:50%;
 
   background:rgba(15,17,17,.7);
 
   backdrop-filter:blur(6px);
-
 }
 
 
 @media(min-width:621px){
 
   .menu-toggle{
-
     display:none;
-
   }
 
 }
@@ -566,13 +446,10 @@ a:focus-visible,
    ========================================================= */
 
 .overview-panel{
-
   position:fixed;
 
   top:0;
-
   right:0;
-
   bottom:0;
 
   z-index:80;
@@ -592,23 +469,18 @@ a:focus-visible,
     cubic-bezier(.4,0,.2,1);
 
   overflow-y:auto;
-
 }
 
 
 .overview-panel.open{
-
   transform:translateX(0);
-
 }
 
 
 .overview-panel h3{
-
   font-family:var(--font-mono);
 
   font-size:11px;
-
   letter-spacing:.18em;
 
   color:var(--muted);
@@ -616,23 +488,18 @@ a:focus-visible,
   text-transform:uppercase;
 
   margin-bottom:18px;
-
 }
 
 
 .overview-list{
-
   list-style:none;
 
   display:flex;
-
   flex-direction:column;
-
 }
 
 
 .overview-list li button{
-
   width:100%;
 
   text-align:left;
@@ -650,39 +517,28 @@ a:focus-visible,
   color:var(--muted);
 
   transition:color .25s;
-
 }
 
 
 .overview-list li button:hover{
-
   color:var(--text);
-
 }
 
 
 .overview-list .yr{
-
   font-family:var(--font-mono);
-
   color:var(--primary);
-
   font-size:13px;
-
   min-width:44px;
-
 }
 
 
 .overview-list .ttl{
-
   font-size:14px;
-
 }
 
 
 .overview-backdrop{
-
   position:fixed;
 
   inset:0;
@@ -696,16 +552,12 @@ a:focus-visible,
   pointer-events:none;
 
   transition:opacity .3s;
-
 }
 
 
 .overview-backdrop.open{
-
   opacity:1;
-
   pointer-events:auto;
-
 }
 
 
@@ -714,7 +566,6 @@ a:focus-visible,
    ========================================================= */
 
 .intro{
-
   position:fixed;
 
   inset:0;
@@ -744,23 +595,17 @@ a:focus-visible,
   transition:
     opacity .9s ease,
     visibility .9s ease;
-
 }
 
 
 .intro.hidden{
-
   opacity:0;
-
   visibility:hidden;
-
   pointer-events:none;
-
 }
 
 
 .intro-eyebrow{
-
   font-family:var(--font-mono);
 
   font-size:12px;
@@ -772,12 +617,10 @@ a:focus-visible,
   color:var(--primary);
 
   margin-bottom:22px;
-
 }
 
 
 .intro-name{
-
   font-family:var(--font-title);
 
   font-weight:300;
@@ -785,21 +628,16 @@ a:focus-visible,
   font-size:clamp(46px,10vw,124px);
 
   line-height:.96;
-
 }
 
 
 .intro-name b{
-
   font-weight:600;
-
   display:block;
-
 }
 
 
 .intro-tagline{
-
   font-size:clamp(14px,2vw,18px);
 
   color:var(--muted);
@@ -811,12 +649,10 @@ a:focus-visible,
   font-weight:400;
 
   line-height:1.6;
-
 }
 
 
 .intro-meta{
-
   display:flex;
 
   gap:22px;
@@ -834,12 +670,10 @@ a:focus-visible,
   flex-wrap:wrap;
 
   justify-content:center;
-
 }
 
 
 .btn-start{
-
   font-family:var(--font-mono);
 
   font-size:13px;
@@ -859,25 +693,19 @@ a:focus-visible,
   overflow:hidden;
 
   transition:color .35s;
-
 }
 
 
 .btn-start span{
-
   position:relative;
-
   z-index:1;
-
 }
 
 
 .btn-start::before{
-
   content:'';
 
   position:absolute;
-
   inset:0;
 
   background:var(--primary);
@@ -887,26 +715,20 @@ a:focus-visible,
   transition:
     transform .4s
     cubic-bezier(.4,0,.2,1);
-
 }
 
 
 .btn-start:hover{
-
   color:var(--background);
-
 }
 
 
 .btn-start:hover::before{
-
   transform:translateX(0);
-
 }
 
 
 .intro-hint{
-
   position:absolute;
 
   bottom:34px;
@@ -920,7 +742,6 @@ a:focus-visible,
   color:var(--secondary);
 
   animation:pulseFade 2.4s ease-in-out infinite;
-
 }
 
 
@@ -942,7 +763,6 @@ a:focus-visible,
    ========================================================= */
 
 .timeline-viewport{
-
   position:fixed;
 
   inset:0;
@@ -954,29 +774,23 @@ a:focus-visible,
   cursor:grab;
 
   touch-action:pan-y;
-
 }
 
 
 .timeline-viewport.dragging{
-
   cursor:grabbing;
-
 }
 
 
 .timeline-track{
-
   position:absolute;
 
   top:0;
-
   left:0;
 
   height:100%;
 
   will-change:transform;
-
 }
 
 
@@ -985,15 +799,12 @@ a:focus-visible,
    ========================================================= */
 
 .timeline-line{
-
   position:absolute;
 
   top:50%;
-
   left:0;
 
   height:2px;
-
   width:100%;
 
   background:
@@ -1006,16 +817,13 @@ a:focus-visible,
     );
 
   transform:translateY(-1px);
-
 }
 
 
 .timeline-line::before{
-
   content:'';
 
   position:absolute;
-
   inset:0;
 
   background-image:
@@ -1024,7 +832,6 @@ a:focus-visible,
       rgba(255,255,255,.06) 0 1px,
       transparent 1px 26px
     );
-
 }
 
 
@@ -1033,28 +840,26 @@ a:focus-visible,
    ========================================================= */
 
 .event{
-
   position:absolute;
 
   top:50%;
 
   width:0;
-
   height:0;
-
 }
 
 
-.event-marker{
+/* =========================================================
+   MARCADOR
+   ========================================================= */
 
+.event-marker{
   position:absolute;
 
   top:0;
-
   left:0;
 
   width:11px;
-
   height:11px;
 
   margin:-5.5px 0 0 -5.5px;
@@ -1070,12 +875,10 @@ a:focus-visible,
     box-shadow .4s ease;
 
   z-index:3;
-
 }
 
 
 .event.active .event-marker{
-
   transform:scale(1.5);
 
   box-shadow:
@@ -1083,7 +886,6 @@ a:focus-visible,
     rgba(184,216,216,.14);
 
   animation:markerPulse 2.2s ease-in-out infinite;
-
 }
 
 
@@ -1113,7 +915,6 @@ a:focus-visible,
    ========================================================= */
 
 .event-connector{
-
   position:absolute;
 
   left:-1px;
@@ -1121,24 +922,82 @@ a:focus-visible,
   width:2px;
 
   background:var(--timeline);
-
 }
 
 
 .event-top .event-connector{
-
   bottom:0;
-
   height:var(--connector-h);
-
 }
 
 
 .event-bottom .event-connector{
-
   top:0;
-
   height:var(--connector-h);
+}
+
+
+/* =========================================================
+   DATA — LADO OPOSTO DO CARD
+   ========================================================= */
+
+.event-date{
+  position:absolute;
+
+  left:0;
+
+  width:160px;
+
+  transform:translateX(-50%);
+
+  text-align:center;
+
+  font-family:var(--font-mono);
+
+  font-size:12px;
+
+  letter-spacing:.12em;
+
+  color:var(--primary);
+
+  white-space:nowrap;
+
+  z-index:5;
+
+  opacity:.9;
+}
+
+
+/*
+   Evento em cima:
+   CARD fica acima da linha.
+   DATA fica abaixo da linha.
+*/
+
+.event-top .event-date{
+
+  top:
+    calc(
+      var(--connector-h)
+      + var(--timeline-safe-gap)
+    );
+
+}
+
+
+/*
+   Evento em baixo:
+   CARD fica abaixo da linha.
+   DATA fica acima da linha.
+*/
+
+.event-bottom .event-date{
+
+  bottom:
+    calc(
+      var(--connector-h)
+      + var(--timeline-safe-gap)
+    );
 
 }
 
@@ -1148,7 +1007,6 @@ a:focus-visible,
    ========================================================= */
 
 .event-card{
-
   position:absolute;
 
   left:0;
@@ -1173,7 +1031,6 @@ a:focus-visible,
       - var(--bottom-safe-space) / 2
       - var(--timeline-safe-gap)
     );
-
 }
 
 
@@ -1191,7 +1048,6 @@ a:focus-visible,
 
   transform:
     translate(-50%,26px);
-
 }
 
 
@@ -1209,7 +1065,6 @@ a:focus-visible,
 
   transform:
     translate(-50%,-26px);
-
 }
 
 
@@ -1223,7 +1078,6 @@ a:focus-visible,
 
   transform:
     translate(-50%,0);
-
 }
 
 
@@ -1254,14 +1108,12 @@ a:focus-visible,
     transform .4s ease;
 
   position:relative;
-
 }
 
 
 .event-figure img{
 
   width:100%;
-
   height:100%;
 
   object-fit:cover;
@@ -1276,7 +1128,6 @@ a:focus-visible,
     filter .8s ease,
     transform .6s
     cubic-bezier(.4,0,.2,1);
-
 }
 
 
@@ -1291,7 +1142,6 @@ a:focus-visible,
   border:1px solid rgba(255,255,255,.06);
 
   pointer-events:none;
-
 }
 
 
@@ -1301,7 +1151,6 @@ a:focus-visible,
   filter:
     grayscale(10%)
     contrast(1.02);
-
 }
 
 
@@ -1310,23 +1159,20 @@ a:focus-visible,
   box-shadow:
     0 22px 48px -12px
     var(--event-shadow);
-
 }
 
 
 .event:hover .event-figure img{
 
   transform:scale(1.045);
-
 }
 
 
 /* =========================================================
-   TEXTO DOS EVENTOS
+   TEXTO
    ========================================================= */
 
 .event-body{
-
   text-align:center;
 
   position:relative;
@@ -1335,27 +1181,19 @@ a:focus-visible,
 
   padding-left:4px;
   padding-right:4px;
-
 }
 
 
 .event-year{
-
-  font-family:var(--font-mono);
-
-  font-size:13px;
-
-  letter-spacing:.1em;
-
-  color:var(--primary);
-
-  margin-top:12px;
-
+  /*
+     Escondemos o ano antigo do corpo.
+     Agora a data aparece no lado oposto da linha.
+  */
+  display:none;
 }
 
 
 .event-title{
-
   font-family:var(--font-title);
 
   font-weight:600;
@@ -1365,12 +1203,10 @@ a:focus-visible,
   margin-top:4px;
 
   line-height:1.25;
-
 }
 
 
 .event-desc{
-
   font-size:12px;
 
   color:var(--muted);
@@ -1378,6 +1214,35 @@ a:focus-visible,
   margin-top:7px;
 
   line-height:1.45;
+}
+
+
+/* =========================================================
+   EVENTOS DE BAIXO
+   TEXTO CONTINUA ACIMA DA IMAGEM
+   ========================================================= */
+
+.event-bottom .event-body{
+
+  margin-bottom:8px;
+
+}
+
+
+.event-bottom .event-title{
+
+  margin-top:0;
+
+}
+
+
+/* =========================================================
+   EVENTOS DE CIMA
+   ========================================================= */
+
+.event-top .event-body{
+
+  margin-top:8px;
 
 }
 
@@ -1387,7 +1252,6 @@ a:focus-visible,
    ========================================================= */
 
 .event-more{
-
   position:relative;
 
   z-index:20;
@@ -1420,39 +1284,34 @@ a:focus-visible,
     border-color .3s,
     color .3s,
     gap .3s;
-
 }
 
 
 .event-more:hover{
-
   color:var(--primary);
 
   border-color:var(--primary);
 
   gap:10px;
-
 }
 
 
 @media(max-width:560px){
 
   .event-title{
-
     font-size:15px;
-
   }
 
   .event-desc{
-
     font-size:11px;
-
   }
 
   .event-more{
-
     font-size:9px;
+  }
 
+  .event-date{
+    font-size:10px;
   }
 
 }
@@ -1463,7 +1322,6 @@ a:focus-visible,
    ========================================================= */
 
 .track-panel{
-
   position:absolute;
 
   top:50%;
@@ -1473,7 +1331,6 @@ a:focus-visible,
   width:min(340px,70vw);
 
   text-align:center;
-
 }
 
 
@@ -1489,7 +1346,6 @@ a:focus-visible,
 
     transform .7s
     cubic-bezier(.4,0,.2,1);
-
 }
 
 
@@ -1498,7 +1354,6 @@ a:focus-visible,
   opacity:1;
 
   transform:translateY(0);
-
 }
 
 
@@ -1513,7 +1368,6 @@ a:focus-visible,
   color:var(--secondary);
 
   text-transform:uppercase;
-
 }
 
 
@@ -1526,7 +1380,6 @@ a:focus-visible,
   font-size:clamp(26px,4vw,40px);
 
   margin:14px 0 12px;
-
 }
 
 
@@ -1539,7 +1392,6 @@ a:focus-visible,
   line-height:1.6;
 
   margin-bottom:20px;
-
 }
 
 
@@ -1560,7 +1412,6 @@ a:focus-visible,
   color:var(--text);
 
   transition:.3s;
-
 }
 
 
@@ -1569,12 +1420,11 @@ a:focus-visible,
   border-color:var(--primary);
 
   color:var(--primary);
-
 }
 
 
 /* =========================================================
-   CONTROLES INFERIORES
+   CONTROLES
    ========================================================= */
 
 .nav-controls{
@@ -1582,7 +1432,6 @@ a:focus-visible,
   position:fixed;
 
   left:0;
-
   right:0;
 
   bottom:18px;
@@ -1614,7 +1463,6 @@ a:focus-visible,
     visibility .6s;
 
   pointer-events:none;
-
 }
 
 
@@ -1627,7 +1475,6 @@ a:focus-visible,
   transform:translateY(0);
 
   pointer-events:auto;
-
 }
 
 
@@ -1638,7 +1485,6 @@ a:focus-visible,
 .nav-arrow{
 
   width:42px;
-
   height:42px;
 
   border-radius:50%;
@@ -1652,7 +1498,6 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   font-size:16px;
@@ -1664,7 +1509,6 @@ a:focus-visible,
     transform .2s;
 
   flex:none;
-
 }
 
 
@@ -1673,14 +1517,12 @@ a:focus-visible,
   border-color:var(--primary);
 
   transform:translateY(-2px);
-
 }
 
 
 .nav-arrow:active{
 
   transform:translateY(0);
-
 }
 
 
@@ -1697,7 +1539,6 @@ a:focus-visible,
   flex-direction:column;
 
   gap:6px;
-
 }
 
 
@@ -1712,7 +1553,6 @@ a:focus-visible,
   border-radius:2px;
 
   overflow:hidden;
-
 }
 
 
@@ -1721,9 +1561,7 @@ a:focus-visible,
   position:absolute;
 
   left:0;
-
   top:0;
-
   bottom:0;
 
   width:0%;
@@ -1731,7 +1569,6 @@ a:focus-visible,
   background:var(--primary);
 
   transition:width .1s linear;
-
 }
 
 
@@ -1748,22 +1585,17 @@ a:focus-visible,
   color:var(--secondary);
 
   letter-spacing:.05em;
-
 }
 
 
 @media(max-width:620px){
 
   .progress-wrap{
-
     width:44vw;
-
   }
 
   .progress-years span:not(:first-child):not(:last-child){
-
     display:none;
-
   }
 
 }
@@ -1804,7 +1636,6 @@ a:focus-visible,
   transition:
     opacity .35s ease,
     visibility .35s ease;
-
 }
 
 
@@ -1815,7 +1646,6 @@ a:focus-visible,
   visibility:visible;
 
   pointer-events:auto;
-
 }
 
 
@@ -1844,7 +1674,6 @@ a:focus-visible,
   box-shadow:
     0 40px 80px -20px
     rgba(0,0,0,.7);
-
 }
 
 
@@ -1853,7 +1682,6 @@ a:focus-visible,
   transform:
     scale(1)
     translateY(0);
-
 }
 
 
@@ -1868,7 +1696,6 @@ a:focus-visible,
   margin:14px 14px 0 0;
 
   width:34px;
-
   height:34px;
 
   border-radius:50%;
@@ -1878,13 +1705,11 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   font-size:18px;
 
   z-index:20;
-
 }
 
 
@@ -1893,7 +1718,6 @@ a:focus-visible,
   background:rgba(0,0,0,.7);
 
   color:var(--primary);
-
 }
 
 
@@ -1904,25 +1728,21 @@ a:focus-visible,
   aspect-ratio:16 / 10;
 
   overflow:hidden;
-
 }
 
 
 .modal-figure img{
 
   width:100%;
-
   height:100%;
 
   object-fit:cover;
-
 }
 
 
 .modal-body{
 
   padding:8px 34px 40px;
-
 }
 
 
@@ -1937,7 +1757,6 @@ a:focus-visible,
   letter-spacing:.1em;
 
   margin-top:18px;
-
 }
 
 
@@ -1950,7 +1769,6 @@ a:focus-visible,
   font-size:clamp(22px,3vw,30px);
 
   margin:10px 0 18px;
-
 }
 
 
@@ -1961,7 +1779,6 @@ a:focus-visible,
   font-size:15px;
 
   line-height:1.75;
-
 }
 
 
@@ -1990,53 +1807,36 @@ a:focus-visible,
   }
 
 
-  .event-year{
-
-    margin-top:7px;
-
-    font-size:11px;
-
-  }
-
-
   .event-title{
-
     font-size:16px;
-
   }
 
 
   .event-desc{
-
     font-size:11px;
-
     margin-top:5px;
-
   }
 
 
   .event-more{
-
     margin-top:7px;
-
     font-size:9px;
+  }
 
+
+  .event-date{
+    font-size:10px;
   }
 
 
   .nav-controls{
-
     bottom:8px;
-
   }
 
 
   .nav-arrow{
-
     width:36px;
-
     height:36px;
-
   }
 
 }
@@ -2054,7 +1854,7 @@ a:focus-visible,
 
   :root{
 
-    --event-size:167px;
+    --event-size:166.5px;
 
     --connector-h:16px;
 
@@ -2067,35 +1867,24 @@ a:focus-visible,
   }
 
 
-  .event-year{
-
-    margin-top:5px;
-
-    font-size:10px;
-
-  }
-
-
   .event-title{
-
     font-size:14px;
-
   }
 
 
   .event-desc{
-
     font-size:9px;
-
   }
 
 
   .event-more{
-
     font-size:8px;
-
     margin-top:5px;
+  }
 
+
+  .event-date{
+    font-size:9px;
   }
 
 }
@@ -2108,42 +1897,33 @@ a:focus-visible,
 @media(max-width:560px){
 
   .modal-overlay{
-
     padding:12px;
-
   }
 
 
   .modal{
-
     max-height:90vh;
-
   }
 
 
   .modal-body{
-
     padding:
       6px
       20px
       28px;
-
   }
 
 
   .modal-desc{
-
     font-size:13px;
-
     line-height:1.65;
-
   }
 
 }
 
 
 /* =========================================================
-   MOBILE COM POUCA ALTURA
+   MOBILE POUCA ALTURA
    ========================================================= */
 
 @media(
@@ -2172,18 +1952,13 @@ a:focus-visible,
 @media(prefers-reduced-motion:reduce){
 
   *{
-
     animation-duration:.001s !important;
-
     transition-duration:.001s !important;
-
   }
 
 
   .timeline-track{
-
     transition:none !important;
-
   }
 
 }
@@ -2198,7 +1973,6 @@ a:focus-visible,
   position:absolute;
 
   width:1px;
-
   height:1px;
 
   overflow:hidden;
@@ -2206,7 +1980,6 @@ a:focus-visible,
   clip:rect(0,0,0,0);
 
   white-space:nowrap;
-
 }
 
 </style>
@@ -2223,7 +1996,9 @@ a:focus-visible,
 <div class="bg-grain"></div>
 
 
-<!-- LOADING -->
+<!-- =======================================================
+     LOADING
+     ======================================================= -->
 
 <div id="loading-screen" aria-hidden="true">
 
@@ -2240,7 +2015,9 @@ a:focus-visible,
 </div>
 
 
-<!-- HEADER -->
+<!-- =======================================================
+     HEADER
+     ======================================================= -->
 
 <header class="site-header">
 
@@ -2271,7 +2048,9 @@ a:focus-visible,
 </header>
 
 
-<!-- MENU MOBILE -->
+<!-- =======================================================
+     MENU MOBILE
+     ======================================================= -->
 
 <button
   class="menu-toggle"
@@ -2307,7 +2086,9 @@ a:focus-visible,
 </aside>
 
 
-<!-- INTRO -->
+<!-- =======================================================
+     INTRO
+     ======================================================= -->
 
 <section
   class="intro"
@@ -2366,7 +2147,9 @@ a:focus-visible,
 </section>
 
 
-<!-- TIMELINE -->
+<!-- =======================================================
+     TIMELINE
+     ======================================================= -->
 
 <main
   class="timeline-viewport"
@@ -2387,7 +2170,9 @@ a:focus-visible,
 </main>
 
 
-<!-- CONTROLES -->
+<!-- =======================================================
+     CONTROLES
+     ======================================================= -->
 
 <div
   class="nav-controls"
@@ -2434,7 +2219,9 @@ a:focus-visible,
 </div>
 
 
-<!-- MODAL -->
+<!-- =======================================================
+     MODAL
+     ======================================================= -->
 
 <div
   class="modal-overlay"
@@ -2768,7 +2555,9 @@ function buildTimeline(){
     );
 
 
-  /* NÓ INICIAL */
+  /* =======================================================
+     NÓ INICIAL
+     ======================================================= */
 
   const introX =
     window.innerWidth / 2;
@@ -2798,13 +2587,13 @@ function buildTimeline(){
       aria-hidden="true"
     ></div>
 
+    <div class="event-date">
+      Início
+    </div>
+
     <div class="event-card">
 
       <div class="event-body">
-
-        <div class="event-year">
-          ${timelineEvents[0].year} · início
-        </div>
 
         <h3 class="event-title">
           A jornada começa
@@ -2825,7 +2614,9 @@ function buildTimeline(){
   track.appendChild(introNode);
 
 
-  /* OVERVIEW */
+  /* =======================================================
+     OVERVIEW
+     ======================================================= */
 
   const overviewList =
     document.getElementById('overviewList');
@@ -2865,7 +2656,9 @@ function buildTimeline(){
   overviewList.appendChild(introLi);
 
 
-  /* EVENTOS */
+  /* =======================================================
+     EVENTOS
+     ======================================================= */
 
   timelineEvents.forEach(
     (ev,i)=>{
@@ -2914,16 +2707,22 @@ function buildTimeline(){
         ></div>
 
 
+        <!-- DATA NO LADO OPOSTO DA LINHA -->
+
+        <div class="event-date">
+          ${ev.year}
+        </div>
+
+
         <div class="event-card">
 
           ${
             position === 'bottom'
             ? `
-              <div class="event-body">
 
-                <div class="event-year">
-                  ${ev.year}
-                </div>
+              <!-- TEXTO PRIMEIRO NOS EVENTOS DE BAIXO -->
+
+              <div class="event-body">
 
                 <h3 class="event-title">
                   ${ev.title}
@@ -2943,6 +2742,7 @@ function buildTimeline(){
 
               </div>
 
+
               <div class="event-figure">
 
                 <img
@@ -2953,8 +2753,10 @@ function buildTimeline(){
                 >
 
               </div>
+
             `
             : `
+
               <div class="event-figure">
 
                 <img
@@ -2966,11 +2768,8 @@ function buildTimeline(){
 
               </div>
 
-              <div class="event-body">
 
-                <div class="event-year">
-                  ${ev.year}
-                </div>
+              <div class="event-body">
 
                 <h3 class="event-title">
                   ${ev.title}
@@ -2989,6 +2788,7 @@ function buildTimeline(){
                 </button>
 
               </div>
+
             `
           }
 
@@ -3003,7 +2803,9 @@ function buildTimeline(){
       eventEls.push(el);
 
 
-      /* OVERVIEW */
+      /* =====================================================
+         OVERVIEW
+         ===================================================== */
 
       const li =
         document.createElement('li');
@@ -3032,7 +2834,9 @@ function buildTimeline(){
       overviewList.appendChild(li);
 
 
-      /* ANOS */
+      /* =====================================================
+         ANOS DO PROGRESSO
+         ===================================================== */
 
       if(
         i === 0 ||
@@ -3059,7 +2863,9 @@ function buildTimeline(){
   );
 
 
-  /* PAINEL FINAL */
+  /* =======================================================
+     PAINEL FINAL
+     ======================================================= */
 
   const lastX =
     timelineEvents[
@@ -4345,4 +4151,4 @@ window.addEventListener(
 </script>
 
 </body>
-   </html>
+  </html>
