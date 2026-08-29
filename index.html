@@ -1,101 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
-
-<title>Billie Eilish — Timeline</title>
+<title>Billie Eilish — Linha do Tempo</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-  rel="preconnect"
-  href="https://fonts.gstatic.com"
-  crossorigin
->
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
-  rel="stylesheet"
->
-
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* =========================================================
-   1. VISUAL CONFIGURATION
-   ========================================================= */
-
 :root{
-
   --background:#111313;
-
   --background-alt:#191c1c;
 
   --primary:#b8d8d8;
-
   --secondary:#718282;
 
   --text:#edf2f2;
-
   --muted:#9aa8a8;
 
   --timeline:#394545;
 
   --event-background:rgba(25,29,29,.75);
-
   --event-border:rgba(184,216,216,.25);
-
   --event-shadow:rgba(0,0,0,.65);
 
   --event-radius:4px;
 
   --font-title:'Fraunces',serif;
-
   --font-body:'Inter',sans-serif;
-
   --font-mono:'Space Mono',monospace;
 
-  /* IMAGES 10% SMALLER */
-
+  /* IMAGENS 10% MENORES */
   --event-size:270px;
 
-  /* CONNECTOR */
-
   --connector-h:22px;
-
   --timeline-safe-gap:8px;
 
   --top-safe-space:90px;
-
   --bottom-safe-space:110px;
 
-  /* DISTANCE BETWEEN EVENTS */
-
   --card-gap:470px;
-
 }
 
 
-/* =========================================================
-   RESPONSIVENESS
-   ========================================================= */
+/* RESPONSIVIDADE */
 
 @media(max-width:1100px){
 
   :root{
-
     --event-size:243px;
-
     --connector-h:22px;
-
     --card-gap:420px;
-
   }
 
 }
@@ -104,13 +64,9 @@
 @media(max-width:800px){
 
   :root{
-
     --event-size:212px;
-
     --connector-h:20px;
-
     --card-gap:370px;
-
   }
 
 }
@@ -119,36 +75,24 @@
 @media(max-width:560px){
 
   :root{
-
     --event-size:167px;
-
     --connector-h:18px;
-
     --card-gap:285px;
 
     --top-safe-space:72px;
-
     --bottom-safe-space:88px;
-
     --timeline-safe-gap:6px;
-
   }
 
 }
 
 
-/* =========================================================
-   RESET
-   ========================================================= */
+/* RESET */
 
 *{
-
   box-sizing:border-box;
-
   margin:0;
-
   padding:0;
-
 }
 
 
@@ -156,7 +100,6 @@ html,
 body{
 
   width:100%;
-
   height:100%;
 
   overflow:hidden;
@@ -182,7 +125,6 @@ body{
 img{
 
   display:block;
-
   max-width:100%;
 
 }
@@ -191,29 +133,22 @@ img{
 button{
 
   font-family:inherit;
-
   border:none;
-
   background:none;
-
   color:inherit;
-
   cursor:pointer;
 
 }
 
 
 a{
-
   color:inherit;
-
 }
 
 
 ::selection{
 
   background:var(--primary);
-
   color:var(--background);
 
 }
@@ -224,37 +159,29 @@ a:focus-visible,
 [tabindex]:focus-visible{
 
   outline:2px solid var(--primary);
-
   outline-offset:3px;
 
 }
 
 
-/* =========================================================
-   BACKGROUND
-   ========================================================= */
+/* FUNDO */
 
 .bg-layer{
 
   position:fixed;
-
   inset:0;
-
   z-index:0;
 
   background-image:
-
     linear-gradient(
       180deg,
       rgba(15,17,17,.88),
       rgba(15,17,17,.94) 55%,
       rgba(5,7,7,.98)
     ),
-
-    url('imagens/nascimento.jpg');
+    url('imagens/fundo.jpg');
 
   background-size:cover;
-
   background-position:center;
 
   filter:
@@ -272,15 +199,12 @@ a:focus-visible,
 .bg-vignette{
 
   position:fixed;
-
   inset:0;
-
   z-index:1;
 
   pointer-events:none;
 
   background:
-
     radial-gradient(
       ellipse at center,
       transparent 40%,
@@ -293,9 +217,7 @@ a:focus-visible,
 .bg-grain{
 
   position:fixed;
-
   inset:0;
-
   z-index:2;
 
   pointer-events:none;
@@ -303,34 +225,25 @@ a:focus-visible,
   opacity:.045;
 
   background-image:url(
-
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
-
   );
 
 }
 
 
-/* =========================================================
-   LOADING
-   ========================================================= */
+/* LOADING */
 
 #loading-screen{
 
   position:fixed;
-
   inset:0;
-
   z-index:100;
 
   background:var(--background);
 
   display:flex;
-
   flex-direction:column;
-
   align-items:center;
-
   justify-content:center;
 
   gap:18px;
@@ -343,7 +256,6 @@ a:focus-visible,
 #loading-screen.hide{
 
   opacity:0;
-
   pointer-events:none;
 
 }
@@ -352,7 +264,6 @@ a:focus-visible,
 .loading-name{
 
   font-family:var(--font-title);
-
   font-weight:600;
 
   letter-spacing:.04em;
@@ -382,13 +293,11 @@ a:focus-visible,
 .loading-bar{
 
   width:220px;
-
   height:1px;
 
   background:var(--secondary);
 
   position:relative;
-
   overflow:hidden;
 
 }
@@ -401,9 +310,7 @@ a:focus-visible,
   position:absolute;
 
   left:-40%;
-
   top:0;
-
   bottom:0;
 
   width:40%;
@@ -432,18 +339,14 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   HEADER
-   ========================================================= */
+/* HEADER */
 
 .site-header{
 
   position:fixed;
 
   top:0;
-
   left:0;
-
   right:0;
 
   z-index:40;
@@ -451,7 +354,6 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
-
   justify-content:space-between;
 
   padding:
@@ -488,9 +390,7 @@ a:focus-visible,
 
 
 .brand span{
-
   color:var(--primary);
-
 }
 
 
@@ -525,9 +425,7 @@ a:focus-visible,
 
 
 .main-nav button:hover{
-
   color:var(--text);
-
 }
 
 
@@ -538,9 +436,7 @@ a:focus-visible,
   position:absolute;
 
   left:0;
-
   right:100%;
-
   bottom:0;
 
   height:1px;
@@ -553,45 +449,36 @@ a:focus-visible,
 
 
 .main-nav button:hover::after{
-
   right:0;
-
 }
 
 
 @media(max-width:620px){
 
   .main-nav{
-
     display:none;
-
   }
 
 }
 
 
-/* =========================================================
-   MOBILE MENU
-   ========================================================= */
+/* MENU MOBILE */
 
 .menu-toggle{
 
   position:fixed;
 
   top:20px;
-
   right:20px;
 
   z-index:70;
 
   width:38px;
-
   height:38px;
 
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   font-size:18px;
@@ -612,26 +499,20 @@ a:focus-visible,
 @media(min-width:621px){
 
   .menu-toggle{
-
     display:none;
-
   }
 
 }
 
 
-/* =========================================================
-   OVERVIEW
-   ========================================================= */
+/* OVERVIEW */
 
 .overview-panel{
 
   position:fixed;
 
   top:0;
-
   right:0;
-
   bottom:0;
 
   z-index:80;
@@ -656,9 +537,7 @@ a:focus-visible,
 
 
 .overview-panel.open{
-
   transform:translateX(0);
-
 }
 
 
@@ -684,7 +563,6 @@ a:focus-visible,
   list-style:none;
 
   display:flex;
-
   flex-direction:column;
 
 }
@@ -714,9 +592,7 @@ a:focus-visible,
 
 
 .overview-list li button:hover{
-
   color:var(--text);
-
 }
 
 
@@ -734,16 +610,13 @@ a:focus-visible,
 
 
 .overview-list .ttl{
-
   font-size:14px;
-
 }
 
 
 .overview-backdrop{
 
   position:fixed;
-
   inset:0;
 
   z-index:79;
@@ -762,20 +635,16 @@ a:focus-visible,
 .overview-backdrop.open{
 
   opacity:1;
-
   pointer-events:auto;
 
 }
 
 
-/* =========================================================
-   INTRO
-   ========================================================= */
+/* INTRO */
 
 .intro{
 
   position:fixed;
-
   inset:0;
 
   z-index:30;
@@ -785,7 +654,6 @@ a:focus-visible,
   flex-direction:column;
 
   align-items:center;
-
   justify-content:center;
 
   text-align:center;
@@ -793,13 +661,11 @@ a:focus-visible,
   padding:24px;
 
   background:
-
     radial-gradient(
       ellipse at center,
       rgba(15,17,17,.4),
       rgba(15,17,17,.94) 70%
     ),
-
     var(--background);
 
   transition:
@@ -812,7 +678,6 @@ a:focus-visible,
 .intro.hidden{
 
   opacity:0;
-
   visibility:hidden;
 
   pointer-events:none;
@@ -851,11 +716,8 @@ a:focus-visible,
 
 
 .intro-name b{
-
   font-weight:600;
-
   display:block;
-
 }
 
 
@@ -927,7 +789,6 @@ a:focus-visible,
 .btn-start span{
 
   position:relative;
-
   z-index:1;
 
 }
@@ -938,7 +799,6 @@ a:focus-visible,
   content:'';
 
   position:absolute;
-
   inset:0;
 
   background:var(--primary);
@@ -953,16 +813,12 @@ a:focus-visible,
 
 
 .btn-start:hover{
-
   color:var(--background);
-
 }
 
 
 .btn-start:hover::before{
-
   transform:translateX(0);
-
 }
 
 
@@ -998,14 +854,11 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   TIMELINE
-   ========================================================= */
+/* TIMELINE */
 
 .timeline-viewport{
 
   position:fixed;
-
   inset:0;
 
   z-index:5;
@@ -1020,9 +873,7 @@ a:focus-visible,
 
 
 .timeline-viewport.dragging{
-
   cursor:grabbing;
-
 }
 
 
@@ -1031,7 +882,6 @@ a:focus-visible,
   position:absolute;
 
   top:0;
-
   left:0;
 
   height:100%;
@@ -1041,16 +891,13 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   TIMELINE LINE
-   ========================================================= */
+/* LINHA */
 
 .timeline-line{
 
   position:absolute;
 
   top:50%;
-
   left:0;
 
   height:2px;
@@ -1058,7 +905,6 @@ a:focus-visible,
   width:100%;
 
   background:
-
     linear-gradient(
       90deg,
       transparent,
@@ -1077,11 +923,9 @@ a:focus-visible,
   content:'';
 
   position:absolute;
-
   inset:0;
 
   background-image:
-
     repeating-linear-gradient(
       90deg,
       rgba(255,255,255,.06) 0 1px,
@@ -1091,9 +935,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   EVENT
-   ========================================================= */
+/* EVENTO */
 
 .event{
 
@@ -1102,7 +944,6 @@ a:focus-visible,
   top:50%;
 
   width:0;
-
   height:0;
 
 }
@@ -1113,11 +954,9 @@ a:focus-visible,
   position:absolute;
 
   top:0;
-
   left:0;
 
   width:11px;
-
   height:11px;
 
   margin:-5.5px 0 0 -5.5px;
@@ -1171,9 +1010,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   DATE — OPPOSITE SIDE OF THE LINE
-   ========================================================= */
+/* DATA - LADO OPOSTO DA LINHA */
 
 .event-date{
 
@@ -1202,12 +1039,18 @@ a:focus-visible,
 }
 
 
+/* EVENTO EM CIMA
+   DATA EMBAIXO */
+
 .event-top .event-date{
 
   top:17px;
 
 }
 
+
+/* EVENTO EMBAIXO
+   DATA EM CIMA */
 
 .event-bottom .event-date{
 
@@ -1216,9 +1059,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   CONNECTOR
-   ========================================================= */
+/* CONECTOR */
 
 .event-connector{
 
@@ -1251,9 +1092,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   CARDS
-   ========================================================= */
+/* CARDS */
 
 .event-card{
 
@@ -1268,7 +1107,6 @@ a:focus-visible,
   opacity:0;
 
   transition:
-
     opacity .6s
     cubic-bezier(.4,0,.2,1),
 
@@ -1276,7 +1114,6 @@ a:focus-visible,
     cubic-bezier(.4,0,.2,1);
 
   max-height:
-
     calc(
       50vh
       - var(--top-safe-space) / 2
@@ -1287,10 +1124,11 @@ a:focus-visible,
 }
 
 
+/* CARD EM CIMA */
+
 .event-top .event-card{
 
   bottom:
-
     calc(
       var(--connector-h)
       + var(--timeline-safe-gap)
@@ -1302,10 +1140,11 @@ a:focus-visible,
 }
 
 
+/* CARD EM BAIXO */
+
 .event-bottom .event-card{
 
   top:
-
     calc(
       var(--connector-h)
       + var(--timeline-safe-gap)
@@ -1317,6 +1156,8 @@ a:focus-visible,
 }
 
 
+/* ANIMAÇÃO */
+
 .event.in-view .event-card{
 
   opacity:1;
@@ -1327,9 +1168,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   IMAGE
-   ========================================================= */
+/* IMAGEM */
 
 .event-figure{
 
@@ -1361,11 +1200,9 @@ a:focus-visible,
 .event-figure img{
 
   width:100%;
-
   height:100%;
 
   object-fit:cover;
-
   object-position:center;
 
   filter:
@@ -1385,7 +1222,6 @@ a:focus-visible,
   content:'';
 
   position:absolute;
-
   inset:0;
 
   border:1px solid rgba(255,255,255,.06);
@@ -1421,9 +1257,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   EVENT TEXT
-   ========================================================= */
+/* TEXTO */
 
 .event-body{
 
@@ -1434,7 +1268,6 @@ a:focus-visible,
   z-index:10;
 
   padding-left:4px;
-
   padding-right:4px;
 
 }
@@ -1483,9 +1316,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   LEARN MORE BUTTON
-   ========================================================= */
+/* SABER MAIS */
 
 .event-more{
 
@@ -1539,49 +1370,36 @@ a:focus-visible,
 @media(max-width:560px){
 
   .event-title{
-
     font-size:15px;
-
   }
 
   .event-desc{
-
     font-size:11px;
-
   }
 
   .event-more{
-
     font-size:9px;
-
   }
 
   .event-date{
 
     font-size:10px;
-
     width:100px;
 
   }
 
   .event-top .event-date{
-
     top:14px;
-
   }
 
   .event-bottom .event-date{
-
     bottom:14px;
-
   }
 
 }
 
 
-/* =========================================================
-   END PANEL
-   ========================================================= */
+/* PAINEL FINAL */
 
 .track-panel{
 
@@ -1605,7 +1423,6 @@ a:focus-visible,
   transform:translateY(24px);
 
   transition:
-
     opacity .7s
     cubic-bezier(.4,0,.2,1),
 
@@ -1695,16 +1512,13 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   NAVIGATION CONTROLS
-   ========================================================= */
+/* CONTROLES */
 
 .nav-controls{
 
   position:fixed;
 
   left:0;
-
   right:0;
 
   bottom:18px;
@@ -1714,7 +1528,6 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   gap:18px;
@@ -1743,7 +1556,6 @@ a:focus-visible,
 .nav-controls.visible{
 
   opacity:1;
-
   visibility:visible;
 
   transform:translateY(0);
@@ -1753,14 +1565,11 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   ARROWS
-   ========================================================= */
+/* SETAS */
 
 .nav-arrow{
 
   width:42px;
-
   height:42px;
 
   border-radius:50%;
@@ -1774,7 +1583,6 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   font-size:16px;
@@ -1800,15 +1608,11 @@ a:focus-visible,
 
 
 .nav-arrow:active{
-
   transform:translateY(0);
-
 }
 
 
-/* =========================================================
-   PROGRESS
-   ========================================================= */
+/* PROGRESSO */
 
 .progress-wrap{
 
@@ -1843,9 +1647,7 @@ a:focus-visible,
   position:absolute;
 
   left:0;
-
   top:0;
-
   bottom:0;
 
   width:0%;
@@ -1877,28 +1679,21 @@ a:focus-visible,
 @media(max-width:620px){
 
   .progress-wrap{
-
     width:44vw;
-
   }
 
   .progress-years span:not(:first-child):not(:last-child){
-
     display:none;
-
   }
 
 }
 
 
-/* =========================================================
-   MODAL
-   ========================================================= */
+/* MODAL */
 
 .modal-overlay{
 
   position:fixed;
-
   inset:0;
 
   z-index:200;
@@ -1912,7 +1707,6 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   padding:24px;
@@ -1933,7 +1727,6 @@ a:focus-visible,
 .modal-overlay.open{
 
   opacity:1;
-
   visibility:visible;
 
   pointer-events:auto;
@@ -1990,7 +1783,6 @@ a:focus-visible,
   margin:14px 14px 0 0;
 
   width:34px;
-
   height:34px;
 
   border-radius:50%;
@@ -2000,7 +1792,6 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   font-size:18px;
@@ -2033,7 +1824,6 @@ a:focus-visible,
 .modal-figure img{
 
   width:100%;
-
   height:100%;
 
   object-fit:cover;
@@ -2087,9 +1877,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   PC HORIZONTAL
-   ========================================================= */
+/* PC HORIZONTAL */
 
 @media(
   min-width:900px
@@ -2115,23 +1903,19 @@ a:focus-visible,
   .event-year{
 
     margin-top:7px;
-
     font-size:11px;
 
   }
 
 
   .event-title{
-
     font-size:16px;
-
   }
 
 
   .event-desc{
 
     font-size:11px;
-
     margin-top:5px;
 
   }
@@ -2140,44 +1924,34 @@ a:focus-visible,
   .event-more{
 
     margin-top:7px;
-
     font-size:9px;
 
   }
 
 
   .event-date{
-
     font-size:10px;
-
   }
 
 
   .event-top .event-date{
-
     top:15px;
-
   }
 
 
   .event-bottom .event-date{
-
     bottom:15px;
-
   }
 
 
   .nav-controls{
-
     bottom:8px;
-
   }
 
 
   .nav-arrow{
 
     width:36px;
-
     height:36px;
 
   }
@@ -2185,9 +1959,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   PC VERY LOW HEIGHT
-   ========================================================= */
+/* PC MUITO BAIXO */
 
 @media(
   min-width:900px
@@ -2213,75 +1985,57 @@ a:focus-visible,
   .event-year{
 
     margin-top:5px;
-
     font-size:10px;
 
   }
 
 
   .event-title{
-
     font-size:14px;
-
   }
 
 
   .event-desc{
-
     font-size:9px;
-
   }
 
 
   .event-more{
 
     font-size:8px;
-
     margin-top:5px;
 
   }
 
 
   .event-date{
-
     font-size:9px;
-
   }
 
 
   .event-top .event-date{
-
     top:13px;
-
   }
 
 
   .event-bottom .event-date{
-
     bottom:13px;
-
   }
 
 }
 
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+/* MOBILE */
 
 @media(max-width:560px){
 
   .modal-overlay{
-
     padding:12px;
-
   }
 
 
   .modal{
-
     max-height:90vh;
-
   }
 
 
@@ -2298,7 +2052,6 @@ a:focus-visible,
   .modal-desc{
 
     font-size:13px;
-
     line-height:1.65;
 
   }
@@ -2306,9 +2059,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   MOBILE LOW HEIGHT
-   ========================================================= */
+/* MOBILE COM POUCA ALTURA */
 
 @media(
   max-width:560px
@@ -2329,9 +2080,7 @@ a:focus-visible,
 }
 
 
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
+/* MOVIMENTO REDUZIDO */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -2345,24 +2094,19 @@ a:focus-visible,
 
 
   .timeline-track{
-
     transition:none !important;
-
   }
 
 }
 
 
-/* =========================================================
-   SCREEN READER
-   ========================================================= */
+/* SCREEN READER */
 
 .sr-only{
 
   position:absolute;
 
   width:1px;
-
   height:1px;
 
   overflow:hidden;
@@ -2374,42 +2118,31 @@ a:focus-visible,
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =======================================================
-     BACKGROUND
-     ======================================================= -->
+<!-- FUNDO -->
 
-<div
-  class="bg-layer"
-  id="bgLayer"
-></div>
+<div class="bg-layer" id="bgLayer"></div>
 
 <div class="bg-vignette"></div>
 
 <div class="bg-grain"></div>
 
 
-<!-- =======================================================
-     LOADING
-     ======================================================= -->
+<!-- LOADING -->
 
-<div
-  id="loading-screen"
-  aria-hidden="true"
->
+<div id="loading-screen" aria-hidden="true">
 
   <div class="loading-name">
     Billie Eilish
   </div>
 
   <div class="loading-sub">
-    Loading story…
+    Carregando história…
   </div>
 
   <div class="loading-bar"></div>
@@ -2417,9 +2150,7 @@ a:focus-visible,
 </div>
 
 
-<!-- =======================================================
-     HEADER
-     ======================================================= -->
+<!-- HEADER -->
 
 <header class="site-header">
 
@@ -2430,11 +2161,11 @@ a:focus-visible,
 
   <nav
     class="main-nav"
-    aria-label="Main navigation"
+    aria-label="Navegação principal"
   >
 
     <button data-action="go-start">
-      Home
+      Início
     </button>
 
     <button data-action="go-timeline">
@@ -2442,7 +2173,7 @@ a:focus-visible,
     </button>
 
     <button data-action="go-about">
-      About
+      Sobre
     </button>
 
   </nav>
@@ -2450,14 +2181,12 @@ a:focus-visible,
 </header>
 
 
-<!-- =======================================================
-     MOBILE MENU
-     ======================================================= -->
+<!-- MENU MOBILE -->
 
 <button
   class="menu-toggle"
   id="menuToggle"
-  aria-label="Open overview"
+  aria-label="Abrir visão geral"
   aria-expanded="false"
 >
   ☰
@@ -2473,11 +2202,11 @@ a:focus-visible,
 <aside
   class="overview-panel"
   id="overviewPanel"
-  aria-label="Timeline overview"
+  aria-label="Visão geral da linha do tempo"
 >
 
   <h3>
-    Timeline
+    Linha do tempo
   </h3>
 
   <ul
@@ -2488,9 +2217,7 @@ a:focus-visible,
 </aside>
 
 
-<!-- =======================================================
-     INTRO
-     ======================================================= -->
+<!-- INTRO -->
 
 <section
   class="intro"
@@ -2498,7 +2225,7 @@ a:focus-visible,
 >
 
   <p class="intro-eyebrow">
-    Interactive Biography
+    Biografia interativa
   </p>
 
 
@@ -2508,25 +2235,23 @@ a:focus-visible,
 
 
   <p class="intro-tagline">
-
-    A journey through the life, music and
-    moments that shaped Billie Eilish's career.
-
+    Uma viagem pela trajetória, música e momentos
+    que marcaram a carreira de Billie Eilish.
   </p>
 
 
   <div class="intro-meta">
 
     <span>
-      b. 2001
+      n. 2001
     </span>
 
     <span>
-      Singer & songwriter
+      Cantora & compositora
     </span>
 
     <span>
-      Los Angeles, USA
+      Los Angeles, EUA
     </span>
 
   </div>
@@ -2538,30 +2263,26 @@ a:focus-visible,
   >
 
     <span>
-      Start the journey →
+      Começar a viagem →
     </span>
 
   </button>
 
 
   <p class="intro-hint">
-
-    use your mouse, touch or keyboard arrows
-
+    use o mouse, toque ou as setas do teclado
   </p>
 
 </section>
 
 
-<!-- =======================================================
-     TIMELINE
-     ======================================================= -->
+<!-- TIMELINE -->
 
 <main
   class="timeline-viewport"
   id="viewport"
   tabindex="0"
-  aria-label="Horizontal timeline"
+  aria-label="Linha do tempo horizontal"
 >
 
   <div
@@ -2576,9 +2297,7 @@ a:focus-visible,
 </main>
 
 
-<!-- =======================================================
-     CONTROLS
-     ======================================================= -->
+<!-- CONTROLES -->
 
 <div
   class="nav-controls"
@@ -2588,7 +2307,7 @@ a:focus-visible,
   <button
     class="nav-arrow"
     id="prevBtn"
-    aria-label="Previous event"
+    aria-label="Evento anterior"
   >
     ←
   </button>
@@ -2617,7 +2336,7 @@ a:focus-visible,
   <button
     class="nav-arrow"
     id="nextBtn"
-    aria-label="Next event"
+    aria-label="Próximo evento"
   >
     →
   </button>
@@ -2625,9 +2344,7 @@ a:focus-visible,
 </div>
 
 
-<!-- =======================================================
-     MODAL
-     ======================================================= -->
+<!-- MODAL -->
 
 <div
   class="modal-overlay"
@@ -2644,7 +2361,7 @@ a:focus-visible,
     <button
       class="modal-close"
       id="modalClose"
-      aria-label="Close"
+      aria-label="Fechar"
     >
       ×
     </button>
@@ -2689,7 +2406,7 @@ a:focus-visible,
 <script>
 
 /* =========================================================
-   CONFIGURATION
+   CONFIGURAÇÃO
    ========================================================= */
 
 const timelineConfig = {
@@ -2697,147 +2414,162 @@ const timelineConfig = {
   personName:"Billie Eilish",
 
   tagline:
-    "A journey through the life, music and moments that shaped Billie Eilish's career.",
+    "Uma viagem pela trajetória, música e momentos que marcaram a carreira de Billie Eilish.",
 
   birthYear:"2001",
 
   profession:
-    "Singer & songwriter",
+    "Cantora & compositora",
 
   location:
-    "Los Angeles, USA",
+    "Los Angeles, EUA",
 
   about:
-    "Billie Eilish is an American singer and songwriter known for her alternative musical approach, distinctive visual identity and creative collaboration with her brother Finneas.",
+    "Billie Eilish é uma cantora e compositora norte-americana conhecida por sua abordagem musical alternativa, estética marcante e colaboração criativa com seu irmão Finneas.",
 
   BACKGROUND_IMAGE:
-    "imagens/fundo.png
+    "imagens/fundo.jpg"
 
 };
 
 
 /* =========================================================
-   EVENTS
+   EVENTOS
+   =========================================================
+
+   É AQUI que você coloca suas imagens.
+
+   Estrutura:
+
+   image:"imagens/nome-da-imagem.jpg"
+
+   Coloque as imagens dentro da pasta "imagens".
+
+   Exemplo:
+
+   imagens/
+   ├── fundo.jpg
+   ├── nascimento.jpg
+   ├── ocean-eyes.jpg
+   ├── dont-smile-at-me.jpg
+   ├── wwafawdwg.jpg
+   ├── grammy.jpg
+   ├── happier-than-ever.jpg
+   ├── oscar.jpg
+   ├── barbie.jpg
+   └── hit-me-hard-and-soft.jpg
+
    ========================================================= */
 
 const timelineEvents = [
 
   {
-
     year:"2001",
 
-    title:"Birth",
+    title:"Nascimento",
 
     image:
-      "imagens/nascimento.jpe",
+      "imagens/nascimento.jpg",
 
     shortDescription:
-      "Billie Eilish is born in Los Angeles.",
+      "Billie Eilish nasce em Los Angeles.",
 
     description:
+      `Billie Eilish Pirate Baird O'Connell nasceu em Los Angeles em 18 de dezembro de 2001. Seu primeiro nome é uma homenagem ao seu avô materno, William; o segundo foi inspirado por uma gêmea siamesa que seus pais viram em um documentário; e o terceiro veio da insistência de seu irmão mais velho, Finneas.
 
-      "Billie Eilish Pirate Baird O'Connell was born in Los Angeles on December 18, 2001. Her first name was inspired by her maternal grandfather, William. Her second name was inspired by conjoined twins her parents saw in a documentary, while her third name came from her older brother Finneas. Her parents, Maggie Baird and Patrick O'Connell, had worked as actors before becoming part of their daughter's professional team. Billie and Finneas were homeschooled in Highland Park and were encouraged to explore dance, gymnastics, horseback riding and especially music. She began playing the ukulele at the age of six. At eight, she joined the Los Angeles Children's Chorus, where she developed her vocal abilities. At eleven, she began seriously writing songs with help from her mother's songwriting lessons. Although she initially wanted to become a dancer, an injury to her hip growth plate ended those ambitions at thirteen, leading her to focus entirely on music."
+Os pais de Billie, Maggie Baird e Patrick O'Connell, foram atores por muitos anos antes de se juntarem à equipe profissional da filha adolescente. Criada em uma casa de dois quartos em Highland Park, onde ela e o irmão estudavam em casa, Eilish foi incentivada a seguir seus interesses em dança, ginástica, equitação e, principalmente, música.
 
+Ela começou a tocar ukulele aos 6 anos de idade. A primeira música que aprendeu a tocar foi "I Will", dos Beatles.
+
+Aos 8 anos, Eilish entrou para o Coral Infantil de Los Angeles, onde aprimorou seu talento vocal. Aos 11, começou a compor músicas a sério com a ajuda das aulas de composição de sua mãe.
+
+Eilish contou que sua primeira música "de verdade", "Fingers Crossed", foi escrita nessa época, depois de assistir a um episódio de The Walking Dead.
+
+Apesar do talento musical, Eilish inicialmente queria ser dançarina, mas depois que uma lesão na placa de crescimento do quadril pôs fim às suas ambições na dança aos 13 anos, ela decidiu se dedicar totalmente à música.`
   },
 
 
   {
-
     year:"2015",
 
     title:"Ocean Eyes",
 
     image:
-      "imagens/ocean-eyes.jpe",
+      "imagens/ocean-eyes.jpg",
 
     shortDescription:
-      "The song that changed her trajectory.",
+      "A música que muda sua trajetória.",
 
     description:
-
-      "In 2015, Billie and her brother Finneas released Ocean Eyes online. The song quickly attracted attention and became the beginning of her professional rise."
-
+      "Em 2015, Billie e seu irmão Finneas disponibilizam Ocean Eyes na internet. A música ganha rapidamente atenção e marca o início de sua ascensão profissional."
   },
 
 
   {
-
     year:"2017",
 
     title:"Don't Smile at Me",
 
     image:
-      "imagens/dont-smile-at-me.jpe",
+      "imagens/dont-smile-at-me.jpg",
 
     shortDescription:
-      "Her debut EP is released.",
+      "Lançamento do primeiro EP.",
 
     description:
-
-      "Billie released her debut EP, Don't Smile at Me. The project expanded her audience and established a musical and visual identity that would become a defining part of her career."
-
+      "Billie lança seu primeiro EP, Don't Smile at Me. O projeto amplia seu público e apresenta uma identidade musical e visual que se tornaria característica de sua carreira."
   },
 
 
   {
-
     year:"2019",
 
     title:"When We All Fall Asleep, Where Do We Go?",
 
     image:
-      "imagens/wwafawdwg.jpe",
+      "imagens/wwafawdwg.jpg",
 
     shortDescription:
-      "Her debut studio album.",
+      "O primeiro álbum de estúdio.",
 
     description:
-
-      "Billie released her debut studio album, When We All Fall Asleep, Where Do We Go? The album received enormous international attention and established her as one of the most important new artists in pop music."
-
+      "Billie lança seu primeiro álbum de estúdio. O trabalho alcança enorme repercussão internacional e consolida a artista como um dos principais novos nomes da música pop."
   },
 
 
   {
-
     year:"2020",
 
     title:"Grammy Awards",
 
     image:
-      "imagens/grammy.jpe",
+      "imagens/grammy.jpg",
 
     shortDescription:
-      "A historic night at the Grammys.",
+      "Uma noite histórica de premiações.",
 
     description:
-
-      "At the 2020 Grammy Awards, Billie made history by winning the four major general-field categories: Album of the Year, Record of the Year, Song of the Year and Best New Artist."
-
+      "Na cerimônia do Grammy de 2020, Billie faz história ao conquistar as quatro principais categorias da premiação, incluindo Álbum do Ano, Gravação do Ano, Canção do Ano e Artista Revelação."
   },
 
 
   {
-
     year:"2021",
 
     title:"Happier Than Ever",
 
     image:
-      "imagens/happier-than-ever.jpe",
+      "imagens/happier-than-ever.jpg",
 
     shortDescription:
-      "Her second studio album.",
+      "Segundo álbum de estúdio.",
 
     description:
-
-      "Billie released Happier Than Ever, her second studio album. The project presented a broader sound and marked a new artistic phase in her career."
-
+      "Billie lança Happier Than Ever, seu segundo álbum de estúdio. O projeto apresenta uma sonoridade mais ampla e uma nova fase artística."
   },
 
 
   {
-
     year:"2022",
 
     title:"Academy Award",
@@ -2846,57 +2578,49 @@ const timelineEvents = [
       "imagens/oscar.jpg",
 
     shortDescription:
-      "Recognition from the film industry.",
+      "Reconhecimento no cinema.",
 
     description:
-
-      "Billie and Finneas received the Academy Award for Best Original Song for No Time to Die, the theme song for the James Bond film of the same name."
-
+      "Billie e Finneas recebem o Oscar de Melhor Canção Original por No Time to Die, tema do filme de James Bond."
   },
 
 
   {
-
     year:"2023",
 
     title:"What Was I Made For?",
 
     image:
-      "imagens/barbie.jpe",
+      "imagens/barbie.jpg",
 
     shortDescription:
-      "A new song created for cinema.",
+      "Uma nova música para o cinema.",
 
     description:
-
-      "Billie and Finneas wrote What Was I Made For? for the film Barbie. The song became one of the most recognized works of her career and received major awards and nominations."
-
+      "Billie e Finneas escrevem What Was I Made For? para o filme Barbie. A música se torna um dos trabalhos mais reconhecidos da artista e recebe importantes premiações."
   },
 
 
   {
-
     year:"2024",
 
     title:"HIT ME HARD AND SOFT",
 
     image:
-      "imagens/hit-me-hard-and-soft.jpe",
+      "imagens/hit-me-hard-and-soft.jpg",
 
     shortDescription:
-      "Her third studio album.",
+      "Terceiro álbum de estúdio.",
 
     description:
-
-      "Billie released her third studio album, HIT ME HARD AND SOFT, once again developed in close collaboration with Finneas. The project presents a cohesive and experimental approach to her sound."
-
+      "Billie lança seu terceiro álbum de estúdio, HIT ME HARD AND SOFT, desenvolvido novamente em colaboração com Finneas. O projeto apresenta uma abordagem mais coesa e experimental."
   }
 
 ];
 
 
 /* =========================================================
-   STATE
+   ESTADO
    ========================================================= */
 
 const prefersReducedMotion =
@@ -2941,24 +2665,22 @@ let hasStarted = false;
 
 
 /* =========================================================
-   CSS NUMBER
+   FUNÇÃO CSS
    ========================================================= */
 
 function cssNum(varName){
 
   return parseFloat(
-
     getComputedStyle(
       document.documentElement
     ).getPropertyValue(varName)
-
   );
 
 }
 
 
 /* =========================================================
-   BUILD TIMELINE
+   CONSTRUÇÃO DA TIMELINE
    ========================================================= */
 
 function buildTimeline(){
@@ -2968,18 +2690,14 @@ function buildTimeline(){
 
 
   bgLayer.style.backgroundImage =
-
     `
-
       linear-gradient(
         180deg,
         rgba(15,17,17,.88),
         rgba(15,17,17,.94) 55%,
         rgba(5,7,7,.98)
       ),
-
       url('${timelineConfig.BACKGROUND_IMAGE}')
-
     `;
 
 
@@ -2994,9 +2712,7 @@ function buildTimeline(){
     );
 
 
-  /* -------------------------------------------------------
-     START NODE
-     ------------------------------------------------------- */
+  /* NÓ INICIAL */
 
   const introX =
     window.innerWidth / 2;
@@ -3038,14 +2754,12 @@ function buildTimeline(){
       <div class="event-body">
 
         <h3 class="event-title">
-          The journey begins
+          A jornada começa
         </h3>
 
         <p class="event-desc">
-
-          Drag, scroll or use the arrows
-          to explore her story.
-
+          Arraste, role ou use as setas para
+          conhecer a trajetória.
         </p>
 
       </div>
@@ -3058,9 +2772,7 @@ function buildTimeline(){
   track.appendChild(introNode);
 
 
-  /* -------------------------------------------------------
-     OVERVIEW
-     ------------------------------------------------------- */
+  /* LISTA OVERVIEW */
 
   const overviewList =
     document.getElementById('overviewList');
@@ -3085,11 +2797,11 @@ function buildTimeline(){
     >
 
       <span class="yr">
-        Start
+        Início
       </span>
 
       <span class="ttl">
-        The journey begins
+        A jornada começa
       </span>
 
     </button>
@@ -3100,9 +2812,7 @@ function buildTimeline(){
   overviewList.appendChild(introLi);
 
 
-  /* -------------------------------------------------------
-     EVENTS
-     ------------------------------------------------------- */
+  /* EVENTOS */
 
   timelineEvents.forEach(
     (ev,i)=>{
@@ -3160,7 +2870,6 @@ function buildTimeline(){
 
           ${
             position === 'bottom'
-
             ? `
 
               <div class="event-body">
@@ -3178,7 +2887,7 @@ function buildTimeline(){
                   class="event-more"
                   data-event-index="${i}"
                 >
-                  Learn more →
+                  Saber mais →
                 </button>
 
               </div>
@@ -3196,7 +2905,6 @@ function buildTimeline(){
               </div>
 
             `
-
             : `
 
               <div class="event-figure">
@@ -3226,13 +2934,12 @@ function buildTimeline(){
                   class="event-more"
                   data-event-index="${i}"
                 >
-                  Learn more →
+                  Saber mais →
                 </button>
 
               </div>
 
             `
-
           }
 
         </div>
@@ -3246,9 +2953,7 @@ function buildTimeline(){
       eventEls.push(el);
 
 
-      /* -----------------------------------------------
-         OVERVIEW
-      ------------------------------------------------ */
+      /* OVERVIEW */
 
       const li =
         document.createElement('li');
@@ -3277,22 +2982,15 @@ function buildTimeline(){
       overviewList.appendChild(li);
 
 
-      /* -----------------------------------------------
-         PROGRESS YEARS
-      ------------------------------------------------ */
+      /* ANOS */
 
       if(
-
         i === 0 ||
-
         i === timelineEvents.length - 1 ||
-
         i %
-
         Math.ceil(
           timelineEvents.length / 5
         ) === 0
-
       ){
 
         const span =
@@ -3311,9 +3009,7 @@ function buildTimeline(){
   );
 
 
-  /* -------------------------------------------------------
-     FINAL PANEL
-     ------------------------------------------------------- */
+  /* PAINEL FINAL */
 
   const lastX =
     timelineEvents[
@@ -3342,20 +3038,18 @@ function buildTimeline(){
     <div class="panel-inner">
 
       <div class="label">
-        End of the timeline
+        Fim da linha do tempo
       </div>
 
 
       <h2>
-        And the story continues…
+        E a história continua…
       </h2>
 
 
       <p>
-
         ${timelineConfig.personName}
-        continues creating new chapters.
-
+        segue construindo novos capítulos.
       </p>
 
 
@@ -3364,7 +3058,7 @@ function buildTimeline(){
         class="btn-ghost"
         id="backToStartBtn"
       >
-        ← Back to beginning
+        ← Voltar ao início
       </button>
 
     </div>
@@ -3377,7 +3071,6 @@ function buildTimeline(){
 
   const trackWidth =
     endX +
-
     Math.max(
       startPad * .5,
       window.innerWidth * .5
@@ -3423,9 +3116,7 @@ const {
 } = buildTimeline();
 
 
-/* =========================================================
-   CLAMP
-   ========================================================= */
+/* CLAMP */
 
 function clamp(
   value,
@@ -3441,9 +3132,7 @@ function clamp(
 }
 
 
-/* =========================================================
-   ANIMATION
-   ========================================================= */
+/* ANIMAÇÃO */
 
 function animate(){
 
@@ -3454,7 +3143,6 @@ function animate(){
 
 
   currentScroll +=
-
     (
       targetScroll -
       currentScroll
@@ -3462,12 +3150,10 @@ function animate(){
 
 
   if(
-
     Math.abs(
       targetScroll -
       currentScroll
     ) < .05
-
   ){
 
     currentScroll =
@@ -3487,15 +3173,11 @@ function animate(){
 
 
   bg.style.transform =
-
     `
-
       translateX(
         ${-currentScroll * .06}px
       )
-
       scale(1.08)
-
     `;
 
 
@@ -3516,21 +3198,17 @@ requestAnimationFrame(
 );
 
 
-/* =========================================================
-   PROGRESS
-   ========================================================= */
+/* PROGRESSO */
 
 function updateProgress(){
 
   const pct =
     maxScroll > 0
-
       ? clamp(
           currentScroll / maxScroll,
           0,
           1
         ) * 100
-
       : 0;
 
 
@@ -3542,9 +3220,7 @@ function updateProgress(){
 }
 
 
-/* =========================================================
-   ACTIVE EVENT
-   ========================================================= */
+/* EVENTO ATIVO */
 
 function updateActiveEvent(){
 
@@ -3560,17 +3236,13 @@ function updateActiveEvent(){
 
 
   introNode.classList.toggle(
-
     'active',
-
     dist0 <
     cssNum('--event-size') * .55
-
   );
 
 
   eventEls.forEach(
-
     (el,i)=>{
 
       const x =
@@ -3584,32 +3256,24 @@ function updateActiveEvent(){
 
 
       el.classList.toggle(
-
         'active',
-
         dist <
         cssNum('--event-size') * .55
-
       );
 
     }
-
   );
 
 }
 
 
-/* =========================================================
-   INTERSECTION OBSERVER
-   ========================================================= */
+/* INTERSECTION OBSERVER */
 
 const observer =
   new IntersectionObserver(
-
     entries=>{
 
       entries.forEach(
-
         entry=>{
 
           if(
@@ -3623,19 +3287,13 @@ const observer =
           }
 
         }
-
       );
 
     },
-
     {
-
       root:viewport,
-
       threshold:.05
-
     }
-
   );
 
 
@@ -3654,21 +3312,15 @@ observer.observe(
 );
 
 
-/* =========================================================
-   MOUSE WHEEL
-   ========================================================= */
+/* RODA DO MOUSE */
 
 viewport.addEventListener(
-
   'wheel',
-
   e=>{
 
     if(
-
       modalOpen ||
       !hasStarted
-
     ){
 
       return;
@@ -3680,45 +3332,30 @@ viewport.addEventListener(
 
 
     const delta =
-
       Math.abs(e.deltaX) >
       Math.abs(e.deltaY)
-
         ? e.deltaX
         : e.deltaY;
 
 
     targetScroll =
-
       clamp(
-
         targetScroll + delta,
-
         0,
-
         maxScroll
-
       );
 
   },
-
   {
-
     passive:false
-
   }
-
 );
 
 
-/* =========================================================
-   DRAG
-   ========================================================= */
+/* ARRASTAR */
 
 viewport.addEventListener(
-
   'pointerdown',
-
   e=>{
 
     if(
@@ -3731,10 +3368,8 @@ viewport.addEventListener(
 
 
     if(
-
       modalOpen ||
       !hasStarted
-
     ){
 
       return;
@@ -3776,14 +3411,11 @@ viewport.addEventListener(
     );
 
   }
-
 );
 
 
 viewport.addEventListener(
-
   'pointermove',
-
   e=>{
 
     if(!isDragging){
@@ -3797,15 +3429,10 @@ viewport.addEventListener(
 
 
     targetScroll =
-
       clamp(
-
         dragStartScroll - dx,
-
         0,
-
         maxScroll
-
       );
 
 
@@ -3825,12 +3452,9 @@ viewport.addEventListener(
     if(dt > 0){
 
       velocity =
-
         (
-
           lastPointerX -
           e.clientX
-
         ) / dt;
 
     }
@@ -3844,13 +3468,10 @@ viewport.addEventListener(
       now;
 
   }
-
 );
 
 
-/* =========================================================
-   END DRAG
-   ========================================================= */
+/* FIM ARRASTO */
 
 function endDrag(){
 
@@ -3869,28 +3490,18 @@ function endDrag(){
 
 
   const momentum =
-
     clamp(
-
       velocity * 160,
-
       -500,
-
       500
-
     );
 
 
   targetScroll =
-
     clamp(
-
       targetScroll + momentum,
-
       0,
-
       maxScroll
-
     );
 
 }
@@ -3908,14 +3519,10 @@ viewport.addEventListener(
 );
 
 
-/* =========================================================
-   KEYBOARD
-   ========================================================= */
+/* TECLADO */
 
 document.addEventListener(
-
   'keydown',
-
   e=>{
 
     if(modalOpen){
@@ -3947,15 +3554,10 @@ document.addEventListener(
     ){
 
       targetScroll =
-
         clamp(
-
           targetScroll + step,
-
           0,
-
           maxScroll
-
         );
 
     }
@@ -3966,15 +3568,10 @@ document.addEventListener(
     ){
 
       targetScroll =
-
         clamp(
-
           targetScroll - step,
-
           0,
-
           maxScroll
-
         );
 
     }
@@ -4000,13 +3597,10 @@ document.addEventListener(
     }
 
   }
-
 );
 
 
-/* =========================================================
-   GO TO NEAREST EVENT
-   ========================================================= */
+/* IR PARA EVENTO */
 
 function goToNearestEvent(
   direction
@@ -4035,11 +3629,9 @@ function goToNearestEvent(
 
     target =
       candidates.find(
-
         x =>
           x >
           centerX + 20
-
       );
 
   }
@@ -4048,15 +3640,12 @@ function goToNearestEvent(
   else{
 
     target =
-
       [...candidates]
         .reverse()
         .find(
-
           x =>
             x <
             centerX - 20
-
         );
 
   }
@@ -4077,16 +3666,11 @@ function goToNearestEvent(
   else{
 
     target =
-
       clamp(
-
         target -
         window.innerWidth / 2,
-
         0,
-
         maxScroll
-
       );
 
   }
@@ -4098,16 +3682,12 @@ function goToNearestEvent(
 }
 
 
-/* =========================================================
-   PREVIOUS / NEXT BUTTONS
-   ========================================================= */
+/* BOTÕES */
 
 document
   .getElementById('nextBtn')
   .addEventListener(
-
     'click',
-
     ()=>{
 
       startJourney();
@@ -4115,16 +3695,13 @@ document
       goToNearestEvent(1);
 
     }
-
   );
 
 
 document
   .getElementById('prevBtn')
   .addEventListener(
-
     'click',
-
     ()=>{
 
       startJourney();
@@ -4132,13 +3709,10 @@ document
       goToNearestEvent(-1);
 
     }
-
   );
 
 
-/* =========================================================
-   START
-   ========================================================= */
+/* INÍCIO */
 
 function startJourney(){
 
@@ -4166,16 +3740,11 @@ function startJourney(){
 
 
   targetScroll =
-
     clamp(
-
       introX -
       window.innerWidth / 2,
-
       0,
-
       maxScroll
-
     );
 
 
@@ -4191,26 +3760,19 @@ function startJourney(){
 document
   .getElementById('startBtn')
   .addEventListener(
-
     'click',
-
     startJourney
-
   );
 
 
-/* =========================================================
-   HEADER — HOME
-   ========================================================= */
+/* HEADER - INÍCIO */
 
 document
   .querySelector(
     '[data-action="go-start"]'
   )
   .addEventListener(
-
     'click',
-
     ()=>{
 
       hasStarted =
@@ -4235,43 +3797,33 @@ document
         0;
 
     }
-
   );
 
 
-/* =========================================================
-   HEADER — TIMELINE
-   ========================================================= */
+/* HEADER - TIMELINE */
 
 document
   .querySelector(
     '[data-action="go-timeline"]'
   )
   .addEventListener(
-
     'click',
-
     ()=>{
 
       startJourney();
 
     }
-
   );
 
 
-/* =========================================================
-   HEADER — ABOUT
-   ========================================================= */
+/* HEADER - SOBRE */
 
 document
   .querySelector(
     '[data-action="go-about"]'
   )
   .addEventListener(
-
     'click',
-
     ()=>{
 
       openModal({
@@ -4280,7 +3832,7 @@ document
           timelineConfig.birthYear,
 
         title:
-          `About ${timelineConfig.personName}`,
+          `Sobre ${timelineConfig.personName}`,
 
         image:
           timelineConfig.BACKGROUND_IMAGE,
@@ -4291,26 +3843,19 @@ document
       });
 
     }
-
   );
 
 
-/* =========================================================
-   BACK TO START
-   ========================================================= */
+/* VOLTAR AO INÍCIO */
 
 track.addEventListener(
-
   'click',
-
   e=>{
 
     if(
-
       e.target.closest(
         '#backToStartBtn'
       )
-
     ){
 
       targetScroll =
@@ -4319,13 +3864,10 @@ track.addEventListener(
     }
 
   }
-
 );
 
 
-/* =========================================================
-   MENU
-   ========================================================= */
+/* MENU */
 
 const menuToggle =
   document.getElementById(
@@ -4370,47 +3912,35 @@ function toggleOverview(
 
 
 menuToggle.addEventListener(
-
   'click',
-
   ()=>{
 
     toggleOverview(
-
       !overviewPanel.classList.contains(
         'open'
       )
-
     );
 
   }
-
 );
 
 
 overviewBackdrop.addEventListener(
-
   'click',
-
   ()=>{
 
     toggleOverview(false);
 
   }
-
 );
 
 
-/* =========================================================
-   OVERVIEW — GO TO EVENT
-   ========================================================= */
+/* OVERVIEW */
 
 document
   .getElementById('overviewList')
   .addEventListener(
-
     'click',
-
     e=>{
 
       const btn =
@@ -4437,29 +3967,21 @@ document
 
 
       targetScroll =
-
         clamp(
-
           x -
           window.innerWidth / 2,
-
           0,
-
           maxScroll
-
         );
 
 
       toggleOverview(false);
 
     }
-
   );
 
 
-/* =========================================================
-   MODAL
-   ========================================================= */
+/* MODAL */
 
 const modalOverlay =
   document.getElementById(
@@ -4497,9 +4019,7 @@ const modalClose =
   );
 
 
-/* =========================================================
-   OPEN MODAL
-   ========================================================= */
+/* ABRIR MODAL */
 
 function openModal(ev){
 
@@ -4538,23 +4058,16 @@ function openModal(ev){
 
 
   setTimeout(
-
     ()=>{
-
       modalClose.focus();
-
     },
-
     20
-
   );
 
 }
 
 
-/* =========================================================
-   CLOSE MODAL
-   ========================================================= */
+/* FECHAR */
 
 function closeModal(){
 
@@ -4569,14 +4082,10 @@ function closeModal(){
 }
 
 
-/* =========================================================
-   LEARN MORE
-   ========================================================= */
+/* SABER MAIS */
 
 track.addEventListener(
-
   'click',
-
   e=>{
 
     const btn =
@@ -4603,10 +4112,8 @@ track.addEventListener(
 
 
     if(
-
       !Number.isInteger(index) ||
       !timelineEvents[index]
-
     ){
 
       return;
@@ -4619,18 +4126,13 @@ track.addEventListener(
     );
 
   }
-
 );
 
 
-/* =========================================================
-   CLOSE BUTTON
-   ========================================================= */
+/* FECHAR MODAL */
 
 modalClose.addEventListener(
-
   'click',
-
   e=>{
 
     e.preventDefault();
@@ -4640,25 +4142,18 @@ modalClose.addEventListener(
     closeModal();
 
   }
-
 );
 
 
-/* =========================================================
-   CLICK OUTSIDE MODAL
-   ========================================================= */
+/* CLICAR FORA */
 
 modalOverlay.addEventListener(
-
   'click',
-
   e=>{
 
     if(
-
       e.target ===
       modalOverlay
-
     ){
 
       closeModal();
@@ -4666,25 +4161,18 @@ modalOverlay.addEventListener(
     }
 
   }
-
 );
 
 
-/* =========================================================
-   ESC TO CLOSE
-   ========================================================= */
+/* ESC */
 
 document.addEventListener(
-
   'keydown',
-
   e=>{
 
     if(
-
       e.key === 'Escape' &&
       modalOpen
-
     ){
 
       closeModal();
@@ -4692,18 +4180,13 @@ document.addEventListener(
     }
 
   }
-
 );
 
 
-/* =========================================================
-   RESIZE
-   ========================================================= */
+/* RESIZE */
 
 window.addEventListener(
-
   'resize',
-
   ()=>{
 
     const trackWidth =
@@ -4713,46 +4196,31 @@ window.addEventListener(
 
 
     maxScroll =
-
       Math.max(
-
         0,
-
         trackWidth -
         window.innerWidth
-
       );
 
 
     targetScroll =
-
       clamp(
-
         targetScroll,
-
         0,
-
         maxScroll
-
       );
 
   }
-
 );
 
 
-/* =========================================================
-   LOADING
-   ========================================================= */
+/* LOADING */
 
 window.addEventListener(
-
   'load',
-
   ()=>{
 
     setTimeout(
-
       ()=>{
 
         document
@@ -4764,13 +4232,10 @@ window.addEventListener(
           );
 
       },
-
       900
-
     );
 
   }
-
 );
 
 </script>
