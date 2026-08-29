@@ -2,46 +2,83 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
 <title>Billie Eilish — Linha do Tempo</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --background:#10110d;
-  --background-alt:#181a14;
-  --primary:#d7ff3f;
-  --secondary:#8f966f;
-  --text:#f0f2df;
-  --muted:#a8ad91;
-  --timeline:#444a32;
-  --event-background:rgba(25,28,19,.82);
-  --event-border:rgba(215,255,63,.28);
-  --event-shadow:rgba(0,0,0,.65);
 
-  --event-size:330px;
-  --connector-h:55px;
-  --card-gap:500px;
+/* =========================================================
+   CONFIGURAÇÃO VISUAL
+   ========================================================= */
+
+:root{
+  --background:#101010;
+  --background-alt:#181818;
+
+  --primary:#c8d96b;
+  --secondary:#858b63;
+
+  --text:#f1f1e9;
+  --muted:#a4a49a;
+
+  --timeline:#44483b;
+
+  --event-background:rgba(25,25,25,.7);
+  --event-border:rgba(200,217,107,.28);
+  --event-shadow:rgba(0,0,0,.6);
+
+  --event-radius:4px;
+
+  --font-title:'Fraunces', serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'Space Mono', monospace;
+
+  /* TAMANHO DOS CARDS */
+  --event-size:300px;
+
+  /* DISTÂNCIA DA LINHA ATÉ O CARD */
+  --connector-h:45px;
+
+  /* DISTÂNCIA ENTRE EVENTOS */
+  --card-gap:480px;
 }
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
 
 @media(max-width:900px){
+
   :root{
-    --event-size:270px;
-    --connector-h:45px;
-    --card-gap:410px;
+    --event-size:230px;
+    --connector-h:38px;
+    --card-gap:370px;
   }
+
 }
 
+
 @media(max-width:560px){
+
   :root{
-    --event-size:220px;
-    --connector-h:32px;
-    --card-gap:310px;
+    --event-size:175px;
+    --connector-h:28px;
+    --card-gap:280px;
   }
+
 }
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 *{
   box-sizing:border-box;
@@ -51,16 +88,17 @@
 
 html,
 body{
-  width:100%;
   height:100%;
   overflow:hidden;
   background:var(--background);
 }
 
 body{
-  font-family:var(--font-body,'Inter',sans-serif);
+  font-family:var(--font-body);
   color:var(--text);
+
   -webkit-font-smoothing:antialiased;
+
   overscroll-behavior:none;
 }
 
@@ -83,128 +121,229 @@ a{
 
 ::selection{
   background:var(--primary);
-  color:#10110d;
+  color:var(--background);
 }
 
-/* FUNDO */
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible{
+
+  outline:2px solid var(--primary);
+  outline-offset:3px;
+
+}
+
+
+/* =========================================================
+   FUNDO
+   ========================================================= */
 
 .bg-layer{
+
   position:fixed;
+
   inset:0;
+
   z-index:0;
 
   background-image:
     linear-gradient(
       180deg,
-      rgba(16,17,13,.82),
-      rgba(16,17,13,.93)
+      rgba(16,16,16,.88),
+      rgba(16,16,16,.94) 55%,
+      rgba(8,8,8,.98)
     ),
-    url("https://picsum.photos/seed/billie-bg/1800/1200");
+    url('https://picsum.photos/seed/billie-bg/1800/1200');
 
   background-size:cover;
+
   background-position:center;
 
   filter:
-    grayscale(35%)
-    contrast(1.08)
-    brightness(.65);
+    grayscale(55%)
+    contrast(1.05)
+    brightness(.72);
 
-  transition:transform .2s linear;
+  will-change:transform;
+
+  transition:filter 1s ease;
+
 }
 
+
 .bg-vignette{
+
   position:fixed;
+
   inset:0;
+
   z-index:1;
+
   pointer-events:none;
 
   background:
     radial-gradient(
       ellipse at center,
-      transparent 35%,
-      rgba(0,0,0,.7) 100%
+      transparent 45%,
+      rgba(0,0,0,.6) 100%
     );
+
 }
+
 
 .bg-grain{
+
   position:fixed;
+
   inset:0;
-  z-index:2;
+
+  z-index:1;
+
   pointer-events:none;
-  opacity:.045;
+
+  opacity:.05;
 
   background-image:url(
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
   );
+
 }
 
-/* LOADING */
+
+/* =========================================================
+   TELA DE CARREGAMENTO
+   ========================================================= */
 
 #loading-screen{
+
   position:fixed;
+
   inset:0;
+
   z-index:100;
 
+  background:var(--background);
+
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
+
   justify-content:center;
 
   gap:18px;
 
-  background:var(--background);
-
   transition:opacity .7s ease;
+
 }
+
 
 #loading-screen.hide{
+
   opacity:0;
+
   pointer-events:none;
+
 }
+
 
 .loading-name{
-  font-family:'Fraunces',serif;
-  font-size:clamp(30px,6vw,55px);
+
+  font-family:var(--font-title);
+
   font-weight:600;
+
+  letter-spacing:.04em;
+
+  font-size:clamp(28px,5vw,44px);
+
+  color:var(--text);
+
 }
+
 
 .loading-sub{
-  font-family:'Space Mono',monospace;
-  font-size:11px;
-  letter-spacing:.16em;
+
+  font-family:var(--font-mono);
+
+  font-size:12px;
+
+  letter-spacing:.18em;
+
   color:var(--muted);
+
   text-transform:uppercase;
+
 }
+
 
 .loading-bar{
+
   width:220px;
-  height:2px;
+
+  height:1px;
+
   background:var(--secondary);
+
   position:relative;
+
   overflow:hidden;
+
 }
+
 
 .loading-bar::after{
-  content:"";
+
+  content:'';
+
   position:absolute;
+
   left:-40%;
+
   top:0;
+
   bottom:0;
+
   width:40%;
+
   background:var(--primary);
-  animation:loadmove 1.1s infinite;
+
+  animation:loadmove 1.1s ease-in-out infinite;
+
 }
+
 
 @keyframes loadmove{
-  0%{left:-40%}
-  50%{left:60%}
-  100%{left:100%}
+
+  0%{
+    left:-40%;
+  }
+
+  50%{
+    left:60%;
+  }
+
+  100%{
+    left:100%;
+  }
+
 }
 
-/* HEADER */
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .site-header{
+
   position:fixed;
+
   top:0;
   left:0;
   right:0;
@@ -212,315 +351,552 @@ a{
   z-index:40;
 
   display:flex;
-  justify-content:space-between;
+
   align-items:center;
 
-  padding:20px clamp(20px,4vw,55px);
+  justify-content:space-between;
 
-  background:linear-gradient(
-    180deg,
-    rgba(16,17,13,.85),
-    transparent
-  );
+  padding:20px clamp(20px,4vw,56px);
 
-  backdrop-filter:blur(7px);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,16,16,.75),
+      transparent
+    );
+
+  backdrop-filter:blur(6px);
+
+  -webkit-backdrop-filter:blur(6px);
+
 }
+
 
 .brand{
-  font-family:'Fraunces',serif;
-  font-size:19px;
+
+  font-family:var(--font-title);
+
   font-weight:600;
+
+  font-size:18px;
+
+  letter-spacing:.05em;
+
 }
+
 
 .brand span{
+
   color:var(--primary);
+
 }
+
 
 .main-nav{
+
   display:flex;
-  gap:30px;
+
+  gap:clamp(16px,3vw,32px);
+
 }
+
 
 .main-nav button{
-  font-family:'Space Mono',monospace;
-  font-size:10px;
+
+  font-family:var(--font-mono);
+
+  font-size:11px;
+
   letter-spacing:.14em;
+
   text-transform:uppercase;
+
   color:var(--muted);
+
+  padding:6px 2px;
+
+  position:relative;
+
+  transition:color .3s;
+
 }
+
 
 .main-nav button:hover{
-  color:var(--primary);
+
+  color:var(--text);
+
 }
 
+
+.main-nav button::after{
+
+  content:'';
+
+  position:absolute;
+
+  left:0;
+
+  right:100%;
+
+  bottom:0;
+
+  height:1px;
+
+  background:var(--primary);
+
+  transition:right .3s ease;
+
+}
+
+
+.main-nav button:hover::after{
+
+  right:0;
+
+}
+
+
 @media(max-width:620px){
+
   .main-nav{
     display:none;
   }
+
 }
 
-/* MENU */
+
+/* =========================================================
+   MENU MOBILE
+   ========================================================= */
 
 .menu-toggle{
+
   position:fixed;
-  top:18px;
-  right:18px;
 
-  z-index:70;
+  top:20px;
 
-  width:40px;
-  height:40px;
+  right:20px;
 
-  display:none;
+  z-index:41;
+
+  width:38px;
+
+  height:38px;
+
+  display:flex;
+
   align-items:center;
+
   justify-content:center;
 
+  font-size:18px;
+
+  color:var(--text);
+
   border:1px solid var(--event-border);
+
   border-radius:50%;
 
-  background:rgba(16,17,13,.8);
-  backdrop-filter:blur(8px);
+  background:rgba(20,20,20,.6);
 
-  font-size:18px;
+  backdrop-filter:blur(6px);
+
 }
 
-@media(max-width:620px){
+
+@media(min-width:621px){
+
   .menu-toggle{
-    display:flex;
+    display:none;
   }
+
 }
+
 
 .overview-panel{
+
   position:fixed;
+
   top:0;
+
   right:0;
+
   bottom:0;
 
   z-index:60;
 
   width:min(340px,86vw);
 
-  padding:80px 26px 30px;
-
   background:var(--background-alt);
 
   border-left:1px solid var(--event-border);
 
+  padding:80px 26px 26px;
+
   transform:translateX(100%);
 
-  transition:transform .4s ease;
+  transition:
+    transform .4s cubic-bezier(.4,0,.2,1);
 
   overflow-y:auto;
+
 }
+
 
 .overview-panel.open{
+
   transform:translateX(0);
+
 }
+
 
 .overview-panel h3{
-  font-family:'Space Mono',monospace;
+
+  font-family:var(--font-mono);
+
   font-size:11px;
+
   letter-spacing:.18em;
+
   color:var(--muted);
+
   text-transform:uppercase;
+
   margin-bottom:18px;
+
 }
+
 
 .overview-list{
-  list-style:none;
-}
 
-.overview-list li button{
-  width:100%;
+  list-style:none;
 
   display:flex;
-  align-items:baseline;
-  gap:14px;
 
-  padding:13px 0;
+  flex-direction:column;
+
+}
+
+
+.overview-list li button{
+
+  width:100%;
 
   text-align:left;
 
-  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:12px 0;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.06);
+
+  display:flex;
+
+  gap:14px;
+
+  align-items:baseline;
 
   color:var(--muted);
+
+  transition:color .25s;
+
 }
+
 
 .overview-list li button:hover{
+
   color:var(--text);
+
 }
 
-.overview-list .yr{
-  min-width:45px;
 
-  font-family:'Space Mono',monospace;
+.overview-list li button .yr{
+
+  font-family:var(--font-mono);
 
   color:var(--primary);
-  font-size:12px;
+
+  font-size:13px;
+
+  min-width:44px;
+
 }
 
-.overview-list .ttl{
+
+.overview-list li button .ttl{
+
   font-size:14px;
+
 }
+
 
 .overview-backdrop{
+
   position:fixed;
+
   inset:0;
 
   z-index:59;
 
-  background:rgba(0,0,0,.45);
+  background:rgba(0,0,0,.4);
 
   opacity:0;
+
   pointer-events:none;
 
   transition:opacity .3s;
+
 }
+
 
 .overview-backdrop.open{
+
   opacity:1;
+
   pointer-events:auto;
+
 }
 
-/* INTRO */
+
+/* =========================================================
+   INTRO
+   ========================================================= */
 
 .intro{
+
   position:fixed;
+
   inset:0;
 
   z-index:30;
 
   display:flex;
+
   flex-direction:column;
-  justify-content:center;
+
   align-items:center;
+
+  justify-content:center;
 
   text-align:center;
 
-  padding:25px;
+  padding:24px;
 
   background:
     radial-gradient(
       ellipse at center,
-      rgba(16,17,13,.35),
-      rgba(16,17,13,.94) 75%
-    );
+      rgba(16,16,16,.4),
+      rgba(16,16,16,.92) 70%
+    ),
+    var(--background);
 
   transition:
-    opacity .8s ease,
-    visibility .8s ease;
+    opacity .9s ease,
+    visibility .9s ease;
+
 }
+
 
 .intro.hidden{
+
   opacity:0;
+
   visibility:hidden;
+
   pointer-events:none;
+
 }
+
 
 .intro-eyebrow{
-  font-family:'Space Mono',monospace;
-  font-size:11px;
-  letter-spacing:.2em;
-  color:var(--primary);
+
+  font-family:var(--font-mono);
+
+  font-size:12px;
+
+  letter-spacing:.24em;
+
   text-transform:uppercase;
 
+  color:var(--primary);
+
   margin-bottom:22px;
+
 }
+
 
 .intro-name{
-  font-family:'Fraunces',serif;
 
-  font-size:clamp(55px,11vw,130px);
+  font-family:var(--font-title);
 
   font-weight:300;
-  line-height:.9;
+
+  font-size:clamp(46px,10vw,124px);
+
+  line-height:.96;
+
+  letter-spacing:-.01em;
+
 }
+
 
 .intro-name b{
+
   font-weight:600;
+
+  display:block;
+
 }
 
-.intro-tagline{
-  max-width:550px;
 
-  margin:25px 0 10px;
+.intro-tagline{
+
+  font-size:clamp(14px,2vw,18px);
 
   color:var(--muted);
 
-  font-size:15px;
+  max-width:520px;
+
+  margin:26px 0 8px;
+
+  font-weight:400;
+
   line-height:1.6;
+
 }
+
 
 .intro-meta{
+
   display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
 
-  margin-bottom:42px;
+  gap:22px;
 
-  font-family:'Space Mono',monospace;
-  font-size:11px;
+  font-family:var(--font-mono);
+
+  font-size:12px;
 
   color:var(--secondary);
+
+  letter-spacing:.08em;
+
+  margin-bottom:44px;
+
+  flex-wrap:wrap;
+
+  justify-content:center;
+
 }
 
-.btn-start{
-  position:relative;
 
-  padding:15px 30px;
+.btn-start{
+
+  font-family:var(--font-mono);
+
+  font-size:13px;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+
+  padding:16px 34px;
 
   border:1px solid var(--primary);
 
-  font-family:'Space Mono',monospace;
-  font-size:12px;
+  color:var(--text);
 
-  letter-spacing:.13em;
-  text-transform:uppercase;
+  position:relative;
 
   overflow:hidden;
+
+  transition:color .35s;
+
 }
+
 
 .btn-start span{
+
   position:relative;
-  z-index:2;
+
+  z-index:1;
+
 }
 
+
 .btn-start::before{
-  content:"";
+
+  content:'';
 
   position:absolute;
+
   inset:0;
 
   background:var(--primary);
 
   transform:translateX(-101%);
 
-  transition:transform .35s ease;
+  transition:
+    transform .4s cubic-bezier(.4,0,.2,1);
+
+  z-index:0;
+
 }
+
 
 .btn-start:hover{
-  color:#10110d;
+
+  color:var(--background);
+
 }
+
 
 .btn-start:hover::before{
+
   transform:translateX(0);
+
 }
+
 
 .intro-hint{
-  position:absolute;
-  bottom:30px;
 
-  font-family:'Space Mono',monospace;
-  font-size:10px;
+  position:absolute;
+
+  bottom:34px;
+
+  font-family:var(--font-mono);
+
+  font-size:11px;
+
+  letter-spacing:.1em;
 
   color:var(--secondary);
+
+  animation:pulseFade 2.4s ease-in-out infinite;
+
 }
 
-/* TIMELINE */
+
+@keyframes pulseFade{
+
+  0%,100%{
+    opacity:.4;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
 
 .timeline-viewport{
+
   position:fixed;
+
   inset:0;
 
   z-index:5;
@@ -529,31 +905,43 @@ a{
 
   cursor:grab;
 
-  touch-action:none;
+  touch-action:pan-y;
+
 }
+
 
 .timeline-viewport.dragging{
+
   cursor:grabbing;
+
 }
 
+
 .timeline-track{
+
   position:absolute;
 
   top:0;
+
   left:0;
 
   height:100%;
 
   will-change:transform;
+
 }
 
+
 .timeline-line{
+
   position:absolute;
 
-  left:0;
   top:50%;
 
+  left:0;
+
   height:2px;
+
   width:100%;
 
   background:
@@ -564,41 +952,58 @@ a{
       var(--timeline) 96%,
       transparent
     );
+
+  transform:translateY(-1px);
+
 }
 
+
 .timeline-line::before{
-  content:"";
+
+  content:'';
 
   position:absolute;
+
   inset:0;
 
-  background:
+  background-image:
     repeating-linear-gradient(
       90deg,
       rgba(255,255,255,.06) 0 1px,
       transparent 1px 26px
     );
+
 }
 
-/* EVENTOS */
+
+/* =========================================================
+   EVENTOS
+   ========================================================= */
 
 .event{
+
   position:absolute;
 
   top:50%;
 
   width:0;
+
   height:0;
+
 }
 
+
 .event-marker{
+
   position:absolute;
 
-  width:11px;
-  height:11px;
+  top:0;
 
   left:0;
-  top:0;
+
+  width:11px;
+
+  height:11px;
 
   margin:-5.5px 0 0 -5.5px;
 
@@ -608,19 +1013,44 @@ a{
 
   border:2px solid var(--primary);
 
-  z-index:4;
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease;
 
-  transition:.4s ease;
+  z-index:3;
+
 }
 
+
 .event.active .event-marker{
+
   transform:scale(1.5);
 
   box-shadow:
-    0 0 0 7px rgba(215,255,63,.13);
+    0 0 0 6px rgba(200,217,107,.16);
+
+  animation:markerPulse 2.2s ease-in-out infinite;
+
 }
 
+
+@keyframes markerPulse{
+
+  0%,100%{
+    box-shadow:
+      0 0 0 6px rgba(200,217,107,.16);
+  }
+
+  50%{
+    box-shadow:
+      0 0 0 10px rgba(200,217,107,.05);
+  }
+
+}
+
+
 .event-connector{
+
   position:absolute;
 
   left:-1px;
@@ -628,21 +1058,38 @@ a{
   width:2px;
 
   background:var(--timeline);
+
+  transform-origin:top;
+
 }
+
 
 .event-top .event-connector{
+
   bottom:0;
+
   height:var(--connector-h);
+
+  transform-origin:bottom;
+
 }
+
 
 .event-bottom .event-connector{
+
   top:0;
+
   height:var(--connector-h);
+
 }
 
-/* CARD */
+
+/* =========================================================
+   CARDS
+   ========================================================= */
 
 .event-card{
+
   position:absolute;
 
   left:0;
@@ -654,189 +1101,359 @@ a{
   opacity:0;
 
   transition:
-    opacity .5s ease,
-    transform .5s ease;
+    opacity .6s cubic-bezier(.4,0,.2,1),
+    transform .6s cubic-bezier(.4,0,.2,1);
+
 }
+
+
+/* CARD DE CIMA */
 
 .event-top .event-card{
-  bottom:calc(var(--connector-h) + 6px);
+
+  bottom:calc(var(--connector-h) + 3px);
 
   transform:
-    translate(-50%,25px);
+    translate(-50%,20px);
+
 }
+
+
+/* CARD DE BAIXO */
 
 .event-bottom .event-card{
-  top:calc(var(--connector-h) + 6px);
+
+  top:calc(var(--connector-h) + 3px);
 
   transform:
-    translate(-50%,-25px);
+    translate(-50%,-20px);
+
 }
 
+
 .event.in-view .event-card{
+
   opacity:1;
 
   transform:
     translate(-50%,0);
+
 }
 
+
+/* =========================================================
+   IMAGEM
+   ========================================================= */
+
 .event-figure{
+
   width:100%;
 
-  aspect-ratio:1 / 1;
+  aspect-ratio:1/1;
 
   overflow:hidden;
 
-  border:1px solid var(--event-border);
+  border:
+    1px solid var(--event-border);
 
-  border-radius:4px;
+  border-radius:var(--event-radius);
 
   background:var(--event-background);
 
   box-shadow:
     0 18px 40px -14px var(--event-shadow);
 
+  transition:
+    box-shadow .4s ease,
+    transform .4s ease;
+
   position:relative;
+
 }
 
+
 .event-figure img{
+
   width:100%;
+
   height:100%;
 
   object-fit:cover;
 
+  object-position:center;
+
   filter:
-    grayscale(75%)
+    grayscale(80%)
     sepia(8%)
     contrast(1.05);
 
+  transform:scale(1.001);
+
   transition:
-    filter .6s ease,
-    transform .6s ease;
+    filter .8s ease,
+    transform .6s cubic-bezier(.4,0,.2,1);
+
 }
+
+
+.event-figure::after{
+
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
+  pointer-events:none;
+
+}
+
 
 .event:hover .event-figure img,
 .event.active .event-figure img{
+
   filter:
     grayscale(15%)
-    contrast(1.04);
+    sepia(4%)
+    contrast(1.02);
 
-  transform:scale(1.04);
 }
+
+
+.event:hover .event-figure{
+
+  box-shadow:
+    0 22px 48px -12px var(--event-shadow);
+
+}
+
+
+.event:hover .event-figure img{
+
+  transform:scale(1.035);
+
+}
+
+
+/* =========================================================
+   TEXTO DOS CARDS
+   ========================================================= */
 
 .event-body{
+
   text-align:center;
 
-  padding-bottom:8px;
 }
 
-.event-year{
-  margin-top:12px;
 
-  font-family:'Space Mono',monospace;
+.event-year{
+
+  font-family:var(--font-mono);
 
   font-size:12px;
 
-  color:var(--primary);
-
   letter-spacing:.1em;
-}
 
-.event-title{
-  margin-top:4px;
-
-  font-family:'Fraunces',serif;
-
-  font-size:19px;
-
-  line-height:1.25;
-}
-
-.event-desc{
-  margin-top:7px;
-
-  font-size:13px;
-
-  color:var(--muted);
-
-  line-height:1.5;
-}
-
-.event-more{
-  display:inline-flex;
+  color:var(--primary);
 
   margin-top:10px;
 
-  padding-bottom:3px;
+}
 
-  font-family:'Space Mono',monospace;
+
+.event-title{
+
+  font-family:var(--font-title);
+
+  font-weight:600;
+
+  font-size:17px;
+
+  margin-top:4px;
+
+  line-height:1.25;
+
+}
+
+
+.event-desc{
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  margin-top:6px;
+
+  line-height:1.4;
+
+}
+
+
+.event-more{
+
+  font-family:var(--font-mono);
 
   font-size:10px;
 
-  letter-spacing:.1em;
+  letter-spacing:.12em;
 
   text-transform:uppercase;
 
   color:var(--text);
 
-  border-bottom:1px solid var(--secondary);
+  margin-top:9px;
 
-  position:relative;
+  display:inline-flex;
 
-  z-index:10;
+  align-items:center;
+
+  gap:6px;
+
+  border-bottom:
+    1px solid var(--secondary);
+
+  padding-bottom:3px;
+
+  transition:
+    border-color .3s,
+    color .3s,
+    gap .3s;
+
 }
+
 
 .event-more:hover{
+
   color:var(--primary);
+
   border-color:var(--primary);
+
+  gap:10px;
+
 }
 
-/* MOBILE */
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media(max-width:560px){
 
-  .event-title{
-    font-size:16px;
+  .event-card{
+
+    width:var(--event-size);
+
   }
+
+
+  .event-figure{
+
+    aspect-ratio:1/1;
+
+  }
+
+
+  .event-year{
+
+    font-size:10px;
+
+    margin-top:7px;
+
+  }
+
+
+  .event-title{
+
+    font-size:14px;
+
+  }
+
 
   .event-desc{
-    font-size:11px;
+
+    font-size:10px;
+
+    margin-top:4px;
+
+    line-height:1.35;
+
   }
+
 
   .event-more{
-    font-size:9px;
+
+    font-size:8px;
+
+    margin-top:6px;
+
   }
+
+
+  .event-top .event-card{
+
+    bottom:
+      calc(var(--connector-h) + 2px);
+
+  }
+
+
+  .event-bottom .event-card{
+
+    top:
+      calc(var(--connector-h) + 2px);
+
+  }
+
 }
 
-/* PAINÉIS */
+
+/* =========================================================
+   PAINÉIS DA TIMELINE
+   ========================================================= */
 
 .track-panel{
+
   position:absolute;
 
   top:50%;
 
   transform:translateY(-50%);
 
-  width:min(350px,70vw);
+  width:min(320px,70vw);
 
   text-align:center;
+
 }
 
-.panel-inner{
+
+.track-panel .panel-inner{
+
   opacity:0;
 
-  transform:translateY(20px);
+  transform:translateY(24px);
 
-  transition:.6s ease;
+  transition:
+    opacity .7s cubic-bezier(.4,0,.2,1),
+    transform .7s cubic-bezier(.4,0,.2,1);
+
 }
 
+
 .track-panel.in-view .panel-inner{
+
   opacity:1;
 
   transform:translateY(0);
+
 }
 
+
 .track-panel .label{
-  font-family:'Space Mono',monospace;
+
+  font-family:var(--font-mono);
 
   font-size:10px;
 
@@ -845,327 +1462,510 @@ a{
   color:var(--secondary);
 
   text-transform:uppercase;
+
 }
+
 
 .track-panel h2{
-  margin:14px 0;
 
-  font-family:'Fraunces',serif;
-
-  font-size:38px;
+  font-family:var(--font-title);
 
   font-weight:300;
+
+  font-size:clamp(26px,4vw,40px);
+
+  margin:14px 0 12px;
+
 }
 
+
 .track-panel p{
+
   color:var(--muted);
 
-  font-size:14px;
+  font-size:13px;
 
   line-height:1.6;
 
   margin-bottom:20px;
+
 }
 
+
 .btn-ghost{
-  padding:12px 22px;
 
-  border:1px solid var(--secondary);
+  font-family:var(--font-mono);
 
-  font-family:'Space Mono',monospace;
+  font-size:11px;
 
-  font-size:10px;
+  letter-spacing:.12em;
 
   text-transform:uppercase;
 
-  letter-spacing:.1em;
+  padding:12px 24px;
+
+  border:
+    1px solid var(--secondary);
+
+  color:var(--text);
+
+  transition:.3s;
+
 }
+
 
 .btn-ghost:hover{
-  color:var(--primary);
 
   border-color:var(--primary);
+
+  color:var(--primary);
+
 }
 
-/* CONTROLES */
+
+/* =========================================================
+   NAVEGAÇÃO
+   ========================================================= */
 
 .nav-controls{
+
   position:fixed;
 
   left:0;
   right:0;
-  bottom:22px;
+
+  bottom:26px;
 
   z-index:35;
 
   display:flex;
 
-  justify-content:center;
   align-items:center;
 
-  gap:16px;
+  justify-content:center;
+
+  gap:18px;
+
+  padding:0 20px;
 
   opacity:0;
+
   visibility:hidden;
 
   transform:translateY(10px);
 
-  transition:.5s ease;
+  transition:
+    opacity .6s ease,
+    transform .6s ease,
+    visibility .6s;
+
 }
+
 
 .nav-controls.visible{
+
   opacity:1;
+
   visibility:visible;
+
   transform:translateY(0);
+
 }
 
+
 .nav-arrow{
+
   width:42px;
+
   height:42px;
-
-  flex:none;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border:1px solid var(--event-border);
 
   border-radius:50%;
 
-  background:rgba(16,17,13,.7);
+  border:
+    1px solid var(--event-border);
+
+  background:rgba(20,20,20,.55);
+
+  backdrop-filter:blur(6px);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
 
   font-size:16px;
+
+  color:var(--text);
+
+  transition:
+    border-color .3s,
+    transform .2s;
+
+  flex:none;
+
 }
+
 
 .nav-arrow:hover{
+
   border-color:var(--primary);
 
-  color:var(--primary);
+  transform:translateY(-2px);
+
 }
+
 
 .progress-wrap{
+
   width:min(420px,50vw);
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:6px;
+
 }
 
+
 .progress-track{
+
   position:relative;
 
   height:2px;
 
-  background:rgba(255,255,255,.12);
+  background:rgba(255,255,255,.1);
+
+  border-radius:2px;
 
   overflow:hidden;
+
 }
 
+
 .progress-fill{
+
   position:absolute;
 
   left:0;
   top:0;
   bottom:0;
 
-  width:0;
+  width:0%;
 
   background:var(--primary);
+
+  transition:width .1s linear;
+
 }
 
+
 .progress-years{
+
   display:flex;
 
   justify-content:space-between;
 
-  margin-top:5px;
+  font-family:var(--font-mono);
 
-  font-family:'Space Mono',monospace;
-
-  font-size:9px;
+  font-size:10px;
 
   color:var(--secondary);
+
+  letter-spacing:.05em;
+
 }
+
 
 @media(max-width:620px){
 
   .progress-wrap{
-    width:42vw;
+
+    width:44vw;
+
   }
+
 
   .progress-years span:not(:first-child):not(:last-child){
+
     display:none;
+
   }
+
 }
 
-/* MODAL */
+
+/* =========================================================
+   MODAL
+   ========================================================= */
 
 .modal-overlay{
+
   position:fixed;
 
   inset:0;
 
-  z-index:90;
+  z-index:80;
+
+  background:rgba(10,10,10,.72);
+
+  backdrop-filter:blur(10px);
+
+  -webkit-backdrop-filter:blur(10px);
 
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   padding:20px;
 
-  background:rgba(5,6,4,.78);
-
-  backdrop-filter:blur(12px);
-
   opacity:0;
+
   visibility:hidden;
 
-  transition:.35s ease;
+  transition:
+    opacity .35s ease,
+    visibility .35s ease;
+
 }
+
 
 .modal-overlay.open{
+
   opacity:1;
+
   visibility:visible;
+
 }
 
-.modal{
-  width:min(650px,100%);
 
-  max-height:90vh;
+.modal{
+
+  width:min(620px,100%);
+
+  max-height:88vh;
 
   overflow-y:auto;
 
   background:var(--background-alt);
 
-  border:1px solid var(--event-border);
+  border:
+    1px solid var(--event-border);
 
-  border-radius:5px;
+  border-radius:var(--event-radius);
 
-  transform:scale(.94) translateY(10px);
+  transform:
+    scale(.94)
+    translateY(10px);
 
-  transition:.35s ease;
+  transition:
+    transform .4s cubic-bezier(.4,0,.2,1);
 
   box-shadow:
-    0 40px 80px rgba(0,0,0,.7);
+    0 40px 80px -20px rgba(0,0,0,.7);
 
-  position:relative;
 }
+
 
 .modal-overlay.open .modal{
-  transform:scale(1) translateY(0);
+
+  transform:
+    scale(1)
+    translateY(0);
+
 }
 
+
 .modal-close{
-  position:absolute;
 
-  top:12px;
-  right:12px;
+  position:sticky;
 
-  z-index:20;
+  top:14px;
 
-  width:36px;
-  height:36px;
+  float:right;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  margin:14px 14px 0 0;
+
+  width:34px;
+
+  height:34px;
 
   border-radius:50%;
 
-  background:rgba(0,0,0,.6);
+  background:rgba(0,0,0,.35);
 
-  font-size:20px;
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:18px;
+
+  z-index:2;
+
 }
+
 
 .modal-close:hover{
+
+  background:rgba(0,0,0,.55);
+
   color:var(--primary);
+
 }
 
+
 .modal-figure{
+
   width:100%;
 
-  height:min(55vh,420px);
+  aspect-ratio:16/9;
 
   overflow:hidden;
 
-  background:#000;
 }
 
+
 .modal-figure img{
+
   width:100%;
+
   height:100%;
 
   object-fit:cover;
+
 }
+
 
 .modal-body{
-  padding:25px 30px 35px;
+
+  padding:8px 30px 35px;
+
 }
 
+
 .modal-year{
-  font-family:'Space Mono',monospace;
+
+  font-family:var(--font-mono);
 
   font-size:12px;
 
   color:var(--primary);
+
+  letter-spacing:.1em;
+
+  margin-top:18px;
+
 }
+
 
 .modal-title{
-  margin:8px 0 15px;
 
-  font-family:'Fraunces',serif;
+  font-family:var(--font-title);
 
-  font-size:30px;
+  font-weight:600;
+
+  font-size:clamp(22px,3vw,30px);
+
+  margin:10px 0 18px;
+
 }
 
+
 .modal-desc{
+
   color:var(--muted);
 
   font-size:14px;
 
   line-height:1.75;
+
 }
 
-@media(max-width:560px){
 
-  .modal-overlay{
-    padding:12px;
-  }
-
-  .modal-figure{
-    height:230px;
-  }
-
-  .modal-body{
-    padding:20px;
-  }
-
-  .modal-title{
-    font-size:24px;
-  }
-}
-
-/* ACESSIBILIDADE */
+/* =========================================================
+   ACESSIBILIDADE / MOVIMENTO REDUZIDO
+   ========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
   *{
+
     animation-duration:.001s !important;
+
     transition-duration:.001s !important;
+
   }
+
+  .timeline-track{
+
+    transition:none !important;
+
+  }
+
 }
+
+
+.sr-only{
+
+  position:absolute;
+
+  width:1px;
+
+  height:1px;
+
+  overflow:hidden;
+
+  clip:rect(0,0,0,0);
+
+  white-space:nowrap;
+
+}
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- =========================================================
+     FUNDO
+     ========================================================= -->
+
 <div class="bg-layer" id="bgLayer"></div>
+
 <div class="bg-vignette"></div>
+
 <div class="bg-grain"></div>
 
-<div id="loading-screen">
-  <div class="loading-name">Billie Eilish</div>
-  <div class="loading-sub">Carregando história...</div>
+
+<!-- =========================================================
+     LOADING
+     ========================================================= -->
+
+<div id="loading-screen" aria-hidden="true">
+
+  <div class="loading-name">
+    Billie Eilish
+  </div>
+
+  <div class="loading-sub">
+    Carregando história…
+  </div>
+
   <div class="loading-bar"></div>
+
 </div>
+
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
 
 <header class="site-header">
 
@@ -1173,7 +1973,7 @@ a{
     Billie <span>Eilish</span>
   </div>
 
-  <nav class="main-nav">
+  <nav class="main-nav" aria-label="Navegação principal">
 
     <button data-action="go-start">
       Início
@@ -1191,26 +1991,36 @@ a{
 
 </header>
 
+
+<!-- =========================================================
+     MENU MOBILE
+     ========================================================= -->
+
 <button
   class="menu-toggle"
   id="menuToggle"
-  aria-label="Abrir timeline"
+  aria-label="Abrir visão geral da linha do tempo"
   aria-expanded="false"
 >
   ☰
 </button>
+
 
 <div
   class="overview-backdrop"
   id="overviewBackdrop"
 ></div>
 
+
 <aside
   class="overview-panel"
   id="overviewPanel"
+  aria-label="Visão geral dos acontecimentos"
 >
 
-  <h3>Linha do tempo</h3>
+  <h3>
+    Linha do tempo
+  </h3>
 
   <ul
     class="overview-list"
@@ -1218,6 +2028,11 @@ a{
   ></ul>
 
 </aside>
+
+
+<!-- =========================================================
+     INTRO
+     ========================================================= -->
 
 <section
   class="intro"
@@ -1228,40 +2043,70 @@ a{
     Biografia interativa
   </p>
 
+
   <h1 class="intro-name">
-    <b>Billie Eilish</b>
+
+    <b>
+      Billie Eilish
+    </b>
+
   </h1>
 
+
   <p class="intro-tagline">
-    Uma viagem por momentos importantes da carreira e trajetória de Billie Eilish.
+
+    Uma viagem pela trajetória, música e momentos que marcaram a carreira de Billie Eilish.
+
   </p>
+
 
   <div class="intro-meta">
 
-    <span>n. 2001</span>
+    <span>
+      n. 2001
+    </span>
 
-    <span>Cantora & compositora</span>
+    <span>
+      Cantora & compositora
+    </span>
 
-    <span>Los Angeles, EUA</span>
+    <span>
+      Los Angeles, EUA
+    </span>
 
   </div>
+
 
   <button
     class="btn-start"
     id="startBtn"
   >
-    <span>Começar a viagem →</span>
+
+    <span>
+      Começar a viagem →
+    </span>
+
   </button>
 
+
   <p class="intro-hint">
-    use o mouse, toque ou as setas
+
+    use o mouse, o toque ou as setas do teclado
+
   </p>
 
 </section>
 
+
+<!-- =========================================================
+     TIMELINE
+     ========================================================= -->
+
 <main
   class="timeline-viewport"
   id="viewport"
+  tabindex="0"
+  aria-label="Linha do tempo horizontal"
 >
 
   <div
@@ -1274,6 +2119,11 @@ a{
   </div>
 
 </main>
+
+
+<!-- =========================================================
+     CONTROLES
+     ========================================================= -->
 
 <div
   class="nav-controls"
@@ -1288,6 +2138,7 @@ a{
     ←
   </button>
 
+
   <div class="progress-wrap">
 
     <div class="progress-track">
@@ -1299,12 +2150,14 @@ a{
 
     </div>
 
+
     <div
       class="progress-years"
       id="progressYears"
     ></div>
 
   </div>
+
 
   <button
     class="nav-arrow"
@@ -1316,6 +2169,11 @@ a{
 
 </div>
 
+
+<!-- =========================================================
+     MODAL
+     ========================================================= -->
+
 <div
   class="modal-overlay"
   id="modalOverlay"
@@ -1325,6 +2183,7 @@ a{
     class="modal"
     role="dialog"
     aria-modal="true"
+    aria-labelledby="modalTitle"
   >
 
     <button
@@ -1335,6 +2194,7 @@ a{
       ×
     </button>
 
+
     <div class="modal-figure">
 
       <img
@@ -1344,6 +2204,7 @@ a{
 
     </div>
 
+
     <div class="modal-body">
 
       <div
@@ -1351,10 +2212,12 @@ a{
         id="modalYear"
       ></div>
 
+
       <h2
         class="modal-title"
         id="modalTitle"
       ></h2>
+
 
       <p
         class="modal-desc"
@@ -1367,196 +2230,317 @@ a{
 
 </div>
 
+
 <script>
+
+
+/* =========================================================
+   CONFIGURAÇÃO
+   ========================================================= */
 
 const timelineConfig = {
 
-  personName:"Billie Eilish",
+  personName:
+    "Billie Eilish",
 
-  birthYear:"2001",
+  tagline:
+    "Uma viagem pela trajetória, música e momentos que marcaram a carreira de Billie Eilish.",
 
-  profession:"Cantora & compositora",
+  birthYear:
+    "2001",
 
-  location:"Los Angeles, EUA",
+  profession:
+    "Cantora & compositora",
+
+  location:
+    "Los Angeles, EUA",
 
   about:
-  "Billie Eilish é uma cantora e compositora norte-americana conhecida por sua estética singular, vocais intimistas e colaboração artística com seu irmão Finneas.",
+    "Billie Eilish é uma cantora e compositora norte-americana conhecida por sua estética singular, produção musical intimista e grande impacto na música pop contemporânea.",
 
   BACKGROUND_IMAGE:
-  "https://picsum.photos/seed/billie-background/1800/1200"
+    "https://picsum.photos/seed/billie-bg/1800/1200"
 
 };
+
+
+/* =========================================================
+   EVENTOS
+   ========================================================= */
 
 const timelineEvents = [
 
   {
     year:"2001",
+
     title:"Nascimento",
-    image:"https://picsum.photos/seed/billie01/800/800",
-    shortDescription:"Billie Eilish nasce em Los Angeles.",
+
+    image:
+      "https://picsum.photos/seed/billie01/700/700",
+
+    shortDescription:
+      "Billie Eilish nasce em Los Angeles.",
+
     description:
-    "Billie Eilish Pirate Baird O'Connell nasce em Los Angeles, Califórnia, em 18 de dezembro de 2001."
+      "Billie Eilish Pirate Baird O'Connell nasce em Los Angeles, Califórnia, em 18 de dezembro de 2001."
   },
+
 
   {
     year:"2015",
+
     title:"Ocean Eyes",
-    image:"https://picsum.photos/seed/billie02/800/800",
-    shortDescription:"A música que chama atenção para sua voz.",
+
+    image:
+      "https://picsum.photos/seed/billie02/700/700",
+
+    shortDescription:
+      "A música que muda sua trajetória.",
+
     description:
-    "Billie lança Ocean Eyes online. A faixa, escrita e produzida com seu irmão Finneas, rapidamente chama atenção e marca o começo de sua ascensão musical."
+      "Ocean Eyes ganha grande atenção na internet e marca o início da ascensão de Billie Eilish como artista."
   },
+
 
   {
     year:"2017",
+
     title:"Don't Smile at Me",
-    image:"https://picsum.photos/seed/billie03/800/800",
-    shortDescription:"Primeiro grande projeto musical.",
+
+    image:
+      "https://picsum.photos/seed/billie03/700/700",
+
+    shortDescription:
+      "Primeiro grande lançamento.",
+
     description:
-    "O EP Don't Smile at Me amplia o público de Billie e inclui músicas que ajudaram a estabelecer sua identidade artística."
+      "Billie lança seu EP de estreia, Don't Smile at Me, consolidando seu estilo e conquistando público internacional."
   },
+
 
   {
     year:"2019",
-    title:"When We All Fall Asleep, Where Do We Go?",
-    image:"https://picsum.photos/seed/billie04/800/800",
-    shortDescription:"Seu álbum de estreia chega ao topo.",
+
+    title:"When We All Fall Asleep",
+
+    image:
+      "https://picsum.photos/seed/billie04/700/700",
+
+    shortDescription:
+      "O álbum que transforma sua carreira.",
+
     description:
-    "Billie lança seu primeiro álbum de estúdio, consolidando sua presença internacional e apresentando uma estética visual e sonora muito marcante."
+      "When We All Fall Asleep, Where Do We Go? chega ao público e coloca Billie Eilish no centro da música pop mundial."
   },
+
 
   {
     year:"2020",
+
     title:"Noite histórica no Grammy",
-    image:"https://picsum.photos/seed/billie05/800/800",
-    shortDescription:"Billie faz história no Grammy.",
+
+    image:
+      "https://picsum.photos/seed/billie05/700/700",
+
+    shortDescription:
+      "Billie faz história no Grammy.",
+
     description:
-    "Na cerimônia do Grammy de 2020, Billie conquista quatro das principais categorias da premiação, incluindo Álbum do Ano e Gravação do Ano."
+      "Billie Eilish conquista quatro das principais categorias do Grammy Awards, tornando-se uma das grandes vencedoras da noite."
   },
+
 
   {
     year:"2021",
+
     title:"Happier Than Ever",
-    image:"https://picsum.photos/seed/billie06/800/800",
-    shortDescription:"Um novo capítulo artístico.",
+
+    image:
+      "https://picsum.photos/seed/billie06/700/700",
+
+    shortDescription:
+      "Uma nova fase artística.",
+
     description:
-    "Happier Than Ever apresenta uma nova fase musical e visual, explorando diferentes formas de composição e produção."
+      "Happier Than Ever apresenta uma nova etapa musical, explorando diferentes sonoridades e temas."
   },
+
 
   {
     year:"2022",
-    title:"What Was I Made For?",
-    image:"https://picsum.photos/seed/billie07/800/800",
-    shortDescription:"Billie participa da trilha de Barbie.",
+
+    title:"Turnê mundial",
+
+    image:
+      "https://picsum.photos/seed/billie07/700/700",
+
+    shortDescription:
+      "Billie leva sua música para o mundo.",
+
     description:
-    "Billie lança What Was I Made For?, criada para a trilha sonora do filme Barbie, e a música se torna um dos trabalhos mais reconhecidos de sua carreira."
+      "A artista percorre diversos países com a turnê relacionada à era Happier Than Ever."
   },
+
+
+  {
+    year:"2023",
+
+    title:"What Was I Made For?",
+
+    image:
+      "https://picsum.photos/seed/billie08/700/700",
+
+    shortDescription:
+      "Uma nova colaboração cinematográfica.",
+
+    description:
+      "Billie e Finneas criam What Was I Made For? para a trilha sonora de Barbie."
+  },
+
 
   {
     year:"2024",
-    title:"HIT ME HARD AND SOFT",
-    image:"https://picsum.photos/seed/billie08/800/800",
-    shortDescription:"Um novo álbum de estúdio.",
-    description:
-    "Billie lança HIT ME HARD AND SOFT, projeto que apresenta uma nova etapa de sua evolução musical."
-  },
 
-  {
-    year:"2025",
-    title:"Continuação da carreira",
-    image:"https://picsum.photos/seed/billie09/800/800",
-    shortDescription:"Billie continua expandindo seu trabalho.",
+    title:"HIT ME HARD AND SOFT",
+
+    image:
+      "https://picsum.photos/seed/billie09/700/700",
+
+    shortDescription:
+      "Uma nova era musical.",
+
     description:
-    "A carreira de Billie continua evoluindo através de novas apresentações, projetos musicais e colaborações."
+      "Billie Eilish lança HIT ME HARD AND SOFT, apresentando uma nova fase de sua carreira e uma sonoridade cuidadosamente construída."
   }
 
 ];
 
+
+/* =========================================================
+   ESTADO
+   ========================================================= */
+
+const prefersReducedMotion =
+  window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+
 const viewport =
-document.getElementById("viewport");
+  document.getElementById('viewport');
+
 
 const track =
-document.getElementById("track");
+  document.getElementById('track');
+
 
 const introEl =
-document.getElementById("intro");
+  document.getElementById('intro');
 
-const bgLayer =
-document.getElementById("bgLayer");
 
 let currentScroll = 0;
+
 let targetScroll = 0;
+
 let maxScroll = 0;
 
 let modalOpen = false;
+
 let isDragging = false;
-let hasStarted = false;
 
 let dragStartX = 0;
+
 let dragStartScroll = 0;
 
 let lastPointerX = 0;
+
 let lastPointerT = 0;
+
 let velocity = 0;
 
-function cssNum(name){
+let hasStarted = false;
+
+
+/* =========================================================
+   CSS VARIABLE
+   ========================================================= */
+
+function cssNum(varName){
 
   return parseFloat(
-    getComputedStyle(document.documentElement)
-    .getPropertyValue(name)
+
+    getComputedStyle(
+      document.documentElement
+    ).getPropertyValue(varName)
+
   );
 
 }
 
-function clamp(value,min,max){
 
-  return Math.max(
-    min,
-    Math.min(max,value)
-  );
-
-}
-
-/* CONSTRUIR TIMELINE */
+/* =========================================================
+   CONSTRUIR TIMELINE
+   ========================================================= */
 
 function buildTimeline(){
 
-  bgLayer.style.backgroundImage =
-  `
-  linear-gradient(
-    180deg,
-    rgba(16,17,13,.82),
-    rgba(16,17,13,.93)
-  ),
-  url('${timelineConfig.BACKGROUND_IMAGE}')
-  `;
+  const bg =
+    document.getElementById('bgLayer');
+
+
+  bg.style.backgroundImage =
+
+    `linear-gradient(
+      180deg,
+      rgba(16,16,16,.88),
+      rgba(16,16,16,.94) 55%,
+      rgba(8,8,8,.98)
+    ),
+    url('${timelineConfig.BACKGROUND_IMAGE}')`;
+
 
   const gap =
-  cssNum("--card-gap");
+    cssNum('--card-gap');
+
 
   const startPad =
-  Math.max(
-    window.innerWidth * .9,
-    620
-  );
+    Math.max(
+      window.innerWidth * .9,
+      620
+    );
+
+
+  /* =======================================================
+     NÓ INICIAL
+     ======================================================= */
 
   const introX =
-  window.innerWidth / 2;
+    window.innerWidth / 2;
+
 
   const introNode =
-  document.createElement("article");
+    document.createElement('article');
+
 
   introNode.className =
-  "event event-bottom intro-node";
+    'event event-bottom intro-node';
+
 
   introNode.style.left =
-  introX + "px";
+    introX + 'px';
+
 
   introNode.innerHTML = `
 
-    <div class="event-connector"></div>
+    <div
+      class="event-connector"
+      aria-hidden="true"
+    ></div>
 
-    <div class="event-marker"></div>
+    <div
+      class="event-marker"
+      aria-hidden="true"
+    ></div>
 
     <div class="event-card">
 
@@ -1571,7 +2555,7 @@ function buildTimeline(){
         </h3>
 
         <p class="event-desc">
-          Siga pela linha do tempo para conhecer sua trajetória.
+          Role, arraste ou use as setas para seguir.
         </p>
 
       </div>
@@ -1580,160 +2564,226 @@ function buildTimeline(){
 
   `;
 
+
   track.appendChild(introNode);
 
+
+  /* =======================================================
+     LISTA LATERAL
+     ======================================================= */
+
   const overviewList =
-  document.getElementById(
-    "overviewList"
-  );
+    document.getElementById('overviewList');
+
 
   const progressYears =
-  document.getElementById(
-    "progressYears"
-  );
+    document.getElementById('progressYears');
+
 
   const eventEls = [];
 
-  const firstLi =
-  document.createElement("li");
 
-  firstLi.innerHTML = `
+  const introLi =
+    document.createElement('li');
+
+
+  introLi.innerHTML = `
+
     <button data-goto="${introX}">
-      <span class="yr">Início</span>
-      <span class="ttl">A jornada começa</span>
+
+      <span class="yr">
+        Início
+      </span>
+
+      <span class="ttl">
+        A jornada começa
+      </span>
+
     </button>
+
   `;
 
-  overviewList.appendChild(firstLi);
 
-  timelineEvents.forEach(
-    (ev,index)=>{
+  overviewList.appendChild(introLi);
 
-      const x =
-      startPad + index * gap;
 
-      ev._x = x;
+  /* =======================================================
+     EVENTOS
+     ======================================================= */
 
-      const position =
+  timelineEvents.forEach((ev,i)=>{
+
+    const x =
+      startPad + i * gap;
+
+
+    ev._x = x;
+
+
+    const position =
       ev.position ||
-      (index % 2 === 0
-        ? "top"
-        : "bottom");
+      (i % 2 === 0 ? 'top' : 'bottom');
 
-      const el =
-      document.createElement("article");
 
-      el.className =
+    const el =
+      document.createElement('article');
+
+
+    el.className =
       `event event-${position}`;
 
-      el.style.left =
-      x + "px";
 
-      el.dataset.index =
-      index;
+    el.style.left =
+      x + 'px';
 
-      el.innerHTML = `
 
-        <div
-          class="event-connector"
-          aria-hidden="true"
-        ></div>
+    el.setAttribute(
+      'data-index',
+      i
+    );
 
-        <div
-          class="event-marker"
-          aria-hidden="true"
-        ></div>
 
-        <div class="event-card">
+    el.innerHTML = `
 
-          <div class="event-figure">
+      <div
+        class="event-connector"
+        aria-hidden="true"
+      ></div>
 
-            <img
-              src="${ev.image}"
-              alt="${ev.title}"
-              loading="lazy"
-            >
+      <div
+        class="event-marker"
+        aria-hidden="true"
+      ></div>
 
-          </div>
+      <div class="event-card">
 
-          <div class="event-body">
+        <div class="event-figure">
 
-            <div class="event-year">
-              ${ev.year}
-            </div>
-
-            <h3 class="event-title">
-              ${ev.title}
-            </h3>
-
-            <p class="event-desc">
-              ${ev.shortDescription}
-            </p>
-
-            <button
-              class="event-more"
-              data-index="${index}"
-            >
-              Saber mais →
-            </button>
-
-          </div>
+          <img
+            src="${ev.image}"
+            alt="${ev.title}"
+            loading="lazy"
+          >
 
         </div>
 
-      `;
 
-      track.appendChild(el);
+        <div class="event-body">
 
-      eventEls.push(el);
+          <div class="event-year">
+            ${ev.year}
+          </div>
 
-      const li =
-      document.createElement("li");
+          <h3 class="event-title">
+            ${ev.title}
+          </h3>
 
-      li.innerHTML = `
-        <button data-goto="${x}">
-          <span class="yr">${ev.year}</span>
-          <span class="ttl">${ev.title}</span>
-        </button>
-      `;
+          <p class="event-desc">
+            ${ev.shortDescription}
+          </p>
 
-      overviewList.appendChild(li);
+          <button
+            class="event-more"
+            data-index="${i}"
+          >
+            Saber mais →
+          </button>
 
-      if(
-        index === 0 ||
-        index === timelineEvents.length - 1 ||
-        index % 2 === 0
-      ){
+        </div>
 
-        const span =
-        document.createElement("span");
+      </div>
 
-        span.textContent =
+    `;
+
+
+    track.appendChild(el);
+
+
+    eventEls.push(el);
+
+
+    /* =====================================================
+       ITEM DO MENU
+       ===================================================== */
+
+    const li =
+      document.createElement('li');
+
+
+    li.innerHTML = `
+
+      <button data-goto="${x}">
+
+        <span class="yr">
+          ${ev.year}
+        </span>
+
+        <span class="ttl">
+          ${ev.title}
+        </span>
+
+      </button>
+
+    `;
+
+
+    overviewList.appendChild(li);
+
+
+    /* =====================================================
+       ANOS DA BARRA
+       ===================================================== */
+
+    if(
+
+      i === 0 ||
+      i === timelineEvents.length - 1 ||
+      i % Math.ceil(
+        timelineEvents.length / 5
+      ) === 0
+
+    ){
+
+      const span =
+        document.createElement('span');
+
+
+      span.textContent =
         ev.year;
 
-        progressYears.appendChild(span);
 
-      }
+      progressYears.appendChild(span);
 
     }
-  );
+
+  });
+
+
+  /* =======================================================
+     FINAL
+     ======================================================= */
 
   const lastX =
-  timelineEvents[
-    timelineEvents.length - 1
-  ]._x;
+    timelineEvents[
+      timelineEvents.length - 1
+    ]._x;
+
 
   const endX =
-  lastX + gap;
+    lastX + gap;
+
 
   const endPanel =
-  document.createElement("div");
+    document.createElement('div');
+
 
   endPanel.className =
-  "track-panel";
+    'track-panel';
+
 
   endPanel.style.left =
-  endX + "px";
+    endX + 'px';
+
 
   endPanel.innerHTML = `
 
@@ -1744,12 +2794,11 @@ function buildTimeline(){
       </div>
 
       <h2>
-        A história continua...
+        E a história continua…
       </h2>
 
       <p>
-        Billie Eilish continua construindo
-        novos capítulos de sua carreira.
+        Billie Eilish segue construindo novos capítulos.
       </p>
 
       <button
@@ -1763,71 +2812,125 @@ function buildTimeline(){
 
   `;
 
+
   track.appendChild(endPanel);
 
+
+  /* =======================================================
+     TAMANHO DA TRACK
+     ======================================================= */
+
   const trackWidth =
-  endX + startPad * .5;
+    endX + startPad * .5;
+
 
   track.style.width =
-  trackWidth + "px";
+    trackWidth + 'px';
+
 
   maxScroll =
-  Math.max(
-    0,
-    trackWidth - window.innerWidth
-  );
+    Math.max(
+      0,
+      trackWidth - window.innerWidth
+    );
+
 
   return {
+
     eventEls,
+
     panelEls:[endPanel],
+
     introNode,
+
     introX
+
   };
 
 }
 
+
+/* =========================================================
+   BUILD
+   ========================================================= */
+
 const {
+
   eventEls,
+
   panelEls,
+
   introNode,
+
   introX
+
 } = buildTimeline();
 
-/* ANIMAÇÃO */
+
+/* =========================================================
+   UTILITÁRIO
+   ========================================================= */
+
+function clamp(v,min,max){
+
+  return Math.max(
+    min,
+    Math.min(max,v)
+  );
+
+}
+
+
+/* =========================================================
+   ANIMAÇÃO
+   ========================================================= */
 
 function animate(){
 
   const ease =
-  window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches
-  ? 1
-  : .12;
+    prefersReducedMotion
+      ? 1
+      : .12;
+
 
   currentScroll +=
-  (targetScroll - currentScroll)
-  * ease;
+    (
+      targetScroll -
+      currentScroll
+    ) * ease;
+
 
   if(
     Math.abs(
-      targetScroll - currentScroll
+      targetScroll -
+      currentScroll
     ) < .05
   ){
 
     currentScroll =
-    targetScroll;
+      targetScroll;
 
   }
 
-  track.style.transform =
-  `translateX(${-currentScroll}px)`;
 
-  bgLayer.style.transform =
-  `translateX(${-currentScroll * .06}px) scale(1.08)`;
+  track.style.transform =
+    `translateX(${-currentScroll}px)`;
+
+
+  /* PARALLAX */
+
+  const bg =
+    document.getElementById('bgLayer');
+
+
+  bg.style.transform =
+    `translateX(${-currentScroll * .06}px) scale(1.08)`;
+
 
   updateProgress();
 
   updateActiveEvent();
+
 
   requestAnimationFrame(
     animate
@@ -1835,164 +2938,217 @@ function animate(){
 
 }
 
+
 requestAnimationFrame(
   animate
 );
 
-/* PROGRESSO */
+
+/* =========================================================
+   PROGRESSO
+   ========================================================= */
 
 function updateProgress(){
 
   const pct =
-  maxScroll > 0
-  ? clamp(
-      currentScroll / maxScroll,
-      0,
-      1
-    ) * 100
-  : 0;
+    maxScroll > 0
 
-  document
-  .getElementById("progressFill")
-  .style.width =
-  pct + "%";
+      ? clamp(
+          currentScroll / maxScroll,
+          0,
+          1
+        ) * 100
+
+      : 0;
+
+
+  document.getElementById(
+    'progressFill'
+  ).style.width =
+    pct + '%';
 
 }
 
-/* EVENTO ATIVO */
+
+/* =========================================================
+   EVENTO ATIVO
+   ========================================================= */
 
 function updateActiveEvent(){
 
   const centerX =
-  currentScroll +
-  window.innerWidth / 2;
+    currentScroll +
+    window.innerWidth / 2;
+
+
+  const dist0 =
+    Math.abs(
+      introX -
+      centerX
+    );
+
 
   introNode.classList.toggle(
-    "active",
-    Math.abs(
-      introX - centerX
-    ) < cssNum("--event-size") * .55
+    'active',
+    dist0 <
+      cssNum('--event-size') * .55
   );
 
-  eventEls.forEach(
-    (el,index)=>{
 
-      const x =
-      timelineEvents[index]._x;
+  eventEls.forEach((el,i)=>{
 
-      el.classList.toggle(
-        "active",
-        Math.abs(
-          x - centerX
-        ) < cssNum("--event-size") * .55
+    const x =
+      timelineEvents[i]._x;
+
+
+    const dist =
+      Math.abs(
+        x -
+        centerX
       );
 
-    }
-  );
+
+    el.classList.toggle(
+      'active',
+      dist <
+        cssNum('--event-size') * .55
+    );
+
+  });
 
 }
 
-/* OBSERVER */
+
+/* =========================================================
+   INTERSECTION OBSERVER
+   ========================================================= */
 
 const observer =
-new IntersectionObserver(
-  entries=>{
+  new IntersectionObserver(
 
-    entries.forEach(
-      entry=>{
+    (entries)=>{
+
+      entries.forEach(entry=>{
 
         if(entry.isIntersecting){
 
-          entry.target
-          .classList
-          .add("in-view");
+          entry.target.classList.add(
+            'in-view'
+          );
 
         }
 
-      }
-    );
+      });
 
-  },
-  {
-    root:viewport,
-    threshold:.05
-  }
+    },
+
+    {
+
+      root:viewport,
+
+      threshold:.05
+
+    }
+
+  );
+
+
+eventEls.forEach(el =>
+  observer.observe(el)
 );
 
-eventEls.forEach(
-  el=>observer.observe(el)
+
+panelEls.forEach(el =>
+  observer.observe(el)
 );
 
-panelEls.forEach(
-  el=>observer.observe(el)
-);
 
 observer.observe(
   introNode
 );
 
-/* MOUSE */
+
+/* =========================================================
+   RODA DO MOUSE
+   ========================================================= */
 
 viewport.addEventListener(
-  "wheel",
-  e=>{
+  'wheel',
+  (e)=>{
 
     if(
       modalOpen ||
       !hasStarted
     ) return;
+
 
     e.preventDefault();
 
+
     const delta =
-    Math.abs(e.deltaX) >
-    Math.abs(e.deltaY)
-    ? e.deltaX
-    : e.deltaY;
+      Math.abs(e.deltaX) >
+      Math.abs(e.deltaY)
+
+        ? e.deltaX
+        : e.deltaY;
+
 
     targetScroll =
-    clamp(
-      targetScroll + delta,
-      0,
-      maxScroll
-    );
+      clamp(
+        targetScroll + delta,
+        0,
+        maxScroll
+      );
 
   },
+
   {
     passive:false
   }
+
 );
 
-/* ARRASTAR */
+
+/* =========================================================
+   ARRASTAR
+   ========================================================= */
 
 viewport.addEventListener(
-  "pointerdown",
-  e=>{
+  'pointerdown',
+  (e)=>{
 
     if(
       modalOpen ||
       !hasStarted
     ) return;
 
+
     isDragging = true;
 
+
     viewport.classList.add(
-      "dragging"
+      'dragging'
     );
 
+
     dragStartX =
-    e.clientX;
+      e.clientX;
+
 
     dragStartScroll =
-    targetScroll;
+      targetScroll;
+
 
     lastPointerX =
-    e.clientX;
+      e.clientX;
+
 
     lastPointerT =
-    performance.now();
+      performance.now();
+
 
     velocity = 0;
+
 
     viewport.setPointerCapture(
       e.pointerId
@@ -2001,429 +3157,405 @@ viewport.addEventListener(
   }
 );
 
+
 viewport.addEventListener(
-  "pointermove",
-  e=>{
+  'pointermove',
+  (e)=>{
 
     if(!isDragging) return;
 
+
     const dx =
-    e.clientX - dragStartX;
+      e.clientX -
+      dragStartX;
+
 
     targetScroll =
-    clamp(
-      dragStartScroll - dx,
-      0,
-      maxScroll
-    );
+      clamp(
+        dragStartScroll - dx,
+        0,
+        maxScroll
+      );
+
 
     currentScroll =
-    targetScroll;
+      targetScroll;
+
 
     const now =
-    performance.now();
+      performance.now();
+
 
     const dt =
-    now - lastPointerT;
+      now -
+      lastPointerT;
+
 
     if(dt > 0){
 
       velocity =
-      (lastPointerX - e.clientX)
-      / dt;
+        (
+          lastPointerX -
+          e.clientX
+        ) / dt;
 
     }
 
+
     lastPointerX =
-    e.clientX;
+      e.clientX;
+
 
     lastPointerT =
-    now;
+      now;
 
   }
 );
 
+
 function endDrag(){
 
-  if(!isDragging) return;
+  if(!isDragging)
+    return;
+
 
   isDragging = false;
 
+
   viewport.classList.remove(
-    "dragging"
+    'dragging'
   );
+
 
   const momentum =
-  clamp(
-    velocity * 160,
-    -500,
-    500
-  );
+    clamp(
+      velocity * 160,
+      -500,
+      500
+    );
+
 
   targetScroll =
-  clamp(
-    targetScroll + momentum,
-    0,
-    maxScroll
-  );
+    clamp(
+      targetScroll + momentum,
+      0,
+      maxScroll
+    );
 
 }
 
+
 viewport.addEventListener(
-  "pointerup",
+  'pointerup',
   endDrag
 );
 
+
 viewport.addEventListener(
-  "pointercancel",
+  'pointercancel',
   endDrag
 );
 
-/* TECLADO */
+
+/* =========================================================
+   TECLADO
+   ========================================================= */
 
 document.addEventListener(
-  "keydown",
-  e=>{
+  'keydown',
+  (e)=>{
 
     if(modalOpen){
 
-      if(e.key === "Escape"){
+      if(e.key === 'Escape'){
+
         closeModal();
+
       }
 
       return;
 
     }
 
-    if(!hasStarted) return;
+
+    if(!hasStarted)
+      return;
+
 
     const step =
-    window.innerWidth * .6;
+      window.innerWidth * .6;
 
-    if(e.key === "ArrowRight"){
+
+    if(e.key === 'ArrowRight'){
 
       targetScroll =
-      clamp(
-        targetScroll + step,
-        0,
-        maxScroll
-      );
+        clamp(
+          targetScroll + step,
+          0,
+          maxScroll
+        );
 
     }
 
-    else if(
-      e.key === "ArrowLeft"
-    ){
+
+    else if(e.key === 'ArrowLeft'){
 
       targetScroll =
-      clamp(
-        targetScroll - step,
-        0,
-        maxScroll
-      );
+        clamp(
+          targetScroll - step,
+          0,
+          maxScroll
+        );
 
     }
 
-    else if(e.key === "Home"){
+
+    else if(e.key === 'Home'){
 
       targetScroll = 0;
 
     }
 
-    else if(e.key === "End"){
+
+    else if(e.key === 'End'){
 
       targetScroll =
-      maxScroll;
+        maxScroll;
 
     }
 
   }
 );
 
-/* NAVEGAÇÃO */
 
-function goToNearestEvent(
-  direction
-){
+/* =========================================================
+   EVENTOS ANTERIOR / PRÓXIMO
+   ========================================================= */
+
+function goToNearestEvent(direction){
 
   const centerX =
-  targetScroll +
-  window.innerWidth / 2;
+    targetScroll +
+    window.innerWidth / 2;
+
 
   const candidates = [
+
     introX,
+
     ...timelineEvents.map(
-      ev=>ev._x
+      ev => ev._x
     )
+
   ];
 
+
   let target;
+
 
   if(direction > 0){
 
     target =
-    candidates.find(
-      x=>x > centerX + 20
-    );
+      candidates.find(
+        x => x > centerX + 20
+      );
 
   }
+
   else{
 
     target =
-    [...candidates]
-    .reverse()
-    .find(
-      x=>x < centerX - 20
-    );
+      [...candidates]
+        .reverse()
+        .find(
+          x => x < centerX - 20
+        );
 
   }
+
 
   if(target === undefined){
 
     target =
-    direction > 0
-    ? maxScroll
-    : 0;
+      direction > 0
+        ? maxScroll
+        : 0;
 
   }
+
   else{
 
     target =
+      clamp(
+        target -
+        window.innerWidth / 2,
+        0,
+        maxScroll
+      );
+
+  }
+
+
+  targetScroll =
+    target;
+
+}
+
+
+document
+  .getElementById('nextBtn')
+  .addEventListener(
+    'click',
+    ()=>{
+      startJourney();
+      goToNearestEvent(1);
+    }
+  );
+
+
+document
+  .getElementById('prevBtn')
+  .addEventListener(
+    'click',
+    ()=>{
+      startJourney();
+      goToNearestEvent(-1);
+    }
+  );
+
+
+/* =========================================================
+   INÍCIO
+   ========================================================= */
+
+function startJourney(){
+
+  if(hasStarted)
+    return;
+
+
+  hasStarted = true;
+
+
+  introEl.classList.add(
+    'hidden'
+  );
+
+
+  document
+    .getElementById('navControls')
+    .classList.add(
+      'visible'
+    );
+
+
+  targetScroll =
     clamp(
-      target -
+      introX -
       window.innerWidth / 2,
       0,
       maxScroll
     );
 
-  }
-
-  targetScroll =
-  target;
-
-}
-
-document
-.getElementById("nextBtn")
-.addEventListener(
-  "click",
-  ()=>{
-    startJourney();
-    goToNearestEvent(1);
-  }
-);
-
-document
-.getElementById("prevBtn")
-.addEventListener(
-  "click",
-  ()=>{
-    startJourney();
-    goToNearestEvent(-1);
-  }
-);
-
-/* INÍCIO */
-
-function startJourney(){
-
-  if(hasStarted) return;
-
-  hasStarted = true;
-
-  introEl.classList.add(
-    "hidden"
-  );
-
-  document
-  .getElementById("navControls")
-  .classList.add("visible");
-
-  targetScroll =
-  clamp(
-    introX -
-    window.innerWidth / 2,
-    0,
-    maxScroll
-  );
 
   currentScroll =
-  targetScroll;
+    targetScroll;
+
 
   viewport.focus();
 
 }
 
-document
-.getElementById("startBtn")
-.addEventListener(
-  "click",
-  startJourney
-);
-
-/* HEADER */
 
 document
-.querySelector(
-  '[data-action="go-start"]'
-)
-.addEventListener(
-  "click",
-  ()=>{
-
-    hasStarted = true;
-
-    introEl.classList.add(
-      "hidden"
-    );
-
-    document
-    .getElementById("navControls")
-    .classList.add("visible");
-
-    targetScroll = 0;
-
-  }
-);
-
-document
-.querySelector(
-  '[data-action="go-timeline"]'
-)
-.addEventListener(
-  "click",
-  startJourney
-);
-
-document
-.querySelector(
-  '[data-action="go-about"]'
-)
-.addEventListener(
-  "click",
-  ()=>{
-
-    openModal({
-
-      year:
-      timelineConfig.birthYear,
-
-      title:
-      `Sobre ${timelineConfig.personName}`,
-
-      image:
-      timelineConfig.BACKGROUND_IMAGE,
-
-      description:
-      timelineConfig.about
-
-    });
-
-  }
-);
-
-/* MENU */
-
-const menuToggle =
-document.getElementById(
-  "menuToggle"
-);
-
-const overviewPanel =
-document.getElementById(
-  "overviewPanel"
-);
-
-const overviewBackdrop =
-document.getElementById(
-  "overviewBackdrop"
-);
-
-function toggleOverview(open){
-
-  overviewPanel
-  .classList
-  .toggle(
-    "open",
-    open
+  .getElementById('startBtn')
+  .addEventListener(
+    'click',
+    startJourney
   );
 
-  overviewBackdrop
-  .classList
-  .toggle(
-    "open",
-    open
-  );
 
-  menuToggle.setAttribute(
-    "aria-expanded",
-    String(open)
-  );
-
-}
-
-menuToggle.addEventListener(
-  "click",
-  ()=>{
-    toggleOverview(
-      !overviewPanel
-      .classList
-      .contains("open")
-    );
-  }
-);
-
-overviewBackdrop.addEventListener(
-  "click",
-  ()=>{
-    toggleOverview(false);
-  }
-);
-
-/* CLIQUE NA TIMELINE DO MENU */
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 document
-.getElementById("overviewList")
-.addEventListener(
-  "click",
-  e=>{
+  .querySelector(
+    '[data-action="go-start"]'
+  )
+  .addEventListener(
+    'click',
+    ()=>{
 
-    const btn =
-    e.target.closest(
-      "[data-goto]"
-    );
+      hasStarted = true;
 
-    if(!btn) return;
+      introEl.classList.add(
+        'hidden'
+      );
 
-    startJourney();
+      document
+        .getElementById('navControls')
+        .classList.add(
+          'visible'
+        );
 
-    const x =
-    parseFloat(
-      btn.dataset.goto
-    );
+      targetScroll = 0;
 
-    targetScroll =
-    clamp(
-      x -
-      window.innerWidth / 2,
-      0,
-      maxScroll
-    );
+    }
+  );
 
-    toggleOverview(false);
 
-  }
-);
+document
+  .querySelector(
+    '[data-action="go-timeline"]'
+  )
+  .addEventListener(
+    'click',
+    ()=>{
+      startJourney();
+    }
+  );
 
-/* VOLTAR AO INÍCIO */
+
+document
+  .querySelector(
+    '[data-action="go-about"]'
+  )
+  .addEventListener(
+    'click',
+    ()=>{
+
+      openModal({
+
+        year:
+          timelineConfig.birthYear,
+
+        title:
+          `Sobre ${timelineConfig.personName}`,
+
+        image:
+          timelineConfig.BACKGROUND_IMAGE,
+
+        description:
+          timelineConfig.about
+
+      });
+
+    }
+  );
+
+
+/* =========================================================
+   VOLTAR AO INÍCIO
+   ========================================================= */
 
 track.addEventListener(
-  "click",
-  e=>{
+  'click',
+  (e)=>{
 
     if(
       e.target.id ===
-      "backToStartBtn"
+      'backToStartBtn'
     ){
 
       targetScroll = 0;
@@ -2433,119 +3565,254 @@ track.addEventListener(
   }
 );
 
-/* MODAL */
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+const menuToggle =
+  document.getElementById(
+    'menuToggle'
+  );
+
+
+const overviewPanel =
+  document.getElementById(
+    'overviewPanel'
+  );
+
+
+const overviewBackdrop =
+  document.getElementById(
+    'overviewBackdrop'
+  );
+
+
+function toggleOverview(open){
+
+  overviewPanel.classList.toggle(
+    'open',
+    open
+  );
+
+
+  overviewBackdrop.classList.toggle(
+    'open',
+    open
+  );
+
+
+  menuToggle.setAttribute(
+    'aria-expanded',
+    String(open)
+  );
+
+}
+
+
+menuToggle.addEventListener(
+  'click',
+  ()=>{
+    toggleOverview(
+      !overviewPanel.classList.contains(
+        'open'
+      )
+    );
+  }
+);
+
+
+overviewBackdrop.addEventListener(
+  'click',
+  ()=>{
+    toggleOverview(false);
+  }
+);
+
+
+/* =========================================================
+   MENU → EVENTO
+   ========================================================= */
+
+document
+  .getElementById('overviewList')
+  .addEventListener(
+    'click',
+    (e)=>{
+
+      const btn =
+        e.target.closest(
+          '[data-goto]'
+        );
+
+
+      if(!btn)
+        return;
+
+
+      startJourney();
+
+
+      const x =
+        parseFloat(
+          btn.dataset.goto
+        );
+
+
+      targetScroll =
+        clamp(
+          x -
+          window.innerWidth / 2,
+          0,
+          maxScroll
+        );
+
+
+      toggleOverview(false);
+
+    }
+  );
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
 
 const modalOverlay =
-document.getElementById(
-  "modalOverlay"
-);
+  document.getElementById(
+    'modalOverlay'
+  );
+
 
 const modalImage =
-document.getElementById(
-  "modalImage"
-);
+  document.getElementById(
+    'modalImage'
+  );
+
 
 const modalYear =
-document.getElementById(
-  "modalYear"
-);
+  document.getElementById(
+    'modalYear'
+  );
+
 
 const modalTitle =
-document.getElementById(
-  "modalTitle"
-);
+  document.getElementById(
+    'modalTitle'
+  );
+
 
 const modalDesc =
-document.getElementById(
-  "modalDesc"
-);
+  document.getElementById(
+    'modalDesc'
+  );
+
 
 const modalClose =
-document.getElementById(
-  "modalClose"
-);
+  document.getElementById(
+    'modalClose'
+  );
+
 
 function openModal(ev){
 
   modalImage.src =
-  ev.image;
+    ev.image;
+
 
   modalImage.alt =
-  ev.title;
+    ev.title;
+
 
   modalYear.textContent =
-  ev.year;
+    ev.year;
+
 
   modalTitle.textContent =
-  ev.title;
+    ev.title;
+
 
   modalDesc.textContent =
-  ev.description;
+    ev.description;
 
-  modalOverlay
-  .classList
-  .add("open");
+
+  modalOverlay.classList.add(
+    'open'
+  );
+
 
   modalOpen = true;
+
 
   modalClose.focus();
 
 }
 
+
 function closeModal(){
 
-  modalOverlay
-  .classList
-  .remove("open");
+  modalOverlay.classList.remove(
+    'open'
+  );
+
 
   modalOpen = false;
 
 }
 
-/* SABER MAIS */
+
+/* =========================================================
+   SABER MAIS
+   ========================================================= */
 
 track.addEventListener(
-  "click",
-  e=>{
+  'click',
+  (e)=>{
 
     const btn =
-    e.target.closest(
-      ".event-more"
-    );
-
-    if(!btn) return;
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    const index =
-    parseInt(
-      btn.dataset.index,
-      10
-    );
-
-    if(
-      Number.isInteger(index) &&
-      timelineEvents[index]
-    ){
-
-      openModal(
-        timelineEvents[index]
+      e.target.closest(
+        '.event-more'
       );
 
+
+    if(!btn)
+      return;
+
+
+    const idx =
+      parseInt(
+        btn.dataset.index,
+        10
+      );
+
+
+    if(
+      Number.isNaN(idx) ||
+      !timelineEvents[idx]
+    ){
+
+      return;
+
     }
+
+
+    openModal(
+      timelineEvents[idx]
+    );
 
   }
 );
 
+
 modalClose.addEventListener(
-  "click",
+  'click',
   closeModal
 );
 
+
 modalOverlay.addEventListener(
-  "click",
-  e=>{
+  'click',
+  (e)=>{
 
     if(
       e.target ===
@@ -2559,54 +3826,66 @@ modalOverlay.addEventListener(
   }
 );
 
-/* RESIZE */
+
+/* =========================================================
+   RESIZE
+   ========================================================= */
 
 window.addEventListener(
-  "resize",
+  'resize',
   ()=>{
 
     const trackWidth =
-    parseFloat(
-      track.style.width
-    );
+      parseFloat(
+        track.style.width
+      );
+
 
     maxScroll =
-    Math.max(
-      0,
-      trackWidth -
-      window.innerWidth
-    );
+      Math.max(
+        0,
+        trackWidth -
+        window.innerWidth
+      );
+
 
     targetScroll =
-    clamp(
-      targetScroll,
-      0,
-      maxScroll
-    );
+      clamp(
+        targetScroll,
+        0,
+        maxScroll
+      );
 
   }
 );
 
-/* LOADING */
+
+/* =========================================================
+   LOADING
+   ========================================================= */
 
 window.addEventListener(
-  "load",
+  'load',
   ()=>{
 
     setTimeout(
       ()=>{
+
         document
-        .getElementById(
-          "loading-screen"
-        )
-        .classList
-        .add("hide");
+          .getElementById(
+            'loading-screen'
+          )
+          .classList.add(
+            'hide'
+          );
+
       },
       900
     );
 
   }
 );
+
 
 </script>
 
