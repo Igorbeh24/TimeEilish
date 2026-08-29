@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Marina Costa — Linha do Tempo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   1. VARIÁVEIS DE CONFIGURAÇÃO VISUAL
+   Altere aqui para trocar a identidade visual da pessoa.
+   ========================================================= */
+:root{
+  --background:#14120f;
+  --background-alt:#1b1712;
+  --primary:#c9a15c;        /* dourado envelhecido — cor de destaque */
+  --secondary:#8a7a5c;      /* bronze suave */
+  --text:#f2ece0;
+  --muted:#a99d86;
+  --timeline:#4a4335;
+  --event-background:rgba(28,24,19,0.55);
+  --event-border:rgba(201,161,92,0.28);
+  --event-shadow:rgba(0,0,0,0.55);
+  --event-radius:3px;
+  --font-title:'Fraunces', serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'Space Mono', monospace;
+
+  --event-size:340px;
+  --connector-h:56px;
+  --card-gap:520px; /* distância horizontal entre eventos, desktop */
+}
+
+@media (max-width:900px){
+  :root{ --event-size:250px; --connector-h:44px; --card-gap:400px; }
+}
+@media (max-width:560px){
+  :root{ --event-size:190px; --connector-h:34px; --card-gap:300px; }
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{height:100%; overflow:hidden; background:var(--background);}
+body{
+  font-family:var(--font-body);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  overscroll-behavior:none;
+}
+img{display:block; max-width:100%;}
+button{font-family:inherit; border:none; background:none; color:inherit; cursor:pointer;}
+a{color:inherit;}
+::selection{background:var(--primary); color:var(--background);}
+
+/* Foco visível para acessibilidade */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:3px;
+}
+
+/* =========================================================
+   FUNDO — troque BACKGROUND_IMAGE pela imagem real
+   ========================================================= */
+.bg-layer{
+  position:fixed; inset:0; z-index:0;
+  background-image:
+    linear-gradient(180deg, rgba(20,18,15,0.88), rgba(20,18,15,0.94) 55%, rgba(10,9,7,0.98)),
+    var(--BACKGROUND_IMAGE, url('https://picsum.photos/seed/marinacosta-bg/1800/1200'));
+  background-size:cover;
+  background-position:center;
+  filter:grayscale(55%) contrast(1.05) brightness(0.75);
+  will-change:transform;
+  transition:filter 1s ease;
+}
+.bg-vignette{
+  position:fixed; inset:0; z-index:1; pointer-events:none;
+  background:radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.55) 100%);
+}
+.bg-grain{
+  position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+#loading-screen{
+  position:fixed; inset:0; z-index:100;
+  background:var(--background);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:18px;
+  transition:opacity .7s ease;
+}
+#loading-screen.hide{opacity:0; pointer-events:none;}
+.loading-name{
+  font-family:var(--font-title); font-weight:600; letter-spacing:0.04em;
+  font-size:clamp(28px,5vw,44px); color:var(--text);
+}
+.loading-sub{font-family:var(--font-mono); font-size:12px; letter-spacing:0.18em; color:var(--muted); text-transform:uppercase;}
+.loading-bar{width:220px; height:1px; background:var(--secondary); position:relative; overflow:hidden;}
+.loading-bar::after{
+  content:''; position:absolute; left:-40%; top:0; bottom:0; width:40%;
+  background:var(--primary); animation:loadmove 1.1s ease-in-out infinite;
+}
+@keyframes loadmove{ 0%{left:-40%;} 50%{left:60%;} 100%{left:100%;} }
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header{
+  position:fixed; top:0; left:0; right:0; z-index:40;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px clamp(20px,4vw,56px);
+  background:linear-gradient(180deg, rgba(20,18,15,0.75), transparent);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+.brand{
+  font-family:var(--font-title); font-weight:600; font-size:18px; letter-spacing:0.05em;
+}
+.brand span{color:var(--primary);}
+.main-nav{display:flex; gap:clamp(16px,3vw,32px);}
+.main-nav button{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--muted); padding:6px 2px; position:relative;
+  transition:color .3s;
+}
+.main-nav button:hover{color:var(--text);}
+.main-nav button::after{
+  content:''; position:absolute; left:0; right:100%; bottom:0; height:1px; background:var(--primary);
+  transition:right .3s ease;
+}
+.main-nav button:hover::after{right:0;}
+@media (max-width:620px){ .main-nav{display:none;} }
+
+/* =========================================================
+   MENU (VISÃO GERAL)
+   ========================================================= */
+.menu-toggle{
+  position:fixed; top:20px; right:20px; z-index:41;
+  width:38px; height:38px; display:flex; align-items:center; justify-content:center;
+  font-size:18px; color:var(--text);
+  border:1px solid var(--event-border); border-radius:50%;
+  background:rgba(20,18,15,0.6); backdrop-filter:blur(6px);
+}
+@media (min-width:621px){ .menu-toggle{display:none;} }
+
+.overview-panel{
+  position:fixed; top:0; right:0; bottom:0; z-index:60;
+  width:min(340px,86vw); background:var(--background-alt);
+  border-left:1px solid var(--event-border);
+  padding:80px 26px 26px;
+  transform:translateX(100%); transition:transform .4s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.overview-panel.open{transform:translateX(0);}
+.overview-panel h3{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; color:var(--muted); text-transform:uppercase; margin-bottom:18px;
+}
+.overview-list{list-style:none; display:flex; flex-direction:column;}
+.overview-list li button{
+  width:100%; text-align:left; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex; gap:14px; align-items:baseline; color:var(--muted);
+  transition:color .25s;
+}
+.overview-list li button:hover{color:var(--text);}
+.overview-list li button .yr{font-family:var(--font-mono); color:var(--primary); font-size:13px; min-width:44px;}
+.overview-list li button .ttl{font-size:14px;}
+.overview-backdrop{
+  position:fixed; inset:0; z-index:59; background:rgba(0,0,0,0.4);
+  opacity:0; pointer-events:none; transition:opacity .3s;
+}
+.overview-backdrop.open{opacity:1; pointer-events:auto;}
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+.intro{
+  position:fixed; inset:0; z-index:30;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:24px;
+  background:
+    radial-gradient(ellipse at center, rgba(20,18,15,0.4), rgba(20,18,15,0.92) 70%),
+    var(--background);
+  transition:opacity .9s ease, visibility .9s ease;
+}
+.intro.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+.intro-eyebrow{
+  font-family:var(--font-mono); font-size:12px; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--primary); margin-bottom:22px;
+}
+.intro-name{
+  font-family:var(--font-title); font-weight:300; font-size:clamp(46px,10vw,124px);
+  line-height:0.96; letter-spacing:-0.01em;
+}
+.intro-name b{font-weight:600; display:block;}
+.intro-tagline{
+  font-size:clamp(14px,2vw,18px); color:var(--muted); max-width:520px; margin:26px 0 8px;
+  font-weight:400; line-height:1.6;
+}
+.intro-meta{
+  display:flex; gap:22px; font-family:var(--font-mono); font-size:12px; color:var(--secondary);
+  letter-spacing:.08em; margin-bottom:44px; flex-wrap:wrap; justify-content:center;
+}
+.intro-meta span{position:relative; padding-left:0;}
+.btn-start{
+  font-family:var(--font-mono); font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+  padding:16px 34px; border:1px solid var(--primary); color:var(--text);
+  position:relative; overflow:hidden; transition:color .35s;
+}
+.btn-start span{position:relative; z-index:1;}
+.btn-start::before{
+  content:''; position:absolute; inset:0; background:var(--primary); transform:translateX(-101%);
+  transition:transform .4s cubic-bezier(.4,0,.2,1); z-index:0;
+}
+.btn-start:hover{color:var(--background);}
+.btn-start:hover::before{transform:translateX(0);}
+.intro-hint{
+  position:absolute; bottom:34px; font-family:var(--font-mono); font-size:11px; letter-spacing:.1em;
+  color:var(--secondary); animation:pulseFade 2.4s ease-in-out infinite;
+}
+@keyframes pulseFade{ 0%,100%{opacity:.4;} 50%{opacity:1;} }
+
+/* =========================================================
+   TIMELINE — VIEWPORT / TRACK
+   ========================================================= */
+.timeline-viewport{
+  position:fixed; inset:0; z-index:5;
+  overflow:hidden; cursor:grab;
+  touch-action:pan-y;
+}
+.timeline-viewport.dragging{cursor:grabbing;}
+.timeline-track{
+  position:absolute; top:0; left:0; height:100%;
+  will-change:transform;
+}
+.timeline-line{
+  position:absolute; top:50%; left:0; height:2px; width:100%;
+  background:linear-gradient(90deg, transparent, var(--timeline) 4%, var(--timeline) 96%, transparent);
+  transform:translateY(-1px);
+}
+.timeline-line::before{ /* leve textura pontilhada */
+  content:''; position:absolute; inset:0;
+  background-image:repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 26px);
+}
+
+/* eventos */
+.event{
+  position:absolute; top:50%; width:0; height:0;
+}
+.event-marker{
+  position:absolute; top:0; left:0; width:11px; height:11px; margin:-5.5px 0 0 -5.5px;
+  border-radius:50%; background:var(--background); border:2px solid var(--primary);
+  transition:transform .4s ease, box-shadow .4s ease;
+  z-index:3;
+}
+.event.active .event-marker{
+  transform:scale(1.5);
+  box-shadow:0 0 0 6px rgba(201,161,92,0.16);
+  animation:markerPulse 2.2s ease-in-out infinite;
+}
+@keyframes markerPulse{
+  0%,100%{ box-shadow:0 0 0 6px rgba(201,161,92,0.16); }
+  50%{ box-shadow:0 0 0 10px rgba(201,161,92,0.05); }
+}
+.event-connector{
+  position:absolute; left:-1px; width:2px; background:var(--timeline);
+  transform-origin:top; transition:transform .5s cubic-bezier(.4,0,.2,1);
+}
+.event-top .event-connector{ bottom:0; height:var(--connector-h); transform-origin:bottom;}
+.event-bottom .event-connector{ top:0; height:var(--connector-h); }
+
+.event-card{
+  position:absolute; left:0; width:var(--event-size);
+  transform:translateX(-50%);
+  opacity:0; transition:opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+}
+.event-top .event-card{ bottom:calc(var(--connector-h) + 4px); transform:translate(-50%,26px); }
+.event-bottom .event-card{ top:calc(var(--connector-h) + 4px); transform:translate(-50%,-26px); }
+.event.in-view .event-card{ opacity:1; transform:translate(-50%,0); }
+
+.event-figure{
+  width:100%; aspect-ratio:1/1; overflow:hidden;
+  border:1px solid var(--event-border);
+  border-radius:var(--event-radius);
+  background:var(--event-background);
+  box-shadow:0 18px 40px -14px var(--event-shadow);
+  transition:box-shadow .4s ease, transform .4s ease;
+  position:relative;
+}
+.event-figure img{
+  width:100%; height:100%; object-fit:cover;
+  filter:grayscale(80%) sepia(8%) contrast(1.05);
+  transform:scale(1.001);
+  transition:filter .8s ease, transform .6s cubic-bezier(.4,0,.2,1);
+}
+.event-figure::after{
+  content:''; position:absolute; inset:0; border:1px solid rgba(255,255,255,0.06); pointer-events:none;
+}
+.event:hover .event-figure img, .event.active .event-figure img{
+  filter:grayscale(15%) sepia(4%) contrast(1.02);
+}
+.event:hover .event-figure{ box-shadow:0 22px 48px -12px var(--event-shadow); }
+.event:hover .event-figure img{ transform:scale(1.045); }
+
+.event-year{
+  font-family:var(--font-mono); font-size:13px; letter-spacing:.1em; color:var(--primary);
+  margin-top:14px;
+}
+.event-top .event-body{ text-align:center; }
+.event-bottom .event-body{ text-align:center; }
+.event-title{
+  font-family:var(--font-title); font-weight:600; font-size:19px; margin-top:4px; line-height:1.25;
+}
+.event-desc{
+  font-size:13px; color:var(--muted); margin-top:8px; line-height:1.5;
+}
+.event-more{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--text); margin-top:12px; display:inline-flex; align-items:center; gap:6px;
+  border-bottom:1px solid var(--secondary); padding-bottom:3px;
+  transition:border-color .3s, color .3s, gap .3s;
+}
+.event-more:hover{ color:var(--primary); border-color:var(--primary); gap:10px; }
+
+@media (max-width:560px){
+  .event-title{font-size:15px;}
+  .event-desc{font-size:12px;}
+}
+
+/* seções de abertura/fechamento embutidas na trilha */
+.track-panel{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:min(340px, 70vw);
+  text-align:center;
+}
+.track-panel .panel-inner{
+  opacity:0; transform:translateY(24px);
+  transition:opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
+}
+.track-panel.in-view .panel-inner{
+  opacity:1; transform:translateY(0);
+}
+.track-panel .label{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; color:var(--secondary); text-transform:uppercase;
+}
+.track-panel h2{
+  font-family:var(--font-title); font-weight:300; font-size:clamp(26px,4vw,40px); margin:14px 0 12px;
+}
+.track-panel p{ color:var(--muted); font-size:14px; line-height:1.6; margin-bottom:20px; }
+.btn-ghost{
+  font-family:var(--font-mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+  padding:12px 24px; border:1px solid var(--secondary); color:var(--text); transition:.3s;
+}
+.btn-ghost:hover{ border-color:var(--primary); color:var(--primary); }
+
+/* =========================================================
+   NAVEGAÇÃO / PROGRESSO
+   ========================================================= */
+.nav-controls{
+  position:fixed; left:0; right:0; bottom:26px; z-index:35;
+  display:flex; align-items:center; justify-content:center; gap:18px;
+  padding:0 20px;
+  opacity:0; visibility:hidden; transform:translateY(10px);
+  transition:opacity .6s ease, transform .6s ease, visibility .6s;
+}
+.nav-controls.visible{
+  opacity:1; visibility:visible; transform:translateY(0);
+}
+.nav-arrow{
+  width:42px; height:42px; border-radius:50%; border:1px solid var(--event-border);
+  background:rgba(20,18,15,0.55); backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center; font-size:16px;
+  color:var(--text); transition:border-color .3s, transform .2s;
+  flex:none;
+}
+.nav-arrow:hover{ border-color:var(--primary); transform:translateY(-2px); }
+.nav-arrow:active{ transform:translateY(0); }
+
+.progress-wrap{
+  width:min(420px,50vw); display:flex; flex-direction:column; gap:6px;
+}
+.progress-track{ position:relative; height:2px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;}
+.progress-fill{ position:absolute; left:0; top:0; bottom:0; width:0%; background:var(--primary); transition:width .1s linear;}
+.progress-years{ display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:10px; color:var(--secondary); letter-spacing:.05em;}
+@media (max-width:620px){ .progress-wrap{width:44vw;} .progress-years span:not(:first-child):not(:last-child){display:none;} }
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+.modal-overlay{
+  position:fixed; inset:0; z-index:80;
+  background:rgba(10,9,7,0.72); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  display:flex; align-items:center; justify-content:center; padding:24px;
+  opacity:0; visibility:hidden; transition:opacity .35s ease, visibility .35s ease;
+}
+.modal-overlay.open{ opacity:1; visibility:visible; }
+.modal{
+  width:min(640px,100%); max-height:88vh; overflow-y:auto;
+  background:var(--background-alt); border:1px solid var(--event-border);
+  border-radius:var(--event-radius);
+  transform:scale(.94) translateY(10px); transition:transform .4s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 40px 80px -20px rgba(0,0,0,0.7);
+}
+.modal-overlay.open .modal{ transform:scale(1) translateY(0); }
+.modal-close{
+  position:sticky; top:14px; float:right; margin:14px 14px 0 0;
+  width:34px; height:34px; border-radius:50%; background:rgba(0,0,0,0.35);
+  display:flex; align-items:center; justify-content:center; font-size:18px; z-index:2;
+}
+.modal-close:hover{ background:rgba(0,0,0,0.55); color:var(--primary); }
+.modal-figure{ width:100%; aspect-ratio:16/10; overflow:hidden; }
+.modal-figure img{ width:100%; height:100%; object-fit:cover; }
+.modal-body{ padding:8px 34px 40px; }
+.modal-year{ font-family:var(--font-mono); font-size:13px; color:var(--primary); letter-spacing:.1em; margin-top:18px;}
+.modal-title{ font-family:var(--font-title); font-weight:600; font-size:clamp(22px,3vw,30px); margin:10px 0 18px; }
+.modal-desc{ color:var(--muted); font-size:15px; line-height:1.75; }
+.modal-desc + .modal-desc{ margin-top:14px; }
+
+/* =========================================================
+   ACESSIBILIDADE / MOVIMENTO REDUZIDO
+   ========================================================= */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001s !important; transition-duration:.001s !important; }
+  .timeline-track{ transition:none !important; }
+}
+.sr-only{
+  position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap;
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer" id="bgLayer"></div>
+<div class="bg-vignette"></div>
+<div class="bg-grain"></div>
+
+<div id="loading-screen" aria-hidden="true">
+  <div class="loading-name">Marina Costa</div>
+  <div class="loading-sub">Carregando história…</div>
+  <div class="loading-bar"></div>
+</div>
+
+<header class="site-header">
+  <div class="brand">Marina <span>Costa</span></div>
+  <nav class="main-nav" aria-label="Navegação principal">
+    <button data-action="go-start">Início</button>
+    <button data-action="go-timeline">Timeline</button>
+    <button data-action="go-about">Sobre</button>
+  </nav>
+</header>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir visão geral da linha do tempo" aria-expanded="false">☰</button>
+<div class="overview-backdrop" id="overviewBackdrop"></div>
+<aside class="overview-panel" id="overviewPanel" aria-label="Visão geral dos acontecimentos">
+  <h3>Linha do tempo</h3>
+  <ul class="overview-list" id="overviewList"></ul>
+</aside>
+
+<section class="intro" id="intro">
+  <p class="intro-eyebrow">Biografia interativa · exemplo</p>
+  <h1 class="intro-name"><b>Marina Costa</b></h1>
+  <p class="intro-tagline">Uma viagem pela história, carreira e momentos que marcaram sua trajetória.</p>
+  <div class="intro-meta">
+    <span>n. 1987</span>
+    <span>Cantora &amp; atriz</span>
+    <span>Rio de Janeiro, Brasil</span>
+  </div>
+  <button class="btn-start" id="startBtn"><span>Começar a viagem →</span></button>
+  <p class="intro-hint">use o mouse, o toque ou as setas do teclado</p>
+</section>
+
+<main class="timeline-viewport" id="viewport" tabindex="0" aria-label="Linha do tempo horizontal, use as setas do teclado para navegar">
+  <div class="timeline-track" id="track">
+    <div class="timeline-line"></div>
+    <!-- eventos são inseridos aqui via JavaScript -->
+  </div>
+</main>
+
+<div class="nav-controls" id="navControls">
+  <button class="nav-arrow" id="prevBtn" aria-label="Evento anterior">←</button>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-years" id="progressYears"></div>
+  </div>
+  <button class="nav-arrow" id="nextBtn" aria-label="Próximo evento">→</button>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Fechar">×</button>
+    <div class="modal-figure"><img id="modalImage" alt=""></div>
+    <div class="modal-body">
+      <div class="modal-year" id="modalYear"></div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-desc" id="modalDesc"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   CONFIGURAÇÃO — troque estes dados pelos da pessoa real.
+   Nada além desta seção precisa ser editado para trocar de biografado.
+   ========================================================================= */
+const timelineConfig = {
+  personName: "Marina Costa",
+  tagline: "Uma viagem pela história, carreira e momentos que marcaram sua trajetória.",
+  birthYear: "1987",
+  profession: "Cantora & atriz",
+  location: "Rio de Janeiro, Brasil",
+  about: "Marina Costa (nome fictício de exemplo) é uma artista cuja trajetória atravessa música, cinema e ativismo cultural. Os dados desta página são placeholders — substitua pelo conteúdo real da pessoa retratada.",
+  // Troque pela imagem de fundo real, ex: "images/background.jpg"
+  BACKGROUND_IMAGE: "https://picsum.photos/seed/marinacosta-bg/1800/1200"
+};
+
+/* Dados de exemplo — claramente fictícios, apenas para demonstrar o funcionamento.
+   position: "top" | "bottom" (opcional — se omitido, alterna automaticamente) */
+const timelineEvents = [
+  {
+    year: "1987",
+    title: "Nascimento",
+    image: "https://picsum.photos/seed/mc-01/700/700",
+    shortDescription: "Nasce no Rio de Janeiro. (EXEMPLO)",
+    description: "Marina Costa nasce no Rio de Janeiro em uma família de músicos, iniciando desde cedo seu contato com instrumentos e composição. (Texto de exemplo — substitua pelo relato real.)"
+  },
+  {
+    year: "2003",
+    title: "Primeiras composições",
+    image: "https://picsum.photos/seed/mc-02/700/700",
+    shortDescription: "Começa a compor suas próprias canções. (EXEMPLO)",
+    description: "Aos 16 anos, grava suas primeiras demos em um estúdio caseiro, moldando um estilo que misturaria MPB e influências contemporâneas."
+  },
+  {
+    year: "2007",
+    title: "Estreia nos palcos",
+    image: "https://picsum.photos/seed/mc-03/700/700",
+    shortDescription: "Primeiro show em casa de shows independente. (EXEMPLO)",
+    description: "Sua primeira apresentação pública acontece em uma pequena casa de shows, marcando o início de uma carreira construída em cima de apresentações intimistas."
+  },
+  {
+    year: "2010",
+    title: "Primeiro álbum",
+    image: "https://picsum.photos/seed/mc-04/700/700",
+    shortDescription: "Lançamento do álbum de estreia. (EXEMPLO)",
+    description: "O álbum de estreia é lançado de forma independente e recebe atenção da crítica especializada, sendo apontado como uma das revelações do ano."
+  },
+  {
+    year: "2013",
+    title: "Estreia no cinema",
+    image: "https://picsum.photos/seed/mc-05/700/700",
+    shortDescription: "Primeiro papel em longa-metragem. (EXEMPLO)",
+    description: "Marina expande sua carreira artística ao aceitar seu primeiro papel no cinema, unindo música e atuação em um projeto autoral."
+  },
+  {
+    year: "2016",
+    title: "Turnê internacional",
+    image: "https://picsum.photos/seed/mc-06/700/700",
+    shortDescription: "Primeira turnê fora do país. (EXEMPLO)",
+    description: "Com o sucesso do terceiro álbum, embarca em sua primeira turnê internacional, passando por Europa e América Latina."
+  },
+  {
+    year: "2019",
+    title: "Grande prêmio da carreira",
+    image: "https://picsum.photos/seed/mc-07/700/700",
+    shortDescription: "Reconhecimento por trabalho de duas décadas. (EXEMPLO)",
+    description: "Recebe um dos principais prêmios da música nacional, reconhecendo consistência artística e impacto cultural ao longo da carreira."
+  },
+  {
+    year: "2021",
+    title: "Projeto social",
+    image: "https://picsum.photos/seed/mc-08/700/700",
+    shortDescription: "Funda instituto de incentivo à música. (EXEMPLO)",
+    description: "Cria um instituto voltado à formação musical de jovens em comunidades periféricas, ampliando seu legado para além dos palcos."
+  },
+  {
+    year: "2024",
+    title: "Novo capítulo",
+    image: "https://picsum.photos/seed/mc-09/700/700",
+    shortDescription: "Anúncio de novo álbum e documentário. (EXEMPLO)",
+    description: "Anuncia simultaneamente um novo álbum de estúdio e um documentário sobre sua trajetória, reafirmando sua presença na cena cultural."
+  }
+];
+
+/* =========================================================================
+   ESTADO E CONSTANTES
+   ========================================================================= */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const viewport = document.getElementById('viewport');
+const track = document.getElementById('track');
+const introEl = document.getElementById('intro');
+
+let currentScroll = 0;
+let targetScroll = 0;
+let maxScroll = 0;
+let modalOpen = false;
+let isDragging = false;
+let dragStartX = 0, dragStartScroll = 0, lastPointerX = 0, lastPointerT = 0, velocity = 0;
+let hasStarted = false;
+
+function cssNum(varName){
+  return parseFloat(getComputedStyle(document.documentElement).getPropertyValue(varName));
+}
+
+/* =========================================================================
+   CONSTRUÇÃO DA TIMELINE A PARTIR DOS DADOS
+   ========================================================================= */
+function buildTimeline(){
+  document.getElementById('bgLayer').style.setProperty('--BACKGROUND_IMAGE', `url('${timelineConfig.BACKGROUND_IMAGE}')`);
+  document.getElementById('bgLayer').style.backgroundImage =
+    `linear-gradient(180deg, rgba(20,18,15,0.88), rgba(20,18,15,0.94) 55%, rgba(10,9,7,0.98)), url('${timelineConfig.BACKGROUND_IMAGE}')`;
+
+  const gap = cssNum('--card-gap');
+  const startPad = Math.max(window.innerWidth * 0.9, 620);
+
+  // nó inicial embutido na trilha — usa a mesma linguagem visual dos eventos
+  // (marcador na linha + conector), mas fica abaixo da linha e nasce
+  // centralizado na tela, já que é o ponto de partida da viagem
+  const introX = window.innerWidth / 2;
+  const introNode = document.createElement('article');
+  introNode.className = 'event event-bottom intro-node';
+  introNode.style.left = introX + 'px';
+  introNode.innerHTML = `
+    <div class="event-connector" aria-hidden="true"></div>
+    <div class="event-marker" aria-hidden="true"></div>
+    <div class="event-card">
+      <div class="event-body">
+        <div class="event-year">${timelineEvents[0].year} · início</div>
+        <h3 class="event-title">A jornada começa</h3>
+        <p class="event-desc">Role, arraste ou use as setas para seguir em frente.</p>
+      </div>
+    </div>`;
+  track.appendChild(introNode);
+
+  const overviewList = document.getElementById('overviewList');
+  const progressYears = document.getElementById('progressYears');
+  const eventEls = [];
+
+  const introLi = document.createElement('li');
+  introLi.innerHTML = `<button data-goto="${introX}"><span class="yr">Início</span><span class="ttl">A jornada começa</span></button>`;
+  overviewList.appendChild(introLi);
+
+  timelineEvents.forEach((ev, i) => {
+    const x = startPad + i * gap;
+    ev._x = x;
+    const position = ev.position || (i % 2 === 0 ? 'top' : 'bottom');
+
+    const el = document.createElement('article');
+    el.className = `event event-${position}`;
+    el.style.left = x + 'px';
+    el.setAttribute('data-index', i);
+
+    el.innerHTML = `
+      <div class="event-connector" aria-hidden="true"></div>
+      <div class="event-marker" aria-hidden="true"></div>
+      <div class="event-card">
+        <div class="event-figure">
+          <img src="${ev.image}" alt="${ev.title}" loading="lazy">
+        </div>
+        <div class="event-body">
+          <div class="event-year">${ev.year}</div>
+          <h3 class="event-title">${ev.title}</h3>
+          <p class="event-desc">${ev.shortDescription}</p>
+          <button class="event-more" data-index="${i}">Saber mais →</button>
+        </div>
+      </div>
+    `;
+    track.appendChild(el);
+    eventEls.push(el);
+
+    const li = document.createElement('li');
+    li.innerHTML = `<button data-goto="${x}"><span class="yr">${ev.year}</span><span class="ttl">${ev.title}</span></button>`;
+    overviewList.appendChild(li);
+
+    if (i === 0 || i === timelineEvents.length - 1 || i % Math.ceil(timelineEvents.length / 5) === 0) {
+      const span = document.createElement('span');
+      span.textContent = ev.year;
+      progressYears.appendChild(span);
+    }
+  });
+
+  // painel final embutido na trilha
+  const lastX = timelineEvents[timelineEvents.length - 1]._x;
+  const endX = lastX + gap;
+  const endPanel = document.createElement('div');
+  endPanel.className = 'track-panel';
+  endPanel.style.left = endX + 'px';
+  endPanel.innerHTML = `
+    <div class="panel-inner">
+      <div class="label">Fim da linha do tempo</div>
+      <h2>E a história continua…</h2>
+      <p>${timelineConfig.personName} segue construindo novos capítulos.</p>
+      <button class="btn-ghost" id="backToStartBtn">← Voltar ao início</button>
+    </div>`;
+  track.appendChild(endPanel);
+
+  const trackWidth = endX + startPad * 0.5;
+  track.style.width = trackWidth + 'px';
+  maxScroll = Math.max(0, trackWidth - window.innerWidth);
+
+  return { eventEls, panelEls: [endPanel], introNode, introX };
+}
+
+const { eventEls, panelEls, introNode, introX } = buildTimeline();
+
+/* =========================================================================
+   LOOP DE ANIMAÇÃO (lerp suave)
+   ========================================================================= */
+function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+
+function animate(){
+  const ease = prefersReducedMotion ? 1 : 0.12;
+  currentScroll += (targetScroll - currentScroll) * ease;
+  if (Math.abs(targetScroll - currentScroll) < 0.05) currentScroll = targetScroll;
+  track.style.transform = `translateX(${-currentScroll}px)`;
+
+  // parallax discreto do fundo
+  const bg = document.getElementById('bgLayer');
+  bg.style.transform = `translateX(${-currentScroll * 0.06}px) scale(1.08)`;
+
+  updateProgress();
+  updateActiveEvent();
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+
+function updateProgress(){
+  const pct = maxScroll > 0 ? clamp(currentScroll / maxScroll, 0, 1) * 100 : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function updateActiveEvent(){
+  const centerX = currentScroll + window.innerWidth / 2;
+  const dist0 = Math.abs(introX - centerX);
+  introNode.classList.toggle('active', dist0 < cssNum('--event-size') * 0.55);
+  eventEls.forEach((el, i) => {
+    const x = timelineEvents[i]._x;
+    const dist = Math.abs(x - centerX);
+    el.classList.toggle('active', dist < cssNum('--event-size') * 0.55);
+  });
+}
+
+/* =========================================================================
+   ENTRADA DOS EVENTOS NA ÁREA VISÍVEL (fade / translate)
+   ========================================================================= */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+    }
+  });
+}, { root: viewport, threshold: 0.15 });
+eventEls.forEach(el => observer.observe(el));
+panelEls.forEach(el => observer.observe(el));
+observer.observe(introNode);
+
+/* =========================================================================
+   NAVEGAÇÃO: RODA DO MOUSE
+   ========================================================================= */
+viewport.addEventListener('wheel', (e) => {
+  if (modalOpen || !hasStarted) return;
+  e.preventDefault();
+  const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  targetScroll = clamp(targetScroll + delta, 0, maxScroll);
+}, { passive: false });
+
+/* =========================================================================
+   NAVEGAÇÃO: ARRASTAR (MOUSE E TOQUE VIA POINTER EVENTS)
+   ========================================================================= */
+viewport.addEventListener('pointerdown', (e) => {
+  if (modalOpen || !hasStarted) return;
+  isDragging = true;
+  viewport.classList.add('dragging');
+  dragStartX = e.clientX;
+  dragStartScroll = targetScroll;
+  lastPointerX = e.clientX;
+  lastPointerT = performance.now();
+  velocity = 0;
+  viewport.setPointerCapture(e.pointerId);
+});
+
+viewport.addEventListener('pointermove', (e) => {
+  if (!isDragging) return;
+  const dx = e.clientX - dragStartX;
+  targetScroll = clamp(dragStartScroll - dx, 0, maxScroll);
+  currentScroll = targetScroll; // resposta imediata durante o arrasto
+
+  const now = performance.now();
+  const dt = now - lastPointerT;
+  if (dt > 0) velocity = (lastPointerX - e.clientX) / dt;
+  lastPointerX = e.clientX;
+  lastPointerT = now;
+});
+
+function endDrag(){
+  if (!isDragging) return;
+  isDragging = false;
+  viewport.classList.remove('dragging');
+  // momentum simples
+  const momentum = clamp(velocity * 160, -500, 500);
+  targetScroll = clamp(targetScroll + momentum, 0, maxScroll);
+}
+viewport.addEventListener('pointerup', endDrag);
+viewport.addEventListener('pointercancel', endDrag);
+viewport.addEventListener('pointerleave', () => { if (isDragging) endDrag(); });
+
+/* =========================================================================
+   NAVEGAÇÃO: TECLADO
+   ========================================================================= */
+document.addEventListener('keydown', (e) => {
+  if (modalOpen) {
+    if (e.key === 'Escape') closeModal();
+    return;
+  }
+  if (!hasStarted) return;
+  const step = window.innerWidth * 0.6;
+  if (e.key === 'ArrowRight') { targetScroll = clamp(targetScroll + step, 0, maxScroll); }
+  else if (e.key === 'ArrowLeft') { targetScroll = clamp(targetScroll - step, 0, maxScroll); }
+  else if (e.key === 'Home') { targetScroll = 0; }
+  else if (e.key === 'End') { targetScroll = maxScroll; }
+});
+
+/* =========================================================================
+   BOTÕES DE NAVEGAÇÃO (ANTERIOR / PRÓXIMO)
+   ========================================================================= */
+function goToNearestEvent(direction){
+  const centerX = targetScroll + window.innerWidth / 2;
+  let candidates = [introX, ...timelineEvents.map(ev => ev._x)];
+  let target;
+  if (direction > 0) {
+    target = candidates.find(x => x > centerX + 20);
+  } else {
+    target = [...candidates].reverse().find(x => x < centerX - 20);
+  }
+  if (target === undefined) {
+    target = direction > 0 ? maxScroll : 0;
+  } else {
+    target = clamp(target - window.innerWidth / 2, 0, maxScroll);
+  }
+  targetScroll = target;
+}
+document.getElementById('nextBtn').addEventListener('click', () => { startJourney(); goToNearestEvent(1); });
+document.getElementById('prevBtn').addEventListener('click', () => { startJourney(); goToNearestEvent(-1); });
+
+/* =========================================================================
+   INTRO / INÍCIO DA JORNADA
+   ========================================================================= */
+function startJourney(){
+  if (hasStarted) return;
+  hasStarted = true;
+  introEl.classList.add('hidden');
+  document.getElementById('navControls').classList.add('visible');
+  // pousa centralizado no nó "A jornada começa" — o usuário segue em frente
+  // a partir dele usando as setas, o scroll ou o arrasto
+  targetScroll = clamp(introX - window.innerWidth / 2, 0, maxScroll);
+  currentScroll = targetScroll;
+  viewport.focus();
+}
+document.getElementById('startBtn').addEventListener('click', startJourney);
+
+/* header nav */
+document.querySelector('[data-action="go-start"]').addEventListener('click', () => {
+  hasStarted = true; introEl.classList.add('hidden');
+  document.getElementById('navControls').classList.add('visible');
+  targetScroll = 0;
+});
+document.querySelector('[data-action="go-timeline"]').addEventListener('click', () => {
+  startJourney();
+});
+document.querySelector('[data-action="go-about"]').addEventListener('click', () => {
+  openModal({
+    year: timelineConfig.birthYear,
+    title: `Sobre ${timelineConfig.personName}`,
+    image: timelineConfig.BACKGROUND_IMAGE,
+    description: timelineConfig.about
+  });
+});
+
+/* botão "voltar ao início" no fim da trilha (delegação, pois é criado dinamicamente) */
+track.addEventListener('click', (e) => {
+  if (e.target.id === 'backToStartBtn') {
+    targetScroll = 0;
+  }
+});
+
+/* =========================================================================
+   MENU DE VISÃO GERAL
+   ========================================================================= */
+const menuToggle = document.getElementById('menuToggle');
+const overviewPanel = document.getElementById('overviewPanel');
+const overviewBackdrop = document.getElementById('overviewBackdrop');
+
+function toggleOverview(open){
+  overviewPanel.classList.toggle('open', open);
+  overviewBackdrop.classList.toggle('open', open);
+  menuToggle.setAttribute('aria-expanded', String(open));
+}
+menuToggle.addEventListener('click', () => toggleOverview(!overviewPanel.classList.contains('open')));
+overviewBackdrop.addEventListener('click', () => toggleOverview(false));
+document.getElementById('overviewList').addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-goto]');
+  if (!btn) return;
+  startJourney();
+  const x = parseFloat(btn.dataset.goto);
+  targetScroll = clamp(x - window.innerWidth / 2, 0, maxScroll);
+  toggleOverview(false);
+});
+
+/* =========================================================================
+   MODAL "SABER MAIS"
+   ========================================================================= */
+const modalOverlay = document.getElementById('modalOverlay');
+const modalImage = document.getElementById('modalImage');
+const modalYear = document.getElementById('modalYear');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalClose = document.getElementById('modalClose');
+
+function openModal(ev){
+  modalImage.src = ev.image;
+  modalImage.alt = ev.title;
+  modalYear.textContent = ev.year;
+  modalTitle.textContent = ev.title;
+  modalDesc.textContent = ev.description;
+  modalOverlay.classList.add('open');
+  modalOpen = true;
+  modalClose.focus();
+}
+function closeModal(){
+  modalOverlay.classList.remove('open');
+  modalOpen = false;
+}
+track.addEventListener('click', (e) => {
+  const btn = e.target.closest('.event-more');
+  if (!btn) return;
+  const idx = parseInt(btn.dataset.index, 10);
+  openModal(timelineEvents[idx]);
+});
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+
+/* =========================================================================
+   RESIZE
+   ========================================================================= */
+window.addEventListener('resize', () => {
+  const trackWidth = parseFloat(track.style.width);
+  maxScroll = Math.max(0, trackWidth - window.innerWidth);
+  targetScroll = clamp(targetScroll, 0, maxScroll);
+});
+
+/* =========================================================================
+   TELA DE CARREGAMENTO
+   ========================================================================= */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loading-screen').classList.add('hide');
+  }, 900);
+});
+</script>
+</body>
+</html>
