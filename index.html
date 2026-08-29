@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Billie Eilish — Linha do Tempo</title>
 
@@ -18,67 +18,48 @@
    ========================================================= */
 
 :root{
-  --background:#101010;
-  --background-alt:#181818;
+  --background:#08090b;
+  --background-alt:#101216;
 
-  --primary:#c8d96b;
-  --secondary:#858b63;
+  --primary:#d8dce2;
+  --secondary:#777d87;
 
-  --text:#f1f1e9;
-  --muted:#a4a49a;
+  --text:#f0f2f5;
+  --muted:#969ba4;
 
-  --timeline:#44483b;
+  --timeline:#343840;
 
-  --event-background:rgba(25,25,25,.7);
-  --event-border:rgba(200,217,107,.28);
-  --event-shadow:rgba(0,0,0,.6);
+  --event-background:rgba(18,20,24,.82);
+  --event-border:rgba(220,225,235,.18);
+  --event-shadow:rgba(0,0,0,.65);
 
-  --event-radius:4px;
+  --event-radius:5px;
 
-  --font-title:'Fraunces', serif;
-  --font-body:'Inter', sans-serif;
-  --font-mono:'Space Mono', monospace;
+  --font-title:'Fraunces',serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'Space Mono',monospace;
 
-  /* TAMANHO DOS CARDS */
-  --event-size:300px;
-
-  /* DISTÂNCIA DA LINHA ATÉ O CARD */
-  --connector-h:45px;
-
-  /* DISTÂNCIA ENTRE EVENTOS */
-  --card-gap:480px;
+  /* DIMINUÍDO NO PC */
+  --event-size:290px;
+  --connector-h:42px;
+  --card-gap:460px;
 }
 
-
-/* =========================================================
-   RESPONSIVIDADE
-   ========================================================= */
-
-@media(max-width:900px){
-
+@media(max-width:1100px){
   :root{
-    --event-size:230px;
+    --event-size:260px;
     --connector-h:38px;
-    --card-gap:370px;
+    --card-gap:400px;
   }
-
 }
 
-
-@media(max-width:560px){
-
+@media(max-width:700px){
   :root{
-    --event-size:175px;
-    --connector-h:28px;
-    --card-gap:280px;
+    --event-size:205px;
+    --connector-h:32px;
+    --card-gap:310px;
   }
-
 }
-
-
-/* =========================================================
-   RESET
-   ========================================================= */
 
 *{
   box-sizing:border-box;
@@ -88,6 +69,7 @@
 
 html,
 body{
+  width:100%;
   height:100%;
   overflow:hidden;
   background:var(--background);
@@ -96,9 +78,7 @@ body{
 body{
   font-family:var(--font-body);
   color:var(--text);
-
   -webkit-font-smoothing:antialiased;
-
   overscroll-behavior:none;
 }
 
@@ -124,18 +104,9 @@ a{
   color:var(--background);
 }
 
-
-/* =========================================================
-   ACESSIBILIDADE
-   ========================================================= */
-
-a:focus-visible,
-button:focus-visible,
-[tabindex]:focus-visible{
-
+button:focus-visible{
   outline:2px solid var(--primary);
   outline-offset:3px;
-
 }
 
 
@@ -144,170 +115,116 @@ button:focus-visible,
    ========================================================= */
 
 .bg-layer{
-
   position:fixed;
-
   inset:0;
-
   z-index:0;
 
   background-image:
     linear-gradient(
       180deg,
-      rgba(16,16,16,.88),
-      rgba(16,16,16,.94) 55%,
-      rgba(8,8,8,.98)
+      rgba(8,9,11,.84),
+      rgba(8,9,11,.93) 60%,
+      rgba(5,6,8,.98)
     ),
-    url('https://picsum.photos/seed/billie-bg/1800/1200');
+    url("https://picsum.photos/seed/billieeilish-bg/1800/1200");
 
   background-size:cover;
-
   background-position:center;
 
   filter:
-    grayscale(55%)
-    contrast(1.05)
-    brightness(.72);
-
-  will-change:transform;
+    grayscale(75%)
+    contrast(1.08)
+    brightness(.65);
 
   transition:filter 1s ease;
-
 }
 
-
 .bg-vignette{
-
   position:fixed;
-
   inset:0;
-
   z-index:1;
-
   pointer-events:none;
 
   background:
     radial-gradient(
       ellipse at center,
-      transparent 45%,
-      rgba(0,0,0,.6) 100%
+      transparent 35%,
+      rgba(0,0,0,.72) 100%
     );
-
 }
 
-
 .bg-grain{
-
   position:fixed;
-
   inset:0;
-
-  z-index:1;
-
+  z-index:2;
   pointer-events:none;
-
-  opacity:.05;
+  opacity:.045;
 
   background-image:url(
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
   );
-
 }
 
 
 /* =========================================================
-   TELA DE CARREGAMENTO
+   LOADING
    ========================================================= */
 
 #loading-screen{
-
   position:fixed;
-
   inset:0;
-
   z-index:100;
 
   background:var(--background);
 
   display:flex;
-
   flex-direction:column;
-
   align-items:center;
-
   justify-content:center;
 
   gap:18px;
 
   transition:opacity .7s ease;
-
 }
-
 
 #loading-screen.hide{
-
   opacity:0;
-
   pointer-events:none;
-
 }
 
-
 .loading-name{
-
   font-family:var(--font-title);
-
   font-weight:600;
-
   letter-spacing:.04em;
 
   font-size:clamp(28px,5vw,44px);
-
-  color:var(--text);
-
 }
 
-
 .loading-sub{
-
   font-family:var(--font-mono);
-
-  font-size:12px;
-
+  font-size:11px;
   letter-spacing:.18em;
 
   color:var(--muted);
-
   text-transform:uppercase;
-
 }
 
-
 .loading-bar{
-
   width:220px;
-
   height:1px;
 
   background:var(--secondary);
 
   position:relative;
-
   overflow:hidden;
-
 }
 
-
 .loading-bar::after{
-
   content:'';
 
   position:absolute;
-
   left:-40%;
-
   top:0;
-
   bottom:0;
 
   width:40%;
@@ -315,9 +232,7 @@ button:focus-visible,
   background:var(--primary);
 
   animation:loadmove 1.1s ease-in-out infinite;
-
 }
-
 
 @keyframes loadmove{
 
@@ -341,74 +256,56 @@ button:focus-visible,
    ========================================================= */
 
 .site-header{
-
   position:fixed;
 
   top:0;
   left:0;
   right:0;
 
-  z-index:40;
+  z-index:70;
 
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 
-  padding:20px clamp(20px,4vw,56px);
+  padding:
+    18px
+    clamp(20px,4vw,56px);
 
   background:
     linear-gradient(
       180deg,
-      rgba(16,16,16,.75),
+      rgba(8,9,11,.82),
       transparent
     );
 
-  backdrop-filter:blur(6px);
-
-  -webkit-backdrop-filter:blur(6px);
-
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
 }
 
-
 .brand{
-
   font-family:var(--font-title);
 
   font-weight:600;
-
   font-size:18px;
 
   letter-spacing:.05em;
-
 }
-
 
 .brand span{
-
   color:var(--primary);
-
 }
-
 
 .main-nav{
-
   display:flex;
-
   gap:clamp(16px,3vw,32px);
-
 }
 
-
 .main-nav button{
-
   font-family:var(--font-mono);
 
   font-size:11px;
-
   letter-spacing:.14em;
-
   text-transform:uppercase;
 
   color:var(--muted);
@@ -418,27 +315,19 @@ button:focus-visible,
   position:relative;
 
   transition:color .3s;
-
 }
-
 
 .main-nav button:hover{
-
   color:var(--text);
-
 }
 
-
 .main-nav button::after{
-
   content:'';
 
   position:absolute;
 
   left:0;
-
   right:100%;
-
   bottom:0;
 
   height:1px;
@@ -446,16 +335,11 @@ button:focus-visible,
   background:var(--primary);
 
   transition:right .3s ease;
-
 }
-
 
 .main-nav button:hover::after{
-
   right:0;
-
 }
-
 
 @media(max-width:620px){
 
@@ -471,23 +355,18 @@ button:focus-visible,
    ========================================================= */
 
 .menu-toggle{
-
   position:fixed;
 
-  top:20px;
+  top:16px;
+  right:18px;
 
-  right:20px;
-
-  z-index:41;
+  z-index:80;
 
   width:38px;
-
   height:38px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
   font-size:18px;
@@ -495,15 +374,12 @@ button:focus-visible,
   color:var(--text);
 
   border:1px solid var(--event-border);
-
   border-radius:50%;
 
-  background:rgba(20,20,20,.6);
+  background:rgba(10,11,14,.7);
 
   backdrop-filter:blur(6px);
-
 }
-
 
 @media(min-width:621px){
 
@@ -513,18 +389,14 @@ button:focus-visible,
 
 }
 
-
 .overview-panel{
-
   position:fixed;
 
   top:0;
-
   right:0;
-
   bottom:0;
 
-  z-index:60;
+  z-index:90;
 
   width:min(340px,86vw);
 
@@ -537,26 +409,20 @@ button:focus-visible,
   transform:translateX(100%);
 
   transition:
-    transform .4s cubic-bezier(.4,0,.2,1);
+    transform .4s
+    cubic-bezier(.4,0,.2,1);
 
   overflow-y:auto;
-
 }
-
 
 .overview-panel.open{
-
   transform:translateX(0);
-
 }
 
-
 .overview-panel h3{
-
   font-family:var(--font-mono);
 
   font-size:11px;
-
   letter-spacing:.18em;
 
   color:var(--muted);
@@ -564,20 +430,14 @@ button:focus-visible,
   text-transform:uppercase;
 
   margin-bottom:18px;
-
 }
 
-
 .overview-list{
-
   list-style:none;
 
   display:flex;
-
   flex-direction:column;
-
 }
-
 
 .overview-list li button{
 
@@ -599,18 +459,13 @@ button:focus-visible,
   color:var(--muted);
 
   transition:color .25s;
-
 }
-
 
 .overview-list li button:hover{
-
   color:var(--text);
-
 }
 
-
-.overview-list li button .yr{
+.overview-list .yr{
 
   font-family:var(--font-mono);
 
@@ -619,42 +474,33 @@ button:focus-visible,
   font-size:13px;
 
   min-width:44px;
-
 }
 
-
-.overview-list li button .ttl{
-
+.overview-list .ttl{
   font-size:14px;
-
 }
-
 
 .overview-backdrop{
 
   position:fixed;
-
   inset:0;
 
-  z-index:59;
+  z-index:89;
 
-  background:rgba(0,0,0,.4);
+  background:rgba(0,0,0,.45);
 
   opacity:0;
 
   pointer-events:none;
 
   transition:opacity .3s;
-
 }
-
 
 .overview-backdrop.open{
 
   opacity:1;
 
   pointer-events:auto;
-
 }
 
 
@@ -668,7 +514,7 @@ button:focus-visible,
 
   inset:0;
 
-  z-index:30;
+  z-index:50;
 
   display:flex;
 
@@ -685,17 +531,14 @@ button:focus-visible,
   background:
     radial-gradient(
       ellipse at center,
-      rgba(16,16,16,.4),
-      rgba(16,16,16,.92) 70%
-    ),
-    var(--background);
+      rgba(8,9,11,.35),
+      rgba(8,9,11,.94) 70%
+    );
 
   transition:
     opacity .9s ease,
     visibility .9s ease;
-
 }
-
 
 .intro.hidden{
 
@@ -704,15 +547,13 @@ button:focus-visible,
   visibility:hidden;
 
   pointer-events:none;
-
 }
-
 
 .intro-eyebrow{
 
   font-family:var(--font-mono);
 
-  font-size:12px;
+  font-size:11px;
 
   letter-spacing:.24em;
 
@@ -720,10 +561,8 @@ button:focus-visible,
 
   color:var(--primary);
 
-  margin-bottom:22px;
-
+  margin-bottom:20px;
 }
-
 
 .intro-name{
 
@@ -731,23 +570,14 @@ button:focus-visible,
 
   font-weight:300;
 
-  font-size:clamp(46px,10vw,124px);
+  font-size:clamp(46px,10vw,120px);
 
   line-height:.96;
-
-  letter-spacing:-.01em;
-
 }
-
 
 .intro-name b{
-
   font-weight:600;
-
-  display:block;
-
 }
-
 
 .intro-tagline{
 
@@ -755,16 +585,12 @@ button:focus-visible,
 
   color:var(--muted);
 
-  max-width:520px;
+  max-width:540px;
 
-  margin:26px 0 8px;
-
-  font-weight:400;
+  margin:24px 0 8px;
 
   line-height:1.6;
-
 }
-
 
 .intro-meta{
 
@@ -774,32 +600,30 @@ button:focus-visible,
 
   font-family:var(--font-mono);
 
-  font-size:12px;
+  font-size:11px;
 
   color:var(--secondary);
 
   letter-spacing:.08em;
 
-  margin-bottom:44px;
+  margin-bottom:40px;
 
   flex-wrap:wrap;
 
   justify-content:center;
-
 }
-
 
 .btn-start{
 
   font-family:var(--font-mono);
 
-  font-size:13px;
+  font-size:12px;
 
   letter-spacing:.14em;
 
   text-transform:uppercase;
 
-  padding:16px 34px;
+  padding:15px 32px;
 
   border:1px solid var(--primary);
 
@@ -810,18 +634,14 @@ button:focus-visible,
   overflow:hidden;
 
   transition:color .35s;
-
 }
-
 
 .btn-start span{
 
   position:relative;
 
   z-index:1;
-
 }
-
 
 .btn-start::before{
 
@@ -836,45 +656,38 @@ button:focus-visible,
   transform:translateX(-101%);
 
   transition:
-    transform .4s cubic-bezier(.4,0,.2,1);
+    transform .4s
+    cubic-bezier(.4,0,.2,1);
 
   z-index:0;
-
 }
-
 
 .btn-start:hover{
 
   color:var(--background);
-
 }
-
 
 .btn-start:hover::before{
 
   transform:translateX(0);
-
 }
-
 
 .intro-hint{
 
   position:absolute;
 
-  bottom:34px;
+  bottom:28px;
 
   font-family:var(--font-mono);
 
-  font-size:11px;
+  font-size:10px;
 
   letter-spacing:.1em;
 
   color:var(--secondary);
 
   animation:pulseFade 2.4s ease-in-out infinite;
-
 }
-
 
 @keyframes pulseFade{
 
@@ -906,38 +719,29 @@ button:focus-visible,
   cursor:grab;
 
   touch-action:pan-y;
-
 }
-
 
 .timeline-viewport.dragging{
-
   cursor:grabbing;
-
 }
-
 
 .timeline-track{
 
   position:absolute;
 
   top:0;
-
   left:0;
 
   height:100%;
 
   will-change:transform;
-
 }
-
 
 .timeline-line{
 
   position:absolute;
 
   top:50%;
-
   left:0;
 
   height:2px;
@@ -954,9 +758,7 @@ button:focus-visible,
     );
 
   transform:translateY(-1px);
-
 }
-
 
 .timeline-line::before{
 
@@ -969,15 +771,14 @@ button:focus-visible,
   background-image:
     repeating-linear-gradient(
       90deg,
-      rgba(255,255,255,.06) 0 1px,
+      rgba(255,255,255,.05) 0 1px,
       transparent 1px 26px
     );
-
 }
 
 
 /* =========================================================
-   EVENTOS
+   EVENTO
    ========================================================= */
 
 .event{
@@ -987,22 +788,19 @@ button:focus-visible,
   top:50%;
 
   width:0;
-
   height:0;
 
+  z-index:10;
 }
-
 
 .event-marker{
 
   position:absolute;
 
   top:0;
-
   left:0;
 
   width:11px;
-
   height:11px;
 
   margin:-5.5px 0 0 -5.5px;
@@ -1017,37 +815,17 @@ button:focus-visible,
     transform .4s ease,
     box-shadow .4s ease;
 
-  z-index:3;
-
+  z-index:20;
 }
-
 
 .event.active .event-marker{
 
-  transform:scale(1.5);
+  transform:scale(1.45);
 
   box-shadow:
-    0 0 0 6px rgba(200,217,107,.16);
-
-  animation:markerPulse 2.2s ease-in-out infinite;
-
+    0 0 0 6px
+    rgba(220,225,235,.12);
 }
-
-
-@keyframes markerPulse{
-
-  0%,100%{
-    box-shadow:
-      0 0 0 6px rgba(200,217,107,.16);
-  }
-
-  50%{
-    box-shadow:
-      0 0 0 10px rgba(200,217,107,.05);
-  }
-
-}
-
 
 .event-connector{
 
@@ -1059,33 +837,26 @@ button:focus-visible,
 
   background:var(--timeline);
 
-  transform-origin:top;
-
+  z-index:5;
 }
-
 
 .event-top .event-connector{
 
   bottom:0;
 
   height:var(--connector-h);
-
-  transform-origin:bottom;
-
 }
-
 
 .event-bottom .event-connector{
 
   top:0;
 
   height:var(--connector-h);
-
 }
 
 
 /* =========================================================
-   CARDS
+   CARD
    ========================================================= */
 
 .event-card{
@@ -1101,35 +872,30 @@ button:focus-visible,
   opacity:0;
 
   transition:
-    opacity .6s cubic-bezier(.4,0,.2,1),
-    transform .6s cubic-bezier(.4,0,.2,1);
+    opacity .6s ease,
+    transform .6s
+    cubic-bezier(.4,0,.2,1);
 
+  /* IMPORTANTE:
+     permite clique normalmente */
+  pointer-events:none;
 }
-
-
-/* CARD DE CIMA */
 
 .event-top .event-card{
 
-  bottom:calc(var(--connector-h) + 3px);
+  bottom:calc(var(--connector-h) + 8px);
 
   transform:
     translate(-50%,20px);
-
 }
-
-
-/* CARD DE BAIXO */
 
 .event-bottom .event-card{
 
-  top:calc(var(--connector-h) + 3px);
+  top:calc(var(--connector-h) + 8px);
 
   transform:
     translate(-50%,-20px);
-
 }
-
 
 .event.in-view .event-card{
 
@@ -1138,6 +904,8 @@ button:focus-visible,
   transform:
     translate(-50%,0);
 
+  /* CORREÇÃO PRINCIPAL */
+  pointer-events:auto;
 }
 
 
@@ -1161,40 +929,28 @@ button:focus-visible,
   background:var(--event-background);
 
   box-shadow:
-    0 18px 40px -14px var(--event-shadow);
-
-  transition:
-    box-shadow .4s ease,
-    transform .4s ease;
+    0 18px 40px -14px
+    var(--event-shadow);
 
   position:relative;
-
 }
-
 
 .event-figure img{
 
   width:100%;
-
   height:100%;
 
   object-fit:cover;
 
-  object-position:center;
-
   filter:
-    grayscale(80%)
-    sepia(8%)
-    contrast(1.05);
-
-  transform:scale(1.001);
+    grayscale(70%)
+    contrast(1.05)
+    brightness(.9);
 
   transition:
-    filter .8s ease,
-    transform .6s cubic-bezier(.4,0,.2,1);
-
+    filter .6s ease,
+    transform .6s ease;
 }
-
 
 .event-figure::after{
 
@@ -1205,49 +961,33 @@ button:focus-visible,
   inset:0;
 
   border:
-    1px solid rgba(255,255,255,.06);
+    1px solid rgba(255,255,255,.05);
 
   pointer-events:none;
-
 }
-
 
 .event:hover .event-figure img,
 .event.active .event-figure img{
 
   filter:
-    grayscale(15%)
-    sepia(4%)
-    contrast(1.02);
-
-}
-
-
-.event:hover .event-figure{
-
-  box-shadow:
-    0 22px 48px -12px var(--event-shadow);
-
-}
-
-
-.event:hover .event-figure img{
+    grayscale(10%)
+    contrast(1.03);
 
   transform:scale(1.035);
-
 }
 
 
 /* =========================================================
-   TEXTO DOS CARDS
+   TEXTO DO EVENTO
    ========================================================= */
 
 .event-body{
 
   text-align:center;
 
+  /* evita que o texto seja cortado */
+  padding-bottom:8px;
 }
-
 
 .event-year{
 
@@ -1260,9 +1000,7 @@ button:focus-visible,
   color:var(--primary);
 
   margin-top:10px;
-
 }
-
 
 .event-title{
 
@@ -1270,14 +1008,12 @@ button:focus-visible,
 
   font-weight:600;
 
-  font-size:17px;
+  font-size:18px;
 
   margin-top:4px;
 
   line-height:1.25;
-
 }
-
 
 .event-desc{
 
@@ -1285,12 +1021,10 @@ button:focus-visible,
 
   color:var(--muted);
 
-  margin-top:6px;
+  margin-top:7px;
 
-  line-height:1.4;
-
+  line-height:1.45;
 }
-
 
 .event-more{
 
@@ -1304,7 +1038,7 @@ button:focus-visible,
 
   color:var(--text);
 
-  margin-top:9px;
+  margin-top:10px;
 
   display:inline-flex;
 
@@ -1317,13 +1051,17 @@ button:focus-visible,
 
   padding-bottom:3px;
 
+  position:relative;
+
+  z-index:30;
+
+  pointer-events:auto;
+
   transition:
     border-color .3s,
     color .3s,
     gap .3s;
-
 }
-
 
 .event-more:hover{
 
@@ -1332,7 +1070,6 @@ button:focus-visible,
   border-color:var(--primary);
 
   gap:10px;
-
 }
 
 
@@ -1340,71 +1077,18 @@ button:focus-visible,
    MOBILE
    ========================================================= */
 
-@media(max-width:560px){
-
-  .event-card{
-
-    width:var(--event-size);
-
-  }
-
-
-  .event-figure{
-
-    aspect-ratio:1/1;
-
-  }
-
-
-  .event-year{
-
-    font-size:10px;
-
-    margin-top:7px;
-
-  }
-
+@media(max-width:700px){
 
   .event-title{
-
-    font-size:14px;
-
+    font-size:15px;
   }
-
 
   .event-desc{
-
-    font-size:10px;
-
-    margin-top:4px;
-
-    line-height:1.35;
-
+    font-size:11px;
   }
-
 
   .event-more{
-
-    font-size:8px;
-
-    margin-top:6px;
-
-  }
-
-
-  .event-top .event-card{
-
-    bottom:
-      calc(var(--connector-h) + 2px);
-
-  }
-
-
-  .event-bottom .event-card{
-
-    top:
-      calc(var(--connector-h) + 2px);
-
+    font-size:9px;
   }
 
 }
@@ -1422,34 +1106,30 @@ button:focus-visible,
 
   transform:translateY(-50%);
 
-  width:min(320px,70vw);
+  width:min(330px,70vw);
 
   text-align:center;
 
+  z-index:10;
 }
-
 
 .track-panel .panel-inner{
 
   opacity:0;
 
-  transform:translateY(24px);
+  transform:translateY(20px);
 
   transition:
-    opacity .7s cubic-bezier(.4,0,.2,1),
-    transform .7s cubic-bezier(.4,0,.2,1);
-
+    opacity .7s ease,
+    transform .7s ease;
 }
-
 
 .track-panel.in-view .panel-inner{
 
   opacity:1;
 
   transform:translateY(0);
-
 }
-
 
 .track-panel .label{
 
@@ -1462,9 +1142,7 @@ button:focus-visible,
   color:var(--secondary);
 
   text-transform:uppercase;
-
 }
-
 
 .track-panel h2{
 
@@ -1472,12 +1150,10 @@ button:focus-visible,
 
   font-weight:300;
 
-  font-size:clamp(26px,4vw,40px);
+  font-size:clamp(25px,4vw,40px);
 
-  margin:14px 0 12px;
-
+  margin:12px 0;
 }
-
 
 .track-panel p{
 
@@ -1487,10 +1163,8 @@ button:focus-visible,
 
   line-height:1.6;
 
-  margin-bottom:20px;
-
+  margin-bottom:18px;
 }
-
 
 .btn-ghost{
 
@@ -1502,24 +1176,20 @@ button:focus-visible,
 
   text-transform:uppercase;
 
-  padding:12px 24px;
+  padding:11px 22px;
 
-  border:
-    1px solid var(--secondary);
+  border:1px solid var(--secondary);
 
   color:var(--text);
 
   transition:.3s;
-
 }
-
 
 .btn-ghost:hover{
 
   border-color:var(--primary);
 
   color:var(--primary);
-
 }
 
 
@@ -1533,10 +1203,9 @@ button:focus-visible,
 
   left:0;
   right:0;
+  bottom:24px;
 
-  bottom:26px;
-
-  z-index:35;
+  z-index:75;
 
   display:flex;
 
@@ -1558,9 +1227,7 @@ button:focus-visible,
     opacity .6s ease,
     transform .6s ease,
     visibility .6s;
-
 }
-
 
 .nav-controls.visible{
 
@@ -1569,14 +1236,11 @@ button:focus-visible,
   visibility:visible;
 
   transform:translateY(0);
-
 }
-
 
 .nav-arrow{
 
   width:42px;
-
   height:42px;
 
   border-radius:50%;
@@ -1584,14 +1248,13 @@ button:focus-visible,
   border:
     1px solid var(--event-border);
 
-  background:rgba(20,20,20,.55);
+  background:rgba(10,11,14,.65);
 
   backdrop-filter:blur(6px);
 
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   font-size:16px;
@@ -1601,20 +1264,14 @@ button:focus-visible,
   transition:
     border-color .3s,
     transform .2s;
-
-  flex:none;
-
 }
-
 
 .nav-arrow:hover{
 
   border-color:var(--primary);
 
   transform:translateY(-2px);
-
 }
-
 
 .progress-wrap{
 
@@ -1625,9 +1282,7 @@ button:focus-visible,
   flex-direction:column;
 
   gap:6px;
-
 }
-
 
 .progress-track{
 
@@ -1637,12 +1292,8 @@ button:focus-visible,
 
   background:rgba(255,255,255,.1);
 
-  border-radius:2px;
-
   overflow:hidden;
-
 }
-
 
 .progress-fill{
 
@@ -1657,9 +1308,7 @@ button:focus-visible,
   background:var(--primary);
 
   transition:width .1s linear;
-
 }
-
 
 .progress-years{
 
@@ -1669,28 +1318,21 @@ button:focus-visible,
 
   font-family:var(--font-mono);
 
-  font-size:10px;
+  font-size:9px;
 
   color:var(--secondary);
 
   letter-spacing:.05em;
-
 }
-
 
 @media(max-width:620px){
 
   .progress-wrap{
-
     width:44vw;
-
   }
 
-
   .progress-years span:not(:first-child):not(:last-child){
-
     display:none;
-
   }
 
 }
@@ -1706,9 +1348,9 @@ button:focus-visible,
 
   inset:0;
 
-  z-index:80;
+  z-index:200;
 
-  background:rgba(10,10,10,.72);
+  background:rgba(5,6,8,.78);
 
   backdrop-filter:blur(10px);
 
@@ -1720,18 +1362,18 @@ button:focus-visible,
 
   justify-content:center;
 
-  padding:20px;
+  padding:24px;
 
   opacity:0;
 
   visibility:hidden;
 
+  pointer-events:none;
+
   transition:
     opacity .35s ease,
     visibility .35s ease;
-
 }
-
 
 .modal-overlay.open{
 
@@ -1739,14 +1381,14 @@ button:focus-visible,
 
   visibility:visible;
 
+  pointer-events:auto;
 }
-
 
 .modal{
 
-  width:min(620px,100%);
+  width:min(640px,100%);
 
-  max-height:88vh;
+  max-height:85vh;
 
   overflow-y:auto;
 
@@ -1762,62 +1404,54 @@ button:focus-visible,
     translateY(10px);
 
   transition:
-    transform .4s cubic-bezier(.4,0,.2,1);
+    transform .4s
+    cubic-bezier(.4,0,.2,1);
 
   box-shadow:
-    0 40px 80px -20px rgba(0,0,0,.7);
-
+    0 40px 80px -20px
+    rgba(0,0,0,.8);
 }
-
 
 .modal-overlay.open .modal{
 
   transform:
     scale(1)
     translateY(0);
-
 }
-
 
 .modal-close{
 
   position:sticky;
 
-  top:14px;
+  top:12px;
 
   float:right;
 
-  margin:14px 14px 0 0;
+  margin:12px 12px 0 0;
 
   width:34px;
-
   height:34px;
 
   border-radius:50%;
 
-  background:rgba(0,0,0,.35);
+  background:rgba(0,0,0,.5);
 
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   font-size:18px;
 
-  z-index:2;
-
+  z-index:10;
 }
-
 
 .modal-close:hover{
 
-  background:rgba(0,0,0,.55);
-
   color:var(--primary);
 
+  background:rgba(0,0,0,.7);
 }
-
 
 .modal-figure{
 
@@ -1826,27 +1460,21 @@ button:focus-visible,
   aspect-ratio:16/9;
 
   overflow:hidden;
-
 }
-
 
 .modal-figure img{
 
   width:100%;
-
   height:100%;
 
   object-fit:cover;
-
 }
-
 
 .modal-body{
 
-  padding:8px 30px 35px;
-
+  padding:
+    8px 34px 36px;
 }
-
 
 .modal-year{
 
@@ -1859,9 +1487,7 @@ button:focus-visible,
   letter-spacing:.1em;
 
   margin-top:18px;
-
 }
-
 
 .modal-title{
 
@@ -1869,12 +1495,12 @@ button:focus-visible,
 
   font-weight:600;
 
-  font-size:clamp(22px,3vw,30px);
+  font-size:
+    clamp(22px,3vw,30px);
 
-  margin:10px 0 18px;
-
+  margin:
+    8px 0 16px;
 }
-
 
 .modal-desc{
 
@@ -1883,46 +1509,19 @@ button:focus-visible,
   font-size:14px;
 
   line-height:1.75;
-
 }
 
 
 /* =========================================================
-   ACESSIBILIDADE / MOVIMENTO REDUZIDO
+   MOVIMENTO REDUZIDO
    ========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
   *{
-
     animation-duration:.001s !important;
-
     transition-duration:.001s !important;
-
   }
-
-  .timeline-track{
-
-    transition:none !important;
-
-  }
-
-}
-
-
-.sr-only{
-
-  position:absolute;
-
-  width:1px;
-
-  height:1px;
-
-  overflow:hidden;
-
-  clip:rect(0,0,0,0);
-
-  white-space:nowrap;
 
 }
 
@@ -1938,9 +1537,7 @@ button:focus-visible,
      ========================================================= -->
 
 <div class="bg-layer" id="bgLayer"></div>
-
 <div class="bg-vignette"></div>
-
 <div class="bg-grain"></div>
 
 
@@ -1948,7 +1545,7 @@ button:focus-visible,
      LOADING
      ========================================================= -->
 
-<div id="loading-screen" aria-hidden="true">
+<div id="loading-screen">
 
   <div class="loading-name">
     Billie Eilish
@@ -1973,7 +1570,7 @@ button:focus-visible,
     Billie <span>Eilish</span>
   </div>
 
-  <nav class="main-nav" aria-label="Navegação principal">
+  <nav class="main-nav">
 
     <button data-action="go-start">
       Início
@@ -1993,29 +1590,26 @@ button:focus-visible,
 
 
 <!-- =========================================================
-     MENU MOBILE
+     MENU
      ========================================================= -->
 
 <button
   class="menu-toggle"
   id="menuToggle"
-  aria-label="Abrir visão geral da linha do tempo"
+  aria-label="Abrir timeline"
   aria-expanded="false"
 >
   ☰
 </button>
-
 
 <div
   class="overview-backdrop"
   id="overviewBackdrop"
 ></div>
 
-
 <aside
   class="overview-panel"
   id="overviewPanel"
-  aria-label="Visão geral dos acontecimentos"
 >
 
   <h3>
@@ -2043,22 +1637,13 @@ button:focus-visible,
     Biografia interativa
   </p>
 
-
   <h1 class="intro-name">
-
-    <b>
-      Billie Eilish
-    </b>
-
+    <b>Billie Eilish</b>
   </h1>
 
-
   <p class="intro-tagline">
-
-    Uma viagem pela trajetória, música e momentos que marcaram a carreira de Billie Eilish.
-
+    Uma viagem pela trajetória, música e momentos que marcaram sua carreira.
   </p>
-
 
   <div class="intro-meta">
 
@@ -2076,23 +1661,17 @@ button:focus-visible,
 
   </div>
 
-
   <button
     class="btn-start"
     id="startBtn"
   >
-
     <span>
       Começar a viagem →
     </span>
-
   </button>
 
-
   <p class="intro-hint">
-
-    use o mouse, o toque ou as setas do teclado
-
+    use o mouse, toque ou as setas do teclado
   </p>
 
 </section>
@@ -2106,7 +1685,6 @@ button:focus-visible,
   class="timeline-viewport"
   id="viewport"
   tabindex="0"
-  aria-label="Linha do tempo horizontal"
 >
 
   <div
@@ -2138,7 +1716,6 @@ button:focus-visible,
     ←
   </button>
 
-
   <div class="progress-wrap">
 
     <div class="progress-track">
@@ -2150,14 +1727,12 @@ button:focus-visible,
 
     </div>
 
-
     <div
       class="progress-years"
       id="progressYears"
     ></div>
 
   </div>
-
 
   <button
     class="nav-arrow"
@@ -2183,7 +1758,6 @@ button:focus-visible,
     class="modal"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="modalTitle"
   >
 
     <button
@@ -2194,7 +1768,6 @@ button:focus-visible,
       ×
     </button>
 
-
     <div class="modal-figure">
 
       <img
@@ -2204,7 +1777,6 @@ button:focus-visible,
 
     </div>
 
-
     <div class="modal-body">
 
       <div
@@ -2212,12 +1784,10 @@ button:focus-visible,
         id="modalYear"
       ></div>
 
-
       <h2
         class="modal-title"
         id="modalTitle"
       ></h2>
-
 
       <p
         class="modal-desc"
@@ -2233,34 +1803,25 @@ button:focus-visible,
 
 <script>
 
-
 /* =========================================================
    CONFIGURAÇÃO
    ========================================================= */
 
 const timelineConfig = {
 
-  personName:
-    "Billie Eilish",
+  personName:"Billie Eilish",
 
-  tagline:
-    "Uma viagem pela trajetória, música e momentos que marcaram a carreira de Billie Eilish.",
+  birthYear:"2001",
 
-  birthYear:
-    "2001",
+  profession:"Cantora & compositora",
 
-  profession:
-    "Cantora & compositora",
-
-  location:
-    "Los Angeles, EUA",
-
-  about:
-    "Billie Eilish é uma cantora e compositora norte-americana conhecida por sua estética singular, produção musical intimista e grande impacto na música pop contemporânea.",
+  location:"Los Angeles, EUA",
 
   BACKGROUND_IMAGE:
-    "https://picsum.photos/seed/billie-bg/1800/1200"
+    "https://picsum.photos/seed/billieeilish-bg/1800/1200",
 
+  about:
+    "Billie Eilish é uma cantora e compositora norte-americana conhecida por sua abordagem artística singular, produção musical minimalista e forte identidade visual."
 };
 
 
@@ -2282,25 +1843,23 @@ const timelineEvents = [
       "Billie Eilish nasce em Los Angeles.",
 
     description:
-      "Billie Eilish Pirate Baird O'Connell nasce em Los Angeles, Califórnia, em 18 de dezembro de 2001."
+      "Billie Eilish Pirate Baird O'Connell nasceu em 18 de dezembro de 2001, em Los Angeles, Califórnia. Ela cresceu em uma família ligada à música e às artes."
   },
-
 
   {
     year:"2015",
 
-    title:"Ocean Eyes",
+    title:"Primeiro grande lançamento",
 
     image:
       "https://picsum.photos/seed/billie02/700/700",
 
     shortDescription:
-      "A música que muda sua trajetória.",
+      "A carreira musical começa a ganhar atenção.",
 
     description:
-      "Ocean Eyes ganha grande atenção na internet e marca o início da ascensão de Billie Eilish como artista."
+      "Durante a adolescência, Billie começou a lançar músicas na internet em parceria criativa com seu irmão Finneas. Seus primeiros trabalhos rapidamente chamaram a atenção do público."
   },
-
 
   {
     year:"2017",
@@ -2311,44 +1870,41 @@ const timelineEvents = [
       "https://picsum.photos/seed/billie03/700/700",
 
     shortDescription:
-      "Primeiro grande lançamento.",
+      "Lançamento do primeiro EP.",
 
     description:
-      "Billie lança seu EP de estreia, Don't Smile at Me, consolidando seu estilo e conquistando público internacional."
+      "O EP Don't Smile at Me consolidou Billie Eilish como uma das novas vozes mais interessantes da música pop alternativa."
   },
-
 
   {
     year:"2019",
 
-    title:"When We All Fall Asleep",
+    title:"When We All Fall Asleep, Where Do We Go?",
 
     image:
       "https://picsum.photos/seed/billie04/700/700",
 
     shortDescription:
-      "O álbum que transforma sua carreira.",
+      "O primeiro álbum de estúdio chega ao mundo.",
 
     description:
-      "When We All Fall Asleep, Where Do We Go? chega ao público e coloca Billie Eilish no centro da música pop mundial."
+      "O álbum de estreia levou Billie Eilish a um enorme reconhecimento internacional e apresentou uma estética musical e visual que se tornou característica de sua carreira."
   },
-
 
   {
     year:"2020",
 
-    title:"Noite histórica no Grammy",
+    title:"Grammy Awards",
 
     image:
       "https://picsum.photos/seed/billie05/700/700",
 
     shortDescription:
-      "Billie faz história no Grammy.",
+      "Uma noite histórica para a artista.",
 
     description:
-      "Billie Eilish conquista quatro das principais categorias do Grammy Awards, tornando-se uma das grandes vencedoras da noite."
+      "Billie fez história no Grammy Awards de 2020 ao conquistar as quatro principais categorias da premiação na mesma edição."
   },
-
 
   {
     year:"2021",
@@ -2359,28 +1915,26 @@ const timelineEvents = [
       "https://picsum.photos/seed/billie06/700/700",
 
     shortDescription:
-      "Uma nova fase artística.",
+      "Segundo álbum de estúdio.",
 
     description:
-      "Happier Than Ever apresenta uma nova etapa musical, explorando diferentes sonoridades e temas."
+      "Happier Than Ever apresentou uma nova fase artística, explorando diferentes sonoridades e uma produção mais refinada."
   },
-
 
   {
     year:"2022",
 
-    title:"Turnê mundial",
+    title:"James Bond",
 
     image:
       "https://picsum.photos/seed/billie07/700/700",
 
     shortDescription:
-      "Billie leva sua música para o mundo.",
+      "Billie participa da franquia 007.",
 
     description:
-      "A artista percorre diversos países com a turnê relacionada à era Happier Than Ever."
+      "Billie e Finneas escreveram e gravaram a música-tema do filme No Time to Die. A canção recebeu o Oscar de Melhor Canção Original."
   },
-
 
   {
     year:"2023",
@@ -2391,12 +1945,11 @@ const timelineEvents = [
       "https://picsum.photos/seed/billie08/700/700",
 
     shortDescription:
-      "Uma nova colaboração cinematográfica.",
+      "Uma nova música para o cinema.",
 
     description:
-      "Billie e Finneas criam What Was I Made For? para a trilha sonora de Barbie."
+      "Billie e Finneas criaram What Was I Made For? para o filme Barbie. A música recebeu amplo reconhecimento e conquistou o Oscar de Melhor Canção Original."
   },
-
 
   {
     year:"2024",
@@ -2407,10 +1960,10 @@ const timelineEvents = [
       "https://picsum.photos/seed/billie09/700/700",
 
     shortDescription:
-      "Uma nova era musical.",
+      "Um novo capítulo musical.",
 
     description:
-      "Billie Eilish lança HIT ME HARD AND SOFT, apresentando uma nova fase de sua carreira e uma sonoridade cuidadosamente construída."
+      "Billie lançou seu terceiro álbum de estúdio, HIT ME HARD AND SOFT, iniciando uma nova fase de sua trajetória musical."
   }
 
 ];
@@ -2425,18 +1978,14 @@ const prefersReducedMotion =
     '(prefers-reduced-motion: reduce)'
   ).matches;
 
-
 const viewport =
   document.getElementById('viewport');
-
 
 const track =
   document.getElementById('track');
 
-
 const introEl =
   document.getElementById('intro');
-
 
 let currentScroll = 0;
 
@@ -2462,17 +2011,23 @@ let hasStarted = false;
 
 
 /* =========================================================
-   CSS VARIABLE
+   FUNÇÕES
    ========================================================= */
 
-function cssNum(varName){
+function cssNum(variable){
 
   return parseFloat(
+    getComputedStyle(document.documentElement)
+      .getPropertyValue(variable)
+  );
 
-    getComputedStyle(
-      document.documentElement
-    ).getPropertyValue(varName)
+}
 
+function clamp(value,min,max){
+
+  return Math.max(
+    min,
+    Math.min(max,value)
   );
 
 }
@@ -2487,48 +2042,42 @@ function buildTimeline(){
   const bg =
     document.getElementById('bgLayer');
 
-
-  bg.style.backgroundImage =
-
-    `linear-gradient(
+  bg.style.backgroundImage = `
+    linear-gradient(
       180deg,
-      rgba(16,16,16,.88),
-      rgba(16,16,16,.94) 55%,
-      rgba(8,8,8,.98)
+      rgba(8,9,11,.84),
+      rgba(8,9,11,.93) 60%,
+      rgba(5,6,8,.98)
     ),
-    url('${timelineConfig.BACKGROUND_IMAGE}')`;
+    url('${timelineConfig.BACKGROUND_IMAGE}')
+  `;
 
 
   const gap =
     cssNum('--card-gap');
 
-
   const startPad =
     Math.max(
-      window.innerWidth * .9,
-      620
+      window.innerWidth * .85,
+      600
     );
 
 
-  /* =======================================================
+  /* ---------------------------------------------------------
      NÓ INICIAL
-     ======================================================= */
+     --------------------------------------------------------- */
 
   const introX =
     window.innerWidth / 2;
 
-
   const introNode =
     document.createElement('article');
-
 
   introNode.className =
     'event event-bottom intro-node';
 
-
   introNode.style.left =
     introX + 'px';
-
 
   introNode.innerHTML = `
 
@@ -2547,7 +2096,7 @@ function buildTimeline(){
       <div class="event-body">
 
         <div class="event-year">
-          2001 · início
+          ${timelineEvents[0].year} · início
         </div>
 
         <h3 class="event-title">
@@ -2555,7 +2104,7 @@ function buildTimeline(){
         </h3>
 
         <p class="event-desc">
-          Role, arraste ou use as setas para seguir.
+          Arraste, role ou use as setas para navegar.
         </p>
 
       </div>
@@ -2564,28 +2113,28 @@ function buildTimeline(){
 
   `;
 
-
   track.appendChild(introNode);
 
 
-  /* =======================================================
-     LISTA LATERAL
-     ======================================================= */
+  /* ---------------------------------------------------------
+     LISTA DO MENU
+     --------------------------------------------------------- */
 
   const overviewList =
-    document.getElementById('overviewList');
-
+    document.getElementById(
+      'overviewList'
+    );
 
   const progressYears =
-    document.getElementById('progressYears');
-
+    document.getElementById(
+      'progressYears'
+    );
 
   const eventEls = [];
 
 
   const introLi =
     document.createElement('li');
-
 
   introLi.innerHTML = `
 
@@ -2603,171 +2152,162 @@ function buildTimeline(){
 
   `;
 
-
   overviewList.appendChild(introLi);
 
 
-  /* =======================================================
+  /* ---------------------------------------------------------
      EVENTOS
-     ======================================================= */
+     --------------------------------------------------------- */
 
-  timelineEvents.forEach((ev,i)=>{
+  timelineEvents.forEach(
+    (ev,index) => {
 
-    const x =
-      startPad + i * gap;
+      const x =
+        startPad + index * gap;
 
+      ev._x = x;
 
-    ev._x = x;
-
-
-    const position =
-      ev.position ||
-      (i % 2 === 0 ? 'top' : 'bottom');
-
-
-    const el =
-      document.createElement('article');
-
-
-    el.className =
-      `event event-${position}`;
+      const position =
+        ev.position ||
+        (
+          index % 2 === 0
+            ? 'top'
+            : 'bottom'
+        );
 
 
-    el.style.left =
-      x + 'px';
+      const el =
+        document.createElement('article');
+
+      el.className =
+        `event event-${position}`;
+
+      el.style.left =
+        x + 'px';
+
+      el.dataset.index =
+        index;
 
 
-    el.setAttribute(
-      'data-index',
-      i
-    );
+      el.innerHTML = `
 
+        <div
+          class="event-connector"
+          aria-hidden="true"
+        ></div>
 
-    el.innerHTML = `
+        <div
+          class="event-marker"
+          aria-hidden="true"
+        ></div>
 
-      <div
-        class="event-connector"
-        aria-hidden="true"
-      ></div>
+        <div class="event-card">
 
-      <div
-        class="event-marker"
-        aria-hidden="true"
-      ></div>
+          <div class="event-figure">
 
-      <div class="event-card">
+            <img
+              src="${ev.image}"
+              alt="${ev.title}"
+              loading="lazy"
+            >
 
-        <div class="event-figure">
-
-          <img
-            src="${ev.image}"
-            alt="${ev.title}"
-            loading="lazy"
-          >
-
-        </div>
-
-
-        <div class="event-body">
-
-          <div class="event-year">
-            ${ev.year}
           </div>
 
-          <h3 class="event-title">
-            ${ev.title}
-          </h3>
+          <div class="event-body">
 
-          <p class="event-desc">
-            ${ev.shortDescription}
-          </p>
+            <div class="event-year">
+              ${ev.year}
+            </div>
 
-          <button
-            class="event-more"
-            data-index="${i}"
-          >
-            Saber mais →
-          </button>
+            <h3 class="event-title">
+              ${ev.title}
+            </h3>
+
+            <p class="event-desc">
+              ${ev.shortDescription}
+            </p>
+
+            <button
+              type="button"
+              class="event-more"
+              data-index="${index}"
+            >
+              Saber mais →
+            </button>
+
+          </div>
 
         </div>
 
-      </div>
-
-    `;
+      `;
 
 
-    track.appendChild(el);
+      track.appendChild(el);
+
+      eventEls.push(el);
 
 
-    eventEls.push(el);
+      /* -------------------------------------------------------
+         MENU
+         ------------------------------------------------------- */
+
+      const li =
+        document.createElement('li');
+
+      li.innerHTML = `
+
+        <button data-goto="${x}">
+
+          <span class="yr">
+            ${ev.year}
+          </span>
+
+          <span class="ttl">
+            ${ev.title}
+          </span>
+
+        </button>
+
+      `;
+
+      overviewList.appendChild(li);
 
 
-    /* =====================================================
-       ITEM DO MENU
-       ===================================================== */
+      /* -------------------------------------------------------
+         PROGRESSO
+         ------------------------------------------------------- */
 
-    const li =
-      document.createElement('li');
+      if(
+        index === 0 ||
+        index === timelineEvents.length - 1 ||
+        index %
+        Math.ceil(
+          timelineEvents.length / 5
+        ) === 0
+      ){
 
+        const span =
+          document.createElement('span');
 
-    li.innerHTML = `
+        span.textContent =
+          ev.year;
 
-      <button data-goto="${x}">
+        progressYears.appendChild(span);
 
-        <span class="yr">
-          ${ev.year}
-        </span>
-
-        <span class="ttl">
-          ${ev.title}
-        </span>
-
-      </button>
-
-    `;
-
-
-    overviewList.appendChild(li);
-
-
-    /* =====================================================
-       ANOS DA BARRA
-       ===================================================== */
-
-    if(
-
-      i === 0 ||
-      i === timelineEvents.length - 1 ||
-      i % Math.ceil(
-        timelineEvents.length / 5
-      ) === 0
-
-    ){
-
-      const span =
-        document.createElement('span');
-
-
-      span.textContent =
-        ev.year;
-
-
-      progressYears.appendChild(span);
+      }
 
     }
+  );
 
-  });
 
-
-  /* =======================================================
+  /* ---------------------------------------------------------
      FINAL
-     ======================================================= */
+     --------------------------------------------------------- */
 
   const lastX =
     timelineEvents[
       timelineEvents.length - 1
     ]._x;
-
 
   const endX =
     lastX + gap;
@@ -2776,10 +2316,8 @@ function buildTimeline(){
   const endPanel =
     document.createElement('div');
 
-
   endPanel.className =
     'track-panel';
-
 
   endPanel.style.left =
     endX + 'px';
@@ -2798,12 +2336,14 @@ function buildTimeline(){
       </h2>
 
       <p>
-        Billie Eilish segue construindo novos capítulos.
+        Billie Eilish segue construindo
+        novos capítulos em sua carreira.
       </p>
 
       <button
         class="btn-ghost"
         id="backToStartBtn"
+        type="button"
       >
         ← Voltar ao início
       </button>
@@ -2812,21 +2352,14 @@ function buildTimeline(){
 
   `;
 
-
   track.appendChild(endPanel);
 
-
-  /* =======================================================
-     TAMANHO DA TRACK
-     ======================================================= */
 
   const trackWidth =
     endX + startPad * .5;
 
-
   track.style.width =
     trackWidth + 'px';
-
 
   maxScroll =
     Math.max(
@@ -2836,49 +2369,21 @@ function buildTimeline(){
 
 
   return {
-
     eventEls,
-
     panelEls:[endPanel],
-
     introNode,
-
     introX
-
   };
 
 }
 
 
-/* =========================================================
-   BUILD
-   ========================================================= */
-
 const {
-
   eventEls,
-
   panelEls,
-
   introNode,
-
   introX
-
 } = buildTimeline();
-
-
-/* =========================================================
-   UTILITÁRIO
-   ========================================================= */
-
-function clamp(v,min,max){
-
-  return Math.max(
-    min,
-    Math.min(max,v)
-  );
-
-}
 
 
 /* =========================================================
@@ -2917,31 +2422,26 @@ function animate(){
     `translateX(${-currentScroll}px)`;
 
 
-  /* PARALLAX */
-
   const bg =
-    document.getElementById('bgLayer');
-
+    document.getElementById(
+      'bgLayer'
+    );
 
   bg.style.transform =
-    `translateX(${-currentScroll * .06}px) scale(1.08)`;
+    `translateX(${
+      -currentScroll * .04
+    }px) scale(1.06)`;
 
 
   updateProgress();
 
   updateActiveEvent();
 
-
-  requestAnimationFrame(
-    animate
-  );
+  requestAnimationFrame(animate);
 
 }
 
-
-requestAnimationFrame(
-  animate
-);
+requestAnimationFrame(animate);
 
 
 /* =========================================================
@@ -2950,22 +2450,20 @@ requestAnimationFrame(
 
 function updateProgress(){
 
-  const pct =
+  const percent =
     maxScroll > 0
-
       ? clamp(
           currentScroll / maxScroll,
           0,
           1
         ) * 100
-
       : 0;
 
 
   document.getElementById(
     'progressFill'
   ).style.width =
-    pct + '%';
+    percent + '%';
 
 }
 
@@ -2981,87 +2479,82 @@ function updateActiveEvent(){
     window.innerWidth / 2;
 
 
-  const dist0 =
+  const introDistance =
     Math.abs(
-      introX -
-      centerX
+      introX - centerX
     );
 
 
   introNode.classList.toggle(
     'active',
-    dist0 <
-      cssNum('--event-size') * .55
+    introDistance <
+    cssNum('--event-size') * .55
   );
 
 
-  eventEls.forEach((el,i)=>{
+  eventEls.forEach(
+    (el,index) => {
 
-    const x =
-      timelineEvents[i]._x;
+      const x =
+        timelineEvents[index]._x;
+
+      const distance =
+        Math.abs(
+          x - centerX
+        );
 
 
-    const dist =
-      Math.abs(
-        x -
-        centerX
+      el.classList.toggle(
+        'active',
+        distance <
+        cssNum('--event-size') * .55
       );
 
-
-    el.classList.toggle(
-      'active',
-      dist <
-        cssNum('--event-size') * .55
-    );
-
-  });
+    }
+  );
 
 }
 
 
 /* =========================================================
-   INTERSECTION OBSERVER
+   OBSERVER
    ========================================================= */
 
 const observer =
   new IntersectionObserver(
+    entries => {
 
-    (entries)=>{
+      entries.forEach(
+        entry => {
 
-      entries.forEach(entry=>{
+          if(
+            entry.isIntersecting
+          ){
 
-        if(entry.isIntersecting){
+            entry.target
+              .classList
+              .add('in-view');
 
-          entry.target.classList.add(
-            'in-view'
-          );
+          }
 
         }
-
-      });
+      );
 
     },
-
     {
-
       root:viewport,
-
       threshold:.05
-
     }
-
   );
 
 
-eventEls.forEach(el =>
-  observer.observe(el)
+eventEls.forEach(
+  el => observer.observe(el)
 );
 
-
-panelEls.forEach(el =>
-  observer.observe(el)
+panelEls.forEach(
+  el => observer.observe(el)
 );
-
 
 observer.observe(
   introNode
@@ -3074,23 +2567,25 @@ observer.observe(
 
 viewport.addEventListener(
   'wheel',
-  (e)=>{
+  event => {
 
     if(
       modalOpen ||
       !hasStarted
-    ) return;
+    ){
+
+      return;
+    }
 
 
-    e.preventDefault();
+    event.preventDefault();
 
 
     const delta =
-      Math.abs(e.deltaX) >
-      Math.abs(e.deltaY)
-
-        ? e.deltaX
-        : e.deltaY;
+      Math.abs(event.deltaX) >
+      Math.abs(event.deltaY)
+        ? event.deltaX
+        : event.deltaY;
 
 
     targetScroll =
@@ -3101,11 +2596,9 @@ viewport.addEventListener(
       );
 
   },
-
   {
     passive:false
   }
-
 );
 
 
@@ -3115,16 +2608,18 @@ viewport.addEventListener(
 
 viewport.addEventListener(
   'pointerdown',
-  (e)=>{
+  event => {
 
     if(
       modalOpen ||
       !hasStarted
-    ) return;
+    ){
+
+      return;
+    }
 
 
     isDragging = true;
-
 
     viewport.classList.add(
       'dragging'
@@ -3132,26 +2627,22 @@ viewport.addEventListener(
 
 
     dragStartX =
-      e.clientX;
-
+      event.clientX;
 
     dragStartScroll =
       targetScroll;
 
-
     lastPointerX =
-      e.clientX;
-
+      event.clientX;
 
     lastPointerT =
       performance.now();
-
 
     velocity = 0;
 
 
     viewport.setPointerCapture(
-      e.pointerId
+      event.pointerId
     );
 
   }
@@ -3160,13 +2651,15 @@ viewport.addEventListener(
 
 viewport.addEventListener(
   'pointermove',
-  (e)=>{
+  event => {
 
-    if(!isDragging) return;
+    if(!isDragging){
+      return;
+    }
 
 
     const dx =
-      e.clientX -
+      event.clientX -
       dragStartX;
 
 
@@ -3185,10 +2678,8 @@ viewport.addEventListener(
     const now =
       performance.now();
 
-
     const dt =
-      now -
-      lastPointerT;
+      now - lastPointerT;
 
 
     if(dt > 0){
@@ -3196,15 +2687,14 @@ viewport.addEventListener(
       velocity =
         (
           lastPointerX -
-          e.clientX
+          event.clientX
         ) / dt;
 
     }
 
 
     lastPointerX =
-      e.clientX;
-
+      event.clientX;
 
     lastPointerT =
       now;
@@ -3215,12 +2705,12 @@ viewport.addEventListener(
 
 function endDrag(){
 
-  if(!isDragging)
+  if(!isDragging){
     return;
+  }
 
 
   isDragging = false;
-
 
   viewport.classList.remove(
     'dragging'
@@ -3250,7 +2740,6 @@ viewport.addEventListener(
   endDrag
 );
 
-
 viewport.addEventListener(
   'pointercancel',
   endDrag
@@ -3263,30 +2752,34 @@ viewport.addEventListener(
 
 document.addEventListener(
   'keydown',
-  (e)=>{
+  event => {
 
     if(modalOpen){
 
-      if(e.key === 'Escape'){
+      if(
+        event.key === 'Escape'
+      ){
 
         closeModal();
 
       }
 
       return;
-
     }
 
 
-    if(!hasStarted)
+    if(!hasStarted){
       return;
+    }
 
 
     const step =
       window.innerWidth * .6;
 
 
-    if(e.key === 'ArrowRight'){
+    if(
+      event.key === 'ArrowRight'
+    ){
 
       targetScroll =
         clamp(
@@ -3298,7 +2791,9 @@ document.addEventListener(
     }
 
 
-    else if(e.key === 'ArrowLeft'){
+    else if(
+      event.key === 'ArrowLeft'
+    ){
 
       targetScroll =
         clamp(
@@ -3310,14 +2805,18 @@ document.addEventListener(
     }
 
 
-    else if(e.key === 'Home'){
+    else if(
+      event.key === 'Home'
+    ){
 
       targetScroll = 0;
 
     }
 
 
-    else if(e.key === 'End'){
+    else if(
+      event.key === 'End'
+    ){
 
       targetScroll =
         maxScroll;
@@ -3329,10 +2828,12 @@ document.addEventListener(
 
 
 /* =========================================================
-   EVENTOS ANTERIOR / PRÓXIMO
+   IR PARA EVENTO
    ========================================================= */
 
-function goToNearestEvent(direction){
+function goToNearestEvent(
+  direction
+){
 
   const centerX =
     targetScroll +
@@ -3340,54 +2841,52 @@ function goToNearestEvent(direction){
 
 
   const candidates = [
-
     introX,
-
     ...timelineEvents.map(
-      ev => ev._x
+      event => event._x
     )
-
   ];
 
 
-  let target;
+  let destination;
 
 
   if(direction > 0){
 
-    target =
+    destination =
       candidates.find(
-        x => x > centerX + 20
+        x => x >
+          centerX + 20
       );
 
-  }
+  }else{
 
-  else{
-
-    target =
+    destination =
       [...candidates]
         .reverse()
         .find(
-          x => x < centerX - 20
+          x =>
+            x <
+            centerX - 20
         );
 
   }
 
 
-  if(target === undefined){
+  if(
+    destination === undefined
+  ){
 
-    target =
+    destination =
       direction > 0
         ? maxScroll
         : 0;
 
-  }
+  }else{
 
-  else{
-
-    target =
+    destination =
       clamp(
-        target -
+        destination -
         window.innerWidth / 2,
         0,
         maxScroll
@@ -3397,18 +2896,25 @@ function goToNearestEvent(direction){
 
 
   targetScroll =
-    target;
+    destination;
 
 }
 
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
 
 document
   .getElementById('nextBtn')
   .addEventListener(
     'click',
-    ()=>{
+    () => {
+
       startJourney();
+
       goToNearestEvent(1);
+
     }
   );
 
@@ -3417,21 +2923,25 @@ document
   .getElementById('prevBtn')
   .addEventListener(
     'click',
-    ()=>{
+    () => {
+
       startJourney();
+
       goToNearestEvent(-1);
+
     }
   );
 
 
 /* =========================================================
-   INÍCIO
+   INICIAR
    ========================================================= */
 
 function startJourney(){
 
-  if(hasStarted)
+  if(hasStarted){
     return;
+  }
 
 
   hasStarted = true;
@@ -3443,7 +2953,9 @@ function startJourney(){
 
 
   document
-    .getElementById('navControls')
+    .getElementById(
+      'navControls'
+    )
     .classList.add(
       'visible'
     );
@@ -3485,7 +2997,7 @@ document
   )
   .addEventListener(
     'click',
-    ()=>{
+    () => {
 
       hasStarted = true;
 
@@ -3494,7 +3006,9 @@ document
       );
 
       document
-        .getElementById('navControls')
+        .getElementById(
+          'navControls'
+        )
         .classList.add(
           'visible'
         );
@@ -3511,8 +3025,10 @@ document
   )
   .addEventListener(
     'click',
-    ()=>{
+    () => {
+
       startJourney();
+
     }
   );
 
@@ -3523,7 +3039,7 @@ document
   )
   .addEventListener(
     'click',
-    ()=>{
+    () => {
 
       openModal({
 
@@ -3551,10 +3067,10 @@ document
 
 track.addEventListener(
   'click',
-  (e)=>{
+  event => {
 
     if(
-      e.target.id ===
+      event.target.id ===
       'backToStartBtn'
     ){
 
@@ -3575,12 +3091,10 @@ const menuToggle =
     'menuToggle'
   );
 
-
 const overviewPanel =
   document.getElementById(
     'overviewPanel'
   );
-
 
 const overviewBackdrop =
   document.getElementById(
@@ -3590,17 +3104,19 @@ const overviewBackdrop =
 
 function toggleOverview(open){
 
-  overviewPanel.classList.toggle(
-    'open',
-    open
-  );
+  overviewPanel
+    .classList
+    .toggle(
+      'open',
+      open
+    );
 
-
-  overviewBackdrop.classList.toggle(
-    'open',
-    open
-  );
-
+  overviewBackdrop
+    .classList
+    .toggle(
+      'open',
+      open
+    );
 
   menuToggle.setAttribute(
     'aria-expanded',
@@ -3612,42 +3128,47 @@ function toggleOverview(open){
 
 menuToggle.addEventListener(
   'click',
-  ()=>{
+  () => {
+
     toggleOverview(
-      !overviewPanel.classList.contains(
-        'open'
-      )
+      !overviewPanel
+        .classList
+        .contains('open')
     );
+
   }
 );
 
 
 overviewBackdrop.addEventListener(
   'click',
-  ()=>{
+  () => {
+
     toggleOverview(false);
+
   }
 );
 
 
 /* =========================================================
-   MENU → EVENTO
+   CLIQUE NOS ITENS DA TIMELINE
    ========================================================= */
 
 document
   .getElementById('overviewList')
   .addEventListener(
     'click',
-    (e)=>{
+    event => {
 
-      const btn =
-        e.target.closest(
+      const button =
+        event.target.closest(
           '[data-goto]'
         );
 
 
-      if(!btn)
+      if(!button){
         return;
+      }
 
 
       startJourney();
@@ -3655,7 +3176,7 @@ document
 
       const x =
         parseFloat(
-          btn.dataset.goto
+          button.dataset.goto
         );
 
 
@@ -3683,30 +3204,25 @@ const modalOverlay =
     'modalOverlay'
   );
 
-
 const modalImage =
   document.getElementById(
     'modalImage'
   );
-
 
 const modalYear =
   document.getElementById(
     'modalYear'
   );
 
-
 const modalTitle =
   document.getElementById(
     'modalTitle'
   );
 
-
 const modalDesc =
   document.getElementById(
     'modalDesc'
   );
-
 
 const modalClose =
   document.getElementById(
@@ -3714,26 +3230,22 @@ const modalClose =
   );
 
 
-function openModal(ev){
+function openModal(eventData){
 
   modalImage.src =
-    ev.image;
-
+    eventData.image;
 
   modalImage.alt =
-    ev.title;
-
+    eventData.title;
 
   modalYear.textContent =
-    ev.year;
-
+    eventData.year;
 
   modalTitle.textContent =
-    ev.title;
-
+    eventData.title;
 
   modalDesc.textContent =
-    ev.description;
+    eventData.description;
 
 
   modalOverlay.classList.add(
@@ -3755,7 +3267,6 @@ function closeModal(){
     'open'
   );
 
-
   modalOpen = false;
 
 }
@@ -3765,39 +3276,49 @@ function closeModal(){
    SABER MAIS
    ========================================================= */
 
+/*
+   IMPORTANTE:
+
+   O listener fica diretamente no TRACK.
+   Assim ele continua funcionando mesmo
+   que os cards sejam criados dinamicamente.
+*/
+
 track.addEventListener(
   'click',
-  (e)=>{
+  event => {
 
-    const btn =
-      e.target.closest(
+    const button =
+      event.target.closest(
         '.event-more'
       );
 
 
-    if(!btn)
+    if(!button){
       return;
+    }
 
 
-    const idx =
-      parseInt(
-        btn.dataset.index,
-        10
+    event.stopPropagation();
+
+
+    const index =
+      Number(
+        button.dataset.index
       );
 
 
-    if(
-      Number.isNaN(idx) ||
-      !timelineEvents[idx]
-    ){
+    const selectedEvent =
+      timelineEvents[index];
 
+
+    if(!selectedEvent){
       return;
-
     }
 
 
     openModal(
-      timelineEvents[idx]
+      selectedEvent
     );
 
   }
@@ -3812,10 +3333,10 @@ modalClose.addEventListener(
 
 modalOverlay.addEventListener(
   'click',
-  (e)=>{
+  event => {
 
     if(
-      e.target ===
+      event.target ===
       modalOverlay
     ){
 
@@ -3833,7 +3354,7 @@ modalOverlay.addEventListener(
 
 window.addEventListener(
   'resize',
-  ()=>{
+  () => {
 
     const trackWidth =
       parseFloat(
@@ -3866,18 +3387,17 @@ window.addEventListener(
 
 window.addEventListener(
   'load',
-  ()=>{
+  () => {
 
     setTimeout(
-      ()=>{
+      () => {
 
         document
           .getElementById(
             'loading-screen'
           )
-          .classList.add(
-            'hide'
-          );
+          .classList
+          .add('hide');
 
       },
       900
@@ -3886,8 +3406,7 @@ window.addEventListener(
   }
 );
 
-
 </script>
 
 </body>
-  </html>
+   </html>
