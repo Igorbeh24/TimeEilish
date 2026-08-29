@@ -13,6 +13,10 @@
 
 <style>
 
+/* =========================================================
+   1. CONFIGURAÇÃO VISUAL
+   ========================================================= */
+
 :root{
   --background:#111313;
   --background-alt:#191c1c;
@@ -35,42 +39,71 @@
   --font-body:'Inter',sans-serif;
   --font-mono:'Space Mono',monospace;
 
+  /* TAMANHO DOS CARDS */
   --event-size:300px;
-  --connector-h:45px;
-  --card-gap:470px;
 
+  /* AGORA A LINHA FICA BEM MAIS PRÓXIMA DOS CARDS */
+  --connector-h:22px;
+
+  /* PEQUENO ESPAÇO ENTRE CONECTOR E CARD */
+  --timeline-safe-gap:8px;
+
+  /*
+     ÁREAS DE SEGURANÇA
+     Mantidas para header e controles.
+  */
   --top-safe-space:90px;
   --bottom-safe-space:110px;
-  --timeline-safe-gap:24px;
+
+  /* DISTÂNCIA ENTRE EVENTOS */
+  --card-gap:470px;
 }
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
 
 @media(max-width:1100px){
+
   :root{
     --event-size:270px;
-    --connector-h:40px;
+    --connector-h:22px;
     --card-gap:420px;
   }
+
 }
+
 
 @media(max-width:800px){
+
   :root{
     --event-size:235px;
-    --connector-h:36px;
+    --connector-h:20px;
     --card-gap:370px;
   }
+
 }
 
+
 @media(max-width:560px){
+
   :root{
     --event-size:185px;
-    --connector-h:30px;
+    --connector-h:18px;
     --card-gap:285px;
 
     --top-safe-space:72px;
     --bottom-safe-space:88px;
-    --timeline-safe-gap:16px;
+    --timeline-safe-gap:6px;
   }
+
 }
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 *{
   box-sizing:border-box;
@@ -78,48 +111,81 @@
   padding:0;
 }
 
+
 html,
 body{
+
   width:100%;
   height:100%;
+
   overflow:hidden;
+
   background:var(--background);
+
 }
+
 
 body{
+
   font-family:var(--font-body);
+
   color:var(--text);
+
   -webkit-font-smoothing:antialiased;
+
   overscroll-behavior:none;
+
 }
+
 
 img{
+
   display:block;
+
   max-width:100%;
+
 }
+
 
 button{
+
   font-family:inherit;
+
   border:none;
+
   background:none;
+
   color:inherit;
+
   cursor:pointer;
+
 }
+
 
 a{
+
   color:inherit;
+
 }
 
+
 ::selection{
+
   background:var(--primary);
+
   color:var(--background);
+
 }
+
 
 button:focus-visible,
 a:focus-visible,
 [tabindex]:focus-visible{
+
   outline:2px solid var(--primary);
+
   outline-offset:3px;
+
 }
 
 
@@ -128,8 +194,11 @@ a:focus-visible,
    ========================================================= */
 
 .bg-layer{
+
   position:fixed;
+
   inset:0;
+
   z-index:0;
 
   background-image:
@@ -142,6 +211,7 @@ a:focus-visible,
     url('https://picsum.photos/seed/billie-bg/1800/1200');
 
   background-size:cover;
+
   background-position:center;
 
   filter:
@@ -150,13 +220,20 @@ a:focus-visible,
     brightness(.72);
 
   will-change:transform;
+
   transition:filter 1s ease;
+
 }
 
+
 .bg-vignette{
+
   position:fixed;
+
   inset:0;
+
   z-index:1;
+
   pointer-events:none;
 
   background:
@@ -165,18 +242,26 @@ a:focus-visible,
       transparent 40%,
       rgba(0,0,0,.6) 100%
     );
+
 }
 
+
 .bg-grain{
+
   position:fixed;
+
   inset:0;
+
   z-index:2;
+
   pointer-events:none;
+
   opacity:.045;
 
   background-image:url(
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
   );
+
 }
 
 
@@ -185,66 +270,119 @@ a:focus-visible,
    ========================================================= */
 
 #loading-screen{
+
   position:fixed;
+
   inset:0;
+
   z-index:100;
 
   background:var(--background);
 
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
+
   justify-content:center;
 
   gap:18px;
 
   transition:opacity .7s ease;
+
 }
+
 
 #loading-screen.hide{
+
   opacity:0;
+
   pointer-events:none;
+
 }
+
 
 .loading-name{
+
   font-family:var(--font-title);
+
   font-weight:600;
+
   letter-spacing:.04em;
+
   font-size:clamp(28px,5vw,44px);
+
   color:var(--text);
+
 }
+
 
 .loading-sub{
+
   font-family:var(--font-mono);
+
   font-size:12px;
+
   letter-spacing:.18em;
+
   color:var(--muted);
+
   text-transform:uppercase;
+
 }
+
 
 .loading-bar{
+
   width:220px;
+
   height:1px;
+
   background:var(--secondary);
+
   position:relative;
+
   overflow:hidden;
+
 }
+
 
 .loading-bar::after{
+
   content:'';
+
   position:absolute;
+
   left:-40%;
+
   top:0;
+
   bottom:0;
+
   width:40%;
+
   background:var(--primary);
+
   animation:loadmove 1.1s ease-in-out infinite;
+
 }
 
+
 @keyframes loadmove{
-  0%{left:-40%;}
-  50%{left:60%;}
-  100%{left:100%;}
+
+  0%{
+    left:-40%;
+  }
+
+  50%{
+    left:60%;
+  }
+
+  100%{
+    left:100%;
+  }
+
 }
 
 
@@ -253,7 +391,9 @@ a:focus-visible,
    ========================================================= */
 
 .site-header{
+
   position:fixed;
+
   top:0;
   left:0;
   right:0;
@@ -261,7 +401,9 @@ a:focus-visible,
   z-index:40;
 
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 
   padding:
@@ -278,29 +420,49 @@ a:focus-visible,
     );
 
   backdrop-filter:blur(6px);
+
   -webkit-backdrop-filter:blur(6px);
+
 }
+
 
 .brand{
+
   font-family:var(--font-title);
+
   font-weight:600;
+
   font-size:18px;
+
   letter-spacing:.05em;
+
 }
+
 
 .brand span{
+
   color:var(--primary);
+
 }
+
 
 .main-nav{
+
   display:flex;
+
   gap:clamp(16px,3vw,32px);
+
 }
 
+
 .main-nav button{
+
   font-family:var(--font-mono);
+
   font-size:11px;
+
   letter-spacing:.14em;
+
   text-transform:uppercase;
 
   color:var(--muted);
@@ -308,34 +470,55 @@ a:focus-visible,
   padding:6px 2px;
 
   position:relative;
+
   transition:color .3s;
+
 }
+
 
 .main-nav button:hover{
+
   color:var(--text);
+
 }
 
+
 .main-nav button::after{
+
   content:'';
+
   position:absolute;
+
   left:0;
+
   right:100%;
+
   bottom:0;
+
   height:1px;
 
   background:var(--primary);
 
   transition:right .3s ease;
+
 }
+
 
 .main-nav button:hover::after{
+
   right:0;
+
 }
 
+
 @media(max-width:620px){
+
   .main-nav{
+
     display:none;
+
   }
+
 }
 
 
@@ -344,34 +527,48 @@ a:focus-visible,
    ========================================================= */
 
 .menu-toggle{
+
   position:fixed;
+
   top:20px;
+
   right:20px;
 
   z-index:70;
 
   width:38px;
+
   height:38px;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
   font-size:18px;
+
   color:var(--text);
 
   border:1px solid var(--event-border);
+
   border-radius:50%;
 
   background:rgba(15,17,17,.7);
 
   backdrop-filter:blur(6px);
+
 }
 
+
 @media(min-width:621px){
+
   .menu-toggle{
+
     display:none;
+
   }
+
 }
 
 
@@ -380,9 +577,13 @@ a:focus-visible,
    ========================================================= */
 
 .overview-panel{
+
   position:fixed;
+
   top:0;
+
   right:0;
+
   bottom:0;
 
   z-index:80;
@@ -402,15 +603,23 @@ a:focus-visible,
     cubic-bezier(.4,0,.2,1);
 
   overflow-y:auto;
+
 }
+
 
 .overview-panel.open{
+
   transform:translateX(0);
+
 }
 
+
 .overview-panel h3{
+
   font-family:var(--font-mono);
+
   font-size:11px;
+
   letter-spacing:.18em;
 
   color:var(--muted);
@@ -418,16 +627,23 @@ a:focus-visible,
   text-transform:uppercase;
 
   margin-bottom:18px;
+
 }
 
+
 .overview-list{
+
   list-style:none;
 
   display:flex;
+
   flex-direction:column;
+
 }
 
+
 .overview-list li button{
+
   width:100%;
 
   text-align:left;
@@ -437,45 +653,70 @@ a:focus-visible,
   border-bottom:1px solid rgba(255,255,255,.06);
 
   display:flex;
+
   gap:14px;
+
   align-items:baseline;
 
   color:var(--muted);
 
   transition:color .25s;
+
 }
+
 
 .overview-list li button:hover{
+
   color:var(--text);
+
 }
+
 
 .overview-list .yr{
+
   font-family:var(--font-mono);
+
   color:var(--primary);
+
   font-size:13px;
+
   min-width:44px;
+
 }
+
 
 .overview-list .ttl{
+
   font-size:14px;
+
 }
 
+
 .overview-backdrop{
+
   position:fixed;
+
   inset:0;
+
   z-index:79;
 
   background:rgba(0,0,0,.4);
 
   opacity:0;
+
   pointer-events:none;
 
   transition:opacity .3s;
+
 }
 
+
 .overview-backdrop.open{
+
   opacity:1;
+
   pointer-events:auto;
+
 }
 
 
@@ -484,13 +725,19 @@ a:focus-visible,
    ========================================================= */
 
 .intro{
+
   position:fixed;
+
   inset:0;
+
   z-index:30;
 
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
+
   justify-content:center;
 
   text-align:center;
@@ -508,17 +755,27 @@ a:focus-visible,
   transition:
     opacity .9s ease,
     visibility .9s ease;
+
 }
+
 
 .intro.hidden{
+
   opacity:0;
+
   visibility:hidden;
+
   pointer-events:none;
+
 }
 
+
 .intro-eyebrow{
+
   font-family:var(--font-mono);
+
   font-size:12px;
+
   letter-spacing:.24em;
 
   text-transform:uppercase;
@@ -526,24 +783,36 @@ a:focus-visible,
   color:var(--primary);
 
   margin-bottom:22px;
+
 }
 
+
 .intro-name{
+
   font-family:var(--font-title);
+
   font-weight:300;
 
   font-size:clamp(46px,10vw,124px);
 
   line-height:.96;
+
 }
+
 
 .intro-name b{
+
   font-weight:600;
+
   display:block;
+
 }
 
+
 .intro-tagline{
+
   font-size:clamp(14px,2vw,18px);
+
   color:var(--muted);
 
   max-width:520px;
@@ -551,14 +820,20 @@ a:focus-visible,
   margin:26px 0 8px;
 
   font-weight:400;
+
   line-height:1.6;
+
 }
 
+
 .intro-meta{
+
   display:flex;
+
   gap:22px;
 
   font-family:var(--font-mono);
+
   font-size:12px;
 
   color:var(--secondary);
@@ -568,11 +843,16 @@ a:focus-visible,
   margin-bottom:44px;
 
   flex-wrap:wrap;
+
   justify-content:center;
+
 }
 
+
 .btn-start{
+
   font-family:var(--font-mono);
+
   font-size:13px;
 
   letter-spacing:.14em;
@@ -586,20 +866,29 @@ a:focus-visible,
   color:var(--text);
 
   position:relative;
+
   overflow:hidden;
 
   transition:color .35s;
+
 }
+
 
 .btn-start span{
+
   position:relative;
+
   z-index:1;
+
 }
 
+
 .btn-start::before{
+
   content:'';
 
   position:absolute;
+
   inset:0;
 
   background:var(--primary);
@@ -609,21 +898,32 @@ a:focus-visible,
   transition:
     transform .4s
     cubic-bezier(.4,0,.2,1);
+
 }
+
 
 .btn-start:hover{
+
   color:var(--background);
+
 }
+
 
 .btn-start:hover::before{
+
   transform:translateX(0);
+
 }
 
+
 .intro-hint{
+
   position:absolute;
+
   bottom:34px;
 
   font-family:var(--font-mono);
+
   font-size:11px;
 
   letter-spacing:.1em;
@@ -631,11 +931,20 @@ a:focus-visible,
   color:var(--secondary);
 
   animation:pulseFade 2.4s ease-in-out infinite;
+
 }
 
+
 @keyframes pulseFade{
-  0%,100%{opacity:.4;}
-  50%{opacity:1;}
+
+  0%,100%{
+    opacity:.4;
+  }
+
+  50%{
+    opacity:1;
+  }
+
 }
 
 
@@ -644,8 +953,11 @@ a:focus-visible,
    ========================================================= */
 
 .timeline-viewport{
+
   position:fixed;
+
   inset:0;
+
   z-index:5;
 
   overflow:hidden;
@@ -653,21 +965,29 @@ a:focus-visible,
   cursor:grab;
 
   touch-action:pan-y;
+
 }
+
 
 .timeline-viewport.dragging{
+
   cursor:grabbing;
+
 }
 
+
 .timeline-track{
+
   position:absolute;
 
   top:0;
+
   left:0;
 
   height:100%;
 
   will-change:transform;
+
 }
 
 
@@ -676,12 +996,15 @@ a:focus-visible,
    ========================================================= */
 
 .timeline-line{
+
   position:absolute;
 
   top:50%;
+
   left:0;
 
   height:2px;
+
   width:100%;
 
   background:
@@ -694,12 +1017,16 @@ a:focus-visible,
     );
 
   transform:translateY(-1px);
+
 }
 
+
 .timeline-line::before{
+
   content:'';
 
   position:absolute;
+
   inset:0;
 
   background-image:
@@ -708,6 +1035,7 @@ a:focus-visible,
       rgba(255,255,255,.06) 0 1px,
       transparent 1px 26px
     );
+
 }
 
 
@@ -716,21 +1044,28 @@ a:focus-visible,
    ========================================================= */
 
 .event{
+
   position:absolute;
 
   top:50%;
 
   width:0;
+
   height:0;
+
 }
 
+
 .event-marker{
+
   position:absolute;
 
   top:0;
+
   left:0;
 
   width:11px;
+
   height:11px;
 
   margin:-5.5px 0 0 -5.5px;
@@ -746,9 +1081,12 @@ a:focus-visible,
     box-shadow .4s ease;
 
   z-index:3;
+
 }
 
+
 .event.active .event-marker{
+
   transform:scale(1.5);
 
   box-shadow:
@@ -756,20 +1094,28 @@ a:focus-visible,
     rgba(184,216,216,.14);
 
   animation:markerPulse 2.2s ease-in-out infinite;
+
 }
 
+
 @keyframes markerPulse{
+
   0%,100%{
+
     box-shadow:
       0 0 0 6px
       rgba(184,216,216,.14);
+
   }
 
   50%{
+
     box-shadow:
       0 0 0 10px
       rgba(184,216,216,.04);
+
   }
+
 }
 
 
@@ -778,6 +1124,7 @@ a:focus-visible,
    ========================================================= */
 
 .event-connector{
+
   position:absolute;
 
   left:-1px;
@@ -785,16 +1132,25 @@ a:focus-visible,
   width:2px;
 
   background:var(--timeline);
+
 }
+
 
 .event-top .event-connector{
+
   bottom:0;
+
   height:var(--connector-h);
+
 }
 
+
 .event-bottom .event-connector{
+
   top:0;
+
   height:var(--connector-h);
+
 }
 
 
@@ -803,6 +1159,7 @@ a:focus-visible,
    ========================================================= */
 
 .event-card{
+
   position:absolute;
 
   left:0;
@@ -827,61 +1184,59 @@ a:focus-visible,
       - var(--bottom-safe-space) / 2
       - var(--timeline-safe-gap)
     );
+
 }
 
 
 /* =========================================================
-   EVENTOS DE CIMA
+   CARD EM CIMA
+   AGORA POSICIONADO DIRETAMENTE PELO CONECTOR
    ========================================================= */
 
 .event-top .event-card{
+
   bottom:
     calc(
       var(--connector-h)
       + var(--timeline-safe-gap)
-      + var(--top-safe-space)
     );
 
   transform:
     translate(-50%,26px);
+
 }
 
 
 /* =========================================================
-   EVENTOS DE BAIXO
+   CARD EM BAIXO
+   TEXTO FICA ACIMA DA IMAGEM
    ========================================================= */
 
 .event-bottom .event-card{
+
   top:
     calc(
       var(--connector-h)
       + var(--timeline-safe-gap)
-      + var(--bottom-safe-space)
     );
 
   transform:
     translate(-50%,-26px);
 
-  /*
-     IMPORTANTE:
-
-     Somente nos eventos de baixo,
-     o corpo de texto aparece ANTES da imagem.
-
-     O texto continua fora da imagem.
-  */
-
-  display:flex;
-
-  flex-direction:column-reverse;
 }
 
 
+/* =========================================================
+   ANIMAÇÃO DE ENTRADA
+   ========================================================= */
+
 .event.in-view .event-card{
+
   opacity:1;
 
   transform:
     translate(-50%,0);
+
 }
 
 
@@ -890,6 +1245,7 @@ a:focus-visible,
    ========================================================= */
 
 .event-figure{
+
   width:100%;
 
   aspect-ratio:1 / 1;
@@ -912,14 +1268,17 @@ a:focus-visible,
 
   position:relative;
 
-  flex:none;
 }
 
+
 .event-figure img{
+
   width:100%;
+
   height:100%;
 
   object-fit:cover;
+
   object-position:center;
 
   filter:
@@ -930,54 +1289,71 @@ a:focus-visible,
     filter .8s ease,
     transform .6s
     cubic-bezier(.4,0,.2,1);
+
 }
 
+
 .event-figure::after{
+
   content:'';
 
   position:absolute;
+
   inset:0;
 
   border:1px solid rgba(255,255,255,.06);
 
   pointer-events:none;
+
 }
+
 
 .event:hover .event-figure img,
 .event.active .event-figure img{
+
   filter:
     grayscale(10%)
     contrast(1.02);
+
 }
 
+
 .event:hover .event-figure{
+
   box-shadow:
     0 22px 48px -12px
     var(--event-shadow);
+
 }
 
+
 .event:hover .event-figure img{
+
   transform:scale(1.045);
+
 }
 
 
 /* =========================================================
-   TEXTO
+   TEXTO DOS EVENTOS
    ========================================================= */
 
 .event-body{
+
   text-align:center;
 
   position:relative;
+
   z-index:10;
 
   padding-left:4px;
   padding-right:4px;
 
-  flex:none;
 }
 
+
 .event-year{
+
   font-family:var(--font-mono);
 
   font-size:13px;
@@ -987,9 +1363,12 @@ a:focus-visible,
   color:var(--primary);
 
   margin-top:12px;
+
 }
 
+
 .event-title{
+
   font-family:var(--font-title);
 
   font-weight:600;
@@ -999,9 +1378,12 @@ a:focus-visible,
   margin-top:4px;
 
   line-height:1.25;
+
 }
 
+
 .event-desc{
+
   font-size:12px;
 
   color:var(--muted);
@@ -1009,14 +1391,16 @@ a:focus-visible,
   margin-top:7px;
 
   line-height:1.45;
+
 }
 
 
 /* =========================================================
-   SABER MAIS
+   BOTÃO SABER MAIS
    ========================================================= */
 
 .event-more{
+
   position:relative;
 
   z-index:20;
@@ -1049,37 +1433,50 @@ a:focus-visible,
     border-color .3s,
     color .3s,
     gap .3s;
+
 }
 
+
 .event-more:hover{
+
   color:var(--primary);
 
   border-color:var(--primary);
 
   gap:10px;
+
 }
+
 
 @media(max-width:560px){
 
   .event-title{
+
     font-size:15px;
+
   }
 
   .event-desc{
+
     font-size:11px;
+
   }
 
   .event-more{
+
     font-size:9px;
+
   }
+
 }
 
 
 /* =========================================================
-   PAINÉIS
+   PAINÉIS DA TIMELINE
    ========================================================= */
 
 .track-panel{
+
   position:absolute;
 
   top:50%;
@@ -1089,9 +1486,12 @@ a:focus-visible,
   width:min(340px,70vw);
 
   text-align:center;
+
 }
 
+
 .track-panel .panel-inner{
+
   opacity:0;
 
   transform:translateY(24px);
@@ -1102,14 +1502,21 @@ a:focus-visible,
 
     transform .7s
     cubic-bezier(.4,0,.2,1);
+
 }
+
 
 .track-panel.in-view .panel-inner{
+
   opacity:1;
+
   transform:translateY(0);
+
 }
 
+
 .track-panel .label{
+
   font-family:var(--font-mono);
 
   font-size:11px;
@@ -1119,9 +1526,12 @@ a:focus-visible,
   color:var(--secondary);
 
   text-transform:uppercase;
+
 }
 
+
 .track-panel h2{
+
   font-family:var(--font-title);
 
   font-weight:300;
@@ -1129,9 +1539,12 @@ a:focus-visible,
   font-size:clamp(26px,4vw,40px);
 
   margin:14px 0 12px;
+
 }
 
+
 .track-panel p{
+
   color:var(--muted);
 
   font-size:14px;
@@ -1139,9 +1552,12 @@ a:focus-visible,
   line-height:1.6;
 
   margin-bottom:20px;
+
 }
 
+
 .btn-ghost{
+
   font-family:var(--font-mono);
 
   font-size:12px;
@@ -1157,22 +1573,29 @@ a:focus-visible,
   color:var(--text);
 
   transition:.3s;
+
 }
 
+
 .btn-ghost:hover{
+
   border-color:var(--primary);
+
   color:var(--primary);
+
 }
 
 
 /* =========================================================
-   CONTROLES
+   CONTROLES INFERIORES
    ========================================================= */
 
 .nav-controls{
+
   position:fixed;
 
   left:0;
+
   right:0;
 
   bottom:18px;
@@ -1182,6 +1605,7 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   gap:18px;
@@ -1203,19 +1627,31 @@ a:focus-visible,
     visibility .6s;
 
   pointer-events:none;
+
 }
 
+
 .nav-controls.visible{
+
   opacity:1;
+
   visibility:visible;
 
   transform:translateY(0);
 
   pointer-events:auto;
+
 }
 
+
+/* =========================================================
+   SETAS
+   ========================================================= */
+
 .nav-arrow{
+
   width:42px;
+
   height:42px;
 
   border-radius:50%;
@@ -1229,6 +1665,7 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   font-size:16px;
@@ -1240,18 +1677,32 @@ a:focus-visible,
     transform .2s;
 
   flex:none;
+
 }
+
 
 .nav-arrow:hover{
+
   border-color:var(--primary);
+
   transform:translateY(-2px);
+
 }
+
 
 .nav-arrow:active{
+
   transform:translateY(0);
+
 }
 
+
+/* =========================================================
+   PROGRESSO
+   ========================================================= */
+
 .progress-wrap{
+
   width:min(420px,50vw);
 
   display:flex;
@@ -1259,9 +1710,12 @@ a:focus-visible,
   flex-direction:column;
 
   gap:6px;
+
 }
 
+
 .progress-track{
+
   position:relative;
 
   height:2px;
@@ -1271,13 +1725,18 @@ a:focus-visible,
   border-radius:2px;
 
   overflow:hidden;
+
 }
 
+
 .progress-fill{
+
   position:absolute;
 
   left:0;
+
   top:0;
+
   bottom:0;
 
   width:0%;
@@ -1285,9 +1744,12 @@ a:focus-visible,
   background:var(--primary);
 
   transition:width .1s linear;
+
 }
 
+
 .progress-years{
+
   display:flex;
 
   justify-content:space-between;
@@ -1299,17 +1761,24 @@ a:focus-visible,
   color:var(--secondary);
 
   letter-spacing:.05em;
+
 }
+
 
 @media(max-width:620px){
 
   .progress-wrap{
+
     width:44vw;
+
   }
 
   .progress-years span:not(:first-child):not(:last-child){
+
     display:none;
+
   }
+
 }
 
 
@@ -1318,6 +1787,7 @@ a:focus-visible,
    ========================================================= */
 
 .modal-overlay{
+
   position:fixed;
 
   inset:0;
@@ -1327,11 +1797,13 @@ a:focus-visible,
   background:rgba(5,7,7,.76);
 
   backdrop-filter:blur(10px);
+
   -webkit-backdrop-filter:blur(10px);
 
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   padding:24px;
@@ -1345,17 +1817,23 @@ a:focus-visible,
   transition:
     opacity .35s ease,
     visibility .35s ease;
+
 }
 
+
 .modal-overlay.open{
+
   opacity:1;
 
   visibility:visible;
 
   pointer-events:auto;
+
 }
 
+
 .modal{
+
   width:min(640px,100%);
 
   max-height:88vh;
@@ -1379,15 +1857,21 @@ a:focus-visible,
   box-shadow:
     0 40px 80px -20px
     rgba(0,0,0,.7);
+
 }
 
+
 .modal-overlay.open .modal{
+
   transform:
     scale(1)
     translateY(0);
+
 }
 
+
 .modal-close{
+
   position:sticky;
 
   top:14px;
@@ -1397,6 +1881,7 @@ a:focus-visible,
   margin:14px 14px 0 0;
 
   width:34px;
+
   height:34px;
 
   border-radius:50%;
@@ -1406,38 +1891,56 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   font-size:18px;
 
   z-index:20;
+
 }
+
 
 .modal-close:hover{
+
   background:rgba(0,0,0,.7);
+
   color:var(--primary);
+
 }
 
+
 .modal-figure{
+
   width:100%;
 
   aspect-ratio:16 / 10;
 
   overflow:hidden;
+
 }
 
+
 .modal-figure img{
+
   width:100%;
+
   height:100%;
 
   object-fit:cover;
+
 }
+
 
 .modal-body{
+
   padding:8px 34px 40px;
+
 }
 
+
 .modal-year{
+
   font-family:var(--font-mono);
 
   font-size:13px;
@@ -1447,9 +1950,12 @@ a:focus-visible,
   letter-spacing:.1em;
 
   margin-top:18px;
+
 }
 
+
 .modal-title{
+
   font-family:var(--font-title);
 
   font-weight:600;
@@ -1457,14 +1963,18 @@ a:focus-visible,
   font-size:clamp(22px,3vw,30px);
 
   margin:10px 0 18px;
+
 }
 
+
 .modal-desc{
+
   color:var(--muted);
 
   font-size:15px;
 
   line-height:1.75;
+
 }
 
 
@@ -1479,46 +1989,74 @@ a:focus-visible,
 ){
 
   :root{
+
     --event-size:230px;
-    --connector-h:32px;
+
+    --connector-h:20px;
 
     --top-safe-space:82px;
+
     --bottom-safe-space:92px;
-    --timeline-safe-gap:18px;
+
+    --timeline-safe-gap:7px;
+
   }
+
 
   .event-year{
+
     margin-top:7px;
+
     font-size:11px;
+
   }
+
 
   .event-title{
+
     font-size:16px;
+
   }
+
 
   .event-desc{
+
     font-size:11px;
+
     margin-top:5px;
+
   }
+
 
   .event-more{
+
     margin-top:7px;
+
     font-size:9px;
+
   }
+
 
   .nav-controls{
+
     bottom:8px;
+
   }
 
+
   .nav-arrow{
+
     width:36px;
+
     height:36px;
+
   }
+
 }
 
 
 /* =========================================================
-   PC MUITO BAIXO
+   PC HORIZONTAL MUITO BAIXO
    ========================================================= */
 
 @media(
@@ -1528,31 +2066,51 @@ a:focus-visible,
 ){
 
   :root{
+
     --event-size:185px;
-    --connector-h:26px;
+
+    --connector-h:16px;
 
     --top-safe-space:62px;
+
     --bottom-safe-space:70px;
-    --timeline-safe-gap:10px;
+
+    --timeline-safe-gap:5px;
+
   }
+
 
   .event-year{
+
     margin-top:5px;
+
     font-size:10px;
+
   }
+
 
   .event-title{
+
     font-size:14px;
+
   }
+
 
   .event-desc{
+
     font-size:9px;
+
   }
 
+
   .event-more{
+
     font-size:8px;
+
     margin-top:5px;
+
   }
+
 }
 
 
@@ -1563,29 +2121,42 @@ a:focus-visible,
 @media(max-width:560px){
 
   .modal-overlay{
+
     padding:12px;
+
   }
+
 
   .modal{
+
     max-height:90vh;
+
   }
 
+
   .modal-body{
+
     padding:
       6px
       20px
       28px;
+
   }
 
+
   .modal-desc{
+
     font-size:13px;
+
     line-height:1.65;
+
   }
+
 }
 
 
 /* =========================================================
-   MOBILE POUCA ALTURA
+   MOBILE COM POUCA ALTURA
    ========================================================= */
 
 @media(
@@ -1595,10 +2166,15 @@ a:focus-visible,
 ){
 
   :root{
+
     --top-safe-space:68px;
+
     --bottom-safe-space:82px;
-    --timeline-safe-gap:12px;
+
+    --timeline-safe-gap:5px;
+
   }
+
 }
 
 
@@ -1609,13 +2185,20 @@ a:focus-visible,
 @media(prefers-reduced-motion:reduce){
 
   *{
+
     animation-duration:.001s !important;
+
     transition-duration:.001s !important;
+
   }
 
+
   .timeline-track{
+
     transition:none !important;
+
   }
+
 }
 
 
@@ -1624,9 +2207,11 @@ a:focus-visible,
    ========================================================= */
 
 .sr-only{
+
   position:absolute;
 
   width:1px;
+
   height:1px;
 
   overflow:hidden;
@@ -1634,10 +2219,12 @@ a:focus-visible,
   clip:rect(0,0,0,0);
 
   white-space:nowrap;
+
 }
 
 </style>
 </head>
+
 
 <body>
 
@@ -1682,6 +2269,7 @@ a:focus-visible,
     Billie <span>Eilish</span>
   </div>
 
+
   <nav
     class="main-nav"
     aria-label="Navegação principal"
@@ -1717,10 +2305,12 @@ a:focus-visible,
   ☰
 </button>
 
+
 <div
   class="overview-backdrop"
   id="overviewBackdrop"
 ></div>
+
 
 <aside
   class="overview-panel"
@@ -1753,14 +2343,17 @@ a:focus-visible,
     Biografia interativa
   </p>
 
+
   <h1 class="intro-name">
     <b>Billie Eilish</b>
   </h1>
+
 
   <p class="intro-tagline">
     Uma viagem pela trajetória, música e momentos
     que marcaram a carreira de Billie Eilish.
   </p>
+
 
   <div class="intro-meta">
 
@@ -1778,6 +2371,7 @@ a:focus-visible,
 
   </div>
 
+
   <button
     class="btn-start"
     id="startBtn"
@@ -1788,6 +2382,7 @@ a:focus-visible,
     </span>
 
   </button>
+
 
   <p class="intro-hint">
     use o mouse, toque ou as setas do teclado
@@ -1836,6 +2431,7 @@ a:focus-visible,
     ←
   </button>
 
+
   <div class="progress-wrap">
 
     <div class="progress-track">
@@ -1847,12 +2443,14 @@ a:focus-visible,
 
     </div>
 
+
     <div
       class="progress-years"
       id="progressYears"
     ></div>
 
   </div>
+
 
   <button
     class="nav-arrow"
@@ -1889,6 +2487,7 @@ a:focus-visible,
       ×
     </button>
 
+
     <div class="modal-figure">
 
       <img
@@ -1898,6 +2497,7 @@ a:focus-visible,
 
     </div>
 
+
     <div class="modal-body">
 
       <div
@@ -1905,10 +2505,12 @@ a:focus-visible,
         id="modalYear"
       ></div>
 
+
       <h2
         class="modal-title"
         id="modalTitle"
       ></h2>
+
 
       <p
         class="modal-desc"
@@ -1973,6 +2575,7 @@ const timelineEvents = [
       "Billie Eilish Pirate Baird O'Connell nasce em 18 de dezembro de 2001, em Los Angeles, Califórnia. Ela cresce em uma família ligada às artes e à música."
   },
 
+
   {
     year:"2015",
 
@@ -1987,6 +2590,7 @@ const timelineEvents = [
     description:
       "Em 2015, Billie e seu irmão Finneas disponibilizam Ocean Eyes na internet. A música ganha rapidamente atenção e marca o início de sua ascensão profissional."
   },
+
 
   {
     year:"2017",
@@ -2003,6 +2607,7 @@ const timelineEvents = [
       "Billie lança seu primeiro EP, Don't Smile at Me. O projeto amplia seu público e apresenta uma identidade musical e visual que se tornaria característica de sua carreira."
   },
 
+
   {
     year:"2019",
 
@@ -2017,6 +2622,7 @@ const timelineEvents = [
     description:
       "Billie lança seu primeiro álbum de estúdio. O trabalho alcança enorme repercussão internacional e consolida a artista como um dos principais novos nomes da música pop."
   },
+
 
   {
     year:"2020",
@@ -2033,6 +2639,7 @@ const timelineEvents = [
       "Na cerimônia do Grammy de 2020, Billie faz história ao conquistar as quatro principais categorias da premiação, incluindo Álbum do Ano, Gravação do Ano, Canção do Ano e Artista Revelação."
   },
 
+
   {
     year:"2021",
 
@@ -2047,6 +2654,7 @@ const timelineEvents = [
     description:
       "Billie lança Happier Than Ever, seu segundo álbum de estúdio. O projeto apresenta uma sonoridade mais ampla e uma nova fase artística."
   },
+
 
   {
     year:"2022",
@@ -2063,6 +2671,7 @@ const timelineEvents = [
       "Billie e Finneas recebem o Oscar de Melhor Canção Original por No Time to Die, tema do filme de James Bond."
   },
 
+
   {
     year:"2023",
 
@@ -2077,6 +2686,7 @@ const timelineEvents = [
     description:
       "Billie e Finneas escrevem What Was I Made For? para o filme Barbie. A música se torna um dos trabalhos mais reconhecidos da artista e recebe importantes premiações."
   },
+
 
   {
     year:"2024",
@@ -2105,16 +2715,21 @@ const prefersReducedMotion =
     '(prefers-reduced-motion: reduce)'
   ).matches;
 
+
 const viewport =
   document.getElementById('viewport');
+
 
 const track =
   document.getElementById('track');
 
+
 const introEl =
   document.getElementById('intro');
 
+
 let currentScroll = 0;
+
 let targetScroll = 0;
 
 let maxScroll = 0;
@@ -2124,9 +2739,11 @@ let modalOpen = false;
 let isDragging = false;
 
 let dragStartX = 0;
+
 let dragStartScroll = 0;
 
 let lastPointerX = 0;
+
 let lastPointerT = 0;
 
 let velocity = 0;
@@ -2158,6 +2775,7 @@ function buildTimeline(){
   const bgLayer =
     document.getElementById('bgLayer');
 
+
   bgLayer.style.backgroundImage =
     `
       linear-gradient(
@@ -2169,8 +2787,10 @@ function buildTimeline(){
       url('${timelineConfig.BACKGROUND_IMAGE}')
     `;
 
+
   const gap =
     cssNum('--card-gap');
+
 
   const startPad =
     Math.max(
@@ -2186,14 +2806,18 @@ function buildTimeline(){
   const introX =
     window.innerWidth / 2;
 
+
   const introNode =
     document.createElement('article');
+
 
   introNode.className =
     'event event-bottom intro-node';
 
+
   introNode.style.left =
     introX + 'px';
+
 
   introNode.innerHTML = `
 
@@ -2230,24 +2854,28 @@ function buildTimeline(){
 
   `;
 
+
   track.appendChild(introNode);
 
 
   /* -------------------------------------------------------
-     OVERVIEW
+     LISTA OVERVIEW
      ------------------------------------------------------- */
 
   const overviewList =
     document.getElementById('overviewList');
 
+
   const progressYears =
     document.getElementById('progressYears');
+
 
   const eventEls = [];
 
 
   const introLi =
     document.createElement('li');
+
 
   introLi.innerHTML = `
 
@@ -2268,6 +2896,7 @@ function buildTimeline(){
 
   `;
 
+
   overviewList.appendChild(introLi);
 
 
@@ -2281,7 +2910,15 @@ function buildTimeline(){
       const x =
         startPad + i * gap;
 
+
       ev._x = x;
+
+
+      /*
+         Alterna entre cima e baixo.
+         Você pode definir ev.position
+         individualmente se quiser.
+      */
 
       const position =
         ev.position ||
@@ -2289,17 +2926,22 @@ function buildTimeline(){
           ? 'top'
           : 'bottom');
 
+
       const el =
         document.createElement('article');
+
 
       el.className =
         `event event-${position}`;
 
+
       el.style.left =
         x + 'px';
 
+
       el.dataset.index =
         i;
+
 
       el.innerHTML = `
 
@@ -2308,53 +2950,104 @@ function buildTimeline(){
           aria-hidden="true"
         ></div>
 
+
         <div
           class="event-marker"
           aria-hidden="true"
         ></div>
 
+
         <div class="event-card">
 
-          <div class="event-figure">
+          <!--
+             Para eventos de baixo,
+             o event-body aparece ANTES da imagem
+             usando CSS/order visual normal.
+          -->
 
-            <img
-              src="${ev.image}"
-              alt="${ev.title}"
-              loading="lazy"
-              draggable="false"
-            >
+          ${
+            position === 'bottom'
+            ? `
+              <div class="event-body">
 
-          </div>
+                <div class="event-year">
+                  ${ev.year}
+                </div>
 
-          <div class="event-body">
+                <h3 class="event-title">
+                  ${ev.title}
+                </h3>
 
-            <div class="event-year">
-              ${ev.year}
-            </div>
+                <p class="event-desc">
+                  ${ev.shortDescription}
+                </p>
 
-            <h3 class="event-title">
-              ${ev.title}
-            </h3>
+                <button
+                  type="button"
+                  class="event-more"
+                  data-event-index="${i}"
+                >
+                  Saber mais →
+                </button>
 
-            <p class="event-desc">
-              ${ev.shortDescription}
-            </p>
+              </div>
 
-            <button
-              type="button"
-              class="event-more"
-              data-event-index="${i}"
-            >
-              Saber mais →
-            </button>
+              <div class="event-figure">
 
-          </div>
+                <img
+                  src="${ev.image}"
+                  alt="${ev.title}"
+                  loading="lazy"
+                  draggable="false"
+                >
+
+              </div>
+            `
+            : `
+              <div class="event-figure">
+
+                <img
+                  src="${ev.image}"
+                  alt="${ev.title}"
+                  loading="lazy"
+                  draggable="false"
+                >
+
+              </div>
+
+              <div class="event-body">
+
+                <div class="event-year">
+                  ${ev.year}
+                </div>
+
+                <h3 class="event-title">
+                  ${ev.title}
+                </h3>
+
+                <p class="event-desc">
+                  ${ev.shortDescription}
+                </p>
+
+                <button
+                  type="button"
+                  class="event-more"
+                  data-event-index="${i}"
+                >
+                  Saber mais →
+                </button>
+
+              </div>
+            `
+          }
 
         </div>
 
       `;
 
+
       track.appendChild(el);
+
 
       eventEls.push(el);
 
@@ -2365,6 +3058,7 @@ function buildTimeline(){
 
       const li =
         document.createElement('li');
+
 
       li.innerHTML = `
 
@@ -2385,11 +3079,12 @@ function buildTimeline(){
 
       `;
 
+
       overviewList.appendChild(li);
 
 
       /* -----------------------------------------------
-         ANOS
+         ANOS DO PROGRESSO
       ------------------------------------------------ */
 
       if(
@@ -2404,8 +3099,10 @@ function buildTimeline(){
         const span =
           document.createElement('span');
 
+
         span.textContent =
           ev.year;
+
 
         progressYears.appendChild(span);
 
@@ -2424,17 +3121,22 @@ function buildTimeline(){
       timelineEvents.length - 1
     ]._x;
 
+
   const endX =
     lastX + gap;
+
 
   const endPanel =
     document.createElement('div');
 
+
   endPanel.className =
     'track-panel';
 
+
   endPanel.style.left =
     endX + 'px';
+
 
   endPanel.innerHTML = `
 
@@ -2444,14 +3146,17 @@ function buildTimeline(){
         Fim da linha do tempo
       </div>
 
+
       <h2>
         E a história continua…
       </h2>
+
 
       <p>
         ${timelineConfig.personName}
         segue construindo novos capítulos.
       </p>
+
 
       <button
         type="button"
@@ -2465,6 +3170,7 @@ function buildTimeline(){
 
   `;
 
+
   track.appendChild(endPanel);
 
 
@@ -2475,8 +3181,10 @@ function buildTimeline(){
       window.innerWidth * .5
     );
 
+
   track.style.width =
     trackWidth + 'px';
+
 
   maxScroll =
     Math.max(
@@ -2484,21 +3192,32 @@ function buildTimeline(){
       trackWidth - window.innerWidth
     );
 
+
   return {
+
     eventEls,
+
     panelEls:[endPanel],
+
     introNode,
+
     introX
+
   };
 
 }
 
 
 const {
+
   eventEls,
+
   panelEls,
+
   introNode,
+
   introX
+
 } = buildTimeline();
 
 
@@ -2531,11 +3250,13 @@ function animate(){
       ? 1
       : .12;
 
+
   currentScroll +=
     (
       targetScroll -
       currentScroll
     ) * ease;
+
 
   if(
     Math.abs(
@@ -2549,13 +3270,16 @@ function animate(){
 
   }
 
+
   track.style.transform =
     `translateX(${-currentScroll}px)`;
+
 
   const bg =
     document.getElementById(
       'bgLayer'
     );
+
 
   bg.style.transform =
     `
@@ -2565,14 +3289,18 @@ function animate(){
       scale(1.08)
     `;
 
+
   updateProgress();
+
   updateActiveEvent();
+
 
   requestAnimationFrame(
     animate
   );
 
 }
+
 
 requestAnimationFrame(
   animate
@@ -2594,6 +3322,7 @@ function updateProgress(){
         ) * 100
       : 0;
 
+
   document.getElementById(
     'progressFill'
   ).style.width =
@@ -2612,10 +3341,12 @@ function updateActiveEvent(){
     currentScroll +
     window.innerWidth / 2;
 
+
   const dist0 =
     Math.abs(
       introX - centerX
     );
+
 
   introNode.classList.toggle(
     'active',
@@ -2623,16 +3354,19 @@ function updateActiveEvent(){
     cssNum('--event-size') * .55
   );
 
+
   eventEls.forEach(
     (el,i)=>{
 
       const x =
         timelineEvents[i]._x;
 
+
       const dist =
         Math.abs(
           x - centerX
         );
+
 
       el.classList.toggle(
         'active',
@@ -2677,13 +3411,16 @@ const observer =
     }
   );
 
+
 eventEls.forEach(
   el=>observer.observe(el)
 );
 
+
 panelEls.forEach(
   el=>observer.observe(el)
 );
+
 
 observer.observe(
   introNode
@@ -2702,16 +3439,21 @@ viewport.addEventListener(
       modalOpen ||
       !hasStarted
     ){
+
       return;
+
     }
 
+
     e.preventDefault();
+
 
     const delta =
       Math.abs(e.deltaX) >
       Math.abs(e.deltaY)
         ? e.deltaX
         : e.deltaY;
+
 
     targetScroll =
       clamp(
@@ -2738,37 +3480,50 @@ viewport.addEventListener(
     if(
       e.target.closest('button')
     ){
+
       return;
+
     }
+
 
     if(
       modalOpen ||
       !hasStarted
     ){
+
       return;
+
     }
+
 
     isDragging =
       true;
+
 
     viewport.classList.add(
       'dragging'
     );
 
+
     dragStartX =
       e.clientX;
+
 
     dragStartScroll =
       targetScroll;
 
+
     lastPointerX =
       e.clientX;
+
 
     lastPointerT =
       performance.now();
 
+
     velocity =
       0;
+
 
     viewport.setPointerCapture(
       e.pointerId
@@ -2786,9 +3541,11 @@ viewport.addEventListener(
       return;
     }
 
+
     const dx =
       e.clientX -
       dragStartX;
+
 
     targetScroll =
       clamp(
@@ -2797,15 +3554,19 @@ viewport.addEventListener(
         maxScroll
       );
 
+
     currentScroll =
       targetScroll;
+
 
     const now =
       performance.now();
 
+
     const dt =
       now -
       lastPointerT;
+
 
     if(dt > 0){
 
@@ -2817,8 +3578,10 @@ viewport.addEventListener(
 
     }
 
+
     lastPointerX =
       e.clientX;
+
 
     lastPointerT =
       now;
@@ -2837,12 +3600,15 @@ function endDrag(){
     return;
   }
 
+
   isDragging =
     false;
+
 
   viewport.classList.remove(
     'dragging'
   );
+
 
   const momentum =
     clamp(
@@ -2850,6 +3616,7 @@ function endDrag(){
       -500,
       500
     );
+
 
   targetScroll =
     clamp(
@@ -2860,10 +3627,12 @@ function endDrag(){
 
 }
 
+
 viewport.addEventListener(
   'pointerup',
   endDrag
 );
+
 
 viewport.addEventListener(
   'pointercancel',
@@ -2884,18 +3653,24 @@ document.addEventListener(
       if(
         e.key === 'Escape'
       ){
+
         closeModal();
+
       }
 
       return;
+
     }
+
 
     if(!hasStarted){
       return;
     }
 
+
     const step =
       window.innerWidth * .6;
+
 
     if(
       e.key === 'ArrowRight'
@@ -2910,6 +3685,7 @@ document.addEventListener(
 
     }
 
+
     else if(
       e.key === 'ArrowLeft'
     ){
@@ -2923,6 +3699,7 @@ document.addEventListener(
 
     }
 
+
     else if(
       e.key === 'Home'
     ){
@@ -2931,6 +3708,7 @@ document.addEventListener(
         0;
 
     }
+
 
     else if(
       e.key === 'End'
@@ -2957,6 +3735,7 @@ function goToNearestEvent(
     targetScroll +
     window.innerWidth / 2;
 
+
   const candidates = [
 
     introX,
@@ -2967,7 +3746,9 @@ function goToNearestEvent(
 
   ];
 
+
   let target;
+
 
   if(direction > 0){
 
@@ -2979,6 +3760,7 @@ function goToNearestEvent(
       );
 
   }
+
 
   else{
 
@@ -2993,6 +3775,7 @@ function goToNearestEvent(
 
   }
 
+
   if(
     target === undefined
   ){
@@ -3003,6 +3786,7 @@ function goToNearestEvent(
         : 0;
 
   }
+
 
   else{
 
@@ -3016,6 +3800,7 @@ function goToNearestEvent(
 
   }
 
+
   targetScroll =
     target;
 
@@ -3023,7 +3808,7 @@ function goToNearestEvent(
 
 
 /* =========================================================
-   BOTÕES
+   BOTÕES ANTERIOR / PRÓXIMO
    ========================================================= */
 
 document
@@ -3038,6 +3823,7 @@ document
 
     }
   );
+
 
 document
   .getElementById('prevBtn')
@@ -3063,12 +3849,15 @@ function startJourney(){
     return;
   }
 
+
   hasStarted =
     true;
+
 
   introEl.classList.add(
     'hidden'
   );
+
 
   document
     .getElementById(
@@ -3078,6 +3867,7 @@ function startJourney(){
       'visible'
     );
 
+
   targetScroll =
     clamp(
       introX -
@@ -3086,12 +3876,15 @@ function startJourney(){
       maxScroll
     );
 
+
   currentScroll =
     targetScroll;
+
 
   viewport.focus();
 
 }
+
 
 document
   .getElementById('startBtn')
@@ -3116,9 +3909,11 @@ document
       hasStarted =
         true;
 
+
       introEl.classList.add(
         'hidden'
       );
+
 
       document
         .getElementById(
@@ -3127,6 +3922,7 @@ document
         .classList.add(
           'visible'
         );
+
 
       targetScroll =
         0;
@@ -3217,10 +4013,12 @@ const menuToggle =
     'menuToggle'
   );
 
+
 const overviewPanel =
   document.getElementById(
     'overviewPanel'
   );
+
 
 const overviewBackdrop =
   document.getElementById(
@@ -3237,10 +4035,12 @@ function toggleOverview(
     open
   );
 
+
   overviewBackdrop.classList.toggle(
     'open',
     open
   );
+
 
   menuToggle.setAttribute(
     'aria-expanded',
@@ -3289,18 +4089,23 @@ document
           '[data-goto]'
         );
 
+
       if(!btn){
         return;
       }
 
+
       e.preventDefault();
 
+
       startJourney();
+
 
       const x =
         parseFloat(
           btn.dataset.goto
         );
+
 
       targetScroll =
         clamp(
@@ -3309,6 +4114,7 @@ document
           0,
           maxScroll
         );
+
 
       toggleOverview(false);
 
@@ -3325,25 +4131,30 @@ const modalOverlay =
     'modalOverlay'
   );
 
+
 const modalImage =
   document.getElementById(
     'modalImage'
   );
+
 
 const modalYear =
   document.getElementById(
     'modalYear'
   );
 
+
 const modalTitle =
   document.getElementById(
     'modalTitle'
   );
 
+
 const modalDesc =
   document.getElementById(
     'modalDesc'
   );
+
 
 const modalClose =
   document.getElementById(
@@ -3361,27 +4172,35 @@ function openModal(ev){
     return;
   }
 
+
   modalImage.src =
     ev.image;
+
 
   modalImage.alt =
     ev.title;
 
+
   modalYear.textContent =
     ev.year;
+
 
   modalTitle.textContent =
     ev.title;
 
+
   modalDesc.textContent =
     ev.description;
+
 
   modalOverlay.classList.add(
     'open'
   );
 
+
   modalOpen =
     true;
+
 
   setTimeout(
     ()=>{
@@ -3403,6 +4222,7 @@ function closeModal(){
     'open'
   );
 
+
   modalOpen =
     false;
 
@@ -3422,24 +4242,33 @@ track.addEventListener(
         '.event-more'
       );
 
+
     if(!btn){
       return;
     }
 
+
     e.preventDefault();
+
+
     e.stopPropagation();
+
 
     const index =
       Number(
         btn.dataset.eventIndex
       );
 
+
     if(
       !Number.isInteger(index) ||
       !timelineEvents[index]
     ){
+
       return;
+
     }
+
 
     openModal(
       timelineEvents[index]
@@ -3458,6 +4287,7 @@ modalClose.addEventListener(
   e=>{
 
     e.preventDefault();
+
     e.stopPropagation();
 
     closeModal();
@@ -3488,7 +4318,7 @@ modalOverlay.addEventListener(
 
 
 /* =========================================================
-   ESC
+   ESC PARA FECHAR
    ========================================================= */
 
 document.addEventListener(
@@ -3521,12 +4351,14 @@ window.addEventListener(
         track.style.width
       );
 
+
     maxScroll =
       Math.max(
         0,
         trackWidth -
         window.innerWidth
       );
+
 
     targetScroll =
       clamp(
@@ -3568,4 +4400,4 @@ window.addEventListener(
 </script>
 
 </body>
-   </html>
+  </html>
