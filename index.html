@@ -13,10 +13,6 @@
 
 <style>
 
-/* =========================================================
-   1. CONFIGURAÇÃO VISUAL
-   ========================================================= */
-
 :root{
   --background:#111313;
   --background-alt:#191c1c;
@@ -39,23 +35,16 @@
   --font-body:'Inter',sans-serif;
   --font-mono:'Space Mono',monospace;
 
-  /* TAMANHO DOS CARDS */
-  --event-size:300px;
+  /* TAMANHO DOS CARDS — REDUZIDO 10% */
+  --event-size:270px;
 
-  /* AGORA A LINHA FICA BEM MAIS PRÓXIMA DOS CARDS */
   --connector-h:22px;
 
-  /* PEQUENO ESPAÇO ENTRE CONECTOR E CARD */
   --timeline-safe-gap:8px;
 
-  /*
-     ÁREAS DE SEGURANÇA
-     Mantidas para header e controles.
-  */
   --top-safe-space:90px;
   --bottom-safe-space:110px;
 
-  /* DISTÂNCIA ENTRE EVENTOS */
   --card-gap:470px;
 }
 
@@ -67,7 +56,7 @@
 @media(max-width:1100px){
 
   :root{
-    --event-size:270px;
+    --event-size:243px;
     --connector-h:22px;
     --card-gap:420px;
   }
@@ -78,7 +67,7 @@
 @media(max-width:800px){
 
   :root{
-    --event-size:235px;
+    --event-size:212px;
     --connector-h:20px;
     --card-gap:370px;
   }
@@ -89,7 +78,7 @@
 @media(max-width:560px){
 
   :root{
-    --event-size:185px;
+    --event-size:167px;
     --connector-h:18px;
     --card-gap:285px;
 
@@ -1190,7 +1179,6 @@ a:focus-visible,
 
 /* =========================================================
    CARD EM CIMA
-   AGORA POSICIONADO DIRETAMENTE PELO CONECTOR
    ========================================================= */
 
 .event-top .event-card{
@@ -1209,7 +1197,6 @@ a:focus-visible,
 
 /* =========================================================
    CARD EM BAIXO
-   TEXTO FICA ACIMA DA IMAGEM
    ========================================================= */
 
 .event-bottom .event-card{
@@ -1990,7 +1977,7 @@ a:focus-visible,
 
   :root{
 
-    --event-size:230px;
+    --event-size:207px;
 
     --connector-h:20px;
 
@@ -2067,7 +2054,7 @@ a:focus-visible,
 
   :root{
 
-    --event-size:185px;
+    --event-size:167px;
 
     --connector-h:16px;
 
@@ -2229,10 +2216,6 @@ a:focus-visible,
 <body>
 
 
-<!-- =======================================================
-     FUNDO
-     ======================================================= -->
-
 <div class="bg-layer" id="bgLayer"></div>
 
 <div class="bg-vignette"></div>
@@ -2240,9 +2223,7 @@ a:focus-visible,
 <div class="bg-grain"></div>
 
 
-<!-- =======================================================
-     LOADING
-     ======================================================= -->
+<!-- LOADING -->
 
 <div id="loading-screen" aria-hidden="true">
 
@@ -2259,9 +2240,7 @@ a:focus-visible,
 </div>
 
 
-<!-- =======================================================
-     HEADER
-     ======================================================= -->
+<!-- HEADER -->
 
 <header class="site-header">
 
@@ -2292,9 +2271,7 @@ a:focus-visible,
 </header>
 
 
-<!-- =======================================================
-     MENU MOBILE
-     ======================================================= -->
+<!-- MENU MOBILE -->
 
 <button
   class="menu-toggle"
@@ -2330,9 +2307,7 @@ a:focus-visible,
 </aside>
 
 
-<!-- =======================================================
-     INTRO
-     ======================================================= -->
+<!-- INTRO -->
 
 <section
   class="intro"
@@ -2391,9 +2366,7 @@ a:focus-visible,
 </section>
 
 
-<!-- =======================================================
-     TIMELINE
-     ======================================================= -->
+<!-- TIMELINE -->
 
 <main
   class="timeline-viewport"
@@ -2414,9 +2387,7 @@ a:focus-visible,
 </main>
 
 
-<!-- =======================================================
-     CONTROLES
-     ======================================================= -->
+<!-- CONTROLES -->
 
 <div
   class="nav-controls"
@@ -2463,9 +2434,7 @@ a:focus-visible,
 </div>
 
 
-<!-- =======================================================
-     MODAL
-     ======================================================= -->
+<!-- MODAL -->
 
 <div
   class="modal-overlay"
@@ -2799,9 +2768,7 @@ function buildTimeline(){
     );
 
 
-  /* -------------------------------------------------------
-     NÓ INICIAL
-     ------------------------------------------------------- */
+  /* NÓ INICIAL */
 
   const introX =
     window.innerWidth / 2;
@@ -2858,9 +2825,7 @@ function buildTimeline(){
   track.appendChild(introNode);
 
 
-  /* -------------------------------------------------------
-     LISTA OVERVIEW
-     ------------------------------------------------------- */
+  /* OVERVIEW */
 
   const overviewList =
     document.getElementById('overviewList');
@@ -2900,9 +2865,7 @@ function buildTimeline(){
   overviewList.appendChild(introLi);
 
 
-  /* -------------------------------------------------------
-     EVENTOS
-     ------------------------------------------------------- */
+  /* EVENTOS */
 
   timelineEvents.forEach(
     (ev,i)=>{
@@ -2913,12 +2876,6 @@ function buildTimeline(){
 
       ev._x = x;
 
-
-      /*
-         Alterna entre cima e baixo.
-         Você pode definir ev.position
-         individualmente se quiser.
-      */
 
       const position =
         ev.position ||
@@ -2958,12 +2915,6 @@ function buildTimeline(){
 
 
         <div class="event-card">
-
-          <!--
-             Para eventos de baixo,
-             o event-body aparece ANTES da imagem
-             usando CSS/order visual normal.
-          -->
 
           ${
             position === 'bottom'
@@ -3052,9 +3003,7 @@ function buildTimeline(){
       eventEls.push(el);
 
 
-      /* -----------------------------------------------
-         OVERVIEW
-      ------------------------------------------------ */
+      /* OVERVIEW */
 
       const li =
         document.createElement('li');
@@ -3083,9 +3032,7 @@ function buildTimeline(){
       overviewList.appendChild(li);
 
 
-      /* -----------------------------------------------
-         ANOS DO PROGRESSO
-      ------------------------------------------------ */
+      /* ANOS */
 
       if(
         i === 0 ||
@@ -3112,9 +3059,7 @@ function buildTimeline(){
   );
 
 
-  /* -------------------------------------------------------
-     PAINEL FINAL
-     ------------------------------------------------------- */
+  /* PAINEL FINAL */
 
   const lastX =
     timelineEvents[
@@ -4400,4 +4345,4 @@ window.addEventListener(
 </script>
 
 </body>
-  </html>
+   </html>
