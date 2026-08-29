@@ -3,32 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Marina Costa — Linha do Tempo</title>
+<title>Billie Eilish — Linha do Tempo</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 :root{
-  --background:#14120f;
-  --background-alt:#1b1712;
-  --primary:#c9a15c;
-  --secondary:#8a7a5c;
-  --text:#f2ece0;
-  --muted:#a99d86;
-  --timeline:#4a4335;
-  --event-background:rgba(28,24,19,0.55);
-  --event-border:rgba(201,161,92,0.28);
-  --event-shadow:rgba(0,0,0,0.55);
-  --event-radius:3px;
-  --font-title:'Fraunces', serif;
-  --font-body:'Inter', sans-serif;
-  --font-mono:'Space Mono', monospace;
+  --background:#080a0a;
+  --background-alt:#101313;
+  --primary:#a8d600;
+  --secondary:#69735a;
+  --text:#edf2e8;
+  --muted:#9da69b;
+  --timeline:#394036;
+  --event-background:rgba(15,19,15,.65);
+  --event-border:rgba(168,214,0,.28);
+  --event-shadow:rgba(0,0,0,.7);
+  --event-radius:4px;
+  --font-title:'Fraunces',serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'Space Mono',monospace;
+
   --event-size:340px;
   --connector-h:56px;
   --card-gap:520px;
 }
 
-@media (max-width:900px){
+@media(max-width:900px){
   :root{
     --event-size:250px;
     --connector-h:44px;
@@ -36,7 +39,7 @@
   }
 }
 
-@media (max-width:560px){
+@media(max-width:560px){
   :root{
     --event-size:190px;
     --connector-h:34px;
@@ -97,11 +100,19 @@ button:focus-visible,
   inset:0;
   z-index:0;
   background-image:
-    linear-gradient(180deg, rgba(20,18,15,0.88), rgba(20,18,15,0.94) 55%, rgba(10,9,7,0.98)),
-    var(--BACKGROUND_IMAGE, url('https://picsum.photos/seed/marinacosta-bg/1800/1200'));
+    linear-gradient(
+      180deg,
+      rgba(8,10,10,.82),
+      rgba(8,10,10,.94) 55%,
+      rgba(4,5,5,.99)
+    ),
+    var(
+      --BACKGROUND_IMAGE,
+      url('https://picsum.photos/seed/billie-bg/1800/1200')
+    );
   background-size:cover;
   background-position:center;
-  filter:grayscale(55%) contrast(1.05) brightness(0.75);
+  filter:grayscale(55%) contrast(1.08) brightness(.7);
   will-change:transform;
   transition:filter 1s ease;
 }
@@ -111,11 +122,12 @@ button:focus-visible,
   inset:0;
   z-index:1;
   pointer-events:none;
-  background:radial-gradient(
-    ellipse at center,
-    transparent 45%,
-    rgba(0,0,0,0.55) 100%
-  );
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 35%,
+      rgba(0,0,0,.7) 100%
+    );
 }
 
 .bg-grain{
@@ -123,7 +135,7 @@ button:focus-visible,
   inset:0;
   z-index:1;
   pointer-events:none;
-  opacity:0.05;
+  opacity:.045;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -148,7 +160,7 @@ button:focus-visible,
 .loading-name{
   font-family:var(--font-title);
   font-weight:600;
-  letter-spacing:0.04em;
+  letter-spacing:.04em;
   font-size:clamp(28px,5vw,44px);
   color:var(--text);
 }
@@ -156,7 +168,7 @@ button:focus-visible,
 .loading-sub{
   font-family:var(--font-mono);
   font-size:12px;
-  letter-spacing:0.18em;
+  letter-spacing:.18em;
   color:var(--muted);
   text-transform:uppercase;
 }
@@ -181,9 +193,9 @@ button:focus-visible,
 }
 
 @keyframes loadmove{
-  0%{left:-40%;}
-  50%{left:60%;}
-  100%{left:100%;}
+  0%{left:-40%}
+  50%{left:60%}
+  100%{left:100%}
 }
 
 .site-header{
@@ -196,7 +208,11 @@ button:focus-visible,
   align-items:center;
   justify-content:space-between;
   padding:20px clamp(20px,4vw,56px);
-  background:linear-gradient(180deg, rgba(20,18,15,0.75), transparent);
+  background:linear-gradient(
+    180deg,
+    rgba(8,10,10,.8),
+    transparent
+  );
   backdrop-filter:blur(6px);
   -webkit-backdrop-filter:blur(6px);
 }
@@ -205,7 +221,7 @@ button:focus-visible,
   font-family:var(--font-title);
   font-weight:600;
   font-size:18px;
-  letter-spacing:0.05em;
+  letter-spacing:.05em;
 }
 
 .brand span{
@@ -220,7 +236,7 @@ button:focus-visible,
 .main-nav button{
   font-family:var(--font-mono);
   font-size:11px;
-  letter-spacing:0.14em;
+  letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--muted);
   padding:6px 2px;
@@ -247,7 +263,7 @@ button:focus-visible,
   right:0;
 }
 
-@media (max-width:620px){
+@media(max-width:620px){
   .main-nav{
     display:none;
   }
@@ -267,11 +283,11 @@ button:focus-visible,
   color:var(--text);
   border:1px solid var(--event-border);
   border-radius:50%;
-  background:rgba(20,18,15,0.6);
+  background:rgba(8,10,10,.65);
   backdrop-filter:blur(6px);
 }
 
-@media (min-width:621px){
+@media(min-width:621px){
   .menu-toggle{
     display:none;
   }
@@ -315,7 +331,7 @@ button:focus-visible,
   width:100%;
   text-align:left;
   padding:12px 0;
-  border-bottom:1px solid rgba(255,255,255,0.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
   display:flex;
   gap:14px;
   align-items:baseline;
@@ -342,7 +358,7 @@ button:focus-visible,
   position:fixed;
   inset:0;
   z-index:59;
-  background:rgba(0,0,0,0.4);
+  background:rgba(0,0,0,.4);
   opacity:0;
   pointer-events:none;
   transition:opacity .3s;
@@ -366,11 +382,11 @@ button:focus-visible,
   background:
     radial-gradient(
       ellipse at center,
-      rgba(20,18,15,0.4),
-      rgba(20,18,15,0.92) 70%
+      rgba(8,10,10,.35),
+      rgba(8,10,10,.95) 70%
     ),
     var(--background);
-  transition:opacity .9s ease, visibility .9s ease;
+  transition:opacity .9s ease,visibility .9s ease;
 }
 
 .intro.hidden{
@@ -392,8 +408,8 @@ button:focus-visible,
   font-family:var(--font-title);
   font-weight:300;
   font-size:clamp(46px,10vw,124px);
-  line-height:0.96;
-  letter-spacing:-0.01em;
+  line-height:.96;
+  letter-spacing:-.02em;
 }
 
 .intro-name b{
@@ -404,7 +420,7 @@ button:focus-visible,
 .intro-tagline{
   font-size:clamp(14px,2vw,18px);
   color:var(--muted);
-  max-width:520px;
+  max-width:620px;
   margin:26px 0 8px;
   font-weight:400;
   line-height:1.6;
@@ -420,11 +436,6 @@ button:focus-visible,
   margin-bottom:44px;
   flex-wrap:wrap;
   justify-content:center;
-}
-
-.intro-meta span{
-  position:relative;
-  padding-left:0;
 }
 
 .btn-start{
@@ -474,8 +485,8 @@ button:focus-visible,
 }
 
 @keyframes pulseFade{
-  0%,100%{opacity:.4;}
-  50%{opacity:1;}
+  0%,100%{opacity:.4}
+  50%{opacity:1}
 }
 
 .timeline-viewport{
@@ -519,11 +530,12 @@ button:focus-visible,
   content:'';
   position:absolute;
   inset:0;
-  background-image:repeating-linear-gradient(
-    90deg,
-    rgba(255,255,255,0.06) 0 1px,
-    transparent 1px 26px
-  );
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.06) 0 1px,
+      transparent 1px 26px
+    );
 }
 
 .event{
@@ -543,22 +555,22 @@ button:focus-visible,
   border-radius:50%;
   background:var(--background);
   border:2px solid var(--primary);
-  transition:transform .4s ease, box-shadow .4s ease;
+  transition:transform .4s ease,box-shadow .4s ease;
   z-index:3;
 }
 
 .event.active .event-marker{
   transform:scale(1.5);
-  box-shadow:0 0 0 6px rgba(201,161,92,0.16);
+  box-shadow:0 0 0 6px rgba(168,214,0,.15);
   animation:markerPulse 2.2s ease-in-out infinite;
 }
 
 @keyframes markerPulse{
   0%,100%{
-    box-shadow:0 0 0 6px rgba(201,161,92,0.16);
+    box-shadow:0 0 0 6px rgba(168,214,0,.15);
   }
   50%{
-    box-shadow:0 0 0 10px rgba(201,161,92,0.05);
+    box-shadow:0 0 0 10px rgba(168,214,0,.04);
   }
 }
 
@@ -567,14 +579,11 @@ button:focus-visible,
   left:-1px;
   width:2px;
   background:var(--timeline);
-  transform-origin:top;
-  transition:transform .5s cubic-bezier(.4,0,.2,1);
 }
 
 .event-top .event-connector{
   bottom:0;
   height:var(--connector-h);
-  transform-origin:bottom;
 }
 
 .event-bottom .event-connector{
@@ -616,7 +625,6 @@ button:focus-visible,
   border-radius:var(--event-radius);
   background:var(--event-background);
   box-shadow:0 18px 40px -14px var(--event-shadow);
-  transition:box-shadow .4s ease, transform .4s ease;
   position:relative;
 }
 
@@ -624,7 +632,7 @@ button:focus-visible,
   width:100%;
   height:100%;
   object-fit:cover;
-  filter:grayscale(80%) sepia(8%) contrast(1.05);
+  filter:grayscale(80%) sepia(10%) hue-rotate(35deg) contrast(1.05);
   transform:scale(1.001);
   transition:
     filter .8s ease,
@@ -635,17 +643,13 @@ button:focus-visible,
   content:'';
   position:absolute;
   inset:0;
-  border:1px solid rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,.06);
   pointer-events:none;
 }
 
 .event:hover .event-figure img,
 .event.active .event-figure img{
-  filter:grayscale(15%) sepia(4%) contrast(1.02);
-}
-
-.event:hover .event-figure{
-  box-shadow:0 22px 48px -12px var(--event-shadow);
+  filter:grayscale(15%) sepia(5%) hue-rotate(35deg) contrast(1.02);
 }
 
 .event:hover .event-figure img{
@@ -660,8 +664,7 @@ button:focus-visible,
   margin-top:14px;
 }
 
-.event-top .event-body,
-.event-bottom .event-body{
+.event-body{
   text-align:center;
 }
 
@@ -692,7 +695,7 @@ button:focus-visible,
   gap:6px;
   border-bottom:1px solid var(--secondary);
   padding-bottom:3px;
-  transition:border-color .3s, color .3s, gap .3s;
+  transition:border-color .3s,color .3s,gap .3s;
 }
 
 .event-more:hover{
@@ -701,7 +704,7 @@ button:focus-visible,
   gap:10px;
 }
 
-@media (max-width:560px){
+@media(max-width:560px){
   .event-title{
     font-size:15px;
   }
@@ -801,24 +804,20 @@ button:focus-visible,
   height:42px;
   border-radius:50%;
   border:1px solid var(--event-border);
-  background:rgba(20,18,15,0.55);
+  background:rgba(8,10,10,.6);
   backdrop-filter:blur(6px);
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:16px;
   color:var(--text);
-  transition:border-color .3s, transform .2s;
+  transition:border-color .3s,transform .2s;
   flex:none;
 }
 
 .nav-arrow:hover{
   border-color:var(--primary);
   transform:translateY(-2px);
-}
-
-.nav-arrow:active{
-  transform:translateY(0);
 }
 
 .progress-wrap{
@@ -831,7 +830,7 @@ button:focus-visible,
 .progress-track{
   position:relative;
   height:2px;
-  background:rgba(255,255,255,0.1);
+  background:rgba(255,255,255,.1);
   border-radius:2px;
   overflow:hidden;
 }
@@ -855,7 +854,7 @@ button:focus-visible,
   letter-spacing:.05em;
 }
 
-@media (max-width:620px){
+@media(max-width:620px){
   .progress-wrap{
     width:44vw;
   }
@@ -869,7 +868,7 @@ button:focus-visible,
   position:fixed;
   inset:0;
   z-index:80;
-  background:rgba(10,9,7,0.72);
+  background:rgba(3,4,4,.78);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
   display:flex;
@@ -878,7 +877,7 @@ button:focus-visible,
   padding:24px;
   opacity:0;
   visibility:hidden;
-  transition:opacity .35s ease, visibility .35s ease;
+  transition:opacity .35s ease,visibility .35s ease;
 }
 
 .modal-overlay.open{
@@ -895,7 +894,7 @@ button:focus-visible,
   border-radius:var(--event-radius);
   transform:scale(.94) translateY(10px);
   transition:transform .4s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 40px 80px -20px rgba(0,0,0,0.7);
+  box-shadow:0 40px 80px -20px rgba(0,0,0,.8);
 }
 
 .modal-overlay.open .modal{
@@ -910,7 +909,7 @@ button:focus-visible,
   width:34px;
   height:34px;
   border-radius:50%;
-  background:rgba(0,0,0,0.35);
+  background:rgba(0,0,0,.35);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -919,7 +918,7 @@ button:focus-visible,
 }
 
 .modal-close:hover{
-  background:rgba(0,0,0,0.55);
+  background:rgba(0,0,0,.55);
   color:var(--primary);
 }
 
@@ -960,18 +959,10 @@ button:focus-visible,
   line-height:1.75;
 }
 
-.modal-desc + .modal-desc{
-  margin-top:14px;
-}
-
-@media (prefers-reduced-motion: reduce){
+@media(prefers-reduced-motion:reduce){
   *{
-    animation-duration:.001s !important;
-    transition-duration:.001s !important;
-  }
-
-  .timeline-track{
-    transition:none !important;
+    animation-duration:.001s!important;
+    transition-duration:.001s!important;
   }
 }
 
@@ -993,13 +984,13 @@ button:focus-visible,
 <div class="bg-grain"></div>
 
 <div id="loading-screen" aria-hidden="true">
-  <div class="loading-name">Marina Costa</div>
+  <div class="loading-name">Billie Eilish</div>
   <div class="loading-sub">Carregando história…</div>
   <div class="loading-bar"></div>
 </div>
 
 <header class="site-header">
-  <div class="brand">Marina <span>Costa</span></div>
+  <div class="brand">Billie <span>Eilish</span></div>
 
   <nav class="main-nav" aria-label="Navegação principal">
     <button data-action="go-start">Início</button>
@@ -1012,35 +1003,42 @@ button:focus-visible,
   class="menu-toggle"
   id="menuToggle"
   aria-label="Abrir visão geral da linha do tempo"
-  aria-expanded="false"
->☰</button>
+  aria-expanded="false">
+  ☰
+</button>
 
 <div class="overview-backdrop" id="overviewBackdrop"></div>
 
 <aside
   class="overview-panel"
   id="overviewPanel"
-  aria-label="Visão geral dos acontecimentos"
->
+  aria-label="Visão geral da linha do tempo">
+
   <h3>Linha do tempo</h3>
+
   <ul class="overview-list" id="overviewList"></ul>
 </aside>
 
 <section class="intro" id="intro">
-  <p class="intro-eyebrow">Biografia interativa · exemplo</p>
+
+  <p class="intro-eyebrow">
+    Biografia interativa
+  </p>
 
   <h1 class="intro-name">
-    <b>Marina Costa</b>
+    <b>Billie Eilish</b>
   </h1>
 
   <p class="intro-tagline">
-    Uma viagem pela história, carreira e momentos que marcaram sua trajetória.
+    Uma viagem pela carreira, pelos álbuns e pelos momentos
+    que transformaram Billie Eilish em um dos grandes nomes
+    da música contemporânea.
   </p>
 
   <div class="intro-meta">
-    <span>n. 1987</span>
-    <span>Cantora &amp; atriz</span>
-    <span>Rio de Janeiro, Brasil</span>
+    <span>n. 2001</span>
+    <span>Cantora & compositora</span>
+    <span>Los Angeles, EUA</span>
   </div>
 
   <button class="btn-start" id="startBtn">
@@ -1050,160 +1048,244 @@ button:focus-visible,
   <p class="intro-hint">
     use o mouse, o toque ou as setas do teclado
   </p>
+
 </section>
 
 <main
   class="timeline-viewport"
   id="viewport"
   tabindex="0"
-  aria-label="Linha do tempo horizontal, use as setas do teclado para navegar"
->
+  aria-label="Linha do tempo horizontal">
+
   <div class="timeline-track" id="track">
     <div class="timeline-line"></div>
   </div>
+
 </main>
 
 <div class="nav-controls" id="navControls">
+
   <button
     class="nav-arrow"
     id="prevBtn"
-    aria-label="Evento anterior"
-  >←</button>
+    aria-label="Evento anterior">
+    ←
+  </button>
 
   <div class="progress-wrap">
+
     <div class="progress-track">
-      <div class="progress-fill" id="progressFill"></div>
+      <div
+        class="progress-fill"
+        id="progressFill">
+      </div>
     </div>
 
-    <div class="progress-years" id="progressYears"></div>
+    <div
+      class="progress-years"
+      id="progressYears">
+    </div>
+
   </div>
 
   <button
     class="nav-arrow"
     id="nextBtn"
-    aria-label="Próximo evento"
-  >→</button>
+    aria-label="Próximo evento">
+    →
+  </button>
+
 </div>
 
 <div class="modal-overlay" id="modalOverlay">
+
   <div
     class="modal"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="modalTitle"
-  >
+    aria-labelledby="modalTitle">
+
     <button
       class="modal-close"
       id="modalClose"
-      aria-label="Fechar"
-    >×</button>
+      aria-label="Fechar">
+      ×
+    </button>
 
     <div class="modal-figure">
       <img id="modalImage" alt="">
     </div>
 
     <div class="modal-body">
-      <div class="modal-year" id="modalYear"></div>
-      <h2 class="modal-title" id="modalTitle"></h2>
-      <p class="modal-desc" id="modalDesc"></p>
+
+      <div
+        class="modal-year"
+        id="modalYear">
+      </div>
+
+      <h2
+        class="modal-title"
+        id="modalTitle">
+      </h2>
+
+      <p
+        class="modal-desc"
+        id="modalDesc">
+      </p>
+
     </div>
+
   </div>
+
 </div>
 
 <script>
 const timelineConfig = {
-  personName: "Marina Costa",
-  tagline: "Uma viagem pela história, carreira e momentos que marcaram sua trajetória.",
-  birthYear: "1987",
-  profession: "Cantora & atriz",
-  location: "Rio de Janeiro, Brasil",
-  about: "Marina Costa (nome fictício de exemplo) é uma artista cuja trajetória atravessa música, cinema e ativismo cultural. Os dados desta página são placeholders — substitua pelo conteúdo real da pessoa retratada.",
-  BACKGROUND_IMAGE: "https://picsum.photos/seed/marinacosta-bg/1800/1200"
+  personName:"Billie Eilish",
+  tagline:"Uma viagem pela carreira, pelos álbuns e pelos momentos que transformaram Billie Eilish em um dos grandes nomes da música contemporânea.",
+  birthYear:"2001",
+  profession:"Cantora & compositora",
+  location:"Los Angeles, EUA",
+
+  about:"Billie Eilish Pirate Baird O'Connell nasceu em 18 de dezembro de 2001, em Los Angeles. Ao lado de seu irmão Finneas, construiu uma carreira marcada por uma abordagem experimental da música pop, estética visual própria e grande reconhecimento internacional.",
+
+  BACKGROUND_IMAGE:"https://picsum.photos/seed/billie-bg/1800/1200"
 };
 
 const timelineEvents = [
+
   {
-    year: "1987",
-    title: "Nascimento",
-    image: "https://picsum.photos/seed/mc-01/700/700",
-    shortDescription: "Nasce no Rio de Janeiro. (EXEMPLO)",
-    description: "Marina Costa nasce no Rio de Janeiro em uma família de músicos, iniciando desde cedo seu contato com instrumentos e composição. (Texto de exemplo — substitua pelo relato real.)"
+    year:"2001",
+    title:"Nascimento",
+    image:"https://picsum.photos/seed/billie-2001/700/700",
+    shortDescription:"Billie Eilish nasce em Los Angeles.",
+    description:"Billie Eilish Pirate Baird O'Connell nasce em 18 de dezembro de 2001, em Los Angeles, Califórnia."
   },
+
   {
-    year: "2003",
-    title: "Primeiras composições",
-    image: "https://picsum.photos/seed/mc-02/700/700",
-    shortDescription: "Começa a compor suas próprias canções. (EXEMPLO)",
-    description: "Aos 16 anos, grava suas primeiras demos em um estúdio caseiro, moldando um estilo que misturaria MPB e influências contemporâneas."
+    year:"2015",
+    title:"Ocean Eyes",
+    image:"https://picsum.photos/seed/billie-2015/700/700",
+    shortDescription:"A música que inicia sua ascensão.",
+    description:"Billie lança Ocean Eyes, uma música escrita e produzida por seu irmão Finneas. A faixa começa a ganhar atenção na internet e coloca Billie no radar do público."
   },
+
   {
-    year: "2007",
-    title: "Estreia nos palcos",
-    image: "https://picsum.photos/seed/mc-03/700/700",
-    shortDescription: "Primeiro show em casa de shows independente. (EXEMPLO)",
-    description: "Sua primeira apresentação pública acontece em uma pequena casa de shows, marcando o início de uma carreira construída em cima de apresentações intimistas."
+    year:"2016",
+    title:"Primeiros grandes lançamentos",
+    image:"https://picsum.photos/seed/billie-2016/700/700",
+    shortDescription:"Billie começa a construir sua identidade artística.",
+    description:"Com novas músicas e apresentações, Billie começa a desenvolver a estética musical e visual que se tornaria uma das marcas de sua carreira."
   },
+
   {
-    year: "2010",
-    title: "Primeiro álbum",
-    image: "https://picsum.photos/seed/mc-04/700/700",
-    shortDescription: "Lançamento do álbum de estreia. (EXEMPLO)",
-    description: "O álbum de estreia é lançado de forma independente e recebe atenção da crítica especializada, sendo apontado como uma das revelações do ano."
+    year:"2017",
+    title:"Don't Smile at Me",
+    image:"https://picsum.photos/seed/billie-2017/700/700",
+    shortDescription:"Seu primeiro grande projeto.",
+    description:"Billie lança o EP Don't Smile at Me, que reúne músicas como Bellyache, idontwannabeyouanymore e lovely. O projeto amplia sua audiência internacional."
   },
+
   {
-    year: "2013",
-    title: "Estreia no cinema",
-    image: "https://picsum.photos/seed/mc-05/700/700",
-    shortDescription: "Primeiro papel em longa-metragem. (EXEMPLO)",
-    description: "Marina expande sua carreira artística ao aceitar seu primeiro papel no cinema, unindo música e atuação em um projeto autoral."
+    year:"2019",
+    title:"When We All Fall Asleep, Where Do We Go?",
+    image:"https://picsum.photos/seed/billie-2019/700/700",
+    shortDescription:"O álbum que muda sua carreira.",
+    description:"Billie lança seu primeiro álbum de estúdio, When We All Fall Asleep, Where Do We Go?. O projeto alcança enorme sucesso mundial e estabelece definitivamente sua identidade artística."
   },
+
   {
-    year: "2016",
-    title: "Turnê internacional",
-    image: "https://picsum.photos/seed/mc-06/700/700",
-    shortDescription: "Primeira turnê fora do país. (EXEMPLO)",
-    description: "Com o sucesso do terceiro álbum, embarca em sua primeira turnê internacional, passando por Europa e América Latina."
+    year:"2019",
+    title:"Bad Guy",
+    image:"https://picsum.photos/seed/billie-badguy/700/700",
+    shortDescription:"Um dos maiores sucessos de sua carreira.",
+    description:"Bad Guy se torna um fenômeno mundial e alcança o topo da Billboard Hot 100. A música ajuda a consolidar Billie como uma das principais artistas pop de sua geração."
   },
+
   {
-    year: "2019",
-    title: "Grande prêmio da carreira",
-    image: "https://picsum.photos/seed/mc-07/700/700",
-    shortDescription: "Reconhecimento por trabalho de duas décadas. (EXEMPLO)",
-    description: "Recebe um dos principais prêmios da música nacional, reconhecendo consistência artística e impacto cultural ao longo da carreira."
+    year:"2020",
+    title:"Grammy histórico",
+    image:"https://picsum.photos/seed/billie-grammy/700/700",
+    shortDescription:"Billie faz história no Grammy.",
+    description:"Na cerimônia do Grammy de 2020, Billie vence as quatro principais categorias da premiação: Álbum do Ano, Gravação do Ano, Canção do Ano e Artista Revelação."
   },
+
   {
-    year: "2021",
-    title: "Projeto social",
-    image: "https://picsum.photos/seed/mc-08/700/700",
-    shortDescription: "Funda instituto de incentivo à música. (EXEMPLO)",
-    description: "Cria um instituto voltado à formação musical de jovens em comunidades periféricas, ampliando seu legado para além dos palcos."
+    year:"2021",
+    title:"Happier Than Ever",
+    image:"https://picsum.photos/seed/billie-2021/700/700",
+    shortDescription:"Uma nova fase musical e visual.",
+    description:"Billie lança Happier Than Ever, seu segundo álbum de estúdio. O projeto apresenta uma sonoridade mais ampla e uma nova fase estética em sua carreira."
   },
+
   {
-    year: "2024",
-    title: "Novo capítulo",
-    image: "https://picsum.photos/seed/mc-09/700/700",
-    shortDescription: "Anúncio de novo álbum e documentário. (EXEMPLO)",
-    description: "Anuncia simultaneamente um novo álbum de estúdio e um documentário sobre sua trajetória, reafirmando sua presença na cena cultural."
+    year:"2022",
+    title:"Happier Than Ever World Tour",
+    image:"https://picsum.photos/seed/billie-tour/700/700",
+    shortDescription:"Billie leva seu segundo álbum aos palcos.",
+    description:"Billie embarca na Happier Than Ever, The World Tour, apresentando o álbum para públicos de diferentes partes do mundo."
+  },
+
+  {
+    year:"2023",
+    title:"What Was I Made For?",
+    image:"https://picsum.photos/seed/billie-2023/700/700",
+    shortDescription:"Uma nova música para Barbie.",
+    description:"Billie e Finneas lançam What Was I Made For?, criada para a trilha sonora do filme Barbie. A música recebe enorme reconhecimento e conquista diversos prêmios."
+  },
+
+  {
+    year:"2024",
+    title:"HIT ME HARD AND SOFT",
+    image:"https://picsum.photos/seed/billie-2024/700/700",
+    shortDescription:"Terceiro álbum de estúdio.",
+    description:"Billie lança HIT ME HARD AND SOFT, seu terceiro álbum de estúdio. O projeto apresenta uma produção mais expansiva e mantém a colaboração criativa entre Billie e Finneas."
+  },
+
+  {
+    year:"2024",
+    title:"HIT ME HARD AND SOFT: THE TOUR",
+    image:"https://picsum.photos/seed/billie-tour-2024/700/700",
+    shortDescription:"Uma nova turnê mundial.",
+    description:"Billie inicia a turnê mundial de HIT ME HARD AND SOFT, levando o repertório do álbum para grandes arenas ao redor do mundo."
+  },
+
+  {
+    year:"2025",
+    title:"Novos capítulos",
+    image:"https://picsum.photos/seed/billie-2025/700/700",
+    shortDescription:"Billie continua expandindo sua trajetória.",
+    description:"A carreira de Billie continua avançando com novos projetos, apresentações e trabalhos musicais, mantendo sua parceria criativa com Finneas."
   }
+
 ];
 
 const prefersReducedMotion =
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
 
-const viewport = document.getElementById('viewport');
-const track = document.getElementById('track');
-const introEl = document.getElementById('intro');
+const viewport =
+  document.getElementById('viewport');
+
+const track =
+  document.getElementById('track');
+
+const introEl =
+  document.getElementById('intro');
 
 let currentScroll = 0;
 let targetScroll = 0;
 let maxScroll = 0;
 let modalOpen = false;
+
 let isDragging = false;
 let dragStartX = 0;
 let dragStartScroll = 0;
 let lastPointerX = 0;
 let lastPointerT = 0;
 let velocity = 0;
+
 let hasStarted = false;
 
 function cssNum(varName){
@@ -1214,6 +1296,7 @@ function cssNum(varName){
 }
 
 function buildTimeline(){
+
   document
     .getElementById('bgLayer')
     .style
@@ -1225,29 +1308,45 @@ function buildTimeline(){
   document.getElementById('bgLayer').style.backgroundImage =
     `linear-gradient(
       180deg,
-      rgba(20,18,15,0.88),
-      rgba(20,18,15,0.94) 55%,
-      rgba(10,9,7,0.98)
-    ), url('${timelineConfig.BACKGROUND_IMAGE}')`;
+      rgba(8,10,10,.82),
+      rgba(8,10,10,.94) 55%,
+      rgba(4,5,5,.99)
+    ),
+    url('${timelineConfig.BACKGROUND_IMAGE}')`;
 
   const gap = cssNum('--card-gap');
-  const startPad = Math.max(window.innerWidth * 0.9, 620);
-  const introX = window.innerWidth / 2;
 
-  const introNode = document.createElement('article');
+  const startPad =
+    Math.max(window.innerWidth * .9,620);
 
-  introNode.className = 'event event-bottom intro-node';
-  introNode.style.left = introX + 'px';
+  const introX =
+    window.innerWidth / 2;
+
+  const introNode =
+    document.createElement('article');
+
+  introNode.className =
+    'event event-bottom intro-node';
+
+  introNode.style.left =
+    introX + 'px';
 
   introNode.innerHTML = `
     <div class="event-connector" aria-hidden="true"></div>
     <div class="event-marker" aria-hidden="true"></div>
+
     <div class="event-card">
       <div class="event-body">
-        <div class="event-year">${timelineEvents[0].year} · início</div>
-        <h3 class="event-title">A jornada começa</h3>
+        <div class="event-year">
+          ${timelineEvents[0].year} · início
+        </div>
+
+        <h3 class="event-title">
+          A jornada começa
+        </h3>
+
         <p class="event-desc">
-          Role, arraste ou use as setas para seguir em frente.
+          Role, arraste ou use as setas para viajar pela carreira.
         </p>
       </div>
     </div>
@@ -1263,7 +1362,8 @@ function buildTimeline(){
 
   const eventEls = [];
 
-  const introLi = document.createElement('li');
+  const introLi =
+    document.createElement('li');
 
   introLi.innerHTML = `
     <button data-goto="${introX}">
@@ -1274,8 +1374,10 @@ function buildTimeline(){
 
   overviewList.appendChild(introLi);
 
-  timelineEvents.forEach((ev, i) => {
-    const x = startPad + i * gap;
+  timelineEvents.forEach((ev,i)=>{
+
+    const x =
+      startPad + i * gap;
 
     ev._x = x;
 
@@ -1283,36 +1385,52 @@ function buildTimeline(){
       ev.position ||
       (i % 2 === 0 ? 'top' : 'bottom');
 
-    const el = document.createElement('article');
+    const el =
+      document.createElement('article');
 
-    el.className = `event event-${position}`;
-    el.style.left = x + 'px';
-    el.setAttribute('data-index', i);
+    el.className =
+      `event event-${position}`;
+
+    el.style.left =
+      x + 'px';
+
+    el.dataset.index =
+      i;
 
     el.innerHTML = `
       <div class="event-connector" aria-hidden="true"></div>
+
       <div class="event-marker" aria-hidden="true"></div>
 
       <div class="event-card">
+
         <div class="event-figure">
           <img
             src="${ev.image}"
             alt="${ev.title}"
-            loading="lazy"
-          >
+            loading="lazy">
         </div>
 
         <div class="event-body">
-          <div class="event-year">${ev.year}</div>
-          <h3 class="event-title">${ev.title}</h3>
-          <p class="event-desc">${ev.shortDescription}</p>
+
+          <div class="event-year">
+            ${ev.year}
+          </div>
+
+          <h3 class="event-title">
+            ${ev.title}
+          </h3>
+
+          <p class="event-desc">
+            ${ev.shortDescription}
+          </p>
 
           <button
             class="event-more"
-            data-index="${i}"
-          >
+            data-index="${i}">
             Saber mais →
           </button>
+
         </div>
       </div>
     `;
@@ -1320,7 +1438,8 @@ function buildTimeline(){
     track.appendChild(el);
     eventEls.push(el);
 
-    const li = document.createElement('li');
+    const li =
+      document.createElement('li');
 
     li.innerHTML = `
       <button data-goto="${x}">
@@ -1331,53 +1450,82 @@ function buildTimeline(){
 
     overviewList.appendChild(li);
 
-    if (
+    if(
       i === 0 ||
       i === timelineEvents.length - 1 ||
-      i % Math.ceil(timelineEvents.length / 5) === 0
+      i % Math.ceil(
+        timelineEvents.length / 5
+      ) === 0
     ){
-      const span = document.createElement('span');
-      span.textContent = ev.year;
+
+      const span =
+        document.createElement('span');
+
+      span.textContent =
+        ev.year;
+
       progressYears.appendChild(span);
     }
+
   });
 
   const lastX =
-    timelineEvents[timelineEvents.length - 1]._x;
+    timelineEvents[
+      timelineEvents.length - 1
+    ]._x;
 
-  const endX = lastX + gap;
+  const endX =
+    lastX + gap;
 
-  const endPanel = document.createElement('div');
+  const endPanel =
+    document.createElement('div');
 
-  endPanel.className = 'track-panel';
-  endPanel.style.left = endX + 'px';
+  endPanel.className =
+    'track-panel';
+
+  endPanel.style.left =
+    endX + 'px';
 
   endPanel.innerHTML = `
     <div class="panel-inner">
-      <div class="label">Fim da linha do tempo</div>
-      <h2>E a história continua…</h2>
+
+      <div class="label">
+        Fim da linha do tempo
+      </div>
+
+      <h2>
+        A história continua…
+      </h2>
+
       <p>
-        ${timelineConfig.personName}
-        segue construindo novos capítulos.
+        Billie Eilish continua construindo
+        novos capítulos em sua carreira.
       </p>
 
-      <button class="btn-ghost" id="backToStartBtn">
+      <button
+        class="btn-ghost"
+        id="backToStartBtn">
         ← Voltar ao início
       </button>
+
     </div>
   `;
 
   track.appendChild(endPanel);
 
   const trackWidth =
-    endX + startPad * 0.5;
+    endX + startPad * .5;
 
-  track.style.width = trackWidth + 'px';
+  track.style.width =
+    trackWidth + 'px';
 
   maxScroll =
-    Math.max(0, trackWidth - window.innerWidth);
+    Math.max(
+      0,
+      trackWidth - window.innerWidth
+    );
 
-  return {
+  return{
     eventEls,
     panelEls:[endPanel],
     introNode,
@@ -1392,21 +1540,31 @@ const {
   introX
 } = buildTimeline();
 
-function clamp(v, min, max){
-  return Math.max(min, Math.min(max, v));
+function clamp(v,min,max){
+  return Math.max(
+    min,
+    Math.min(max,v)
+  );
 }
 
 function animate(){
+
   const ease =
-    prefersReducedMotion ? 1 : 0.12;
+    prefersReducedMotion
+      ? 1
+      : .12;
 
   currentScroll +=
-    (targetScroll - currentScroll) * ease;
+    (targetScroll - currentScroll) *
+    ease;
 
-  if (
-    Math.abs(targetScroll - currentScroll) < 0.05
+  if(
+    Math.abs(
+      targetScroll - currentScroll
+    ) < .05
   ){
-    currentScroll = targetScroll;
+    currentScroll =
+      targetScroll;
   }
 
   track.style.transform =
@@ -1416,7 +1574,7 @@ function animate(){
     document.getElementById('bgLayer');
 
   bg.style.transform =
-    `translateX(${-currentScroll * 0.06}px) scale(1.08)`;
+    `translateX(${-currentScroll * .06}px) scale(1.08)`;
 
   updateProgress();
   updateActiveEvent();
@@ -1427,128 +1585,201 @@ function animate(){
 requestAnimationFrame(animate);
 
 function updateProgress(){
+
   const pct =
     maxScroll > 0
-      ? clamp(currentScroll / maxScroll, 0, 1) * 100
+      ? clamp(
+          currentScroll / maxScroll,
+          0,
+          1
+        ) * 100
       : 0;
 
-  document.getElementById('progressFill')
-    .style.width = pct + '%';
+  document
+    .getElementById('progressFill')
+    .style.width =
+    pct + '%';
 }
 
 function updateActiveEvent(){
+
   const centerX =
-    currentScroll + window.innerWidth / 2;
+    currentScroll +
+    window.innerWidth / 2;
 
   const dist0 =
-    Math.abs(introX - centerX);
+    Math.abs(
+      introX - centerX
+    );
 
   introNode.classList.toggle(
     'active',
-    dist0 < cssNum('--event-size') * 0.55
+    dist0 <
+    cssNum('--event-size') * .55
   );
 
-  eventEls.forEach((el, i) => {
-    const x = timelineEvents[i]._x;
+  eventEls.forEach((el,i)=>{
+
+    const x =
+      timelineEvents[i]._x;
 
     const dist =
-      Math.abs(x - centerX);
+      Math.abs(
+        x - centerX
+      );
 
     el.classList.toggle(
       'active',
-      dist < cssNum('--event-size') * 0.55
+      dist <
+      cssNum('--event-size') * .55
     );
+
   });
 }
 
 const observer =
   new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting){
-          entry.target.classList.add('in-view');
+    entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add(
+            'in-view'
+          );
         }
       });
     },
     {
       root:viewport,
-      threshold:0.15
+      threshold:.15
     }
   );
 
-eventEls.forEach(el => observer.observe(el));
-panelEls.forEach(el => observer.observe(el));
+eventEls.forEach(
+  el=>observer.observe(el)
+);
+
+panelEls.forEach(
+  el=>observer.observe(el)
+);
+
 observer.observe(introNode);
 
-viewport.addEventListener('wheel', (e) => {
-  if (modalOpen || !hasStarted) return;
+viewport.addEventListener(
+  'wheel',
+  e=>{
 
-  e.preventDefault();
+    if(
+      modalOpen ||
+      !hasStarted
+    ) return;
 
-  const delta =
-    Math.abs(e.deltaX) > Math.abs(e.deltaY)
-      ? e.deltaX
-      : e.deltaY;
+    e.preventDefault();
 
-  targetScroll =
-    clamp(
-      targetScroll + delta,
-      0,
-      maxScroll
-    );
-}, {
-  passive:false
-});
+    const delta =
+      Math.abs(e.deltaX) >
+      Math.abs(e.deltaY)
+        ? e.deltaX
+        : e.deltaY;
 
-viewport.addEventListener('pointerdown', (e) => {
-  if (modalOpen || !hasStarted) return;
+    targetScroll =
+      clamp(
+        targetScroll + delta,
+        0,
+        maxScroll
+      );
 
-  isDragging = true;
+  },
+  {passive:false}
+);
 
-  viewport.classList.add('dragging');
+viewport.addEventListener(
+  'pointerdown',
+  e=>{
 
-  dragStartX = e.clientX;
-  dragStartScroll = targetScroll;
-  lastPointerX = e.clientX;
-  lastPointerT = performance.now();
-  velocity = 0;
+    if(
+      modalOpen ||
+      !hasStarted
+    ) return;
 
-  viewport.setPointerCapture(e.pointerId);
-});
+    isDragging = true;
 
-viewport.addEventListener('pointermove', (e) => {
-  if (!isDragging) return;
-
-  const dx =
-    e.clientX - dragStartX;
-
-  targetScroll =
-    clamp(
-      dragStartScroll - dx,
-      0,
-      maxScroll
+    viewport.classList.add(
+      'dragging'
     );
 
-  currentScroll = targetScroll;
+    dragStartX =
+      e.clientX;
 
-  const now = performance.now();
-  const dt = now - lastPointerT;
+    dragStartScroll =
+      targetScroll;
 
-  if (dt > 0){
-    velocity =
-      (lastPointerX - e.clientX) / dt;
+    lastPointerX =
+      e.clientX;
+
+    lastPointerT =
+      performance.now();
+
+    velocity = 0;
+
+    viewport.setPointerCapture(
+      e.pointerId
+    );
+
   }
+);
 
-  lastPointerX = e.clientX;
-  lastPointerT = now;
-});
+viewport.addEventListener(
+  'pointermove',
+  e=>{
+
+    if(!isDragging) return;
+
+    const dx =
+      e.clientX -
+      dragStartX;
+
+    targetScroll =
+      clamp(
+        dragStartScroll - dx,
+        0,
+        maxScroll
+      );
+
+    currentScroll =
+      targetScroll;
+
+    const now =
+      performance.now();
+
+    const dt =
+      now - lastPointerT;
+
+    if(dt > 0){
+      velocity =
+        (
+          lastPointerX -
+          e.clientX
+        ) / dt;
+    }
+
+    lastPointerX =
+      e.clientX;
+
+    lastPointerT =
+      now;
+
+  }
+);
 
 function endDrag(){
-  if (!isDragging) return;
+
+  if(!isDragging) return;
 
   isDragging = false;
 
-  viewport.classList.remove('dragging');
+  viewport.classList.remove(
+    'dragging'
+  );
 
   const momentum =
     clamp(
@@ -1565,128 +1796,174 @@ function endDrag(){
     );
 }
 
-viewport.addEventListener('pointerup', endDrag);
-viewport.addEventListener('pointercancel', endDrag);
+viewport.addEventListener(
+  'pointerup',
+  endDrag
+);
+
+viewport.addEventListener(
+  'pointercancel',
+  endDrag
+);
 
 viewport.addEventListener(
   'pointerleave',
-  () => {
-    if (isDragging) endDrag();
+  ()=>{
+    if(isDragging){
+      endDrag();
+    }
   }
 );
 
-document.addEventListener('keydown', (e) => {
-  if (modalOpen){
-    if (e.key === 'Escape') closeModal();
-    return;
-  }
+document.addEventListener(
+  'keydown',
+  e=>{
 
-  if (!hasStarted) return;
+    if(modalOpen){
 
-  const step =
-    window.innerWidth * 0.6;
+      if(e.key === 'Escape'){
+        closeModal();
+      }
 
-  if (e.key === 'ArrowRight'){
-    targetScroll =
-      clamp(
-        targetScroll + step,
-        0,
-        maxScroll
-      );
+      return;
+    }
+
+    if(!hasStarted) return;
+
+    const step =
+      window.innerWidth * .6;
+
+    if(e.key === 'ArrowRight'){
+
+      targetScroll =
+        clamp(
+          targetScroll + step,
+          0,
+          maxScroll
+        );
+
+    }else if(e.key === 'ArrowLeft'){
+
+      targetScroll =
+        clamp(
+          targetScroll - step,
+          0,
+          maxScroll
+        );
+
+    }else if(e.key === 'Home'){
+
+      targetScroll = 0;
+
+    }else if(e.key === 'End'){
+
+      targetScroll =
+        maxScroll;
+    }
+
   }
-  else if (e.key === 'ArrowLeft'){
-    targetScroll =
-      clamp(
-        targetScroll - step,
-        0,
-        maxScroll
-      );
-  }
-  else if (e.key === 'Home'){
-    targetScroll = 0;
-  }
-  else if (e.key === 'End'){
-    targetScroll = maxScroll;
-  }
-});
+);
 
 function goToNearestEvent(direction){
+
   const centerX =
-    targetScroll + window.innerWidth / 2;
+    targetScroll +
+    window.innerWidth / 2;
 
   const candidates = [
     introX,
-    ...timelineEvents.map(ev => ev._x)
+    ...timelineEvents.map(
+      ev=>ev._x
+    )
   ];
 
   let target;
 
-  if (direction > 0){
+  if(direction > 0){
+
     target =
       candidates.find(
-        x => x > centerX + 20
+        x=>x > centerX + 20
       );
-  }
-  else{
+
+  }else{
+
     target =
       [...candidates]
         .reverse()
         .find(
-          x => x < centerX - 20
+          x=>x < centerX - 20
         );
   }
 
-  if (target === undefined){
+  if(target === undefined){
+
     target =
       direction > 0
         ? maxScroll
         : 0;
-  }
-  else{
+
+  }else{
+
     target =
       clamp(
-        target - window.innerWidth / 2,
+        target -
+        window.innerWidth / 2,
         0,
         maxScroll
       );
   }
 
-  targetScroll = target;
+  targetScroll =
+    target;
 }
 
 document
   .getElementById('nextBtn')
-  .addEventListener('click', () => {
-    startJourney();
-    goToNearestEvent(1);
-  });
+  .addEventListener(
+    'click',
+    ()=>{
+      startJourney();
+      goToNearestEvent(1);
+    }
+  );
 
 document
   .getElementById('prevBtn')
-  .addEventListener('click', () => {
-    startJourney();
-    goToNearestEvent(-1);
-  });
+  .addEventListener(
+    'click',
+    ()=>{
+      startJourney();
+      goToNearestEvent(-1);
+    }
+  );
 
 function startJourney(){
-  if (hasStarted) return;
+
+  if(hasStarted) return;
 
   hasStarted = true;
 
-  introEl.classList.add('hidden');
+  introEl.classList.add(
+    'hidden'
+  );
 
   document
     .getElementById('navControls')
-    .classList.add('visible');
+    .classList.add(
+      'visible'
+    );
 
   targetScroll =
     clamp(
-      introX - window.innerWidth / 2,
+      introX -
+      window.innerWidth / 2,
       0,
       maxScroll
     );
 
-  currentScroll = targetScroll;
+  currentScroll =
+    targetScroll;
 
   viewport.focus();
 }
@@ -1699,52 +1976,84 @@ document
   );
 
 document
-  .querySelector('[data-action="go-start"]')
-  .addEventListener('click', () => {
-    hasStarted = true;
+  .querySelector(
+    '[data-action="go-start"]'
+  )
+  .addEventListener(
+    'click',
+    ()=>{
+      hasStarted = true;
 
-    introEl.classList.add('hidden');
+      introEl.classList.add(
+        'hidden'
+      );
 
-    document
-      .getElementById('navControls')
-      .classList.add('visible');
+      document
+        .getElementById('navControls')
+        .classList.add(
+          'visible'
+        );
 
-    targetScroll = 0;
-  });
+      targetScroll = 0;
+    }
+  );
 
 document
-  .querySelector('[data-action="go-timeline"]')
-  .addEventListener('click', () => {
-    startJourney();
-  });
+  .querySelector(
+    '[data-action="go-timeline"]'
+  )
+  .addEventListener(
+    'click',
+    startJourney
+  );
 
 document
-  .querySelector('[data-action="go-about"]')
-  .addEventListener('click', () => {
-    openModal({
-      year:timelineConfig.birthYear,
-      title:`Sobre ${timelineConfig.personName}`,
-      image:timelineConfig.BACKGROUND_IMAGE,
-      description:timelineConfig.about
-    });
-  });
+  .querySelector(
+    '[data-action="go-about"]'
+  )
+  .addEventListener(
+    'click',
+    ()=>{
+      openModal({
+        year:timelineConfig.birthYear,
+        title:`Sobre ${timelineConfig.personName}`,
+        image:timelineConfig.BACKGROUND_IMAGE,
+        description:timelineConfig.about
+      });
+    }
+  );
 
-track.addEventListener('click', (e) => {
-  if (e.target.id === 'backToStartBtn'){
-    targetScroll = 0;
+track.addEventListener(
+  'click',
+  e=>{
+
+    if(
+      e.target.id ===
+      'backToStartBtn'
+    ){
+      targetScroll = 0;
+    }
+
   }
-});
+);
 
 const menuToggle =
-  document.getElementById('menuToggle');
+  document.getElementById(
+    'menuToggle'
+  );
 
 const overviewPanel =
-  document.getElementById('overviewPanel');
+  document.getElementById(
+    'overviewPanel'
+  );
 
 const overviewBackdrop =
-  document.getElementById('overviewBackdrop');
+  document.getElementById(
+    'overviewBackdrop'
+  );
 
 function toggleOverview(open){
+
   overviewPanel.classList.toggle(
     'open',
     open
@@ -1763,68 +2072,104 @@ function toggleOverview(open){
 
 menuToggle.addEventListener(
   'click',
-  () => {
+  ()=>{
     toggleOverview(
-      !overviewPanel.classList.contains('open')
+      !overviewPanel.classList.contains(
+        'open'
+      )
     );
   }
 );
 
 overviewBackdrop.addEventListener(
   'click',
-  () => toggleOverview(false)
+  ()=>{
+    toggleOverview(false);
+  }
 );
 
 document
   .getElementById('overviewList')
-  .addEventListener('click', (e) => {
-    const btn =
-      e.target.closest('[data-goto]');
+  .addEventListener(
+    'click',
+    e=>{
 
-    if (!btn) return;
+      const btn =
+        e.target.closest(
+          '[data-goto]'
+        );
 
-    startJourney();
+      if(!btn) return;
 
-    const x =
-      parseFloat(btn.dataset.goto);
+      startJourney();
 
-    targetScroll =
-      clamp(
-        x - window.innerWidth / 2,
-        0,
-        maxScroll
-      );
+      const x =
+        parseFloat(
+          btn.dataset.goto
+        );
 
-    toggleOverview(false);
-  });
+      targetScroll =
+        clamp(
+          x -
+          window.innerWidth / 2,
+          0,
+          maxScroll
+        );
+
+      toggleOverview(false);
+    }
+  );
 
 const modalOverlay =
-  document.getElementById('modalOverlay');
+  document.getElementById(
+    'modalOverlay'
+  );
 
 const modalImage =
-  document.getElementById('modalImage');
+  document.getElementById(
+    'modalImage'
+  );
 
 const modalYear =
-  document.getElementById('modalYear');
+  document.getElementById(
+    'modalYear'
+  );
 
 const modalTitle =
-  document.getElementById('modalTitle');
+  document.getElementById(
+    'modalTitle'
+  );
 
 const modalDesc =
-  document.getElementById('modalDesc');
+  document.getElementById(
+    'modalDesc'
+  );
 
 const modalClose =
-  document.getElementById('modalClose');
+  document.getElementById(
+    'modalClose'
+  );
 
 function openModal(ev){
-  modalImage.src = ev.image;
-  modalImage.alt = ev.title;
 
-  modalYear.textContent = ev.year;
-  modalTitle.textContent = ev.title;
-  modalDesc.textContent = ev.description;
+  modalImage.src =
+    ev.image;
 
-  modalOverlay.classList.add('open');
+  modalImage.alt =
+    ev.title;
+
+  modalYear.textContent =
+    ev.year;
+
+  modalTitle.textContent =
+    ev.title;
+
+  modalDesc.textContent =
+    ev.description;
+
+  modalOverlay.classList.add(
+    'open'
+  );
 
   modalOpen = true;
 
@@ -1832,26 +2177,36 @@ function openModal(ev){
 }
 
 function closeModal(){
-  modalOverlay.classList.remove('open');
+
+  modalOverlay.classList.remove(
+    'open'
+  );
+
   modalOpen = false;
 }
 
-track.addEventListener('click', (e) => {
-  const btn =
-    e.target.closest('.event-more');
+track.addEventListener(
+  'click',
+  e=>{
 
-  if (!btn) return;
+    const btn =
+      e.target.closest(
+        '.event-more'
+      );
 
-  const idx =
-    parseInt(
-      btn.dataset.index,
-      10
+    if(!btn) return;
+
+    const idx =
+      parseInt(
+        btn.dataset.index,
+        10
+      );
+
+    openModal(
+      timelineEvents[idx]
     );
-
-  openModal(
-    timelineEvents[idx]
-  );
-});
+  }
+);
 
 modalClose.addEventListener(
   'click',
@@ -1860,8 +2215,11 @@ modalClose.addEventListener(
 
 modalOverlay.addEventListener(
   'click',
-  (e) => {
-    if (e.target === modalOverlay){
+  e=>{
+    if(
+      e.target ===
+      modalOverlay
+    ){
       closeModal();
     }
   }
@@ -1869,14 +2227,17 @@ modalOverlay.addEventListener(
 
 window.addEventListener(
   'resize',
-  () => {
+  ()=>{
     const trackWidth =
-      parseFloat(track.style.width);
+      parseFloat(
+        track.style.width
+      );
 
     maxScroll =
       Math.max(
         0,
-        trackWidth - window.innerWidth
+        trackWidth -
+        window.innerWidth
       );
 
     targetScroll =
@@ -1890,15 +2251,22 @@ window.addEventListener(
 
 window.addEventListener(
   'load',
-  () => {
-    setTimeout(() => {
-      document
-        .getElementById('loading-screen')
-        .classList.add('hide');
-    }, 900);
+  ()=>{
+    setTimeout(
+      ()=>{
+        document
+          .getElementById(
+            'loading-screen'
+          )
+          .classList.add(
+            'hide'
+          );
+      },
+      900
+    );
   }
 );
 </script>
 
 </body>
-  </html>
+    </html>
