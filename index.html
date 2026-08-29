@@ -13,6 +13,10 @@
 
 <style>
 
+/* =========================================================
+   1. CONFIGURAÇÃO VISUAL
+   ========================================================= */
+
 :root{
   --background:#111313;
   --background-alt:#191c1c;
@@ -35,39 +39,66 @@
   --font-body:'Inter',sans-serif;
   --font-mono:'Space Mono',monospace;
 
+  /* TAMANHO DOS CARDS */
   --event-size:300px;
+
+  /* DISTÂNCIA ENTRE LINHA E CARD */
   --connector-h:45px;
+
+  /* DISTÂNCIA HORIZONTAL ENTRE EVENTOS */
   --card-gap:470px;
+
+  --top-safe-space:90px;
   --bottom-safe-space:110px;
+
+  --timeline-safe-gap:24px;
 }
 
 
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
 @media(max-width:1100px){
+
   :root{
     --event-size:270px;
     --connector-h:40px;
     --card-gap:420px;
   }
+
 }
 
 
 @media(max-width:800px){
+
   :root{
     --event-size:235px;
     --connector-h:36px;
     --card-gap:370px;
   }
+
 }
 
 
 @media(max-width:560px){
+
   :root{
     --event-size:185px;
     --connector-h:30px;
     --card-gap:285px;
+
+    --top-safe-space:72px;
+    --bottom-safe-space:88px;
+    --timeline-safe-gap:16px;
   }
+
 }
 
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 *{
   box-sizing:border-box;
@@ -78,52 +109,78 @@
 
 html,
 body{
+
   width:100%;
   height:100%;
+
   overflow:hidden;
+
   background:var(--background);
+
 }
 
 
 body{
+
   font-family:var(--font-body);
+
   color:var(--text);
+
   -webkit-font-smoothing:antialiased;
+
   overscroll-behavior:none;
+
 }
 
 
 img{
+
   display:block;
+
   max-width:100%;
+
 }
 
 
 button{
+
   font-family:inherit;
+
   border:none;
+
   background:none;
+
   color:inherit;
+
   cursor:pointer;
+
 }
 
 
 a{
+
   color:inherit;
+
 }
 
 
 ::selection{
+
   background:var(--primary);
+
   color:var(--background);
+
 }
 
 
 button:focus-visible,
 a:focus-visible,
 [tabindex]:focus-visible{
+
   outline:2px solid var(--primary);
+
   outline-offset:3px;
+
 }
 
 
@@ -132,8 +189,11 @@ a:focus-visible,
    ========================================================= */
 
 .bg-layer{
+
   position:fixed;
+
   inset:0;
+
   z-index:0;
 
   background-image:
@@ -146,6 +206,7 @@ a:focus-visible,
     url('https://picsum.photos/seed/billie-bg/1800/1200');
 
   background-size:cover;
+
   background-position:center;
 
   filter:
@@ -154,14 +215,20 @@ a:focus-visible,
     brightness(.72);
 
   will-change:transform;
+
   transition:filter 1s ease;
+
 }
 
 
 .bg-vignette{
+
   position:fixed;
+
   inset:0;
+
   z-index:1;
+
   pointer-events:none;
 
   background:
@@ -170,19 +237,26 @@ a:focus-visible,
       transparent 40%,
       rgba(0,0,0,.6) 100%
     );
+
 }
 
 
 .bg-grain{
+
   position:fixed;
+
   inset:0;
+
   z-index:2;
+
   pointer-events:none;
+
   opacity:.045;
 
   background-image:url(
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
   );
+
 }
 
 
@@ -191,71 +265,119 @@ a:focus-visible,
    ========================================================= */
 
 #loading-screen{
+
   position:fixed;
+
   inset:0;
+
   z-index:100;
 
   background:var(--background);
 
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
+
   justify-content:center;
+
   gap:18px;
 
   transition:opacity .7s ease;
+
 }
 
 
 #loading-screen.hide{
+
   opacity:0;
+
   pointer-events:none;
+
 }
 
 
 .loading-name{
+
   font-family:var(--font-title);
+
   font-weight:600;
+
   letter-spacing:.04em;
+
   font-size:clamp(28px,5vw,44px);
+
   color:var(--text);
+
 }
 
 
 .loading-sub{
+
   font-family:var(--font-mono);
+
   font-size:12px;
+
   letter-spacing:.18em;
+
   color:var(--muted);
+
   text-transform:uppercase;
+
 }
 
 
 .loading-bar{
+
   width:220px;
+
   height:1px;
+
   background:var(--secondary);
+
   position:relative;
+
   overflow:hidden;
+
 }
 
 
 .loading-bar::after{
+
   content:'';
+
   position:absolute;
+
   left:-40%;
+
   top:0;
+
   bottom:0;
+
   width:40%;
+
   background:var(--primary);
+
   animation:loadmove 1.1s ease-in-out infinite;
+
 }
 
 
 @keyframes loadmove{
-  0%{left:-40%;}
-  50%{left:60%;}
-  100%{left:100%;}
+
+  0%{
+    left:-40%;
+  }
+
+  50%{
+    left:60%;
+  }
+
+  100%{
+    left:100%;
+  }
+
 }
 
 
@@ -264,7 +386,9 @@ a:focus-visible,
    ========================================================= */
 
 .site-header{
+
   position:fixed;
+
   top:0;
   left:0;
   right:0;
@@ -272,12 +396,16 @@ a:focus-visible,
   z-index:40;
 
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 
   padding:
     20px
     clamp(20px,4vw,56px);
+
+  min-height:72px;
 
   background:
     linear-gradient(
@@ -287,67 +415,105 @@ a:focus-visible,
     );
 
   backdrop-filter:blur(6px);
+
   -webkit-backdrop-filter:blur(6px);
+
 }
 
 
 .brand{
+
   font-family:var(--font-title);
+
   font-weight:600;
+
   font-size:18px;
+
   letter-spacing:.05em;
+
 }
 
 
 .brand span{
+
   color:var(--primary);
+
 }
 
 
 .main-nav{
+
   display:flex;
+
   gap:clamp(16px,3vw,32px);
+
 }
 
 
 .main-nav button{
+
   font-family:var(--font-mono);
+
   font-size:11px;
+
   letter-spacing:.14em;
+
   text-transform:uppercase;
+
   color:var(--muted);
+
   padding:6px 2px;
+
   position:relative;
+
   transition:color .3s;
+
 }
 
 
 .main-nav button:hover{
+
   color:var(--text);
+
 }
 
 
 .main-nav button::after{
+
   content:'';
+
   position:absolute;
+
   left:0;
+
   right:100%;
+
   bottom:0;
+
   height:1px;
+
   background:var(--primary);
+
   transition:right .3s ease;
+
 }
 
 
 .main-nav button:hover::after{
+
   right:0;
+
 }
 
 
 @media(max-width:620px){
+
   .main-nav{
+
     display:none;
+
   }
+
 }
 
 
@@ -356,34 +522,48 @@ a:focus-visible,
    ========================================================= */
 
 .menu-toggle{
+
   position:fixed;
+
   top:20px;
+
   right:20px;
+
   z-index:70;
 
   width:38px;
+
   height:38px;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
   font-size:18px;
+
   color:var(--text);
 
   border:1px solid var(--event-border);
+
   border-radius:50%;
 
   background:rgba(15,17,17,.7);
 
   backdrop-filter:blur(6px);
+
 }
 
 
 @media(min-width:621px){
+
   .menu-toggle{
+
     display:none;
+
   }
+
 }
 
 
@@ -392,9 +572,13 @@ a:focus-visible,
    ========================================================= */
 
 .overview-panel{
+
   position:fixed;
+
   top:0;
+
   right:0;
+
   bottom:0;
 
   z-index:80;
@@ -402,6 +586,7 @@ a:focus-visible,
   width:min(340px,86vw);
 
   background:var(--background-alt);
+
   border-left:1px solid var(--event-border);
 
   padding:80px 26px 26px;
@@ -413,33 +598,49 @@ a:focus-visible,
     cubic-bezier(.4,0,.2,1);
 
   overflow-y:auto;
+
 }
 
 
 .overview-panel.open{
+
   transform:translateX(0);
+
 }
 
 
 .overview-panel h3{
+
   font-family:var(--font-mono);
+
   font-size:11px;
+
   letter-spacing:.18em;
+
   color:var(--muted);
+
   text-transform:uppercase;
+
   margin-bottom:18px;
+
 }
 
 
 .overview-list{
+
   list-style:none;
+
   display:flex;
+
   flex-direction:column;
+
 }
 
 
 .overview-list li button{
+
   width:100%;
+
   text-align:left;
 
   padding:12px 0;
@@ -447,50 +648,70 @@ a:focus-visible,
   border-bottom:1px solid rgba(255,255,255,.06);
 
   display:flex;
+
   gap:14px;
+
   align-items:baseline;
 
   color:var(--muted);
 
   transition:color .25s;
+
 }
 
 
 .overview-list li button:hover{
+
   color:var(--text);
+
 }
 
 
 .overview-list .yr{
+
   font-family:var(--font-mono);
+
   color:var(--primary);
+
   font-size:13px;
+
   min-width:44px;
+
 }
 
 
 .overview-list .ttl{
+
   font-size:14px;
+
 }
 
 
 .overview-backdrop{
+
   position:fixed;
+
   inset:0;
+
   z-index:79;
 
   background:rgba(0,0,0,.4);
 
   opacity:0;
+
   pointer-events:none;
 
   transition:opacity .3s;
+
 }
 
 
 .overview-backdrop.open{
+
   opacity:1;
+
   pointer-events:auto;
+
 }
 
 
@@ -499,13 +720,19 @@ a:focus-visible,
    ========================================================= */
 
 .intro{
+
   position:fixed;
+
   inset:0;
+
   z-index:30;
 
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
+
   justify-content:center;
 
   text-align:center;
@@ -523,94 +750,140 @@ a:focus-visible,
   transition:
     opacity .9s ease,
     visibility .9s ease;
+
 }
 
 
 .intro.hidden{
+
   opacity:0;
+
   visibility:hidden;
+
   pointer-events:none;
+
 }
 
 
 .intro-eyebrow{
+
   font-family:var(--font-mono);
+
   font-size:12px;
+
   letter-spacing:.24em;
+
   text-transform:uppercase;
+
   color:var(--primary);
+
   margin-bottom:22px;
+
 }
 
 
 .intro-name{
+
   font-family:var(--font-title);
+
   font-weight:300;
+
   font-size:clamp(46px,10vw,124px);
+
   line-height:.96;
+
 }
 
 
 .intro-name b{
+
   font-weight:600;
+
   display:block;
+
 }
 
 
 .intro-tagline{
+
   font-size:clamp(14px,2vw,18px);
+
   color:var(--muted);
+
   max-width:520px;
+
   margin:26px 0 8px;
+
   font-weight:400;
+
   line-height:1.6;
+
 }
 
 
 .intro-meta{
+
   display:flex;
+
   gap:22px;
 
   font-family:var(--font-mono);
+
   font-size:12px;
 
   color:var(--secondary);
+
   letter-spacing:.08em;
 
   margin-bottom:44px;
 
   flex-wrap:wrap;
+
   justify-content:center;
+
 }
 
 
 .btn-start{
+
   font-family:var(--font-mono);
+
   font-size:13px;
+
   letter-spacing:.14em;
+
   text-transform:uppercase;
 
   padding:16px 34px;
 
   border:1px solid var(--primary);
+
   color:var(--text);
 
   position:relative;
+
   overflow:hidden;
 
   transition:color .35s;
+
 }
 
 
 .btn-start span{
+
   position:relative;
+
   z-index:1;
+
 }
 
 
 .btn-start::before{
+
   content:'';
+
   position:absolute;
+
   inset:0;
 
   background:var(--primary);
@@ -620,36 +893,53 @@ a:focus-visible,
   transition:
     transform .4s
     cubic-bezier(.4,0,.2,1);
+
 }
 
 
 .btn-start:hover{
+
   color:var(--background);
+
 }
 
 
 .btn-start:hover::before{
+
   transform:translateX(0);
+
 }
 
 
 .intro-hint{
+
   position:absolute;
+
   bottom:34px;
 
   font-family:var(--font-mono);
+
   font-size:11px;
+
   letter-spacing:.1em;
 
   color:var(--secondary);
 
   animation:pulseFade 2.4s ease-in-out infinite;
+
 }
 
 
 @keyframes pulseFade{
-  0%,100%{opacity:.4;}
-  50%{opacity:1;}
+
+  0%,100%{
+    opacity:.4;
+  }
+
+  50%{
+    opacity:1;
+  }
+
 }
 
 
@@ -658,8 +948,11 @@ a:focus-visible,
    ========================================================= */
 
 .timeline-viewport{
+
   position:fixed;
+
   inset:0;
+
   z-index:5;
 
   overflow:hidden;
@@ -667,23 +960,29 @@ a:focus-visible,
   cursor:grab;
 
   touch-action:pan-y;
+
 }
 
 
 .timeline-viewport.dragging{
+
   cursor:grabbing;
+
 }
 
 
 .timeline-track{
+
   position:absolute;
 
   top:0;
+
   left:0;
 
   height:100%;
 
   will-change:transform;
+
 }
 
 
@@ -692,12 +991,15 @@ a:focus-visible,
    ========================================================= */
 
 .timeline-line{
+
   position:absolute;
 
   top:50%;
+
   left:0;
 
   height:2px;
+
   width:100%;
 
   background:
@@ -710,13 +1012,16 @@ a:focus-visible,
     );
 
   transform:translateY(-1px);
+
 }
 
 
 .timeline-line::before{
+
   content:'';
 
   position:absolute;
+
   inset:0;
 
   background-image:
@@ -725,6 +1030,7 @@ a:focus-visible,
       rgba(255,255,255,.06) 0 1px,
       transparent 1px 26px
     );
+
 }
 
 
@@ -733,22 +1039,28 @@ a:focus-visible,
    ========================================================= */
 
 .event{
+
   position:absolute;
 
   top:50%;
 
   width:0;
+
   height:0;
+
 }
 
 
 .event-marker{
+
   position:absolute;
 
   top:0;
+
   left:0;
 
   width:11px;
+
   height:11px;
 
   margin:-5.5px 0 0 -5.5px;
@@ -764,10 +1076,12 @@ a:focus-visible,
     box-shadow .4s ease;
 
   z-index:3;
+
 }
 
 
 .event.active .event-marker{
+
   transform:scale(1.5);
 
   box-shadow:
@@ -775,21 +1089,28 @@ a:focus-visible,
     rgba(184,216,216,.14);
 
   animation:markerPulse 2.2s ease-in-out infinite;
+
 }
 
 
 @keyframes markerPulse{
+
   0%,100%{
+
     box-shadow:
       0 0 0 6px
       rgba(184,216,216,.14);
+
   }
 
   50%{
+
     box-shadow:
       0 0 0 10px
       rgba(184,216,216,.04);
+
   }
+
 }
 
 
@@ -798,6 +1119,7 @@ a:focus-visible,
    ========================================================= */
 
 .event-connector{
+
   position:absolute;
 
   left:-1px;
@@ -805,18 +1127,25 @@ a:focus-visible,
   width:2px;
 
   background:var(--timeline);
+
 }
 
 
 .event-top .event-connector{
+
   bottom:0;
+
   height:var(--connector-h);
+
 }
 
 
 .event-bottom .event-connector{
+
   top:0;
+
   height:var(--connector-h);
+
 }
 
 
@@ -825,6 +1154,7 @@ a:focus-visible,
    ========================================================= */
 
 .event-card{
+
   position:absolute;
 
   left:0;
@@ -841,49 +1171,68 @@ a:focus-visible,
 
     transform .6s
     cubic-bezier(.4,0,.2,1);
+
+  max-height:
+    calc(
+      50vh
+      - var(--top-safe-space) / 2
+      - var(--bottom-safe-space) / 2
+      - var(--timeline-safe-gap)
+    );
+
 }
 
 
 .event-top .event-card{
-  bottom:calc(var(--connector-h) + 14px);
+
+  bottom:
+    calc(
+      var(--connector-h)
+      + var(--timeline-safe-gap)
+      + var(--top-safe-space)
+    );
 
   transform:
     translate(-50%,26px);
+
 }
 
 
 .event-bottom .event-card{
-  top:calc(var(--connector-h) + 14px);
+
+  top:
+    calc(
+      var(--connector-h)
+      + var(--timeline-safe-gap)
+      + var(--bottom-safe-space)
+    );
 
   transform:
     translate(-50%,-26px);
+
 }
 
 
 .event.in-view .event-card{
+
   opacity:1;
 
   transform:
     translate(-50%,0);
+
 }
 
 
 /* =========================================================
    IMAGEM DOS EVENTOS
+   10% MENOR
    ========================================================= */
 
-/*
-   SOMENTE AS IMAGENS DOS EVENTOS FORAM REDUZIDAS
-   PARA 70% DO TAMANHO ORIGINAL.
-*/
-
 .event-figure{
-  width:70%;
+
+  width:90%;
 
   aspect-ratio:1 / 1;
-
-  margin-left:auto;
-  margin-right:auto;
 
   overflow:hidden;
 
@@ -902,14 +1251,22 @@ a:focus-visible,
     transform .4s ease;
 
   position:relative;
+
+  margin-left:auto;
+
+  margin-right:auto;
+
 }
 
 
 .event-figure img{
+
   width:100%;
+
   height:100%;
 
   object-fit:cover;
+
   object-position:center;
 
   filter:
@@ -920,38 +1277,48 @@ a:focus-visible,
     filter .8s ease,
     transform .6s
     cubic-bezier(.4,0,.2,1);
+
 }
 
 
 .event-figure::after{
+
   content:'';
 
   position:absolute;
+
   inset:0;
 
   border:1px solid rgba(255,255,255,.06);
 
   pointer-events:none;
+
 }
 
 
 .event:hover .event-figure img,
 .event.active .event-figure img{
+
   filter:
     grayscale(10%)
     contrast(1.02);
+
 }
 
 
 .event:hover .event-figure{
+
   box-shadow:
     0 22px 48px -12px
     var(--event-shadow);
+
 }
 
 
 .event:hover .event-figure img{
+
   transform:scale(1.045);
+
 }
 
 
@@ -960,15 +1327,22 @@ a:focus-visible,
    ========================================================= */
 
 .event-body{
+
   text-align:center;
 
   position:relative;
 
   z-index:10;
+
+  padding-left:4px;
+
+  padding-right:4px;
+
 }
 
 
 .event-year{
+
   font-family:var(--font-mono);
 
   font-size:13px;
@@ -978,10 +1352,12 @@ a:focus-visible,
   color:var(--primary);
 
   margin-top:12px;
+
 }
 
 
 .event-title{
+
   font-family:var(--font-title);
 
   font-weight:600;
@@ -991,10 +1367,12 @@ a:focus-visible,
   margin-top:4px;
 
   line-height:1.25;
+
 }
 
 
 .event-desc{
+
   font-size:12px;
 
   color:var(--muted);
@@ -1002,14 +1380,64 @@ a:focus-visible,
   margin-top:7px;
 
   line-height:1.45;
+
 }
 
 
 /* =========================================================
-   BOTÃO SABER MAIS
+   EVENTOS DE BAIXO
+   TEXTO POR CIMA DA IMAGEM
+   ========================================================= */
+
+.event-bottom .event-card{
+
+  display:block;
+
+}
+
+
+.event-bottom .event-figure{
+
+  position:relative;
+
+}
+
+
+.event-bottom .event-body{
+
+  position:absolute;
+
+  left:5%;
+
+  right:5%;
+
+  bottom:0;
+
+  padding:
+    55px
+    12px
+    14px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(5,7,7,.12) 15%,
+      rgba(5,7,7,.72) 50%,
+      rgba(5,7,7,.96) 100%
+    );
+
+}
+
+
+/* =========================================================
+   SABER MAIS
    ========================================================= */
 
 .event-more{
+
   position:relative;
 
   z-index:20;
@@ -1042,40 +1470,59 @@ a:focus-visible,
     border-color .3s,
     color .3s,
     gap .3s;
+
 }
 
 
 .event-more:hover{
+
   color:var(--primary);
 
   border-color:var(--primary);
 
   gap:10px;
+
 }
 
 
 @media(max-width:560px){
 
   .event-title{
+
     font-size:15px;
+
   }
 
   .event-desc{
+
     font-size:11px;
+
   }
 
   .event-more{
+
     font-size:9px;
+
+  }
+
+  .event-bottom .event-body{
+
+    padding:
+      42px
+      8px
+      10px;
+
   }
 
 }
 
 
 /* =========================================================
-   PAINÉIS
+   PAINÉIS DA TIMELINE
    ========================================================= */
 
 .track-panel{
+
   position:absolute;
 
   top:50%;
@@ -1085,10 +1532,12 @@ a:focus-visible,
   width:min(340px,70vw);
 
   text-align:center;
+
 }
 
 
 .track-panel .panel-inner{
+
   opacity:0;
 
   transform:translateY(24px);
@@ -1099,17 +1548,21 @@ a:focus-visible,
 
     transform .7s
     cubic-bezier(.4,0,.2,1);
+
 }
 
 
 .track-panel.in-view .panel-inner{
+
   opacity:1;
 
   transform:translateY(0);
+
 }
 
 
 .track-panel .label{
+
   font-family:var(--font-mono);
 
   font-size:11px;
@@ -1119,10 +1572,12 @@ a:focus-visible,
   color:var(--secondary);
 
   text-transform:uppercase;
+
 }
 
 
 .track-panel h2{
+
   font-family:var(--font-title);
 
   font-weight:300;
@@ -1130,10 +1585,12 @@ a:focus-visible,
   font-size:clamp(26px,4vw,40px);
 
   margin:14px 0 12px;
+
 }
 
 
 .track-panel p{
+
   color:var(--muted);
 
   font-size:14px;
@@ -1141,10 +1598,12 @@ a:focus-visible,
   line-height:1.6;
 
   margin-bottom:20px;
+
 }
 
 
 .btn-ghost{
+
   font-family:var(--font-mono);
 
   font-size:12px;
@@ -1160,24 +1619,29 @@ a:focus-visible,
   color:var(--text);
 
   transition:.3s;
+
 }
 
 
 .btn-ghost:hover{
+
   border-color:var(--primary);
 
   color:var(--primary);
+
 }
 
 
 /* =========================================================
-   CONTROLES
+   CONTROLES INFERIORES
    ========================================================= */
 
 .nav-controls{
+
   position:fixed;
 
   left:0;
+
   right:0;
 
   bottom:18px;
@@ -1187,11 +1651,15 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   gap:18px;
 
-  padding:8px 20px;
+  padding:
+    8px
+    20px
+    calc(8px + env(safe-area-inset-bottom));
 
   opacity:0;
 
@@ -1205,10 +1673,12 @@ a:focus-visible,
     visibility .6s;
 
   pointer-events:none;
+
 }
 
 
 .nav-controls.visible{
+
   opacity:1;
 
   visibility:visible;
@@ -1216,6 +1686,7 @@ a:focus-visible,
   transform:translateY(0);
 
   pointer-events:auto;
+
 }
 
 
@@ -1224,7 +1695,9 @@ a:focus-visible,
    ========================================================= */
 
 .nav-arrow{
+
   width:42px;
+
   height:42px;
 
   border-radius:50%;
@@ -1238,6 +1711,7 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   font-size:16px;
@@ -1249,18 +1723,23 @@ a:focus-visible,
     transform .2s;
 
   flex:none;
+
 }
 
 
 .nav-arrow:hover{
+
   border-color:var(--primary);
 
   transform:translateY(-2px);
+
 }
 
 
 .nav-arrow:active{
+
   transform:translateY(0);
+
 }
 
 
@@ -1269,6 +1748,7 @@ a:focus-visible,
    ========================================================= */
 
 .progress-wrap{
+
   width:min(420px,50vw);
 
   display:flex;
@@ -1276,10 +1756,12 @@ a:focus-visible,
   flex-direction:column;
 
   gap:6px;
+
 }
 
 
 .progress-track{
+
   position:relative;
 
   height:2px;
@@ -1289,14 +1771,18 @@ a:focus-visible,
   border-radius:2px;
 
   overflow:hidden;
+
 }
 
 
 .progress-fill{
+
   position:absolute;
 
   left:0;
+
   top:0;
+
   bottom:0;
 
   width:0%;
@@ -1304,10 +1790,12 @@ a:focus-visible,
   background:var(--primary);
 
   transition:width .1s linear;
+
 }
 
 
 .progress-years{
+
   display:flex;
 
   justify-content:space-between;
@@ -1319,17 +1807,22 @@ a:focus-visible,
   color:var(--secondary);
 
   letter-spacing:.05em;
+
 }
 
 
 @media(max-width:620px){
 
   .progress-wrap{
+
     width:44vw;
+
   }
 
   .progress-years span:not(:first-child):not(:last-child){
+
     display:none;
+
   }
 
 }
@@ -1340,6 +1833,7 @@ a:focus-visible,
    ========================================================= */
 
 .modal-overlay{
+
   position:fixed;
 
   inset:0;
@@ -1355,6 +1849,7 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   padding:24px;
@@ -1368,19 +1863,23 @@ a:focus-visible,
   transition:
     opacity .35s ease,
     visibility .35s ease;
+
 }
 
 
 .modal-overlay.open{
+
   opacity:1;
 
   visibility:visible;
 
   pointer-events:auto;
+
 }
 
 
 .modal{
+
   width:min(640px,100%);
 
   max-height:88vh;
@@ -1404,17 +1903,21 @@ a:focus-visible,
   box-shadow:
     0 40px 80px -20px
     rgba(0,0,0,.7);
+
 }
 
 
 .modal-overlay.open .modal{
+
   transform:
     scale(1)
     translateY(0);
+
 }
 
 
 .modal-close{
+
   position:sticky;
 
   top:14px;
@@ -1424,6 +1927,7 @@ a:focus-visible,
   margin:14px 14px 0 0;
 
   width:34px;
+
   height:34px;
 
   border-radius:50%;
@@ -1433,44 +1937,56 @@ a:focus-visible,
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   font-size:18px;
 
   z-index:20;
+
 }
 
 
 .modal-close:hover{
+
   background:rgba(0,0,0,.7);
 
   color:var(--primary);
+
 }
 
 
 .modal-figure{
+
   width:100%;
 
   aspect-ratio:16 / 10;
 
   overflow:hidden;
+
 }
 
 
 .modal-figure img{
+
   width:100%;
+
   height:100%;
 
   object-fit:cover;
+
 }
 
 
 .modal-body{
+
   padding:8px 34px 40px;
+
 }
 
 
 .modal-year{
+
   font-family:var(--font-mono);
 
   font-size:13px;
@@ -1480,10 +1996,12 @@ a:focus-visible,
   letter-spacing:.1em;
 
   margin-top:18px;
+
 }
 
 
 .modal-title{
+
   font-family:var(--font-title);
 
   font-weight:600;
@@ -1491,15 +2009,18 @@ a:focus-visible,
   font-size:clamp(22px,3vw,30px);
 
   margin:10px 0 18px;
+
 }
 
 
 .modal-desc{
+
   color:var(--muted);
 
   font-size:15px;
 
   line-height:1.75;
+
 }
 
 
@@ -1514,52 +2035,67 @@ a:focus-visible,
 ){
 
   :root{
+
     --event-size:230px;
+
     --connector-h:32px;
-  }
 
+    --top-safe-space:82px;
 
-  .event-top .event-card{
-    bottom:calc(var(--connector-h) + 8px);
-  }
+    --bottom-safe-space:92px;
 
+    --timeline-safe-gap:18px;
 
-  .event-bottom .event-card{
-    top:calc(var(--connector-h) + 8px);
   }
 
 
   .event-year{
+
     margin-top:7px;
+
     font-size:11px;
+
   }
 
 
   .event-title{
+
     font-size:16px;
+
   }
 
 
   .event-desc{
+
     font-size:11px;
+
     margin-top:5px;
+
   }
 
 
   .event-more{
+
     margin-top:7px;
+
     font-size:9px;
+
   }
 
 
   .nav-controls{
+
     bottom:8px;
+
   }
 
 
   .nav-arrow{
+
     width:36px;
+
     height:36px;
+
   }
 
 }
@@ -1576,40 +2112,49 @@ a:focus-visible,
 ){
 
   :root{
+
     --event-size:185px;
+
     --connector-h:26px;
-  }
 
+    --top-safe-space:62px;
 
-  .event-top .event-card{
-    bottom:calc(var(--connector-h) + 5px);
-  }
+    --bottom-safe-space:70px;
 
+    --timeline-safe-gap:10px;
 
-  .event-bottom .event-card{
-    top:calc(var(--connector-h) + 5px);
   }
 
 
   .event-year{
+
     margin-top:5px;
+
     font-size:10px;
+
   }
 
 
   .event-title{
+
     font-size:14px;
+
   }
 
 
   .event-desc{
+
     font-size:9px;
+
   }
 
 
   .event-more{
+
     font-size:8px;
+
     margin-top:5px;
+
   }
 
 }
@@ -1622,26 +2167,58 @@ a:focus-visible,
 @media(max-width:560px){
 
   .modal-overlay{
+
     padding:12px;
+
   }
 
 
   .modal{
+
     max-height:90vh;
+
   }
 
 
   .modal-body{
+
     padding:
       6px
       20px
       28px;
+
   }
 
 
   .modal-desc{
+
     font-size:13px;
+
     line-height:1.65;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE COM POUCA ALTURA
+   ========================================================= */
+
+@media(
+  max-width:560px
+) and (
+  max-height:650px
+){
+
+  :root{
+
+    --top-safe-space:68px;
+
+    --bottom-safe-space:82px;
+
+    --timeline-safe-gap:12px;
+
   }
 
 }
@@ -1654,13 +2231,18 @@ a:focus-visible,
 @media(prefers-reduced-motion:reduce){
 
   *{
+
     animation-duration:.001s !important;
+
     transition-duration:.001s !important;
+
   }
 
 
   .timeline-track{
+
     transition:none !important;
+
   }
 
 }
@@ -1671,9 +2253,11 @@ a:focus-visible,
    ========================================================= */
 
 .sr-only{
+
   position:absolute;
 
   width:1px;
+
   height:1px;
 
   overflow:hidden;
@@ -1681,6 +2265,7 @@ a:focus-visible,
   clip:rect(0,0,0,0);
 
   white-space:nowrap;
+
 }
 
 </style>
@@ -1689,12 +2274,21 @@ a:focus-visible,
 
 <body>
 
+
+<!-- =======================================================
+     FUNDO
+     ======================================================= -->
+
 <div class="bg-layer" id="bgLayer"></div>
 
 <div class="bg-vignette"></div>
 
 <div class="bg-grain"></div>
 
+
+<!-- =======================================================
+     LOADING
+     ======================================================= -->
 
 <div id="loading-screen" aria-hidden="true">
 
@@ -1710,6 +2304,10 @@ a:focus-visible,
 
 </div>
 
+
+<!-- =======================================================
+     HEADER
+     ======================================================= -->
 
 <header class="site-header">
 
@@ -1739,6 +2337,10 @@ a:focus-visible,
 
 </header>
 
+
+<!-- =======================================================
+     MENU MOBILE
+     ======================================================= -->
 
 <button
   class="menu-toggle"
@@ -1773,6 +2375,10 @@ a:focus-visible,
 
 </aside>
 
+
+<!-- =======================================================
+     INTRO
+     ======================================================= -->
 
 <section
   class="intro"
@@ -1831,6 +2437,10 @@ a:focus-visible,
 </section>
 
 
+<!-- =======================================================
+     TIMELINE
+     ======================================================= -->
+
 <main
   class="timeline-viewport"
   id="viewport"
@@ -1849,6 +2459,10 @@ a:focus-visible,
 
 </main>
 
+
+<!-- =======================================================
+     CONTROLES
+     ======================================================= -->
 
 <div
   class="nav-controls"
@@ -1894,6 +2508,10 @@ a:focus-visible,
 
 </div>
 
+
+<!-- =======================================================
+     MODAL
+     ======================================================= -->
 
 <div
   class="modal-overlay"
@@ -1954,6 +2572,10 @@ a:focus-visible,
 
 <script>
 
+/* =========================================================
+   CONFIGURAÇÃO
+   ========================================================= */
+
 const timelineConfig = {
 
   personName:"Billie Eilish",
@@ -1977,6 +2599,10 @@ const timelineConfig = {
 
 };
 
+
+/* =========================================================
+   EVENTOS
+   ========================================================= */
 
 const timelineEvents = [
 
@@ -2126,6 +2752,10 @@ const timelineEvents = [
 ];
 
 
+/* =========================================================
+   ESTADO
+   ========================================================= */
+
 const prefersReducedMotion =
   window.matchMedia(
     '(prefers-reduced-motion: reduce)'
@@ -2167,6 +2797,10 @@ let velocity = 0;
 let hasStarted = false;
 
 
+/* =========================================================
+   FUNÇÃO CSS
+   ========================================================= */
+
 function cssNum(varName){
 
   return parseFloat(
@@ -2177,6 +2811,10 @@ function cssNum(varName){
 
 }
 
+
+/* =========================================================
+   CONSTRUÇÃO DA TIMELINE
+   ========================================================= */
 
 function buildTimeline(){
 
@@ -2206,6 +2844,10 @@ function buildTimeline(){
       620
     );
 
+
+  /* -------------------------------------------------------
+     NÓ INICIAL
+     ------------------------------------------------------- */
 
   const introX =
     window.innerWidth / 2;
@@ -2262,6 +2904,10 @@ function buildTimeline(){
   track.appendChild(introNode);
 
 
+  /* -------------------------------------------------------
+     LISTA OVERVIEW
+     ------------------------------------------------------- */
+
   const overviewList =
     document.getElementById('overviewList');
 
@@ -2299,6 +2945,10 @@ function buildTimeline(){
 
   overviewList.appendChild(introLi);
 
+
+  /* -------------------------------------------------------
+     EVENTOS
+     ------------------------------------------------------- */
 
   timelineEvents.forEach(
     (ev,i)=>{
@@ -2358,35 +3008,68 @@ function buildTimeline(){
               draggable="false"
             >
 
+            ${
+              position === 'bottom'
+              ? `
+                <div class="event-body">
+
+                  <div class="event-year">
+                    ${ev.year}
+                  </div>
+
+                  <h3 class="event-title">
+                    ${ev.title}
+                  </h3>
+
+                  <p class="event-desc">
+                    ${ev.shortDescription}
+                  </p>
+
+                  <button
+                    type="button"
+                    class="event-more"
+                    data-event-index="${i}"
+                  >
+                    Saber mais →
+                  </button>
+
+                </div>
+              `
+              : ''
+            }
+
           </div>
 
 
-          <div class="event-body">
+          ${
+            position === 'top'
+            ? `
+              <div class="event-body">
 
-            <div class="event-year">
-              ${ev.year}
-            </div>
+                <div class="event-year">
+                  ${ev.year}
+                </div>
 
+                <h3 class="event-title">
+                  ${ev.title}
+                </h3>
 
-            <h3 class="event-title">
-              ${ev.title}
-            </h3>
+                <p class="event-desc">
+                  ${ev.shortDescription}
+                </p>
 
+                <button
+                  type="button"
+                  class="event-more"
+                  data-event-index="${i}"
+                >
+                  Saber mais →
+                </button>
 
-            <p class="event-desc">
-              ${ev.shortDescription}
-            </p>
-
-
-            <button
-              type="button"
-              class="event-more"
-              data-event-index="${i}"
-            >
-              Saber mais →
-            </button>
-
-          </div>
+              </div>
+            `
+            : ''
+          }
 
         </div>
 
@@ -2395,8 +3078,13 @@ function buildTimeline(){
 
       track.appendChild(el);
 
+
       eventEls.push(el);
 
+
+      /* -----------------------------------------------
+         OVERVIEW
+      ------------------------------------------------ */
 
       const li =
         document.createElement('li');
@@ -2425,6 +3113,10 @@ function buildTimeline(){
       overviewList.appendChild(li);
 
 
+      /* -----------------------------------------------
+         ANOS DO PROGRESSO
+      ------------------------------------------------ */
+
       if(
         i === 0 ||
         i === timelineEvents.length - 1 ||
@@ -2449,6 +3141,10 @@ function buildTimeline(){
     }
   );
 
+
+  /* -------------------------------------------------------
+     PAINEL FINAL
+     ------------------------------------------------------- */
 
   const lastX =
     timelineEvents[
@@ -2543,12 +3239,21 @@ function buildTimeline(){
 
 
 const {
+
   eventEls,
+
   panelEls,
+
   introNode,
+
   introX
+
 } = buildTimeline();
 
+
+/* =========================================================
+   CLAMP
+   ========================================================= */
 
 function clamp(
   value,
@@ -2563,6 +3268,10 @@ function clamp(
 
 }
 
+
+/* =========================================================
+   ANIMAÇÃO
+   ========================================================= */
 
 function animate(){
 
@@ -2628,6 +3337,10 @@ requestAnimationFrame(
 );
 
 
+/* =========================================================
+   PROGRESSO
+   ========================================================= */
+
 function updateProgress(){
 
   const pct =
@@ -2647,6 +3360,10 @@ function updateProgress(){
 
 }
 
+
+/* =========================================================
+   EVENTO ATIVO
+   ========================================================= */
 
 function updateActiveEvent(){
 
@@ -2693,6 +3410,10 @@ function updateActiveEvent(){
 }
 
 
+/* =========================================================
+   INTERSECTION OBSERVER
+   ========================================================= */
+
 const observer =
   new IntersectionObserver(
     entries=>{
@@ -2736,6 +3457,10 @@ observer.observe(
 );
 
 
+/* =========================================================
+   RODA DO MOUSE
+   ========================================================= */
+
 viewport.addEventListener(
   'wheel',
   e=>{
@@ -2773,6 +3498,10 @@ viewport.addEventListener(
   }
 );
 
+
+/* =========================================================
+   ARRASTAR
+   ========================================================= */
 
 viewport.addEventListener(
   'pointerdown',
@@ -2891,6 +3620,10 @@ viewport.addEventListener(
 );
 
 
+/* =========================================================
+   FIM DO ARRASTO
+   ========================================================= */
+
 function endDrag(){
 
   if(!isDragging){
@@ -2936,6 +3669,10 @@ viewport.addEventListener(
   endDrag
 );
 
+
+/* =========================================================
+   TECLADO
+   ========================================================= */
 
 document.addEventListener(
   'keydown',
@@ -3015,6 +3752,10 @@ document.addEventListener(
   }
 );
 
+
+/* =========================================================
+   IR PARA EVENTO
+   ========================================================= */
 
 function goToNearestEvent(
   direction
@@ -3096,6 +3837,10 @@ function goToNearestEvent(
 }
 
 
+/* =========================================================
+   BOTÕES ANTERIOR / PRÓXIMO
+   ========================================================= */
+
 document
   .getElementById('nextBtn')
   .addEventListener(
@@ -3123,6 +3868,10 @@ document
     }
   );
 
+
+/* =========================================================
+   INÍCIO
+   ========================================================= */
 
 function startJourney(){
 
@@ -3175,6 +3924,10 @@ document
   );
 
 
+/* =========================================================
+   HEADER — INÍCIO
+   ========================================================= */
+
 document
   .querySelector(
     '[data-action="go-start"]'
@@ -3208,6 +3961,10 @@ document
   );
 
 
+/* =========================================================
+   HEADER — TIMELINE
+   ========================================================= */
+
 document
   .querySelector(
     '[data-action="go-timeline"]'
@@ -3221,6 +3978,10 @@ document
     }
   );
 
+
+/* =========================================================
+   HEADER — SOBRE
+   ========================================================= */
 
 document
   .querySelector(
@@ -3250,6 +4011,10 @@ document
   );
 
 
+/* =========================================================
+   VOLTAR AO INÍCIO
+   ========================================================= */
+
 track.addEventListener(
   'click',
   e=>{
@@ -3268,6 +4033,10 @@ track.addEventListener(
   }
 );
 
+
+/* =========================================================
+   MENU
+   ========================================================= */
 
 const menuToggle =
   document.getElementById(
@@ -3335,6 +4104,10 @@ overviewBackdrop.addEventListener(
 );
 
 
+/* =========================================================
+   OVERVIEW — IR PARA EVENTO
+   ========================================================= */
+
 document
   .getElementById('overviewList')
   .addEventListener(
@@ -3379,6 +4152,10 @@ document
   );
 
 
+/* =========================================================
+   MODAL
+   ========================================================= */
+
 const modalOverlay =
   document.getElementById(
     'modalOverlay'
@@ -3414,6 +4191,10 @@ const modalClose =
     'modalClose'
   );
 
+
+/* =========================================================
+   ABRIR MODAL
+   ========================================================= */
 
 function openModal(ev){
 
@@ -3461,6 +4242,10 @@ function openModal(ev){
 }
 
 
+/* =========================================================
+   FECHAR MODAL
+   ========================================================= */
+
 function closeModal(){
 
   modalOverlay.classList.remove(
@@ -3473,6 +4258,10 @@ function closeModal(){
 
 }
 
+
+/* =========================================================
+   SABER MAIS
+   ========================================================= */
 
 track.addEventListener(
   'click',
@@ -3519,6 +4308,10 @@ track.addEventListener(
 );
 
 
+/* =========================================================
+   BOTÃO FECHAR
+   ========================================================= */
+
 modalClose.addEventListener(
   'click',
   e=>{
@@ -3532,6 +4325,10 @@ modalClose.addEventListener(
   }
 );
 
+
+/* =========================================================
+   CLICAR FORA DO MODAL
+   ========================================================= */
 
 modalOverlay.addEventListener(
   'click',
@@ -3550,6 +4347,10 @@ modalOverlay.addEventListener(
 );
 
 
+/* =========================================================
+   ESC PARA FECHAR
+   ========================================================= */
+
 document.addEventListener(
   'keydown',
   e=>{
@@ -3566,6 +4367,10 @@ document.addEventListener(
   }
 );
 
+
+/* =========================================================
+   RESIZE
+   ========================================================= */
 
 window.addEventListener(
   'resize',
@@ -3595,6 +4400,10 @@ window.addEventListener(
   }
 );
 
+
+/* =========================================================
+   LOADING
+   ========================================================= */
 
 window.addEventListener(
   'load',
