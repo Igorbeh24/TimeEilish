@@ -13,10 +13,6 @@
 
 <style>
 
-/* =========================================================
-   1. CONFIGURAÇÃO VISUAL
-   ========================================================= */
-
 :root{
   --background:#111313;
   --background-alt:#191c1c;
@@ -42,16 +38,14 @@
   /* IMAGENS 10% MENORES */
   --event-size:270px;
 
-  /* LINHA PRÓXIMA DOS CARDS */
+  /* LINHA MAIS PRÓXIMA DOS CARDS */
   --connector-h:22px;
 
-  /* PEQUENO ESPAÇO ENTRE CONECTOR E CARD */
   --timeline-safe-gap:8px;
 
   --top-safe-space:90px;
   --bottom-safe-space:110px;
 
-  /* DISTÂNCIA ENTRE EVENTOS */
   --card-gap:470px;
 }
 
@@ -1116,63 +1110,6 @@ a:focus-visible,
 
 
 /* =========================================================
-   DATA — LADO OPOSTO DA LINHA
-   ========================================================= */
-
-.event-date{
-
-  position:absolute;
-
-  left:0;
-
-  width:140px;
-
-  transform:translateX(-50%);
-
-  font-family:var(--font-mono);
-
-  font-size:12px;
-
-  letter-spacing:.12em;
-
-  color:var(--primary);
-
-  text-align:center;
-
-  white-space:nowrap;
-
-  z-index:4;
-
-}
-
-
-/*
-   EVENTO EM CIMA:
-   CARD EM CIMA DA LINHA
-   DATA EMBAIXO DA LINHA
-*/
-
-.event-top .event-date{
-
-  top:17px;
-
-}
-
-
-/*
-   EVENTO EMBAIXO:
-   CARD EMBAIXO DA LINHA
-   DATA EM CIMA DA LINHA
-*/
-
-.event-bottom .event-date{
-
-  bottom:17px;
-
-}
-
-
-/* =========================================================
    CONECTOR
    ========================================================= */
 
@@ -1242,7 +1179,7 @@ a:focus-visible,
 
 
 /* =========================================================
-   CARD EM CIMA
+   EVENTOS DE CIMA
    ========================================================= */
 
 .event-top .event-card{
@@ -1260,7 +1197,8 @@ a:focus-visible,
 
 
 /* =========================================================
-   CARD EM BAIXO
+   EVENTOS DE BAIXO
+   TEXTO ACIMA DA IMAGEM
    ========================================================= */
 
 .event-bottom .event-card{
@@ -1276,10 +1214,6 @@ a:focus-visible,
 
 }
 
-
-/* =========================================================
-   ANIMAÇÃO DE ENTRADA
-   ========================================================= */
 
 .event.in-view .event-card{
 
@@ -1386,7 +1320,7 @@ a:focus-visible,
 
 
 /* =========================================================
-   TEXTO DOS EVENTOS
+   TEXTO
    ========================================================= */
 
 .event-body{
@@ -1445,10 +1379,6 @@ a:focus-visible,
 
 }
 
-
-/* =========================================================
-   BOTÃO SABER MAIS
-   ========================================================= */
 
 .event-more{
 
@@ -1519,31 +1449,11 @@ a:focus-visible,
 
   }
 
-  .event-date{
-
-    font-size:10px;
-
-    width:100px;
-
-  }
-
-  .event-top .event-date{
-
-    top:14px;
-
-  }
-
-  .event-bottom .event-date{
-
-    bottom:14px;
-
-  }
-
 }
 
 
 /* =========================================================
-   PAINÉIS DA TIMELINE
+   PAINÉIS
    ========================================================= */
 
 .track-panel{
@@ -1658,7 +1568,7 @@ a:focus-visible,
 
 
 /* =========================================================
-   CONTROLES INFERIORES
+   CONTROLES
    ========================================================= */
 
 .nav-controls{
@@ -1714,10 +1624,6 @@ a:focus-visible,
 
 }
 
-
-/* =========================================================
-   SETAS
-   ========================================================= */
 
 .nav-arrow{
 
@@ -2061,7 +1967,6 @@ a:focus-visible,
 
   :root{
 
-    /* 230px → 207px = 10% MENOR */
     --event-size:207px;
 
     --connector-h:20px;
@@ -2109,27 +2014,6 @@ a:focus-visible,
   }
 
 
-  .event-date{
-
-    font-size:10px;
-
-  }
-
-
-  .event-top .event-date{
-
-    top:15px;
-
-  }
-
-
-  .event-bottom .event-date{
-
-    bottom:15px;
-
-  }
-
-
   .nav-controls{
 
     bottom:8px;
@@ -2149,7 +2033,7 @@ a:focus-visible,
 
 
 /* =========================================================
-   PC HORIZONTAL MUITO BAIXO
+   PC MUITO BAIXO
    ========================================================= */
 
 @media(
@@ -2160,8 +2044,7 @@ a:focus-visible,
 
   :root{
 
-    /* 185px → 166px = 10% MENOR */
-    --event-size:166px;
+    --event-size:167px;
 
     --connector-h:16px;
 
@@ -2205,27 +2088,6 @@ a:focus-visible,
 
   }
 
-
-  .event-date{
-
-    font-size:9px;
-
-  }
-
-
-  .event-top .event-date{
-
-    top:13px;
-
-  }
-
-
-  .event-bottom .event-date{
-
-    bottom:13px;
-
-  }
-
 }
 
 
@@ -2264,29 +2126,6 @@ a:focus-visible,
     font-size:13px;
 
     line-height:1.65;
-
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE COM POUCA ALTURA
-   ========================================================= */
-
-@media(
-  max-width:560px
-) and (
-  max-height:650px
-){
-
-  :root{
-
-    --top-safe-space:68px;
-
-    --bottom-safe-space:82px;
-
-    --timeline-safe-gap:5px;
 
   }
 
@@ -2343,10 +2182,6 @@ a:focus-visible,
 
 <body>
 
-
-<!-- =======================================================
-     FUNDO
-     ======================================================= -->
 
 <div class="bg-layer" id="bgLayer"></div>
 
@@ -2676,7 +2511,7 @@ const timelineConfig = {
 const timelineEvents = [
 
   {
-    year:"2001",
+    year:"18 DE DEZEMBRO DE 2001",
 
     title:"Nascimento",
 
@@ -2684,10 +2519,10 @@ const timelineEvents = [
       "https://picsum.photos/seed/billie-2001/700/700",
 
     shortDescription:
-      "Billie Eilish nasce em Los Angeles.",
+      "O nascimento e os primeiros anos de Billie Eilish.",
 
     description:
-      "Billie Eilish Pirate Baird O'Connell nasceu em Los Angeles em 18 de dezembro de 2001. Seu primeiro nome é uma homenagem ao seu avô materno, William; o segundo foi inspirado por uma gêmea siamesa que seus pais viram em um documentário; e o terceiro veio da insistência de seu irmão mais velho, Finneas. Os pais de Billie, Maggie Baird e Patrick O'Connell, foram atores por muitos anos antes de se juntarem à equipe profissional da filha adolescente. Criada em uma casa de dois quartos em Highland Park, onde ela e o irmão estudavam em casa, Eilish foi incentivada a seguir seus interesses em dança, ginástica, equitação e, principalmente, música. Ela começou a tocar ukulele aos 6 anos de idade. A primeira música que aprendeu a tocar foi "I Will", dos Beatles . Aos 8 anos, Eilish entrou para o Coral Infantil de Los Angeles, onde aprimorou seu talento vocal. Aos 11, começou a compor músicas a sério com a ajuda das aulas de composição de sua mãe. Eilish contou que sua primeira música "de verdade", "Fingers Crossed", foi escrita nessa época, depois de assistir a um episódio de The Walking Dead. Apesar do talento musical, Eilish inicialmente queria ser dançarina, mas depois que uma lesão na placa de crescimento do quadril pôs fim às suas ambições na dança aos 13 anos, ela decidiu se dedicar totalmente à música."
+      "Billie Eilish Pirate Baird O'Connell nasceu em Los Angeles em 18 de dezembro de 2001. Seu primeiro nome é uma homenagem ao seu avô materno, William; o segundo foi inspirado por uma gêmea siamesa que seus pais viram em um documentário; e o terceiro veio da insistência de seu irmão mais velho, Finneas. Os pais de Billie, Maggie Baird e Patrick O'Connell, foram atores por muitos anos antes de se juntarem à equipe profissional da filha adolescente. Criada em uma casa de dois quartos em Highland Park, onde ela e o irmão estudavam em casa, Eilish foi incentivada a seguir seus interesses em dança, ginástica, equitação e, principalmente, música. Ela começou a tocar ukulele aos 6 anos de idade. A primeira música que aprendeu a tocar foi \"I Will\", dos Beatles. Aos 8 anos, Eilish entrou para o Coral Infantil de Los Angeles, onde aprimorou seu talento vocal. Aos 11, começou a compor músicas a sério com a ajuda das aulas de composição de sua mãe. Eilish contou que sua primeira música \"de verdade\", \"Fingers Crossed\", foi escrita nessa época, depois de assistir a um episódio de The Walking Dead. Apesar do talento musical, Eilish inicialmente queria ser dançarina, mas depois que uma lesão na placa de crescimento do quadril pôs fim às suas ambições na dança aos 13 anos, ela decidiu se dedicar totalmente à música."
   },
 
 
@@ -2914,9 +2749,9 @@ function buildTimeline(){
     );
 
 
-  /* -------------------------------------------------------
+  /* =======================================================
      NÓ INICIAL
-     ------------------------------------------------------- */
+     ======================================================= */
 
   const introX =
     window.innerWidth / 2;
@@ -2941,21 +2776,18 @@ function buildTimeline(){
       aria-hidden="true"
     ></div>
 
-
     <div
       class="event-marker"
       aria-hidden="true"
     ></div>
 
-
-    <div class="event-date">
-      ${timelineEvents[0].year}
-    </div>
-
-
     <div class="event-card">
 
       <div class="event-body">
+
+        <div class="event-year">
+          2001 · início
+        </div>
 
         <h3 class="event-title">
           A jornada começa
@@ -2976,9 +2808,9 @@ function buildTimeline(){
   track.appendChild(introNode);
 
 
-  /* -------------------------------------------------------
-     LISTA OVERVIEW
-     ------------------------------------------------------- */
+  /* =======================================================
+     OVERVIEW
+     ======================================================= */
 
   const overviewList =
     document.getElementById('overviewList');
@@ -3018,9 +2850,9 @@ function buildTimeline(){
   overviewList.appendChild(introLi);
 
 
-  /* -------------------------------------------------------
+  /* =======================================================
      EVENTOS
-     ------------------------------------------------------- */
+     ======================================================= */
 
   timelineEvents.forEach(
     (ev,i)=>{
@@ -3069,24 +2901,18 @@ function buildTimeline(){
         ></div>
 
 
-        <!-- DATA NO LADO OPOSTO DA LINHA -->
-
-        <div class="event-date">
-
-          ${ev.year}
-
-        </div>
-
-
         <div class="event-card">
 
           ${
             position === 'bottom'
             ? `
-
-              <!-- EVENTO DE BAIXO -->
+              <!-- TEXTO ACIMA DA IMAGEM -->
 
               <div class="event-body">
+
+                <div class="event-year">
+                  ${ev.year}
+                </div>
 
                 <h3 class="event-title">
                   ${ev.title}
@@ -3106,7 +2932,6 @@ function buildTimeline(){
 
               </div>
 
-
               <div class="event-figure">
 
                 <img
@@ -3117,11 +2942,9 @@ function buildTimeline(){
                 >
 
               </div>
-
             `
             : `
-
-              <!-- EVENTO DE CIMA -->
+              <!-- IMAGEM ACIMA -->
 
               <div class="event-figure">
 
@@ -3134,8 +2957,13 @@ function buildTimeline(){
 
               </div>
 
+              <!-- TEXTO ABAIXO -->
 
               <div class="event-body">
+
+                <div class="event-year">
+                  ${ev.year}
+                </div>
 
                 <h3 class="event-title">
                   ${ev.title}
@@ -3154,7 +2982,6 @@ function buildTimeline(){
                 </button>
 
               </div>
-
             `
           }
 
@@ -3169,9 +2996,9 @@ function buildTimeline(){
       eventEls.push(el);
 
 
-      /* -----------------------------------------------
+      /* =====================================================
          OVERVIEW
-      ------------------------------------------------ */
+         ===================================================== */
 
       const li =
         document.createElement('li');
@@ -3200,9 +3027,9 @@ function buildTimeline(){
       overviewList.appendChild(li);
 
 
-      /* -----------------------------------------------
+      /* =====================================================
          ANOS DO PROGRESSO
-      ------------------------------------------------ */
+         ===================================================== */
 
       if(
         i === 0 ||
@@ -3229,9 +3056,9 @@ function buildTimeline(){
   );
 
 
-  /* -------------------------------------------------------
+  /* =======================================================
      PAINEL FINAL
-     ------------------------------------------------------- */
+     ======================================================= */
 
   const lastX =
     timelineEvents[
@@ -4517,4 +4344,4 @@ window.addEventListener(
 </script>
 
 </body>
-       </html>
+   </html>
