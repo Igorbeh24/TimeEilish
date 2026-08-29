@@ -39,25 +39,29 @@
   --font-body:'Inter',sans-serif;
   --font-mono:'Space Mono',monospace;
 
-  /*
-     TAMANHO DOS CARDS
-  */
+  /* TAMANHO DOS CARDS */
   --event-size:300px;
 
-  /*
-     DISTÂNCIA ENTRE A LINHA E O CARD
-  */
+  /* DISTÂNCIA ENTRE LINHA E CARD */
   --connector-h:45px;
 
-  /*
-     DISTÂNCIA HORIZONTAL ENTRE EVENTOS
-  */
+  /* DISTÂNCIA HORIZONTAL ENTRE EVENTOS */
   --card-gap:470px;
 
   /*
-     ESPAÇO RESERVADO PARA OS CONTROLES
+     ÁREAS DE SEGURANÇA
+
+     O topo protege o header.
+     O bottom protege as setas/progresso.
   */
+  --top-safe-space:90px;
   --bottom-safe-space:110px;
+
+  /*
+     Espaço adicional entre o card
+     e as áreas protegidas.
+  */
+  --timeline-safe-gap:24px;
 }
 
 
@@ -93,6 +97,10 @@
     --event-size:185px;
     --connector-h:30px;
     --card-gap:285px;
+
+    --top-safe-space:72px;
+    --bottom-safe-space:88px;
+    --timeline-safe-gap:16px;
   }
 
 }
@@ -406,6 +414,8 @@ a:focus-visible,
   padding:
     20px
     clamp(20px,4vw,56px);
+
+  min-height:72px;
 
   background:
     linear-gradient(
@@ -1172,19 +1182,37 @@ a:focus-visible,
     transform .6s
     cubic-bezier(.4,0,.2,1);
 
+  /*
+     Impede que um card fique maior
+     que a área disponível.
+  */
+
+  max-height:
+    calc(
+      50vh
+      - var(--top-safe-space) / 2
+      - var(--bottom-safe-space) / 2
+      - var(--timeline-safe-gap)
+    );
+
 }
 
 
 /*
    CARD EM CIMA
 
-   O limite de altura foi pensado para
-   não bater no header.
+   O card termina antes da área
+   reservada para o HEADER.
 */
 
 .event-top .event-card{
 
-  bottom:calc(var(--connector-h) + 14px);
+  bottom:
+    calc(
+      var(--connector-h)
+      + var(--timeline-safe-gap)
+      + var(--top-safe-space)
+    );
 
   transform:
     translate(-50%,26px);
@@ -1195,13 +1223,18 @@ a:focus-visible,
 /*
    CARD EM BAIXO
 
-   O padding extra impede que o
-   conteúdo fique atrás das setinhas.
+   O card começa depois da área
+   reservada para os CONTROLES.
 */
 
 .event-bottom .event-card{
 
-  top:calc(var(--connector-h) + 14px);
+  top:
+    calc(
+      var(--connector-h)
+      + var(--timeline-safe-gap)
+      + var(--bottom-safe-space)
+    );
 
   transform:
     translate(-50%,-26px);
@@ -1324,6 +1357,9 @@ a:focus-visible,
   position:relative;
 
   z-index:10;
+
+  padding-left:4px;
+  padding-right:4px;
 
 }
 
@@ -1586,7 +1622,10 @@ a:focus-visible,
 
   gap:18px;
 
-  padding:8px 20px;
+  padding:
+    8px
+    20px
+    calc(8px + env(safe-area-inset-bottom));
 
   opacity:0;
 
@@ -1955,14 +1994,6 @@ a:focus-visible,
    PC HORIZONTAL
    ========================================================= */
 
-/*
-   Aqui está uma das correções principais.
-
-   Em telas largas e baixas, os cards são reduzidos
-   para que não fiquem espremidos entre o topo e
-   os controles inferiores.
-*/
-
 @media(
   min-width:900px
 ) and (
@@ -1975,19 +2006,11 @@ a:focus-visible,
 
     --connector-h:32px;
 
-  }
+    --top-safe-space:82px;
 
+    --bottom-safe-space:92px;
 
-  .event-top .event-card{
-
-    bottom:calc(var(--connector-h) + 8px);
-
-  }
-
-
-  .event-bottom .event-card{
-
-    top:calc(var(--connector-h) + 8px);
+    --timeline-safe-gap:18px;
 
   }
 
@@ -2060,19 +2083,11 @@ a:focus-visible,
 
     --connector-h:26px;
 
-  }
+    --top-safe-space:62px;
 
+    --bottom-safe-space:70px;
 
-  .event-top .event-card{
-
-    bottom:calc(var(--connector-h) + 5px);
-
-  }
-
-
-  .event-bottom .event-card{
-
-    top:calc(var(--connector-h) + 5px);
+    --timeline-safe-gap:10px;
 
   }
 
@@ -2146,6 +2161,29 @@ a:focus-visible,
     font-size:13px;
 
     line-height:1.65;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE COM POUCA ALTURA
+   ========================================================= */
+
+@media(
+  max-width:560px
+) and (
+  max-height:650px
+){
+
+  :root{
+
+    --top-safe-space:68px;
+
+    --bottom-safe-space:82px;
+
+    --timeline-safe-gap:12px;
 
   }
 
@@ -3100,8 +3138,8 @@ function buildTimeline(){
 
 
   /*
-     Deixa espaço suficiente no final para
-     o último elemento não ficar cortado.
+     Deixa espaço suficiente no final
+     para o último elemento não ficar cortado.
   */
 
   const trackWidth =
@@ -3489,11 +3527,6 @@ viewport.addEventListener(
         maxScroll
       );
 
-
-    /*
-       Resposta imediata durante
-       o arrasto.
-    */
 
     currentScroll =
       targetScroll;
@@ -4142,11 +4175,6 @@ function openModal(ev){
     true;
 
 
-  /*
-     Tira o foco do sistema de arrasto
-     e coloca no botão fechar.
-  */
-
   setTimeout(
     ()=>{
       modalClose.focus();
@@ -4177,17 +4205,6 @@ function closeModal(){
 /* =========================================================
    SABER MAIS
    ========================================================= */
-
-/*
-   ESTA PARTE FOI REFEITA.
-
-   Em vez de tentar colocar um listener
-   em cada botão individualmente, usamos
-   delegação de eventos.
-
-   Assim funciona mesmo que os cards sejam
-   criados dinamicamente pelo JavaScript.
-*/
 
 track.addEventListener(
   'click',
@@ -4302,11 +4319,6 @@ window.addEventListener(
   'resize',
   ()=>{
 
-    /*
-       Mantém o scroll dentro dos limites
-       quando a janela muda de tamanho.
-    */
-
     const trackWidth =
       parseFloat(
         track.style.width
@@ -4361,4 +4373,4 @@ window.addEventListener(
 </script>
 
 </body>
-   </html>
+     </html>
