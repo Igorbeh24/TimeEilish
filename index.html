@@ -4760,7 +4760,60 @@ const iconMute =
    it simply toggles mute/unmute.
 */
 
-let musicIsMuted = true;
+let musicIsMuted = false;
+
+bgMusic.muted = false;
+
+bgMusic.volume = 0.6;
+
+/*
+   Browsers block audio with sound from starting
+   automatically before the user interacts with the
+   page. Because of this, we try to play it right away
+   (in case the browser allows it), and we also try
+   again on the very first click/tap/keypress anywhere
+   on the page, so the music starts playing on its own
+   without the person needing to press the mute button.
+*/
+
+function tryAutoPlayMusic(){
+
+  if(
+    musicIsMuted ||
+    !bgMusic.paused
+  ){
+
+    return;
+
+  }
+
+  bgMusic.play().catch(
+    ()=>{}
+  );
+
+}
+
+
+tryAutoPlayMusic();
+
+
+[
+  'pointerdown',
+  'keydown',
+  'touchstart'
+].forEach(
+  evt=>{
+
+    document.addEventListener(
+      evt,
+      tryAutoPlayMusic,
+      {
+        once:true
+      }
+    );
+
+  }
+);
 
 
 function setMusicIcon(){
