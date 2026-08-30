@@ -659,7 +659,7 @@ a:focus-visible,
 
   .main-nav{
     display:flex;
-    gap:clamp(7px,2.2vw,14px);
+    gap:clamp(6px,2vw,12px);
     margin-left:auto;
   }
 
@@ -747,7 +747,7 @@ a:focus-visible,
   }
 
   .main-nav{
-    gap:8px;
+    gap:7px;
   }
 
   .main-nav button{
@@ -2491,6 +2491,112 @@ a:focus-visible,
 
 }
 
+.modal-extra{
+
+  margin-top:26px;
+
+  border-top:1px solid var(--event-border);
+
+  padding-top:22px;
+
+}
+
+.modal-contact-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(2,minmax(0,1fr));
+
+  gap:18px;
+
+}
+
+.modal-contact-group{
+
+  border:1px solid var(--event-border);
+
+  background:rgba(15,17,17,.34);
+
+  padding:16px;
+
+}
+
+.modal-contact-group h3{
+
+  font-family:var(--font-mono);
+
+  font-size:10px;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+
+  color:var(--secondary);
+
+  margin-bottom:10px;
+
+}
+
+.modal-contact-list{
+
+  list-style:none;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:8px;
+
+}
+
+.modal-contact-list li{
+
+  font-size:13px;
+
+  color:var(--muted);
+
+}
+
+.modal-contact-list a{
+
+  color:var(--text);
+
+  text-decoration:none;
+
+  border-bottom:1px solid var(--secondary);
+
+  padding-bottom:2px;
+
+  transition:
+    color .25s ease,
+    border-color .25s ease;
+
+}
+
+.modal-contact-list a:hover{
+
+  color:var(--primary);
+
+  border-color:var(--primary);
+
+}
+
+@media(max-width:560px){
+
+  .modal-contact-grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .modal-contact-group{
+
+    padding:14px;
+
+  }
+
+}
+
 
 /* =========================================================
    PC HORIZONTAL
@@ -2908,6 +3014,10 @@ a:focus-visible,
       Fragrance
     </button>
 
+    <button data-action="go-contact">
+      Contact
+    </button>
+
   </nav>
 
 </header>
@@ -3182,6 +3292,12 @@ a:focus-visible,
         id="modalDesc"
       ></p>
 
+      <div
+        class="modal-extra"
+        id="modalExtra"
+        hidden
+      ></div>
+
     </div>
 
   </div>
@@ -3221,7 +3337,36 @@ const timelineConfig = {
     "imagens/fundo-mobile.png",
 
   ABOUT_IMAGE:
-    "imagens/sobre.jpe"
+    "imagens/sobre.jpe",
+
+  CONTACT_IMAGE:
+    "imagens/sobre.jpe",
+
+  CONTACT_PARAGRAPH:
+    "For questions, collaborations, project feedback, or general messages about this timeline, use one of the contact options below. Choose the channel that best fits your message.",
+
+  CONTACT_LISTS:[
+    {
+      title:"Direct Contact",
+      items:[
+        {
+          label:"Email",
+          value:"contact@example.com",
+          href:"mailto:contact@example.com"
+        }
+      ]
+    },
+    {
+      title:"Social",
+      items:[
+        {
+          label:"Instagram",
+          value:"@billieeilish",
+          href:"https://www.instagram.com/billieeilish/"
+        }
+      ]
+    }
+  ]
 
 };
 
@@ -5208,6 +5353,77 @@ document
 
 
 /* =========================================================
+   HEADER — CONTACT
+   ========================================================= */
+
+
+document
+  .querySelector(
+    '[data-action="go-contact"]'
+  )
+  .addEventListener(
+    'click',
+    ()=>{
+
+      const contactHtml = `
+        <div class="modal-contact-grid">
+          ${timelineConfig.CONTACT_LISTS
+            .map(
+              group=>`
+                <section class="modal-contact-group">
+                  <h3>${group.title}</h3>
+
+                  <ul class="modal-contact-list">
+                    ${group.items
+                      .map(
+                        item=>`
+                          <li>
+                            <a
+                              href="${item.href}"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              ${item.label}: ${item.value}
+                            </a>
+                          </li>
+                        `
+                      )
+                      .join('')
+                    }
+                  </ul>
+                </section>
+              `
+            )
+            .join('')
+          }
+        </div>
+      `;
+
+
+      openModal({
+
+        year:
+          "CONTACT",
+
+        title:
+          `Contact ${timelineConfig.personName}`,
+
+        image:
+          timelineConfig.CONTACT_IMAGE,
+
+        description:
+          timelineConfig.CONTACT_PARAGRAPH,
+
+        extraHtml:
+          contactHtml
+
+      });
+
+    }
+  );
+
+
+/* =========================================================
    BACK TO START
    ========================================================= */
 
@@ -5384,6 +5600,12 @@ const modalDesc =
   );
 
 
+const modalExtra =
+  document.getElementById(
+    'modalExtra'
+  );
+
+
 const modalClose =
   document.getElementById(
     'modalClose'
@@ -5421,6 +5643,25 @@ function openModal(ev){
 
   modalDesc.textContent =
     ev.description;
+
+
+  modalExtra.innerHTML =
+    '';
+
+
+  modalExtra.hidden =
+    true;
+
+
+  if(ev.extraHtml){
+
+    modalExtra.innerHTML =
+      ev.extraHtml;
+
+    modalExtra.hidden =
+      false;
+
+  }
 
 
   modalOverlay.classList.add(
