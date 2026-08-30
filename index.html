@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,9 +7,10 @@
 <meta charset="UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+
+
 
 <title>Billie Eilish — Timeline</title>
 
@@ -24,7 +26,6 @@
   href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
   rel="stylesheet"
 >
-
 
 <style>
 
@@ -584,8 +585,6 @@ a:focus-visible,
 
 .menu-toggle{
 
-  display:none !important;
-
   position:fixed;
 
   top:20px;
@@ -627,189 +626,6 @@ a:focus-visible,
 
   }
 
-}
-
-
-/* =========================================================
-   FRAGRANCE PANEL
-   ========================================================= */
-
-.fragrance-panel{
-
-  position:fixed;
-  inset:0;
-  z-index:90;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(15,17,17,.96),
-      rgba(8,10,10,.98)
-    );
-
-  transform:translateX(100%);
-
-  transition:
-    transform .55s cubic-bezier(.4,0,.2,1);
-
-  overflow:hidden;
-
-  pointer-events:none;
-
-}
-
-.fragrance-panel.open{
-  transform:translateX(0);
-  pointer-events:auto;
-}
-
-.fragrance-header{
-
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  z-index:5;
-
-  min-height:84px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:20px clamp(20px,4vw,56px);
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(15,17,17,.96),
-      transparent
-    );
-
-  backdrop-filter:blur(7px);
-  -webkit-backdrop-filter:blur(7px);
-}
-
-.fragrance-heading{
-  font-family:var(--font-title);
-  font-size:clamp(28px,4vw,46px);
-  font-weight:300;
-}
-
-.fragrance-back{
-  font-family:var(--font-mono);
-  font-size:11px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--muted);
-  padding:8px 2px;
-  border-bottom:1px solid var(--secondary);
-  transition:.3s;
-}
-
-.fragrance-back:hover{
-  color:var(--primary);
-  border-color:var(--primary);
-}
-
-.fragrance-viewport{
-  position:absolute;
-  inset:84px 0 0;
-  overflow-x:auto;
-  overflow-y:hidden;
-  display:flex;
-  align-items:center;
-  padding:0 clamp(24px,6vw,90px) 30px;
-  scrollbar-width:thin;
-  scrollbar-color:var(--secondary) transparent;
-}
-
-.fragrance-list{
-  display:flex;
-  gap:clamp(24px,4vw,58px);
-  align-items:flex-start;
-  min-width:max-content;
-  padding:20px 0 30px;
-}
-
-.fragrance-card{
-  width:clamp(190px,22vw,270px);
-  flex:none;
-  text-align:center;
-}
-
-.fragrance-figure{
-  width:100%;
-  aspect-ratio:1 / 1;
-  overflow:hidden;
-  border:1px solid var(--event-border);
-  border-radius:var(--event-radius);
-  background:var(--event-background);
-  box-shadow:0 18px 40px -14px var(--event-shadow);
-}
-
-.fragrance-figure img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter:grayscale(55%) contrast(1.04);
-  transition:filter .6s ease, transform .6s ease;
-}
-
-.fragrance-card:hover .fragrance-figure img{
-  filter:grayscale(5%) contrast(1.02);
-  transform:scale(1.045);
-}
-
-.fragrance-name{
-  font-family:var(--font-title);
-  font-size:clamp(17px,2vw,21px);
-  font-weight:600;
-  margin-top:14px;
-  line-height:1.25;
-}
-
-.fragrance-read-more{
-  font-family:var(--font-mono);
-  font-size:10px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-top:9px;
-  border-bottom:1px solid var(--secondary);
-  padding-bottom:3px;
-  transition:.3s;
-}
-
-.fragrance-read-more:hover{
-  color:var(--primary);
-  border-color:var(--primary);
-}
-
-@media(max-width:620px){
-  .main-nav{
-    gap:clamp(9px,3vw,18px);
-  }
-
-  .main-nav button{
-    font-size:9px;
-    letter-spacing:.1em;
-  }
-
-  .fragrance-header{
-    min-height:72px;
-    padding:16px 20px;
-  }
-
-  .fragrance-viewport{
-    inset:72px 0 0;
-    padding-left:20px;
-    padding-right:20px;
-  }
-
-  .fragrance-card{
-    width:190px;
-  }
 }
 
 
@@ -2072,82 +1888,6 @@ a:focus-visible,
 
 
 /* =========================================================
-   FRAGRANCE NAVIGATION
-   ========================================================= */
-
-const fragrancePanel =
-  document.getElementById('fragrancePanel');
-
-const fragranceBack =
-  document.getElementById('fragranceBack');
-
-function openFragrance(){
-
-  fragrancePanel.classList.add('open');
-
-  fragranceOpen = true;
-
-  document.body.classList.add('fragrance-is-open');
-
-}
-
-function closeFragrance(){
-
-  fragrancePanel.classList.remove('open');
-
-  fragranceOpen = false;
-
-  document.body.classList.remove('fragrance-is-open');
-
-}
-
-fragranceBack.addEventListener(
-  'click',
-  closeFragrance
-);
-
-
-document
-  .querySelector('[data-action="go-fragrance"]')
-  .addEventListener(
-    'click',
-    openFragrance
-  );
-
-
-fragranceList.addEventListener(
-  'click',
-  e=>{
-
-    const btn =
-      e.target.closest('.fragrance-read-more');
-
-    if(!btn){
-      return;
-    }
-
-    const index =
-      Number(btn.dataset.fragranceIndex);
-
-    if(
-      !Number.isInteger(index) ||
-      !fragranceItems[index]
-    ){
-      return;
-    }
-
-    openModal({
-      year:fragranceItems[index].year,
-      title:fragranceItems[index].name,
-      image:fragranceItems[index].image,
-      description:fragranceItems[index].description
-    });
-
-  }
-);
-
-
-/* =========================================================
    MODAL
    ========================================================= */
 
@@ -2633,9 +2373,7 @@ fragranceList.addEventListener(
 
 </head>
 
-
 <body>
-
 
 <!-- =======================================================
      BACKGROUND
@@ -2649,7 +2387,6 @@ fragranceList.addEventListener(
 <div class="bg-vignette"></div>
 
 <div class="bg-grain"></div>
-
 
 <!-- =======================================================
      LOADING
@@ -2672,7 +2409,6 @@ fragranceList.addEventListener(
 
 </div>
 
-
 <!-- =======================================================
      HEADER
      ======================================================= -->
@@ -2683,68 +2419,63 @@ fragranceList.addEventListener(
     Billie <span>Eilish</span>
   </div>
 
-
   <nav
     class="main-nav"
     aria-label="Main navigation"
   >
 
-    <button data-action="go-start">
-      Home
-    </button>
+<button data-action="go-start">
+  Home
+</button>
 
-    <button data-action="go-timeline">
-      Timeline
-    </button>
+<button data-action="go-timeline">
+  Timeline
+</button>
 
-    <button data-action="go-about">
-      About
-    </button>
-
-    <button data-action="go-fragrance">
-      Fragrance
-    </button>
+<button data-action="go-about">
+  About
+</button>
 
   </nav>
 
 </header>
 
-
 <!-- =======================================================
-     FRAGRANCE
+     MOBILE MENU
      ======================================================= -->
 
+<button
+class="menu-toggle"
+id="menuToggle"
+aria-label="Open overview"
+aria-expanded="false"
+
+
+
+☰
+</button>
+
+<div
+  class="overview-backdrop"
+  id="overviewBackdrop"
+></div>
+
 <aside
-  class="fragrance-panel"
-  id="fragrancePanel"
-  aria-label="Fragrance collection"
+  class="overview-panel"
+  id="overviewPanel"
+  aria-label="Timeline overview"
 >
 
-  <header class="fragrance-header">
+  <h3>
+    Timeline
+  </h3>
 
-    <h2 class="fragrance-heading">
-      Fragrance
-    </h2>
-
-    <button
-      type="button"
-      class="fragrance-back"
-      id="fragranceBack"
-    >
-      ← Back
-    </button>
-
-  </header>
-
-  <div class="fragrance-viewport">
-    <div
-      class="fragrance-list"
-      id="fragranceList"
-    ></div>
-  </div>
+  <ul
+    class="overview-list"
+    id="overviewList"
+  ></ul>
 
 </aside>
-
 
 <!-- =======================================================
      INTRO
@@ -2759,53 +2490,48 @@ fragranceList.addEventListener(
     Interactive Biography
   </p>
 
-
   <h1 class="intro-name">
     <b>Billie Eilish</b>
   </h1>
-
 
   <p class="intro-tagline">
     A journey through the career, music and moments
     that shaped Billie Eilish.
   </p>
 
-
   <div class="intro-meta">
 
-    <span>
-      b. 2001
-    </span>
+<span>
+  b. 2001
+</span>
 
-    <span>
-      Singer & songwriter
-    </span>
+<span>
+  Singer & songwriter
+</span>
 
-    <span>
-      Los Angeles, USA
-    </span>
+<span>
+  Los Angeles, USA
+</span>
 
   </div>
 
+<button
+class="btn-start"
+id="startBtn"
 
-  <button
-    class="btn-start"
-    id="startBtn"
-  >
 
-    <span>
-      Start the journey →
-    </span>
+
+<span>
+  Start the journey →
+</span>
 
   </button>
-
 
   <p class="intro-hint">
     use your mouse, touch or the arrow keys
   </p>
 
 </section>
-
 
 <!-- =======================================================
      TIMELINE
@@ -2823,12 +2549,11 @@ fragranceList.addEventListener(
     id="track"
   >
 
-    <div class="timeline-line"></div>
+<div class="timeline-line"></div>
 
   </div>
 
 </main>
-
 
 <!-- =======================================================
      CONTROLS
@@ -2839,45 +2564,48 @@ fragranceList.addEventListener(
   id="navControls"
 >
 
-  <button
-    class="nav-arrow"
-    id="prevBtn"
-    aria-label="Previous event"
-  >
-    ←
-  </button>
+<button
+class="nav-arrow"
+id="prevBtn"
+aria-label="Previous event"
 
+
+
+←
+
+  </button>
 
   <div class="progress-wrap">
 
-    <div class="progress-track">
+<div class="progress-track">
 
-      <div
-        class="progress-fill"
-        id="progressFill"
-      ></div>
-
-    </div>
-
-
-    <div
-      class="progress-years"
-      id="progressYears"
-    ></div>
-
-  </div>
-
-
-  <button
-    class="nav-arrow"
-    id="nextBtn"
-    aria-label="Next event"
-  >
-    →
-  </button>
+  <div
+    class="progress-fill"
+    id="progressFill"
+  ></div>
 
 </div>
 
+
+<div
+  class="progress-years"
+  id="progressYears"
+></div>
+
+  </div>
+
+<button
+class="nav-arrow"
+id="nextBtn"
+aria-label="Next event"
+
+
+
+→
+
+  </button>
+
+</div>
 
 <!-- =======================================================
      MODAL
@@ -2895,50 +2623,49 @@ fragranceList.addEventListener(
     aria-labelledby="modalTitle"
   >
 
-    <button
-      class="modal-close"
-      id="modalClose"
-      aria-label="Close"
-    >
-      ×
-    </button>
+<button
+  class="modal-close"
+  id="modalClose"
+  aria-label="Close"
+>
+  ×
+</button>
 
 
-    <div class="modal-figure">
+<div class="modal-figure">
 
-      <img
-        id="modalImage"
-        alt=""
-      >
+  <img
+    id="modalImage"
+    alt=""
+  >
 
-    </div>
-
-
-    <div class="modal-body">
-
-      <div
-        class="modal-year"
-        id="modalYear"
-      ></div>
+</div>
 
 
-      <h2
-        class="modal-title"
-        id="modalTitle"
-      ></h2>
+<div class="modal-body">
+
+  <div
+    class="modal-year"
+    id="modalYear"
+  ></div>
 
 
-      <p
-        class="modal-desc"
-        id="modalDesc"
-      ></p>
+  <h2
+    class="modal-title"
+    id="modalTitle"
+  ></h2>
 
-    </div>
+
+  <p
+    class="modal-desc"
+    id="modalDesc"
+  ></p>
+
+</div>
 
   </div>
 
 </div>
-
 
 <script>
 
@@ -2975,54 +2702,6 @@ const timelineConfig = {
     "imagens/sobre.jpe"
 
 };
-
-
-/* =========================================================
-   FRAGRANCE COLLECTION
-   =========================================================
-
-   Put the fragrance images inside:
-   imagens/fragrancias/
-
-   You can change the names, image paths and descriptions
-   without changing the rest of the website.
-   ========================================================= */
-
-const fragranceItems = [
-
-  {
-    name:"Eilish",
-    image:"imagens/fragrancias/eilish.jpg",
-    year:"2021",
-    description:
-      "Eilish is Billie Eilish's first fragrance. Its warm, sweet and woody character was created as a personal extension of her artistic world."
-  },
-
-  {
-    name:"Eilish No. 2",
-    image:"imagens/fragrancias/eilish-no-2.jpg",
-    year:"2022",
-    description:
-      "Eilish No. 2 explores a darker and more mysterious side of the fragrance collection, with a different atmosphere from the original."
-  },
-
-  {
-    name:"Eilish No. 3",
-    image:"imagens/fragrancias/eilish-no-3.jpg",
-    year:"2023",
-    description:
-      "Eilish No. 3 continues the collection with a warmer, deeper and more sensual interpretation of the Eilish fragrance world."
-  },
-
-  {
-    name:"Your Turn",
-    image:"imagens/fragrancias/your-turn.jpg",
-    year:"2025",
-    description:
-      "Your Turn expands Billie Eilish's fragrance universe with a new concept and its own visual identity."
-  }
-
-];
 
 
 /* =========================================================
@@ -3317,8 +2996,6 @@ let lastPointerT = 0;
 let velocity = 0;
 
 let hasStarted = false;
-
-let fragranceOpen = false;
 
 
 /* =========================================================
@@ -4896,22 +4573,6 @@ document.addEventListener(
 
       closeModal();
 
-    }
-
-  }
-);
-
-
-/* =========================================================
-   FRAGRANCE ESCAPE
-   ========================================================= */
-
-document.addEventListener(
-  'keydown',
-  e=>{
-
-    if(e.key === 'Escape' && fragranceOpen && !modalOpen){
-      closeFragrance();
     }
 
   }
