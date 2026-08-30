@@ -492,12 +492,91 @@ a:focus-visible,
 
   letter-spacing:.05em;
 
+  display:flex;
+
+  align-items:center;
+
 }
 
 
 .brand span{
 
   color:var(--primary);
+
+}
+
+
+/* =========================================================
+   MUTE / UNMUTE BUTTON
+   ========================================================= */
+
+.mute-toggle{
+
+  margin-left:12px;
+
+  width:26px;
+
+  height:26px;
+
+  border-radius:50%;
+
+  border:1px solid var(--event-border);
+
+  background:rgba(15,17,17,.55);
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:var(--primary);
+
+  flex:none;
+
+  transition:
+    border-color .3s,
+    color .3s,
+    transform .2s;
+
+}
+
+
+.mute-toggle:hover{
+
+  border-color:var(--primary);
+
+  transform:translateY(-1px);
+
+}
+
+
+.mute-toggle svg{
+
+  pointer-events:none;
+
+}
+
+
+@media(max-width:620px){
+
+  .mute-toggle{
+
+    width:22px;
+
+    height:22px;
+
+    margin-left:8px;
+
+  }
+
+  .mute-toggle svg{
+
+    width:13px;
+
+    height:13px;
+
+  }
 
 }
 
@@ -813,6 +892,27 @@ a:focus-visible,
   margin-top:6px;
 }
 
+.fragrance-video{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-top:7px;
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--muted);
+  border-bottom:1px solid transparent;
+  transition:
+    color .3s,
+    border-color .3s;
+}
+
+.fragrance-video:hover{
+  color:var(--primary);
+  border-color:var(--primary);
+}
+
 .fragrance-notes{
   margin-top:16px;
   text-align:left;
@@ -900,6 +1000,10 @@ a:focus-visible,
   }
 
   .fragrance-release{
+    font-size:8px;
+  }
+
+  .fragrance-video{
     font-size:8px;
   }
 
@@ -2697,6 +2801,20 @@ a:focus-visible,
 
 
 <!-- =======================================================
+     BACKGROUND MUSIC
+     Substitua o "src" abaixo pelo caminho do seu arquivo
+     de música (ex: "audio/musica.mp3").
+     ======================================================= -->
+
+<audio
+  id="bgMusic"
+  src="audio/billie-eilish-theme.mp3"
+  loop
+  preload="none"
+></audio>
+
+
+<!-- =======================================================
      LOADING
      ======================================================= -->
 
@@ -2725,7 +2843,48 @@ a:focus-visible,
 <header class="site-header">
 
   <div class="brand">
+
     Billie <span>Eilish</span>
+
+    <button
+      type="button"
+      class="mute-toggle"
+      id="muteToggle"
+      aria-label="Play music"
+      aria-pressed="false"
+    >
+
+      <svg
+        class="icon-sound"
+        viewBox="0 0 24 24"
+        width="14"
+        height="14"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        style="display:none"
+      >
+        <polygon points="3 9 3 15 8 15 13 20 13 4 8 9 3 9"></polygon>
+        <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+        <path d="M18 6a9 9 0 0 1 0 12"></path>
+      </svg>
+
+      <svg
+        class="icon-mute"
+        viewBox="0 0 24 24"
+        width="14"
+        height="14"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polygon points="3 9 3 15 8 15 13 20 13 4 8 9 3 9"></polygon>
+        <line x1="16" y1="9" x2="22" y2="15"></line>
+        <line x1="22" y1="9" x2="16" y2="15"></line>
+      </svg>
+
+    </button>
+
   </div>
 
 
@@ -3328,6 +3487,7 @@ const fragranceProducts = [
     name:"Eilish",
     image:"imagens/eilish-fragrance.jpe",
     releaseDate:"November 10, 2021",
+    videoUrl:"https://www.youtube.com/watch?v=-Sc7zPApiHA",
     topNotes:"Red Berries, Mandarin, Sugared Petals",
     middleNotes:"Vanilla Bourbon, Soft Spices Accord, Cocoa",
     baseNotes:"Warm Musk, Creamy Woods, Tonka",
@@ -3338,6 +3498,7 @@ const fragranceProducts = [
     name:"Eilish No. 2",
     image:"imagens/eilish-no-2.jpe",
     releaseDate:"November 18, 2022",
+    videoUrl:"https://www.youtube.com/watch?v=P65tI0SOnY8",
     topNotes:"Italian Bergamot, Apple Blossom, Incense",
     middleNotes:"Papyrus, Black Pepper, Wild Wet Poppy Flower",
     baseNotes:"Palo Santo, Ebony, Skin Musk",
@@ -3348,6 +3509,7 @@ const fragranceProducts = [
     name:"Eilish No. 3",
     image:"imagens/eilish-no-3.jpe",
     releaseDate:"November 11, 2023",
+    videoUrl:"https://www.tiktok.com/@billieeilishhome/video/7299508017651830058",
     topNotes:"Grapefruit, Pink Peppercorn, Jasmine",
     middleNotes:"Saffron, Fir Needle, Cedar",
     baseNotes:"Amber, Oakmoss, Skin Musk",
@@ -3358,6 +3520,7 @@ const fragranceProducts = [
     name:"Your Turn",
     image:"imagens/your-turn.jpe",
     releaseDate:"February 6, 2025",
+    videoUrl:"https://www.youtube.com/watch?v=YX7_-D7CgfM",
     topNotes:"Bergamot Peel, Cardamom Pod, Fresh Ginger",
     middleNotes:"Velvet Peach Skin, Night Blooming Jasmine, Coconut Water",
     baseNotes:"Sandalwood Australia, Captive Musks, Upcycled Sylvamber",
@@ -3368,6 +3531,7 @@ const fragranceProducts = [
     name:"Your Turn II",
     image:"imagens/your-turn-2.jpe",
     releaseDate:"November 26, 2025",
+    videoUrl:"https://www.youtube.com/watch?v=fh1shxVt8UY&t=1s",
     topNotes:"Pimento Berry, Mirabelle Plum, Cassis Leaves",
     middleNotes:"Fig Nectar, Black Tea Leaves, Vanilla Orchid",
     baseNotes:"Natural Vetiver, Olibanum Resin, Cedarwood Virginia EO",
@@ -3378,6 +3542,7 @@ const fragranceProducts = [
     name:"Eilish Intese",
     image:"imagens/eilish-eau-de-parfum.jpe",
     releaseDate:"July 28, 2026",
+    videoUrl:"https://www.youtube.com/watch?v=jWZ8UGE-s4Q",
     topNotes:"Sugared Petals, Mandarin, Warm Berries",
     middleNotes:"Richer Vanilla, Soft Spices, Cocoa",
     baseNotes:"Deeper Woods, Warm Musks, Tonka Bean",
@@ -3385,6 +3550,14 @@ const fragranceProducts = [
   }
 
 ];
+
+
+/* =========================================================
+   STORE LINK (used by the fragrance "Read more" button)
+   ========================================================= */
+
+const FRAGRANCE_STORE_URL =
+  "https://store.billieeilish.com/products";
 
 
 /* =========================================================
@@ -4563,6 +4736,96 @@ document
 
 
 /* =========================================================
+   MUTE / UNMUTE MUSIC
+   ========================================================= */
+
+const bgMusic =
+  document.getElementById('bgMusic');
+
+const muteToggle =
+  document.getElementById('muteToggle');
+
+const iconSound =
+  muteToggle.querySelector('.icon-sound');
+
+const iconMute =
+  muteToggle.querySelector('.icon-mute');
+
+
+/*
+   The music starts muted/paused by default because
+   browsers block autoplay with sound before the user
+   interacts with the page. The first click on the
+   button starts playback and unmutes it; from then on,
+   it simply toggles mute/unmute.
+*/
+
+let musicIsMuted = true;
+
+
+function setMusicIcon(){
+
+  iconSound.style.display =
+    musicIsMuted ? 'none' : 'block';
+
+  iconMute.style.display =
+    musicIsMuted ? 'block' : 'none';
+
+  muteToggle.setAttribute(
+    'aria-pressed',
+    String(!musicIsMuted)
+  );
+
+  muteToggle.setAttribute(
+    'aria-label',
+    musicIsMuted ? 'Play music' : 'Mute music'
+  );
+
+}
+
+
+muteToggle.addEventListener(
+  'click',
+  e=>{
+
+    e.preventDefault();
+
+    e.stopPropagation();
+
+
+    musicIsMuted =
+      !musicIsMuted;
+
+
+    if(!musicIsMuted){
+
+      bgMusic.muted =
+        false;
+
+      bgMusic.play().catch(
+        ()=>{}
+      );
+
+    }
+
+    else{
+
+      bgMusic.muted =
+        true;
+
+    }
+
+
+    setMusicIcon();
+
+  }
+);
+
+
+setMusicIcon();
+
+
+/* =========================================================
    FRAGRANCE
    ========================================================= */
 
@@ -4607,6 +4870,21 @@ function buildFragrances(){
             ${product.releaseDate}
           </div>
 
+          ${
+            product.videoUrl
+            ? `
+              <a
+                class="fragrance-video"
+                href="${product.videoUrl}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ▶ Watch the clip
+              </a>
+            `
+            : ''
+          }
+
           <div class="fragrance-notes">
 
             <div class="fragrance-note-group">
@@ -4626,13 +4904,14 @@ function buildFragrances(){
 
           </div>
 
-          <button
-            type="button"
+          <a
             class="fragrance-more"
-            data-fragrance-index="${i}"
+            href="${FRAGRANCE_STORE_URL}"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Read more →
-          </button>
+          </a>
 
         </article>
 
@@ -4694,42 +4973,6 @@ document
 fragranceClose.addEventListener(
   'click',
   closeFragrance
-);
-
-
-fragranceGrid.addEventListener(
-  'click',
-  e=>{
-
-    const btn =
-      e.target.closest(
-        '.fragrance-more'
-      );
-
-    if(!btn){
-      return;
-    }
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    const index =
-      Number(
-        btn.dataset.fragranceIndex
-      );
-
-    if(
-      !Number.isInteger(index) ||
-      !fragranceProducts[index]
-    ){
-      return;
-    }
-
-    openModal(
-      fragranceProducts[index]
-    );
-
-  }
 );
 
 
@@ -5075,7 +5318,7 @@ function closeModal(){
 
 
 /* =========================================================
-   READ MORE
+   READ MORE (TIMELINE EVENTS)
    ========================================================= */
 
 track.addEventListener(
