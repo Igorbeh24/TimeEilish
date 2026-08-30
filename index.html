@@ -762,7 +762,7 @@ a:focus-visible,
   width:min(1100px,100%);
   margin:0 auto;
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:30px 22px;
 }
 
@@ -803,6 +803,46 @@ a:focus-visible,
   font-size:17px;
   line-height:1.25;
   margin-top:12px;
+}
+
+.fragrance-release{
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:.08em;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+.fragrance-notes{
+  margin-top:16px;
+  text-align:left;
+  border-top:1px solid var(--event-border);
+  padding-top:12px;
+}
+
+.fragrance-note-group{
+  margin-bottom:11px;
+}
+
+.fragrance-note-group:last-child{
+  margin-bottom:0;
+}
+
+.fragrance-note-group span{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:8px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--secondary);
+  margin-bottom:3px;
+}
+
+.fragrance-note-group p{
+  margin:0;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.45;
 }
 
 .fragrance-more{
@@ -857,6 +897,27 @@ a:focus-visible,
   .fragrance-name{
     font-size:14px;
     margin-top:9px;
+  }
+
+  .fragrance-release{
+    font-size:8px;
+  }
+
+  .fragrance-notes{
+    margin-top:12px;
+    padding-top:10px;
+  }
+
+  .fragrance-note-group{
+    margin-bottom:9px;
+  }
+
+  .fragrance-note-group span{
+    font-size:7px;
+  }
+
+  .fragrance-note-group p{
+    font-size:9px;
   }
 
   .fragrance-more{
@@ -3266,43 +3327,61 @@ const fragranceProducts = [
   {
     name:"Eilish",
     image:"imagens/eilish-fragrance.jpe",
-    description:
-      "Eilish is Billie Eilish's debut fragrance. The scent was developed as an extension of her creative world, combining a warm, sweet and sensual character with a darker, more mysterious atmosphere. Its presentation and bottle design were created to feel like an object connected to Billie's visual identity."
+    releaseDate:"November 10, 2021",
+    topNotes:"Red Berries, Mandarin, Sugared Petals",
+    middleNotes:"Vanilla Bourbon, Soft Spices Accord, Cocoa",
+    baseNotes:"Warm Musk, Creamy Woods, Tonka",
+    description:"Eilish is Billie Eilish's debut fragrance. The scent was developed as an extension of her creative world, combining a warm, sweet and sensual character with a darker, more mysterious atmosphere."
   },
 
   {
     name:"Eilish No. 2",
     image:"imagens/eilish-no-2.jpe",
-    description:
-      "Eilish No. 2 explores a darker and more woody side of the fragrance collection. It was created as a contrasting companion to the original Eilish fragrance, with a deeper atmosphere and a more mysterious character."
+    releaseDate:"November 18, 2022",
+    topNotes:"Italian Bergamot, Apple Blossom, Incense",
+    middleNotes:"Papyrus, Black Pepper, Wild Wet Poppy Flower",
+    baseNotes:"Palo Santo, Ebony, Skin Musk",
+    description:"Eilish No. 2 explores a darker and more woody side of the fragrance collection, creating a deeper and more mysterious companion to the original Eilish."
   },
 
   {
     name:"Eilish No. 3",
     image:"imagens/eilish-no-3.jpe",
-    description:
-      "Eilish No. 3 continues Billie's fragrance universe with a warmer and more expressive interpretation. The fragrance expands the collection while keeping the distinctive artistic approach associated with Billie's perfumes."
+    releaseDate:"November 11, 2023",
+    topNotes:"Grapefruit, Pink Peppercorn, Jasmine",
+    middleNotes:"Saffron, Fir Needle, Cedar",
+    baseNotes:"Amber, Oakmoss, Skin Musk",
+    description:"Eilish No. 3 continues the fragrance universe with a distinct interpretation built around a more expressive and atmospheric composition."
   },
 
   {
     name:"Your Turn",
     image:"imagens/your-turn.jpe",
-    description:
-      "Your Turn expands Billie Eilish's fragrance collection with a new concept and identity. The fragrance is presented as part of a world built around individuality, self-expression and the idea that everyone has their own story to tell."
+    releaseDate:"February 6, 2025",
+    topNotes:"Bergamot Peel, Cardamom Pod, Fresh Ginger",
+    middleNotes:"Velvet Peach Skin, Night Blooming Jasmine, Coconut Water",
+    baseNotes:"Sandalwood Australia, Captive Musks, Upcycled Sylvamber",
+    description:"Your Turn expands Billie Eilish's fragrance collection with a new concept centered on individuality, self-expression and the idea that everyone has their own story to tell."
   },
 
   {
     name:"Your Turn II",
     image:"imagens/your-turn-2.jpe",
-    description:
-      "Your Turn II develops the Your Turn concept into another fragrance experience. Its presentation continues the collection's focus on individuality and creative self-expression."
+    releaseDate:"November 26, 2025",
+    topNotes:"Pimento Berry, Mirabelle Plum, Cassis Leaves",
+    middleNotes:"Fig Nectar, Black Tea Leaves, Vanilla Orchid",
+    baseNotes:"Natural Vetiver, Olibanum Resin, Cedarwood Virginia EO",
+    description:"Your Turn II develops the Your Turn concept into another fragrance experience, continuing the collection's focus on individuality and creative self-expression."
   },
 
   {
-    name:"Eilish Eau de Parfum",
+    name:"Eilish Intese",
     image:"imagens/eilish-eau-de-parfum.jpe",
-    description:
-      "Eilish Eau de Parfum represents the original fragrance concept at the center of Billie's perfume collection. Its identity combines a recognizable visual presentation with a scent designed to feel warm, intimate and distinctive."
+    releaseDate:"July 28, 2026",
+    topNotes:"Sugared Petals, Mandarin, Warm Berries",
+    middleNotes:"Richer Vanilla, Soft Spices, Cocoa",
+    baseNotes:"Deeper Woods, Warm Musks, Tonka Bean",
+    description:"Eilish Intese presents another interpretation of the Eilish fragrance world, with a richer composition and a deeper take on the familiar sweet, warm and sensual character."
   }
 
 ];
@@ -4523,6 +4602,29 @@ function buildFragrances(){
           <h3 class="fragrance-name">
             ${product.name}
           </h3>
+
+          <div class="fragrance-release">
+            ${product.releaseDate}
+          </div>
+
+          <div class="fragrance-notes">
+
+            <div class="fragrance-note-group">
+              <span>Top Notes</span>
+              <p>${product.topNotes}</p>
+            </div>
+
+            <div class="fragrance-note-group">
+              <span>Middle Notes</span>
+              <p>${product.middleNotes}</p>
+            </div>
+
+            <div class="fragrance-note-group">
+              <span>Base Notes</span>
+              <p>${product.baseNotes}</p>
+            </div>
+
+          </div>
 
           <button
             type="button"
