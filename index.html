@@ -16,6 +16,11 @@
 
 <link
   rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+<link
+  rel="preconnect"
   href="https://fonts.gstatic.com"
   crossorigin
 >
@@ -77,9 +82,7 @@
   :root{
 
     --event-size:243px;
-
     --connector-h:22px;
-
     --card-gap:420px;
 
   }
@@ -92,9 +95,7 @@
   :root{
 
     --event-size:212px;
-
     --connector-h:20px;
-
     --card-gap:370px;
 
   }
@@ -107,13 +108,10 @@
   :root{
 
     --event-size:167px;
-
     --connector-h:18px;
-
     --card-gap:285px;
 
     --top-safe-space:72px;
-
     --bottom-safe-space:88px;
 
     --timeline-safe-gap:6px;
@@ -219,13 +217,13 @@ a:focus-visible,
    ========================================================= */
 
 /*
-   The background itself stays fixed.
+   DESKTOP:
+   imagens/fundo-pc.png
 
-   The image repeats horizontally instead of moving
-   the entire background element.
+   MOBILE:
+   imagens/fundo-mobile.png
 
-   This prevents empty areas from appearing when the
-   timeline moves to the left or right.
+   O background se repete horizontalmente.
 */
 
 .bg-layer{
@@ -237,43 +235,78 @@ a:focus-visible,
   z-index:0;
 
   background-image:
+
     linear-gradient(
       180deg,
       rgba(15,17,17,.88),
       rgba(15,17,17,.94) 55%,
       rgba(5,7,7,.98)
     ),
-    url('imagens/fundo.png');
 
-  background-repeat:
-    no-repeat,
-    repeat-x;
+    url('imagens/fundo-pc.png');
 
-  background-size:
-    cover,
-    auto 100%;
+  /*
+     IMPORTANTE:
+     repeat-x faz o fundo continuar infinitamente
+     para os lados.
+  */
 
-  background-position:
-    center,
-    center top;
+  background-repeat:repeat-x;
 
-  background-attachment:
-    fixed,
-    scroll;
+  /*
+     Mantém a altura preenchendo a tela.
+     A largura pode ultrapassar a tela.
+  */
+
+  background-size:auto 100%;
+
+  background-position:center top;
 
   filter:
     grayscale(55%)
     contrast(1.05)
     brightness(.72);
 
-  will-change:background-position;
-
-  pointer-events:none;
+  will-change:transform;
 
   transition:filter 1s ease;
 
 }
 
+
+/* =========================================================
+   MOBILE BACKGROUND
+   ========================================================= */
+
+@media(max-width:560px){
+
+  .bg-layer{
+
+    background-image:
+
+      linear-gradient(
+        180deg,
+        rgba(15,17,17,.88),
+        rgba(15,17,17,.94) 55%,
+        rgba(5,7,7,.98)
+      ),
+
+      url('imagens/fundo-mobile.png');
+
+    background-repeat:repeat-x;
+
+    background-size:auto 100%;
+
+    background-position:center top;
+
+  }
+
+}
+
+
+/* =========================================================
+   BACKGROUND VIGNETTE
+   ========================================================= */
 
 .bg-vignette{
 
@@ -286,6 +319,7 @@ a:focus-visible,
   pointer-events:none;
 
   background:
+
     radial-gradient(
       ellipse at center,
       transparent 40%,
@@ -294,6 +328,10 @@ a:focus-visible,
 
 }
 
+
+/* =========================================================
+   GRAIN
+   ========================================================= */
 
 .bg-grain{
 
@@ -539,7 +577,6 @@ a:focus-visible,
   position:absolute;
 
   left:0;
-
   right:100%;
 
   bottom:0;
@@ -580,13 +617,11 @@ a:focus-visible,
   position:fixed;
 
   top:20px;
-
   right:20px;
 
   z-index:70;
 
   width:38px;
-
   height:38px;
 
   display:flex;
@@ -1046,7 +1081,6 @@ a:focus-visible,
   position:absolute;
 
   top:50%;
-
   left:0;
 
   height:2px;
@@ -1096,7 +1130,6 @@ a:focus-visible,
   top:50%;
 
   width:0;
-
   height:0;
 
 }
@@ -1107,11 +1140,9 @@ a:focus-visible,
   position:absolute;
 
   top:0;
-
   left:0;
 
   width:11px;
-
   height:11px;
 
   margin:-5.5px 0 0 -5.5px;
@@ -1246,7 +1277,7 @@ a:focus-visible,
 
 
 /* =========================================================
-   EVENT CARDS
+   CARDS
    ========================================================= */
 
 .event-card{
@@ -1424,7 +1455,6 @@ a:focus-visible,
   z-index:10;
 
   padding-left:4px;
-
   padding-right:4px;
 
 }
@@ -1748,7 +1778,6 @@ a:focus-visible,
 .nav-arrow{
 
   width:42px;
-
   height:42px;
 
   border-radius:50%;
@@ -1831,9 +1860,7 @@ a:focus-visible,
   position:absolute;
 
   left:0;
-
   top:0;
-
   bottom:0;
 
   width:0%;
@@ -1978,7 +2005,6 @@ a:focus-visible,
   margin:14px 14px 0 0;
 
   width:34px;
-
   height:34px;
 
   border-radius:50%;
@@ -2007,6 +2033,10 @@ a:focus-visible,
 }
 
 
+/* =========================================================
+   MODAL IMAGE
+   ========================================================= */
+
 .modal-figure{
 
   width:100%;
@@ -2028,6 +2058,10 @@ a:focus-visible,
 
 }
 
+
+/* =========================================================
+   MODAL BODY
+   ========================================================= */
 
 .modal-body{
 
@@ -2165,7 +2199,6 @@ a:focus-visible,
   .nav-arrow{
 
     width:36px;
-
     height:36px;
 
   }
@@ -2295,7 +2328,7 @@ a:focus-visible,
 
 
 /* =========================================================
-   MOBILE — LOW HEIGHT
+   MOBILE LOW HEIGHT
    ========================================================= */
 
 @media(
@@ -2397,7 +2430,7 @@ a:focus-visible,
   </div>
 
   <div class="loading-sub">
-    Loading history...
+    Loading story...
   </div>
 
   <div class="loading-bar"></div>
@@ -2412,7 +2445,9 @@ a:focus-visible,
 <header class="site-header">
 
   <div class="brand">
+
     Billie <span>Eilish</span>
+
   </div>
 
 
@@ -2491,13 +2526,17 @@ a:focus-visible,
 
 
   <h1 class="intro-name">
+
     <b>Billie Eilish</b>
+
   </h1>
 
 
   <p class="intro-tagline">
-    A journey through the career, music and moments
-    that shaped Billie Eilish.
+
+    A journey through the career, music and
+    moments that shaped Billie Eilish.
+
   </p>
 
 
@@ -2531,7 +2570,9 @@ a:focus-visible,
 
 
   <p class="intro-hint">
-    use your mouse, touch or the arrow keys
+
+    use your mouse, touch or arrow keys
+
   </p>
 
 </section>
@@ -2672,8 +2713,9 @@ a:focus-visible,
 
 <script>
 
+
 /* =========================================================
-   CONFIGURATION
+   TIMELINE CONFIGURATION
    ========================================================= */
 
 const timelineConfig = {
@@ -2691,30 +2733,32 @@ const timelineConfig = {
   location:
     "Los Angeles, USA",
 
-  about:
-    "Billie Eilish Pirate Baird O’Connell was born on December 18, 2001, in Los Angeles, California. She grew up in an artistic family alongside her older brother, Finneas, and her parents, Maggie Baird and Patrick O’Connell. From an early age, Billie was surrounded by music, acting, and other forms of creative expression, which helped shape her creativity and her unique way of seeing the world. During her childhood, Billie was homeschooled alongside Finneas. This environment gave both siblings a great deal of freedom to explore their interests and create things together. Billie became involved in dance, singing, and songwriting, and for several years she imagined that she might pursue a career in dance. An injury eventually interrupted that path, and music began to occupy an even larger place in her life. From a very young age, Billie showed a personality that was different from the traditional standards associated with pop artists. She did not seem interested in creating a perfect image or hiding the things that made her different. Instead, she turned those differences into part of her identity. This freedom also appeared in the way she dressed. During the early years of her career, Billie became known for wearing extremely oversized clothing. More than simply an aesthetic choice, this was connected to her desire to keep her body away from constant public judgment. She wanted people to focus on her music and personality rather than her body. Over time, her relationship with her appearance changed. Billie began experimenting with different styles, hairstyles, colors, and ways of dressing. Even so, she continued to maintain control over how she wanted to be presented. Her image was never limited to a single version of herself. Billie’s personality is also defined by contrasts. She can be extremely private and reserved at certain moments, while also being funny, spontaneous, and irreverent. In interviews and behind-the-scenes moments, she often shows a sense of humor that is very different from the darker image present in some of her music. This difference between the person and the artistic persona is important to understanding Billie. Not everything that appears in her songs literally represents her life. She likes to imagine situations, take on different perspectives, and transform feelings or ideas into characters. This allows her music to be dark, frightening, romantic, funny, or provocative without necessarily being autobiographical. At the same time, there are parts of her life that have deeply influenced her art. Billie grew up under an enormous amount of public attention and had to experience adolescence while millions of people were watching her life. Things that would normally be part of a private teenage experience were suddenly happening in front of the entire world. She has also spoken openly about difficulties she experienced during her adolescence, including depression, body image struggles, and periods of intense emotional difficulty. These experiences contributed to the way she talks about insecurity, identity, loneliness, and growing up. Fame brought enormous opportunities, but it also completely changed her daily life. Constant travel, performances, photographers, interviews, and public expectations made it much harder to live a completely normal life. Billie had to learn how to establish boundaries and protect parts of her personal life. Even so, she never completely abandoned vulnerability. One of Billie’s most recognizable characteristics is her ability to transform difficult emotions into art without presenting everything in an exaggerated way. Sometimes a simple sentence, a pause, or a subtle change in her voice can communicate more emotion than a huge production. Her voice became one of the most recognizable tools of her artistic identity. Billie often uses a quiet and intimate vocal style, but she can completely change her delivery when a song requires more power. She treats her voice not only as a way of singing a melody, but as part of the production itself. Finneas plays a fundamental role in this process. The relationship between the two siblings goes beyond a professional collaboration. They developed their own way of working, where songwriting, production, and performance often happen together. Billie might present an idea or melody, Finneas might transform it into a production, and the two continue changing the song until they find exactly what they want. This partnership has allowed Billie to have an unusual level of creative control for an artist who became famous at such a young age. She participates in decisions involving music, vocals, concepts, music videos, clothing, and performances. Instead of simply receiving finished songs from outside writers and producers, Billie built her career by actively participating in almost every stage of her art. Her visual aesthetic also became an important part of her identity. Music videos, album covers, performances, and outfits often have their own concepts. Billie likes working with surreal imagery, uncomfortable elements, strange humor, and situations that seem to come from dreams or nightmares. But her aesthetic has never remained completely still. Each stage of her career has presented a different version of herself. As Billie grew older, her music and appearance also began reflecting new experiences and new ways of understanding herself. The transition from adolescence into adulthood was especially important. Billie had to discover who she was while her identity was already being discussed by millions of people. This created an unusual situation: while she was still trying to understand herself, the public had already created expectations about who she was supposed to be. Because of this, freedom became an important theme throughout her journey. Billie has often shown that she does not need to remain trapped inside an image other people created for her. She can change her style, explore new subjects, talk about relationships, sexuality, her body, and growing up while continuing to be the same artist in constant evolution. Beyond music, Billie also developed a strong connection with cinema. Soundtracks, music videos, and cinematic projects allowed her to combine music with visual storytelling. She began viewing performances and musical projects as complete experiences in which sound and image work together. Her relationship with her fans is also an important part of her career. Billie often shows concern for the way her music affects people. Her concerts are moments when an extremely personal experience becomes something shared by thousands of people at the same time. Despite the enormous scale of her career, Billie continues to maintain a strong connection with her family. Finneas remains her main creative partner, while her parents have also been present during different moments of her journey. Her family helped create the environment in which Billie was able to develop her creativity from a very young age. Billie also became a reference point for young artists who did not identify with the traditional model of a pop star. She showed that an artist could be quiet, strange, funny, vulnerable, and different without having to give up commercial success. Her influence goes beyond the songs she has released. She has helped change the way many people view aesthetics, music production, clothing, music videos, and even the relationship between an artist and their audience. Billie showed that there is not only one correct way to be a global pop star. Over the years, Billie has also matured in the way she talks about herself. She went from being a teenager trying to understand her identity to becoming an adult woman who is more conscious of her boundaries, desires, insecurities, and responsibilities. This evolution appears both in her music and in the way she presents herself to the world. In the end, Billie Eilish’s story is not simply the story of a singer who achieved worldwide fame. It is the story of a person who grew up in front of millions of eyes while trying to preserve her individuality as her life changed completely. She built a career in which her personality did not have to disappear for her image as a star to exist. Instead, her personality, contradictions, experiences, and creative freedom became some of the greatest strengths of her art. Billie Eilish became an internationally recognized artist, but her journey continues to be defined by the same characteristic that has been present from the beginning: the desire to do things her own way. Rather than trying to fit into a definition of who she should be, Billie turned her changes, doubts, and different stages of life into part of her own artistic identity.",
+  /*
+     THIS IMAGE IS COMPLETELY INDEPENDENT
+     FROM THE BACKGROUND.
 
-  
-  BACKGROUND_IMAGE:
-    "imagens/fundo.png"
+     Put the image here:
+
+     imagens/about.jpg
+  */
+
+  aboutImage:
+    "imagens/about.jpg",
+
+  about:
+    "Billie Eilish is an American singer and songwriter known for her alternative musical approach, distinctive aesthetic and creative collaboration with her brother Finneas."
 
 };
 
 
 /* =========================================================
-   EVENTS
-   =========================================================
-
-   All event images are located inside the "imagens"
-   folder.
-
-   Keep the filenames exactly as they appear in the folder.
-
+   TIMELINE EVENTS
    ========================================================= */
 
 const timelineEvents = [
 
   {
+
     year:"2001",
 
     title:"Birth",
@@ -2726,22 +2770,23 @@ const timelineEvents = [
       "Billie Eilish is born in Los Angeles.",
 
     description:
-      `Billie Eilish Pirate Baird O'Connell was born in Los Angeles on December 18, 2001. Her first name honors her maternal grandfather, William. Her second name was inspired by conjoined twins her parents saw in a documentary, while her third name came from her older brother Finneas.
+      `Billie Eilish Pirate Baird O'Connell was born in Los Angeles on December 18, 2001. Her first name was inspired by her maternal grandfather, William; her middle name was inspired by a conjoined twin her parents saw in a documentary; and her third name came from her older brother Finneas.
 
-Billie's parents, Maggie Baird and Patrick O'Connell, were actors before becoming part of their daughter's professional team. Raised in a two-bedroom home in Highland Park and homeschooled alongside her brother, Eilish was encouraged to explore dance, gymnastics, horseback riding and, above all, music.
+Billie's parents, Maggie Baird and Patrick O'Connell, were actors for many years before becoming part of their daughter's professional team. Raised in a two-bedroom home in Highland Park, where she and her brother were homeschooled, Eilish was encouraged to explore dance, gymnastics, horseback riding and, most importantly, music.
 
-She began playing the ukulele at six years old. One of the first songs she learned was "I Will" by the Beatles.
+She began playing the ukulele at the age of six. The first song she learned to play was "I Will" by The Beatles.
 
-At eight, Eilish joined the Los Angeles Children's Chorus, where she developed her vocal abilities. At eleven, she began seriously writing songs with help from her mother's songwriting lessons.
+At eight, Eilish joined the Los Angeles Children's Chorus, where she developed her vocal abilities. At eleven, she began seriously writing songs with the help of songwriting lessons from her mother.
 
-Eilish has said that her first "real" song, "Fingers Crossed", was written during this period after watching an episode of The Walking Dead.
- enti
-Although she had a strong interest in music, Eilish initially wanted to become a dancer. After a hip growth-plate injury ended her ambitions in dance at thirteen, she decided to focusrely on music.`
+Eilish has said that her first "real" song, "Fingers Crossed", was written around this time after watching an episode of The Walking Dead.
+
+Although she had a strong interest in music, Eilish initially wanted to become a dancer. After a growth plate injury in her hip ended her dancing ambitions at thirteen, she decided to dedicate herself fully to music.`
 
   },
 
 
   {
+
     year:"2015",
 
     title:"Ocean Eyes",
@@ -2750,14 +2795,16 @@ Although she had a strong interest in music, Eilish initially wanted to become a
       "imagens/ocean-eyes.jpe",
 
     shortDescription:
-      "The song that changed her path.",
+      "The song that changed her trajectory.",
 
     description:
-  "“ocean eyes” was written and produced by Billie Eilish’s older brother, Finneas O’Connell. Originally, Finneas wrote the song for his own band, but Billie heard it and wanted to record her own version. At the time, Billie was only 13 years old. They recorded the song together in Finneas’s bedroom and uploaded it to SoundCloud in 2015. The song quickly gained attention online and became the beginning of Billie’s professional music career.\n\nThe song is about being deeply attracted to and emotionally vulnerable around someone. The phrase “ocean eyes” compares a person’s eyes to the ocean, suggesting beauty, depth, mystery, and the feeling of being completely lost in someone. The ocean can also represent something beautiful but powerful and unpredictable."
+      "In 2015, Billie and her brother Finneas released Ocean Eyes online. The song quickly attracted attention and marked the beginning of her professional rise."
+
   },
 
 
   {
+
     year:"2017",
 
     title:"Don't Smile at Me",
@@ -2766,30 +2813,16 @@ Although she had a strong interest in music, Eilish initially wanted to become a
       "imagens/dont-smile-at-me.jpe",
 
     shortDescription:
-      "The release of her first EP.",
+      "The release of her debut EP.",
 
     description:
-  "After Ocean Eyes, Billie released “Six Feet Under” in 2016. The song continued exploring that melancholic and minimalist atmosphere, but it began to show Billie becoming more involved with relationships, loss, and complicated emotions. It helped establish an identity that would become strongly associated with this era: delicate on the outside, but emotionally uncomfortable underneath.\n\nOn February 24, 2017, “Bellyache” was released. The song plays with the perspective of someone who has done something terrible and is now dealing with guilt. Billie isn't simply describing a personal experience; she is taking on a fictional perspective. This would become important for understanding her artistic style later in her career: Billie often likes to step into the minds of characters and explore uncomfortable situations.\n\nOn June 30, 2017, “Watch” was released. The song is about ending a relationship and leaving the other person to deal with the consequences. The production also shows more of the Billie + Finneas formula: few elements, distinctive sounds, intimate vocals, and changes in the production.\n\nThen came “COPYCAT.” This is one of the songs that establishes the personality of the era most strongly. Billie confronts someone who tries to imitate her and takes on a much more confident attitude. It is almost the opposite of Ocean Eyes. Instead of the vulnerable Billie, we get a provocative one. This is important because dont smile at me begins to show that her artistic identity would not simply be that of a girl singing sad songs. She also wanted to explore power, sarcasm, anger, and weirdness.\n\nIn July 2017, “idontwannabeyouanymore” appeared. It is probably one of the most introspective tracks on the EP. The song revolves around insecurity and dissatisfaction with oneself, presenting a much more vulnerable side of Billie. There is an interesting contrast: “COPYCAT” shows someone who doesn't need to be like others, while “idontwannabeyouanymore” shows someone who is dissatisfied with herself. That contradiction is one of the most interesting aspects of the EP.\n\nThen came “my boy.” Here Billie returns to a complicated relationship. The person described in the song seems inconsistent: he says one thing, does another, and leaves Billie trying to understand his intentions. Musically, it is more playful than some of the previous tracks, helping the EP avoid being trapped in a single emotion.\n\n“party favor” completely changes the mood. The production is extremely simple, with Billie singing primarily accompanied by a ukulele. The song presents a breakup situation, almost as if Billie is leaving a message for someone and trying to end the relationship. The simplicity of the song is part of its charm.\n\nThen comes “hostage.” It is one of the most atmospheric songs on the EP. It creates a sense of intimacy and possessiveness in an intentionally uncomfortable way. Musically, it is one of the tracks that best demonstrates Finneas' ability to create a striking production using very few elements.\n\nOn August 11, 2017, dont smile at me was officially released as an EP. The project brought together songs Billie and Finneas had developed during that period, creating a collection of different emotions, perspectives, and experiences. The EP has a very distinct identity: minimalist production, intimate vocals, uncomfortable lyrics, and a mixture of vulnerability and attitude.\n\nAfter the release, Billie worked with Vince Staples on “&burn.” The track is a new version of “watch,” featuring Vince Staples. It was added to the project later, expanding the EP after its original release.\n\nThe release also led to Billie's first headlining tour, the dont smile at me tour. It took place between October 4 and November 2, 2017, bringing the EP's songs to live audiences. It was the moment when those songs, originally created in a very intimate way, began to take on a much larger life in front of an audience.\n\ndont smile at me did not immediately become a massive phenomenon. The project gradually grew as Billie gained more listeners. The songs accumulated more and more streams, allowing the EP to reach important positions on music charts. This was especially remarkable because Billie was only 15 years old when the EP was released.\n\ndont smile at me does not tell one continuous story. It is better understood as a portrait of Billie Eilish during that period. Each song explores a different perspective: confrontation and confidence in “COPYCAT,” insecurity in “idontwannabeyouanymore,” romantic frustration in “my boy,” breakup and detachment in “watch,” ending a relationship in “party favor,” guilt through a fictional perspective in “bellyache,” vulnerability in “ocean eyes,” intimacy in “hostage,” and a more aggressive version of “watch” in “&burn.”\n\nThe songs are different from one another, but together they build the identity of the EP. dont smile at me was the project that introduced the world to the Billie + Finneas formula. It showed that they could create memorable music without relying on huge productions, instead using intimate vocals, unusual sounds, silence, effects, and lyrics that explored uncomfortable emotions.\n\nMore than simply being a debut release, dont smile at me became the starting point for the artistic identity Billie would develop in her later projects. It was the small EP that introduced the world to an artist who, only a short time later, would completely transform her career."
-  },
+      "Billie released her debut EP, Don't Smile at Me. The project expanded her audience and introduced a musical and visual identity that would become strongly associated with her career."
 
-  {
-    year:"2018",
-
-    title:"bitches broken hearts",
-
-    image:
-      "imagens/bitches-broken-hearts.jpe",
-
-    shortDescription:
-      "Officially released on March 30, 2018.",
-
-    description: 
-      "After the release of dont smile at me, Billie Eilish continued releasing music while her audience was growing around the world. On March 30, 2018, she officially released “bitches broken hearts,” a song that Billie and Finneas had originally worked on earlier in her career. The release gave the song a new place in Billie's growing discography and allowed more people to discover a more intimate side of her songwriting. “bitches broken hearts” is centered around heartbreak, emotional distance, and the complicated feelings that can remain after a relationship changes. Billie sings about still being affected by someone while also recognizing that the relationship is no longer the same. There is sadness in the song, but also frustration and a sense of emotional independence. The song has a very stripped-back production. Finneas uses soft percussion, subtle bass, atmospheric sounds, and layered vocals to create a quiet and intimate environment around Billie’s voice. Instead of making the production feel large, the arrangement leaves plenty of empty space, allowing the smallest details in her vocal performance to stand out. Billie’s delivery is calm and restrained throughout much of the song. She does not need to sing loudly to communicate the emotion. Her quiet vocals make the lyrics feel more personal, almost as if she is expressing thoughts that she would not normally say out loud. The song also reflects the way Billie approached relationships in her music at the time. Rather than presenting heartbreak as a simple story about being sad, she explored conflicting emotions. Someone can still care about another person while being angry with them, miss them while wanting distance, and feel hurt while trying to move forward. “bitches broken hearts” was released as a standalone single and was not part of the original dont smile at me tracklist. Its release came during a period when Billie was becoming increasingly recognized by listeners outside her original audience. The song gave fans another opportunity to hear Billie and Finneas working together and showed their ability to create an emotional song using a very small number of musical elements. The song also became notable for its visual presentation. Billie appeared in the music video surrounded by a dark and intimate atmosphere, matching the emotional tone of the track. The visuals focused more on mood and Billie’s presence than on a complicated storyline, keeping the attention on the feeling of the song. “bitches broken hearts” became an important part of Billie’s early catalog because it captured a specific moment in her life and artistic development. It was a quiet, personal song that showed her ability to turn complicated emotions surrounding love and heartbreak into something simple, atmospheric, and deeply intimate."
-  
   },
 
 
   {
+
     year:"2019",
 
     title:"When We All Fall Asleep, Where Do We Go?",
@@ -2800,28 +2833,14 @@ Although she had a strong interest in music, Eilish initially wanted to become a
     shortDescription:
       "Her debut studio album.",
 
-    description: 
-      "After the success of dont smile at me, Billie and Finneas began thinking about the next step in their careers. Billie was no longer just the girl who had uploaded Ocean Eyes to the internet. She had a real career, fans waiting for new music, and a record label supporting her work. Even so, they did not want to simply make a conventional pop album. They wanted to create something with its own identity, something that sounded different from everything Billie had done before. The idea for WHEN WE ALL FALL ASLEEP, WHERE DO WE GO? began to emerge from their desire to explore the stranger side of the human mind: dreams, nightmares, fear, insecurity, relationships, desire, anger, and the thoughts that appear when we are alone. The title came from the question of where we go when we fall asleep. For Billie, sleep and dreams had always been interesting subjects, especially because of her experiences with vivid dreams and nightmares. But the album was not literally a story about someone falling asleep. Sleep worked more as a metaphor for entering the mind. After that, Billie and Finneas began building the songs together. Most of the process continued to take place at the family home. They had already developed a very particular way of working. They would usually start with an idea, which could be a phrase, a concept, a melody, a sound, or simply a situation Billie wanted to turn into music. Finneas would then build the production around that idea. They recorded, listened, changed things, removed others, and continued experimenting until they reached the result they wanted. The biggest difference was that they did not need a huge team of producers coming in and out of the studio. It was mainly Billie and Finneas working together. This gave them a great deal of freedom. If Billie had a strange idea, they could simply try it. If Finneas created an unusual sound, they could put it into the song. There was no need to convince several people that the idea would work. One of the most important parts of this story is where the album was produced. Much of WHEN WE ALL FALL ASLEEP, WHERE DO WE GO? was created in Finneas’s bedroom at the family home in Highland Park, Los Angeles. It was not a huge professional studio. It was simply a bedroom equipped with a computer, recording equipment, instruments, and monitors. Billie would enter the room, the two would work on the song, and then she would record the vocals right there. This small environment directly influenced the sound of the album. Because Billie was very close to the microphone, her voice could be recorded in an extremely intimate way. In many songs, you can hear details that might normally be removed from a pop recording, such as breathing, small noises, mouth sounds, silences, and subtle changes in her voice. Instead of hiding these imperfections, Billie and Finneas began using them as part of the production. Billie’s voice became more than just a vocal; it became an instrument. While the album was being created, one of the most important songs in the entire project emerged: bury a friend. The idea began with a strange question: what if Billie were the monster under the bed? Instead of telling the story of the person who is afraid of the monster, Billie would become the creature herself. This created a completely different perspective. The monster was not simply a frightening creature, but could represent negative thoughts, fear, insecurity, and parts of a person’s own personality that they do not like to see. Billie later explained that the idea behind bury a friend changed the way she viewed the entire album. She began imagining the record as a nightmare world. From that point on, music and visuals began to work together. The album developed not only its own sound, but also its own visual universe. Another important song from this period was bad guy. Billie and Finneas wanted to create something that was almost the opposite of a traditional pop song. The production needed to be dry, minimal, and strange. Instead of filling the song with instruments, they left plenty of space. The bass became one of the main elements, while Billie’s voice was used in an almost theatrical way. In the song, Billie plays with her own image and takes on a provocative personality. She presents herself as the dangerous person in the story, but there is also a lot of humor in it. She was not simply trying to convince the world that she was a bad person. She was playing with the way people might perceive her. The song also established one of the defining characteristics of that era: Billie did not need to look or sound like a traditional pop star. She could be strange, wear oversized clothes, make funny expressions, sing almost in a whisper, and still dominate a pop song. As the album was being built, other ideas began taking shape. xanny was about Billie observing people using recreational drugs and her decision not to participate in that environment. The song had a slow, hazy atmosphere, almost as if everything were happening in slow motion. you should see me in a crown presented a much more aggressive and ambitious Billie, almost like a power fantasy in which she wanted to be at the top and be recognized. all the good girls go to hell mixed religious imagery, angels, demons, and destruction with a message about environmental problems. wish you were gay showed a much more vulnerable side. Billie sang about liking someone who did not return her feelings and imagining an alternative explanation for that rejection. when the party's over had an even more delicate atmosphere and focused on a relationship that was coming to an end. The production was extremely minimal, and Billie sang so closely that it felt as if she were speaking directly to the person she was addressing. At the same time that the album was being created, Billie was going through one of the most difficult periods of her life. Her fame was growing extremely quickly, but that did not mean she was happy. On the contrary, in 2018, while her career was beginning to explode, Billie experienced a period of clinical depression. She later explained that she felt deeply unhappy, isolated, and unable to enjoy things. Fame also made simple things, such as leaving the house or seeing friends, much more difficult. This situation was especially complicated because, from the outside, everything seemed perfect. Billie was achieving exactly what many artists dream of: successful songs, growing numbers of fans, bigger shows, and a rapidly expanding career. But internally, she could not experience that happiness in the same way. She explained in an interview that she was living incredible things professionally but felt as if she was not truly present enough to enjoy them. Billie also spoke about body image struggles and a period of self-harm when she was younger. She connected part of that period to the difficulties she experienced after an injury interrupted her path in dance. These experiences became an important part of the way she viewed her body, her identity, and her emotions. During the most difficult period of her depression, Billie also experienced suicidal thoughts. In later interviews, she revealed that she once believed she might not make it to the age of 17. She also explained that fame and isolation contributed to making that period even more difficult. Because of this, some of the songs on WHEN WE ALL FALL ASLEEP, WHERE DO WE GO? gained an even heavier meaning when viewed in the context of the life Billie was living. bury a friend, for example, was not simply a song about a fictional monster. The idea of the monster could be connected to the dark thoughts and parts of the mind that she herself struggled to confront. listen before i go, meanwhile, presents an extremely dark narrative about a person thinking about dying. The song should not simply be treated as a literal description of Billie’s life, but it was part of an album created during a period when she was dealing with real mental health struggles. Even with all of this happening, Billie continued working. Perhaps one of the most important things was that she still found a way through music to transform what she was feeling into something creative. Instead of completely hiding difficult emotions, she and Finneas turned them into songs, sounds, and images. In 2018, Billie’s career was already growing extremely quickly. She had millions of listeners, a highly dedicated fan base, and was performing bigger shows. The song lovely, a collaboration with Khalid, also helped increase her visibility. Meanwhile, Billie and Finneas continued working on the album. The pressure was also increasing. It was no longer simply a matter of releasing a few songs. People were waiting for Billie Eilish’s first album. The industry was paying attention, and expectations were growing about what she would do after dont smile at me. Even so, Billie and Finneas decided not to try to please everyone. They wanted to make the album the way they believed it should be made. The aesthetic also began becoming just as important as the music. Billie and her team were building their own visual universe. The album cover showed Billie sitting on a bed in a white environment, with completely black eyes and a frightening expression. The image looked as if it had come out of a nightmare and fit the album title perfectly. The music videos continued this aesthetic. Blood, spiders, eyes, teeth, darkness, creatures, and strange situations appeared throughout the era. But it was not simply a horror aesthetic. It was something surreal, like looking at a strange dream that did not follow the rules of the real world. The music and visuals began functioning as one complete experience. After all of this work, the moment that would completely change Billie’s career finally arrived. On March 29, 2019, WHEN WE ALL FALL ASLEEP, WHERE DO WE GO? was released. Billie was only 17 years old. The album contained 14 tracks and represented years of growth since Ocean Eyes, as well as months of work by Billie and Finneas, much of it inside that bedroom in Los Angeles. The reaction was enormous. The album debuted at number one on the Billboard 200 and quickly began dominating streaming platforms and music charts. But one song in particular started growing at an extraordinary rate: bad guy. The track became a worldwide phenomenon. It appeared constantly on radio stations, social media, videos, and music charts. Its strange and minimalist sound, which initially seemed very different from traditional pop, ultimately became one of the reasons the song became so successful. A few months later, bad guy reached number one on the Billboard Hot 100. Billie became the first artist born in the 21st century to reach number one on the chart. The girl who had started by uploading Ocean Eyes to SoundCloud at 13 was now at the top of the global pop music industry. In November 2019, Billie released everything i wanted, a song she wrote and produced with Finneas that explored the darker side of her sudden fame and the complicated emotions she was experiencing. The song was inspired by a dream in which Billie died by suicide, but its meaning ultimately became centered on the relationship between Billie and Finneas. Instead of focusing only on the frightening dream, the song expressed the idea that even when everything around her felt overwhelming, Finneas would be there for her. everything i wanted became another major success and showed a more vulnerable and personal side of Billie after the massive success of her debut album. The song also demonstrated how Billie and Finneas continued using their music to transform difficult emotions and personal experiences into something meaningful. And perhaps the most impressive part is that this success had not begun in a huge Los Angeles studio. It had started years earlier, when Billie was still a child, and continued to be built largely inside her brother’s bedroom. Finneas, who was also trying to establish his own career, became his sister’s main songwriter, producer, and creative partner. Billie, meanwhile, was not simply the singer. She participated in songwriting, artistic decisions, vocals, and the entire identity of the project. In just a few years, the two went from siblings making music at home to becoming one of the most important partnerships in modern pop music. The album, born from personal experiences, dreams, nightmares, experimentation, and countless hours of work in a bedroom, transformed Billie Eilish into a global superstar. And despite all the darkness surrounding that period, Billie managed to make it through. In 2019, she said that she was finally beginning to move out of that state and no longer felt as miserable as before. The release of WHEN WE ALL FALL ASLEEP, WHERE DO WE GO? was therefore much more than the release of an album. It was the moment when a teenager who had started making music with her brother at home became one of the biggest artists in the world, while simultaneously trying to understand her own adolescence, sudden fame, relationships, fears, and her own mind."
-  
+    description:
+      "Billie released her debut studio album. The project received enormous international attention and established her as one of the most important new names in pop music."
+
   },
 
-  {
-    year:"2020",
-
-    title:"No Time to Die",
-
-    image:
-      "imagens/no-time-to-die.jpe",
-
-    shortDescription:
-      "Official theme song for the 25th James Bond film.",
-
-    description: 
-      "No Time to Die was created as the official theme song for the James Bond film of the same name. Billie Eilish and Finneas wrote the song together when Billie was only 18 years old. Even though it was created for one of the biggest film franchises in history, they wanted the song to remain true to Billie’s own artistic identity rather than simply copying the traditional sound of previous Bond themes. The song begins with a quiet piano and Billie’s soft, controlled vocals. The production is intentionally minimal at first, creating a dark and mysterious atmosphere. Billie sings with very little force, making the performance feel intimate and almost like a private confession. The lyrics focus on betrayal, heartbreak, and broken trust. Billie sings about realizing that someone she trusted was not who she believed they were. The song carries a strong feeling of disappointment, but there is also a sense of acceptance. Instead of desperately trying to repair the relationship, the narrator recognizes the betrayal and moves away from it. As the song progresses, the production slowly becomes larger. Strings and orchestral elements begin to surround Billie’s voice, creating a cinematic atmosphere while maintaining the intimacy of the original composition. The contrast between the quiet beginning and the larger ending is one of the song’s most important musical characteristics. Billie’s vocal performance is also central to the song. Rather than using powerful vocals from the beginning, she remains restrained and allows small changes in her voice to communicate the emotion. Her breathing, soft harmonies, and layered vocals give the track a haunting quality. Finneas was responsible for much of the production alongside Stephen Lipson, while the orchestral arrangements expanded the song into a larger cinematic piece. The arrangement was designed to make the song feel connected to the world of James Bond without losing the sound that Billie and Finneas had developed together. One of the most striking moments comes toward the end, when the instrumentation becomes much more dramatic and Billie’s vocals rise above the orchestra. The song gradually builds tension instead of immediately revealing all of its power. This makes the final section feel like the emotional release of everything that had been building throughout the track. The song was released on February 13, 2020. It quickly became one of the most important standalone releases of Billie’s career during this period. It was not part of a new Billie Eilish studio album at the time. Instead, it existed as a single specifically connected to the James Bond film. No Time to Die also represented an important challenge for Billie and Finneas. They were creating music for a franchise with decades of history and a very recognizable musical tradition. Previous Bond themes were often associated with dramatic orchestration and powerful vocal performances, but Billie approached the opportunity differently. She brought the quietness, vulnerability, and minimalism that had become central to her music. The song still sounded grand and cinematic, but its emotional center remained Billie’s voice and the relationship between the lyrics and the production. The title itself reflects the darker atmosphere of the song. No Time to Die sounds like a statement of survival and determination, while the lyrics describe the emotional consequences of betrayal. The combination creates a song that feels dramatic without needing to rely entirely on traditional action-movie energy. The recording also demonstrated how well Billie and Finneas could adapt their creative process to a much larger musical environment. They began with a song built around a simple idea and intimate instrumentation, then allowed the orchestral arrangement to expand it without losing its original identity. No Time to Die became another example of Billie’s ability to turn quiet and personal emotions into something cinematic. Instead of trying to make the biggest possible song, Billie and Finneas allowed the tension to grow naturally, using space, silence, piano, vocals, and orchestration to create the final atmosphere. The result was a dark, emotional, and cinematic song that fit the world of James Bond while still sounding unmistakably like Billie Eilish."
-  
-  },
 
   {
+
     year:"2020",
 
     title:"Grammy Awards",
@@ -2832,28 +2851,14 @@ Although she had a strong interest in music, Eilish initially wanted to become a
     shortDescription:
       "A historic night at the Grammys.",
 
-    description: 
-      "Less than a year after the release of *WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?*, Billie Eilish was about to experience one of the most important nights of her career. On January 26, 2020, the 62nd Annual Grammy Awards took place in Los Angeles. Billie was only 18 years old and had been nominated in several of the ceremony’s biggest categories. What nobody knew yet was that the night would go down in history. Billie arrived at the Grammys with six nominations, including all four major categories: Album of the Year, Record of the Year, Song of the Year, and Best New Artist. *WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?* was nominated for Album of the Year, while “bad guy” was nominated for Record of the Year and Song of the Year. Billie was also nominated for Best New Artist. Her first major victory came when Billie won Best New Artist. For an artist who had started her career by uploading “Ocean Eyes” to the internet only a few years earlier, this was already an incredible achievement. But the night was only beginning. Then came Album of the Year. *WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?* won the category, placing Billie among the biggest names in music at that moment. The album that had been produced mainly by Billie and Finneas at home, with much of the work taking place in Finneas’s bedroom, was now receiving one of the highest honors possible in the music industry. Finneas was also essential to that victory. As the producer and songwriter behind the project, he had worked alongside his sister throughout the entire process. The two had spent months creating the songs in a small environment, experimenting with sounds and trying to make something that did not sound like traditional pop. Now, all of that work was being recognized on the Grammy stage. But two of the most important categories of the night were still left. When it was time to announce the winner of Record of the Year, “bad guy” took home the award. Billie looked genuinely surprised. The song that had started as a minimalist and unusual production in Finneas’s bedroom had just won one of the most prestigious awards in the music industry. Then came Song of the Year. Once again, “bad guy” won. That meant Billie had just won three of the biggest categories of the night at only 18 years old. But there was still Album of the Year, which she had also won. By the end of the ceremony, Billie Eilish had won the four major awards of the night: Album of the Year, Record of the Year, Song of the Year, and Best New Artist. It was a historic achievement. Billie became the youngest artist ever to win all four major Grammy categories in the same night. Other artists had achieved the four major awards throughout their careers, but nobody had done it at such a young age in a single ceremony. And there was something even more remarkable about her story. Billie had not reached that moment by following the traditional path of a pop star. She had not started with a huge career built by a massive team. Her story had begun years earlier, with a 13-year-old girl recording “Ocean Eyes” with her brother. Finneas also had an extraordinary night. In addition to being involved in Billie’s victories, he received awards for his work as a producer and songwriter. The partnership between the two, which had started inside their family home, was now being recognized on the biggest stage in the music industry. Billie wore an oversized Gucci outfit, with her signature black-and-green hair, long nails, and an appearance that continued to look completely different from the traditional Grammy aesthetic. Even while standing at the center of one of the biggest nights in music, she maintained the identity she had built throughout her career. During her Album of the Year acceptance speech, Billie spoke about Finneas and about how unbelievable the moment felt. The two of them were visibly emotional. For them, the victories represented much more than four trophies. They represented everything they had gone through together. Only a few years earlier, Billie had been an unknown teenager making music with her brother. Now, at 18, she was standing on the Grammy stage holding four of the biggest awards in music. The achievement also came after an extremely difficult period in Billie’s life. She had struggled with depression and suicidal thoughts while her career was beginning to grow. Because of that, the image of her standing on that stage had an even deeper meaning: a young woman who had experienced incredibly difficult moments was now standing in front of the entire world celebrating a historic achievement. But Billie did not treat that victory as the end of her journey. After the ceremony, her career continued to grow. The Grammys did not close the story of *WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?*. Instead, they helped establish the album as one of the most important works in pop music of that period and cemented Billie Eilish as one of the biggest artists of her generation. That night also showed the world that the partnership between Billie and Finneas was not a coincidence. The sound they had developed together inside a bedroom had managed to reach the very top of the music industry. And perhaps that is what makes that night so special: the four Grammys were not just a victory for Billie Eilish. They were the result of a journey that had started in an incredibly small and intimate way — two siblings making music together at home — and ended on the biggest stage in the world of music."
-  
+    description:
+      "At the 2020 Grammy Awards, Billie made history by winning the four major general-field categories, including Album of the Year, Record of the Year, Song of the Year and Best New Artist."
+
   },
 
-  {
-    year:"2020",
-
-    title:"The World’s A Little Blurry",
-
-    image:
-      "imagens/the-world's-a-little-blurry.jpe",
-
-    shortDescription:
-      "Her first documentary.",
-
-    description: 
-      "After the enormous success of WHEN WE ALL FALL ASLEEP, WHERE DO WE GO? and her historic night at the 2020 Grammy Awards, Billie Eilish had reached a completely different level of fame. She was no longer simply a young artist who had become successful online. She was now one of the biggest musicians in the world, and cameras had been following important parts of her life and career for years. The result was Billie Eilish: The World’s a Little Blurry, a documentary directed by R. J. Cutler. The film was released on February 26, 2021, through Apple TV+. Rather than being a traditional concert film or a simple biography, the documentary follows Billie during a particularly important period of her life, showing both her professional career and her personal experiences. The documentary gives viewers a much closer look at Billie outside of performances and music videos. It shows her at home with her family, working with Finneas, writing songs, rehearsing, traveling, performing, and dealing with the enormous attention that came with becoming famous at such a young age. One of the most important aspects of the film is Billie’s relationship with her family. Her parents, Maggie Baird and Patrick O'Connell, appear throughout the documentary, while Finneas remains one of the central figures in the story. Their relationship shows how closely connected Billie’s personal life and musical career were. Even after becoming a global superstar, she continued to spend much of her time surrounded by the same family environment where her career had begun. The film also shows Billie and Finneas working together creatively. Their songwriting process is presented in a very natural way, with the two discussing melodies, lyrics, production ideas, and arrangements. Instead of presenting the creation of music as something glamorous or distant, the documentary shows how much of it comes from ordinary moments, conversations, experimentation, and repeated attempts to find the right sound. Another important part of the documentary is the contrast between Billie’s public image and her private life. On stage, she could appear extremely confident and powerful, surrounded by thousands of fans. At home, however, the film shows a much quieter and more vulnerable side of her. She experiences excitement, frustration, insecurity, happiness, disappointment, and exhaustion like anyone else. The documentary also follows Billie during her live performances and shows how much her relationship with her audience had changed. The crowds had become enormous, and the reaction to her music was sometimes overwhelming. The film captures the strange experience of being recognized almost everywhere while still being extremely young. One particularly emotional part of the documentary involves Billie’s connection to her fans. She frequently expresses how much their support means to her, but the film also shows the pressure that comes with knowing that millions of people are watching and expecting something from her. Fame gives her opportunities that she could never have imagined, but it also makes ordinary life much more complicated. The documentary also explores Billie’s relationship with her own ambitions. She had achieved things that would have seemed impossible only a few years earlier, yet she still struggled with the feeling that she needed to continue improving. The pressure was not only coming from the music industry or the public. Much of it came from Billie herself. Her relationship with Finneas is another central element. The documentary shows that their partnership is not simply about producing successful songs. They are siblings who have grown up together, and their relationship includes arguments, jokes, disagreements, support, and moments of genuine affection. Their ability to work together is closely connected to their understanding of each other. The film also shows Billie dealing with the emotional consequences of her rapid rise to fame. She had gone from being a teenager making music at home to performing in front of massive audiences in only a few years. The transition happened so quickly that there was little time to experience a normal adolescence away from public attention. This becomes especially clear when the documentary shows Billie reflecting on her identity and the person she wanted to become. She was still growing up and figuring herself out while millions of people were simultaneously forming opinions about her. The title, The World’s a Little Blurry, reflects this feeling of uncertainty. Billie was experiencing extraordinary success, but her life was also changing faster than she could fully understand. The world around her had become enormous, while she was still trying to understand herself. The documentary became an important portrait of Billie because it did not present her only as a successful pop star. It showed the person behind the image: a young woman surrounded by family, music, fame, expectations, emotions, and an enormous audience. By following Billie through this period, The World’s a Little Blurry captured a unique moment in her life. She had already achieved extraordinary success, but she was still young enough to be discovering who she was. The documentary allowed audiences to see that behind the awards, records, concerts, and worldwide fame was still the same Billie who had begun making music with her brother at home."
-  
-  },
 
   {
+
     year:"2021",
 
     title:"Happier Than Ever",
@@ -2864,12 +2869,14 @@ Although she had a strong interest in music, Eilish initially wanted to become a
     shortDescription:
       "Her second studio album.",
 
-    description: 
-      "The creation of Happier Than Ever brought a different side of Billie Eilish to the surface. The album was written and produced with Finneas, and unlike the darker and more chaotic atmosphere of her previous record, this project became more open, intimate, and mature. Billie and Finneas were interested in creating music that felt natural rather than forcing themselves to recreate the sound that had made them famous. The album eventually became a collection of sixteen songs, each exploring a different emotion, experience, or part of Billie’s life. The album begins with Getting Older, one of its most personal songs. Billie reflects on how much her life had changed since becoming famous so young. She talks about growing older while being watched by millions of people, dealing with experiences that she was not always ready for, and trying to understand what parts of her life actually made her happy. The song immediately establishes that this album is about Billie looking back at her experiences with a much more mature perspective. I Didn’t Change My Number follows with a completely different attitude. Instead of sounding vulnerable, Billie sounds cold and decisive. The song is about cutting someone out of her life and refusing to feel guilty about it. The heavy beat and sharp delivery give the song an almost playful sense of revenge. It is Billie saying that she does not owe someone access to her simply because they once had it. Then comes Billie Bossa Nova, one of the album’s most unusual songs. Inspired by the sound of classic bossa nova and older romantic music, the song plays with the idea of romance, fantasy, and the glamorous image people have of Billie’s life. The title itself references the Brazilian musical style, while the production creates a smooth and almost cinematic atmosphere. Billie and Finneas deliberately made the song feel like something from an old movie, while the lyrics played with the difference between fantasy and reality. My Future changes the mood completely. Released in July 2020, the song begins as a slow and lonely ballad before transforming into a warmer, more rhythmic section. At its center is the idea of falling in love with yourself instead of depending on another person for happiness. Billie sings about looking toward her future and realizing that she can build a relationship with herself. The musical transformation reflects that emotional change: the beginning feels isolated, while the second half feels more hopeful and free. Oxytocin takes the album into a much more sensual direction. The production is electronic, aggressive, and rhythmic, with a strong pulse that gives the song a physical energy. The title refers to oxytocin, a hormone associated with bonding and physical intimacy. Billie uses the song to explore desire and sexuality in a way that feels confident rather than sentimental. It also represents her becoming more comfortable discussing adult subjects openly. GOLDWING is one of the shortest and most atmospheric tracks on the album. It begins with Billie’s voice layered in an almost choir-like arrangement before moving into a darker electronic production. The song has a protective feeling to it, addressing someone who is vulnerable and warning them about people who may try to take advantage of them. Its unusual vocal arrangement gives the song an almost spiritual atmosphere. Lost Cause brings back Billie’s sarcastic and confident side. The song is directed at someone she has realized is not worth her time anymore. Instead of being heartbroken, Billie sounds almost amused by the situation. The production is relaxed, with a smooth groove that contrasts with the dismissive attitude of the lyrics. The message is simple: sometimes the best thing you can do is recognize that someone is not worth chasing. Halley’s Comet is one of the album’s most romantic and vulnerable moments. Billie describes the feeling of unexpectedly falling in love and being surprised by how strongly another person can affect her. The song begins quietly, almost like a private thought, with soft vocals and a delicate instrumental. The title compares the feeling to Halley’s Comet, something rare and beautiful that appears only occasionally. Not My Responsibility is different from the other tracks because it is primarily a spoken-word piece rather than a conventional song. Billie addresses the constant judgments people make about her body, clothing, sexuality, and appearance. She questions why people feel entitled to decide what her body should look like or what her clothing should mean. The piece had previously been performed during her Where Do We Go? World Tour before being included on the album. OverHeated continues the subject of Billie’s relationship with fame and public perception. The song explores the pressure created by social media, beauty standards, and the expectation that celebrities should constantly look perfect. The production is energetic and electronic, creating a contrast with the anxiety underneath the lyrics. Billie questions the obsession people have with her appearance and with the idea of celebrities needing to maintain an impossible image. Everybody Dies takes a much more philosophical direction. Billie reflects on death and the fact that mortality is something everyone eventually has to face. Rather than treating death only as something terrifying, the song considers how knowing that life is temporary can change the way people think about existence. The production is slow and atmospheric, allowing the lyrics to remain the focus. Your Power is one of the most serious songs on the album. Billie uses a soft acoustic arrangement to discuss the abuse of power in relationships, particularly situations in which an older or more powerful person takes advantage of someone more vulnerable. Billie described the song as addressing many different situations that people have witnessed or experienced rather than simply being about one specific person. The quiet production makes the subject feel even more uncomfortable because there is no dramatic sound hiding the words. NDA focuses on another consequence of fame: the loss of privacy. The title refers to a non-disclosure agreement, something Billie had increasingly encountered as her personal and professional life became more complicated. The song mentions security, privacy, relationships, and the uncomfortable reality of having strangers intensely interested in her life. Its dark electronic production creates a feeling of paranoia and tension. Therefore I Am brings back the confident Billie from songs like COPYCAT. The title plays with René Descartes’ famous philosophical statement I think, therefore I am, but Billie uses it in a more sarcastic way. She dismisses people who act as though they know her simply because they see her in the media. The production is minimal and bass-heavy, while Billie delivers the lyrics with an intentionally relaxed attitude. The song became one of the album’s biggest singles. Then comes the title track, Happier Than Ever. The song begins extremely quietly, almost like a private confession. Billie sings about realizing that she is happier without a certain person in her life and about the emotional damage that relationship caused. But halfway through the song, everything changes. The soft acoustic ballad explodes into distorted electric guitars, louder drums, and increasingly powerful vocals. What begins as sadness becomes anger and finally feels like liberation. Billie has described the song as one of the most important songs she had written, and its structure became one of the defining moments of the album. The album ends with Male Fantasy, a much quieter song that brings the project back to intimacy. Billie reflects on loneliness, relationships, sexuality, and the difficulty of moving on from someone. Instead of ending with another explosive moment, the album closes quietly, almost as if Billie is left alone with her thoughts. The song reinforces the personal nature of the entire record. Together, the sixteen songs of Happier Than Ever create a portrait of Billie at a different stage of her life. Getting Older deals with growing up, I Didn’t Change My Number with cutting someone off, Billie Bossa Nova with romance and fantasy, my future with self-love, Oxytocin with desire, GOLDWING with vulnerability, Lost Cause with emotional detachment, Halley’s Comet with falling in love, Not My Responsibility and OverHeated with public judgment, Everybody Dies with mortality, Your Power with abuse of power, NDA with privacy and fame, Therefore I Am with criticism, Happier Than Ever with liberation, and Male Fantasy with loneliness and moving forward. The album was released on July 30, 2021, containing sixteen tracks and representing a more mature and intimate side of Billie Eilish. Rather than trying to repeat the darkness of her previous work, Billie and Finneas allowed the songs to move through different styles, from acoustic ballads and bossa nova influences to electronic production and distorted guitars. The result was an album that felt less like a single character or aesthetic and more like a collection of different sides of Billie herself."
-  
+    description:
+      "Billie released Happier Than Ever, her second studio album. The project presented a broader sound and marked a new artistic chapter."
+
   },
 
-  {      
+
+  {
+
     year:"2022",
 
     title:"Academy Award",
@@ -2878,15 +2885,16 @@ Although she had a strong interest in music, Eilish initially wanted to become a
       "imagens/oscar.jpg",
 
     shortDescription:
-      "Recognition from the film industry.",
+      "Recognition in cinema.",
 
-    description: 
-      "The success of No Time to Die continued beyond the song itself, as Billie Eilish and Finneas received major recognition for their work. At the 2021 Grammy Awards, No Time to Die won Best Song Written for Visual Media, adding another Grammy to Billie and Finneas’s growing collection. The award recognized the songwriting itself and highlighted how effectively the song connected music with the cinematic world of James Bond. The biggest moment came later at the 94th Academy Awards, held on March 27, 2022. No Time to Die was nominated for Best Original Song, competing against several other songs written specifically for films. Billie and Finneas attended the ceremony together, marking another major moment in their career. When No Time to Die was announced as the winner, Billie and Finneas became the first songwriting team to win the three major awards for the same song: the Grammy, the Golden Globe, and the Academy Award. For Billie, the achievement was particularly remarkable because she was only 20 years old. During their acceptance speech, Billie and Finneas thanked the people who had helped bring the song and the film together. The moment represented another step in the extraordinary career they had built together. Only a few years earlier, they had been making songs in a bedroom at home. Now, they were standing on one of the most famous stages in the entertainment industry receiving one of the most prestigious awards in film. The Academy Award also showed that Billie’s music could exist beyond the traditional boundaries of pop. No Time to Die had been created specifically for a film, but the songwriting, production, vocals, and emotional atmosphere were strong enough to receive recognition from both the music and film industries. For Billie and Finneas, the award became another major milestone in their creative partnership. Their ability to write and produce music together had already taken them from small home recordings to international success, and now their work had been recognized at the highest level of the film industry. Winning the Academy Award for No Time to Die therefore became an important chapter in Billie Eilish’s career. It was not simply another trophy. It represented the expansion of her artistic world, proving that the partnership between Billie and Finneas could create music capable of succeeding both as a song and as part of a major cinematic experience."
+    description:
+      "Billie and Finneas received the Academy Award for Best Original Song for No Time to Die, the theme song of the James Bond film."
 
   },
 
 
   {
+
     year:"2023",
 
     title:"What Was I Made For?",
@@ -2895,13 +2903,16 @@ Although she had a strong interest in music, Eilish initially wanted to become a
       "imagens/barbie.jpe",
 
     shortDescription:
-      "A new song created for cinema.",
+      "A new song for cinema.",
 
-    description: 
-      "In 2023, Billie Eilish and Finneas began working on a song for the upcoming Barbie film. Director Greta Gerwig and producer Mark Ronson wanted a song that could represent one of the most emotional moments of the movie, particularly the moment when Barbie begins questioning her identity, purpose, and existence. Billie and Finneas were invited to create something for the film, but at first they were not sure what they could make. The writing process was different from many of Billie’s previous songs. Instead of starting with a specific personal experience, the song had to connect with Barbie’s story while still feeling emotionally genuine. Billie and Finneas watched a scene from the film and began thinking about what Barbie might be feeling in that moment. The central question became what it means to suddenly realize that you do not know who you are or what you are supposed to be. From that idea came What Was I Made For?. The title itself became the central question of the song. Rather than presenting a clear answer, Billie sings about uncertainty, identity, purpose, and the feeling of becoming disconnected from the person you once believed you were. Although the song was written for a fictional character, its emotions were universal enough for listeners to connect them to their own lives. The production was intentionally extremely simple. Finneas built the song around a delicate piano arrangement, keeping the instrumentation quiet so that Billie’s voice and the lyrics remained the main focus. The song does not depend on a large beat or dramatic production. Instead, its emotional power comes from the space between the notes, the softness of Billie’s voice, and the gradual development of the arrangement. Billie’s vocal performance was also different from some of her earlier work. She sings with an incredibly soft and fragile tone, almost as if she is thinking out loud. Her voice gradually becomes more expressive as the song develops, but she never loses the intimate quality of the performance. The recording process also reflected this simplicity. Billie and Finneas wanted the song to feel vulnerable and honest rather than overly polished. The final production includes subtle strings and orchestral elements that expand the emotional atmosphere without overwhelming the central piano and vocal. The song was released on July 13, 2023, as part of the Barbie soundtrack. It was introduced to the public through the film’s promotional campaign and quickly became one of the most talked-about songs connected to the movie. The music video continued the emotional concept of the song. Billie appears in a room surrounded by miniature clothing racks and small versions of outfits from different moments of her career. As she removes the clothes from the racks, the video creates a visual representation of her relationship with her own identity and the different versions of herself she has presented throughout her career. The connection between Billie and the character of Barbie became one of the most interesting aspects of the song. Barbie is traditionally presented as someone who can become almost anything, but in the film she begins questioning what she actually is and what she wants to become. Billie was also creating the song during a period when she was growing older and entering a new stage of her own life. This made the emotional themes of the song feel particularly natural for her. What Was I Made For? became much bigger than a soundtrack song. It reached audiences who had never necessarily been interested in Billie’s previous music, while longtime fans recognized the intimate songwriting and production style she had developed with Finneas. The song also became a major commercial success. It reached the top of charts around the world and eventually became one of Billie Eilish’s most successful songs. Its popularity was driven not only by the Barbie film but also by listeners connecting deeply with its message about feeling lost, questioning your purpose, and trying to understand who you are. One of the reasons the song had such a strong impact was its simplicity. At a time when many major pop songs were built around large productions and energetic hooks, What Was I Made For? became successful by doing almost the opposite. It was quiet, slow, vulnerable, and emotionally direct. The song also demonstrated the continued evolution of Billie and Finneas as a songwriting partnership. Their earliest work had been created in a bedroom with minimalist production, and years later they were still able to create something powerful using the same basic philosophy: start with an emotion, remove everything unnecessary, and let the song speak for itself. What Was I Made For? ultimately became one of the defining songs of Billie Eilish’s career. It connected the world of Barbie with themes that were much larger than the movie itself: growing up, identity, uncertainty, loneliness, purpose, and the difficulty of understanding who you are. The song showed that Billie did not need to make a huge or complicated production to create something emotionally powerful. With a piano, delicate orchestration, Finneas’s production, and Billie’s voice, they created a song that became one of the most memorable musical moments of the Barbie era and another important step in Billie Eilish’s artistic evolution."
+    description:
+      "Billie and Finneas wrote What Was I Made For? for the film Barbie. The song became one of the artist's most recognized works and received major awards."
+
   },
-  
+
+
   {
+
     year:"2024",
 
     title:"HIT ME HARD AND SOFT",
@@ -2912,39 +2923,9 @@ Although she had a strong interest in music, Eilish initially wanted to become a
     shortDescription:
       "Her third studio album.",
 
-    description: 
-      "After the release of Happier Than Ever and the enormous success of What Was I Made For?, Billie Eilish and Finneas began working on a new album. This time, they wanted to create something that felt more connected as a complete experience. Instead of building the project around a large number of singles, they wanted the songs to work together and create a journey from beginning to end. The project eventually became HIT ME HARD AND SOFT. Billie described the album as something that should hit the listener emotionally in different ways. Some songs were meant to feel soft and intimate, while others would become much more intense. This contrast became one of the central ideas behind the album. Billie and Finneas once again handled the songwriting and production together. Much of the work was done in Finneas’s home studio, continuing the creative partnership that had existed since the beginning of Billie’s career. Their approach had become more sophisticated over the years, but they still focused on experimentation, unusual sounds, layered vocals, and creating productions that served the emotions of each song. One of the most important songs on the album is SKINNY. It opens the record and immediately introduces a more mature Billie. The song explores her relationship with her body, growing older, fame, and the feeling of being constantly observed. Billie reflects on how people can look at her from the outside while having no idea what she is actually experiencing internally. The production begins delicately, allowing her voice and lyrics to remain at the center. LUNCH takes the album in a completely different direction. The song is confident, playful, and sensual, with a much stronger rhythmic production. Billie sings about attraction and desire with a level of directness that represents another stage of her artistic development. The contrast between LUNCH and SKINNY helps establish the album’s idea of moving between different emotional extremes. CHIHIRO is one of the album’s most atmospheric tracks. Its title references Chihiro from the Studio Ghibli film Spirited Away, but the song is not simply a retelling of the movie. Instead, Billie uses the idea of searching for someone and trying to reach them emotionally. The production combines electronic textures, deep bass, layered vocals, and a hypnotic rhythm, creating a feeling of movement and uncertainty. BIRDS OF A FEATHER became one of the most recognizable songs from the album. The track sounds bright and romantic on the surface, but its lyrics deal with the intense idea of wanting to remain with someone even through death. The phrase birds of a feather represents two people who naturally belong together. Billie sings about a connection so strong that she does not want it to end. WILDFLOWER moves into a much more complicated emotional space. The song tells the story of a relationship involving a person who had previously been connected to someone Billie knew. Rather than presenting the situation as simple romance, Billie explores guilt, insecurity, comparison, and the feeling of wondering whether she has crossed an emotional boundary. The production is soft and restrained, allowing the uncomfortable emotions in the lyrics to remain exposed. THE GREATEST begins quietly but gradually becomes much more powerful. Billie sings about giving everything to someone and questioning whether that effort was ever truly appreciated. The song starts almost like a vulnerable confession before transforming into one of the album’s biggest musical moments. The production grows increasingly intense, with guitars and drums pushing the song toward an emotional climax. L’AMOUR DE MA VIE is divided into two very different sections. The first part sounds like a traditional heartbreak song, with Billie reflecting on a relationship that has ended. But then the production suddenly changes. The second half becomes electronic, rhythmic, and almost sarcastic, transforming the emotional perspective of the song. Billie moves from sadness toward detachment and even humor, showing that she is no longer trapped in the relationship. THE DINER is one of the strangest and most theatrical songs on the album. Billie creates a character who becomes obsessed with another person and imagines following them. The song plays with the perspective of a stalker, using dark humor and unsettling imagery. The production has an almost mechanical quality, creating a disturbing atmosphere while still remaining catchy. BITTERSUITE is one of the most complex songs on the album. It moves through several different musical sections, changing atmosphere and rhythm as Billie explores complicated emotions surrounding desire, relationships, and fantasy. The title itself combines the ideas of bitterness and a musical suite, reflecting the song’s shifting structure. The album closes with BLUE, which brings many of the ideas from the entire record together. The song moves through multiple sections and contains themes of loneliness, identity, relationships, and emotional exhaustion. It also connects to several ideas that appear earlier in the album, making the ending feel circular. Rather than simply stopping after the final song, the record feels as if it has returned to the emotional world where it began. The sequencing of the album was extremely important. HIT ME HARD AND SOFT was designed to be listened to as a complete record rather than simply a collection of individual songs. Songs flow into one another, musical ideas return later, and certain sounds and lyrical themes connect different parts of the album. The title HIT ME HARD AND SOFT describes this contrast. Some moments are extremely quiet and delicate, while others suddenly become huge and overwhelming. Billie and Finneas use that contrast throughout the record, moving between acoustic instruments, electronic production, distorted sounds, orchestration, deep bass, and extremely intimate vocals. Billie’s voice is also used in many different ways throughout the album. At times she sings almost directly into the microphone, creating the feeling of a private conversation. In other moments, her voice is layered into large harmonies or pushed into more powerful performances. The contrast allows the listener to experience the songs as different emotional states rather than hearing the same vocal approach throughout the album. The production also demonstrates how much Billie and Finneas had developed since their bedroom recordings. They continued using unconventional sounds and minimalist ideas, but the arrangements became much more detailed. Instead of making the songs complicated simply for the sake of complexity, they used production changes to represent changes in emotion. HIT ME HARD AND SOFT was released on May 17, 2024. Billie decided not to release a traditional single before the album, encouraging listeners to experience the project as a complete work. This was an unusual strategy for a major pop release, especially at a time when streaming platforms often encourage artists to release multiple singles before an album. The decision worked. The album immediately generated enormous attention, with fans listening to the entire project and discussing the songs individually while also analyzing how they connected together. BIRDS OF A FEATHER became one of the biggest songs from the album and eventually grew into a major global hit. The album also received widespread critical acclaim. Critics praised the songwriting, production, vocal performances, and especially the way Billie and Finneas created an album that felt cohesive without making every song sound the same. HIT ME HARD AND SOFT also represented an important stage in Billie’s personal and artistic growth. She was no longer the teenager who had released WHEN WE ALL FALL ASLEEP, WHERE DO WE GO? at 17. She was now an adult artist reflecting on relationships, fame, sexuality, her body, loneliness, and the complicated process of becoming comfortable with herself. The album continued the central idea that had existed throughout Billie’s career: vulnerability could be powerful. Instead of hiding uncomfortable emotions, Billie used them as the foundation of her songwriting. At the same time, she became more confident in exploring desire, humor, anger, romance, and independence. Finneas remained at the center of the process. Once again, the two siblings created the album together, writing, recording, producing, and shaping the sound as a team. Their partnership had evolved from making songs in a bedroom into one of the most successful creative collaborations in modern pop music, but the fundamental relationship between them remained the same. HIT ME HARD AND SOFT ultimately became more than another successful Billie Eilish album. It represented the point where years of experimentation, personal growth, and collaboration between Billie and Finneas came together into a highly cohesive project. The album could be soft, aggressive, romantic, uncomfortable, funny, dark, and vulnerable, sometimes within the same song. Rather than trying to recreate the sound of her previous albums, Billie used HIT ME HARD AND SOFT to show where she was at that moment in her life. The result was an album built around contrast: intimacy and intensity, love and insecurity, confidence and vulnerability, softness and power."
-  },
+    description:
+      "Billie released her third studio album, HIT ME HARD AND SOFT, once again developed in collaboration with Finneas. The project presents a more cohesive and experimental approach."
 
-  {
-    year:"2026",
-
-    title:"HIT ME HARD AND SOFT (3D MOVIE)",
-
-    image:
-      "imagens/hit-me-hard-and-soft3D.jpe",
-
-    shortDescription:
-      "concert film with James Cameron.",
-
-    description: 
-      "After the release of HIT ME HARD AND SOFT and the beginning of its world tour, Billie Eilish wanted to capture the experience of performing the album live in a way that went beyond a traditional concert recording. The tour had become a massive production, but Billie wanted audiences to experience something more intimate: what it felt like to actually be inside the show, surrounded by the crowd, the lights, the music, and the emotions of the performances. The idea eventually became BILLIE EILISH – HIT ME HARD AND SOFT: THE TOUR (LIVE IN 3D), a concert film created by Billie Eilish and filmmaker James Cameron. Instead of simply placing cameras at the front of a concert and recording the performance from a distance, the project was designed to put the audience inside Billie’s world and show the tour through her perspective. James Cameron became one of the most important people behind the project. Known for his work on major cinematic productions and his use of advanced filmmaking technology, Cameron approached the concert from a different perspective. He was interested not only in filming Billie performing, but also in capturing the relationship between Billie and her audience. Billie was also directly involved in the creative direction. This was important because the film was not intended to be simply a documentary about her tour. She wanted the experience to reflect how the concerts actually felt from her point of view. The goal was to show the energy and scale of the performances while also revealing quieter and more personal moments that audiences normally could not see. The film was captured during Billie’s HIT ME HARD AND SOFT tour, including performances in Manchester. The production used numerous strategically positioned cameras to capture the concert from different angles and distances. Some cameras were positioned to capture the enormous scale of the stage, while others were placed much closer to Billie and the audience. The use of 3D became one of the defining characteristics of the project. Rather than simply converting a normal concert recording into 3D afterward, the production was designed around an immersive experience. The intention was for the audience to feel as if they were physically inside the concert space, surrounded by the stage, lights, musicians, and crowd. This approach also changed the way the performances could be filmed. Billie could be shown extremely close to the camera during intimate moments, while the film could suddenly expand into enormous views of the entire arena. The contrast between closeness and scale reflected one of the central ideas of HIT ME HARD AND SOFT itself: moving between soft, vulnerable moments and powerful, overwhelming ones. The concert features songs from the HIT ME HARD AND SOFT era alongside performances that showcase Billie’s connection with her previous music. Songs such as SKINNY, LUNCH, CHIHIRO, BIRDS OF A FEATHER, WILDFLOWER, THE GREATEST, L’AMOUR DE MA VIE, THE DINER, BITTERSUITE, and BLUE become part of a larger live experience rather than simply being presented as individual music videos. The performances also show how the songs changed when Billie brought them from the studio to a massive audience. The quiet production of some tracks becomes much larger inside an arena, while the more energetic songs gain an entirely different intensity when thousands of people sing and move together. One of the most important aspects of the film is its focus on Billie’s relationship with the audience. The camera does not only stay on the stage. It also captures the crowd, the reactions of fans, the movement of the arena, and the moments when Billie interacts with the people watching her. This creates a different perspective from a normal concert recording. The audience is not treated as something that simply exists in the background. It becomes part of the experience itself. The film also includes moments that reveal what happens around the performances. Billie is shown preparing for the show and experiencing the pressure and excitement surrounding the concerts. These moments help create a connection between the enormous public performance and the person behind it. Finneas also appears as part of the concert experience. His role in Billie’s music remains essential, just as it has throughout their career. Their partnership, which began years earlier with songs created at home, had now expanded into a huge international production performed for thousands of people. The scale of the project represents how far Billie’s career had come. The same artist who once recorded songs with Finneas in a bedroom was now performing in enormous arenas while working with one of the most famous filmmakers in the world to create an immersive theatrical experience. The visual style of the film was also designed to complement the atmosphere of the HIT ME HARD AND SOFT era. The production combines dramatic lighting, large-scale stage visuals, close-up shots, movement, and carefully controlled camera perspectives. Instead of making the concert look distant and perfect, the filmmakers wanted it to feel immediate and physical. The result is a film that attempts to capture not only what a Billie Eilish concert looks like, but what it feels like. The audience experiences the pressure of the stage, the intensity of the music, the silence between songs, the reactions of the crowd, and the closeness between Billie and her fans. BILLIE EILISH – HIT ME HARD AND SOFT: THE TOUR (LIVE IN 3D) was released in 2026 as a theatrical concert film. It was directed by Billie Eilish and James Cameron and distributed by Paramount Pictures. The film represents another evolution in Billie’s relationship with visual media. Her career had already included music videos, documentaries, live films, and major cinematic projects, but this time she was not simply appearing in front of the camera. She was also helping direct the experience herself. For James Cameron, the project offered the opportunity to experiment with immersive concert filmmaking and bring the technology and visual language associated with large-scale cinema into a live music environment. For Billie, it provided a way to preserve a specific moment in her career and show audiences what the HIT ME HARD AND SOFT tour felt like from inside the experience. The film therefore became more than a recording of a concert. It became a visual document of the HIT ME HARD AND SOFT era and of the relationship Billie had built with her audience over years of performing. From the intimate moments on stage to the enormous crowds surrounding her, the film captures the contrast that has always existed at the center of Billie’s music: something can feel incredibly personal while being experienced by thousands of people at the same time. HIT ME HARD AND SOFT: THE TOUR ultimately represents another step in Billie Eilish’s artistic evolution. She began her career creating music in a bedroom, then moved to international stages, and eventually helped create a cinematic version of those performances alongside James Cameron. The result is an immersive portrait of an artist at a moment when her music, live performances, visual identity, and relationship with her audience had all grown to an entirely new scale."
-  
-  },
-
-    {
-    year:"2026",
-
-    title:"BE4?",
-
-    image:
-      "imagens/BE4.jpe",
-
-    shortDescription:
-      "Maybe a new album...",
-
-    description: 
-      '"been here." Billie shares an post, indicating she is working on new music.'
   }
 
 ];
@@ -2996,15 +2977,17 @@ let hasStarted = false;
 
 
 /* =========================================================
-   CSS VARIABLE HELPER
+   CSS VARIABLE NUMBER
    ========================================================= */
 
 function cssNum(varName){
 
   return parseFloat(
+
     getComputedStyle(
       document.documentElement
     ).getPropertyValue(varName)
+
   );
 
 }
@@ -3016,27 +2999,13 @@ function cssNum(varName){
 
 function buildTimeline(){
 
-  const bgLayer =
-    document.getElementById('bgLayer');
-
-
   /*
-     Keep the background repeated horizontally.
+     NOTE:
+     The background is now controlled entirely by CSS.
 
-     The background itself never moves.
-     JavaScript only changes background-position.
+     This means the JavaScript does NOT overwrite
+     the desktop/mobile background.
   */
-
-  bgLayer.style.backgroundImage =
-    `
-      linear-gradient(
-        180deg,
-        rgba(15,17,17,.88),
-        rgba(15,17,17,.94) 55%,
-        rgba(5,7,7,.98)
-      ),
-      url('${timelineConfig.BACKGROUND_IMAGE}')
-    `;
 
 
   const gap =
@@ -3083,7 +3052,9 @@ function buildTimeline(){
 
 
     <div class="event-date">
+
       ${timelineEvents[0].year}
+
     </div>
 
 
@@ -3092,12 +3063,17 @@ function buildTimeline(){
       <div class="event-body">
 
         <h3 class="event-title">
+
           The journey begins
+
         </h3>
 
+
         <p class="event-desc">
+
           Drag, scroll or use the arrows
           to explore the journey.
+
         </p>
 
       </div>
@@ -3113,11 +3089,15 @@ function buildTimeline(){
   /* OVERVIEW */
 
   const overviewList =
-    document.getElementById('overviewList');
+    document.getElementById(
+      'overviewList'
+    );
 
 
   const progressYears =
-    document.getElementById('progressYears');
+    document.getElementById(
+      'progressYears'
+    );
 
 
   const eventEls = [];
@@ -3135,11 +3115,16 @@ function buildTimeline(){
     >
 
       <span class="yr">
+
         Start
+
       </span>
 
+
       <span class="ttl">
+
         The journey begins
+
       </span>
 
     </button>
@@ -3202,7 +3187,9 @@ function buildTimeline(){
 
 
         <div class="event-date">
+
           ${ev.year}
+
         </div>
 
 
@@ -3210,76 +3197,93 @@ function buildTimeline(){
 
           ${
             position === 'bottom'
-            ? `
+              ? `
 
-              <div class="event-body">
+                <div class="event-body">
 
-                <h3 class="event-title">
-                  ${ev.title}
-                </h3>
+                  <h3 class="event-title">
 
-                <p class="event-desc">
-                  ${ev.shortDescription}
-                </p>
+                    ${ev.title}
 
-                <button
-                  type="button"
-                  class="event-more"
-                  data-event-index="${i}"
-                >
-                  Read more →
-                </button>
-
-              </div>
+                  </h3>
 
 
-              <div class="event-figure">
+                  <p class="event-desc">
 
-                <img
-                  src="${ev.image}"
-                  alt="${ev.title}"
-                  loading="lazy"
-                  draggable="false"
-                >
+                    ${ev.shortDescription}
 
-              </div>
-
-            `
-            : `
-
-              <div class="event-figure">
-
-                <img
-                  src="${ev.image}"
-                  alt="${ev.title}"
-                  loading="lazy"
-                  draggable="false"
-                >
-
-              </div>
+                  </p>
 
 
-              <div class="event-body">
+                  <button
+                    type="button"
+                    class="event-more"
+                    data-event-index="${i}"
+                  >
 
-                <h3 class="event-title">
-                  ${ev.title}
-                </h3>
+                    Read more →
 
-                <p class="event-desc">
-                  ${ev.shortDescription}
-                </p>
+                  </button>
 
-                <button
-                  type="button"
-                  class="event-more"
-                  data-event-index="${i}"
-                >
-                  Read more →
-                </button>
+                </div>
 
-              </div>
 
-            `
+                <div class="event-figure">
+
+                  <img
+                    src="${ev.image}"
+                    alt="${ev.title}"
+                    loading="lazy"
+                    draggable="false"
+                  >
+
+                </div>
+
+              `
+
+              : `
+
+                <div class="event-figure">
+
+                  <img
+                    src="${ev.image}"
+                    alt="${ev.title}"
+                    loading="lazy"
+                    draggable="false"
+                  >
+
+                </div>
+
+
+                <div class="event-body">
+
+                  <h3 class="event-title">
+
+                    ${ev.title}
+
+                  </h3>
+
+
+                  <p class="event-desc">
+
+                    ${ev.shortDescription}
+
+                  </p>
+
+
+                  <button
+                    type="button"
+                    class="event-more"
+                    data-event-index="${i}"
+                  >
+
+                    Read more →
+
+                  </button>
+
+                </div>
+
+              `
           }
 
         </div>
@@ -3307,11 +3311,16 @@ function buildTimeline(){
         >
 
           <span class="yr">
+
             ${ev.year}
+
           </span>
 
+
           <span class="ttl">
+
             ${ev.title}
+
           </span>
 
         </button>
@@ -3322,15 +3331,19 @@ function buildTimeline(){
       overviewList.appendChild(li);
 
 
-      /* PROGRESS YEARS */
+      /* YEARS */
 
       if(
+
         i === 0 ||
+
         i === timelineEvents.length - 1 ||
+
         i %
         Math.ceil(
           timelineEvents.length / 5
         ) === 0
+
       ){
 
         const span =
@@ -3378,18 +3391,24 @@ function buildTimeline(){
     <div class="panel-inner">
 
       <div class="label">
+
         End of the timeline
+
       </div>
 
 
       <h2>
+
         And the story continues...
+
       </h2>
 
 
       <p>
+
         ${timelineConfig.personName}
-        continues to create new chapters.
+        continues building new chapters.
+
       </p>
 
 
@@ -3398,7 +3417,9 @@ function buildTimeline(){
         class="btn-ghost"
         id="backToStartBtn"
       >
+
         ← Back to start
+
       </button>
 
     </div>
@@ -3411,6 +3432,7 @@ function buildTimeline(){
 
   const trackWidth =
     endX +
+
     Math.max(
       startPad * .5,
       window.innerWidth * .5
@@ -3487,6 +3509,7 @@ function animate(){
 
 
   currentScroll +=
+
     (
       targetScroll -
       currentScroll
@@ -3494,10 +3517,12 @@ function animate(){
 
 
   if(
+
     Math.abs(
       targetScroll -
       currentScroll
     ) < .05
+
   ){
 
     currentScroll =
@@ -3511,15 +3536,10 @@ function animate(){
 
 
   /*
-     IMPORTANT:
+     BACKGROUND PARALLAX
 
-     The background is NOT translated anymore.
-
-     Instead, only its repeating background-position
-     changes.
-
-     Because the image repeats on the X axis,
-     there is no empty area when scrolling.
+     The background repeats horizontally,
+     so it never disappears while scrolling.
   */
 
   const bg =
@@ -3528,10 +3548,13 @@ function animate(){
     );
 
 
-  bg.style.backgroundPosition =
+  bg.style.transform =
+
     `
-      center,
-      ${-currentScroll * .06}px top
+      translateX(
+        ${-currentScroll * .06}px
+      )
+      scale(1.08)
     `;
 
 
@@ -3559,12 +3582,15 @@ requestAnimationFrame(
 function updateProgress(){
 
   const pct =
+
     maxScroll > 0
+
       ? clamp(
           currentScroll / maxScroll,
           0,
           1
         ) * 100
+
       : 0;
 
 
@@ -3583,24 +3609,30 @@ function updateProgress(){
 function updateActiveEvent(){
 
   const centerX =
+
     currentScroll +
     window.innerWidth / 2;
 
 
   const dist0 =
+
     Math.abs(
       introX - centerX
     );
 
 
   introNode.classList.toggle(
+
     'active',
+
     dist0 <
     cssNum('--event-size') * .55
+
   );
 
 
   eventEls.forEach(
+
     (el,i)=>{
 
       const x =
@@ -3608,18 +3640,23 @@ function updateActiveEvent(){
 
 
       const dist =
+
         Math.abs(
           x - centerX
         );
 
 
       el.classList.toggle(
+
         'active',
+
         dist <
         cssNum('--event-size') * .55
+
       );
 
     }
+
   );
 
 }
@@ -3630,10 +3667,13 @@ function updateActiveEvent(){
    ========================================================= */
 
 const observer =
+
   new IntersectionObserver(
+
     entries=>{
 
       entries.forEach(
+
         entry=>{
 
           if(
@@ -3647,13 +3687,19 @@ const observer =
           }
 
         }
+
       );
 
     },
+
     {
+
       root:viewport,
+
       threshold:.05
+
     }
+
   );
 
 
@@ -3677,7 +3723,9 @@ observer.observe(
    ========================================================= */
 
 viewport.addEventListener(
+
   'wheel',
+
   e=>{
 
     if(
@@ -3694,32 +3742,44 @@ viewport.addEventListener(
 
 
     const delta =
+
       Math.abs(e.deltaX) >
       Math.abs(e.deltaY)
+
         ? e.deltaX
+
         : e.deltaY;
 
 
     targetScroll =
+
       clamp(
+
         targetScroll + delta,
+
         0,
+
         maxScroll
+
       );
 
   },
+
   {
     passive:false
   }
+
 );
 
 
 /* =========================================================
-   DRAGGING
+   DRAG
    ========================================================= */
 
 viewport.addEventListener(
+
   'pointerdown',
+
   e=>{
 
     if(
@@ -3775,11 +3835,14 @@ viewport.addEventListener(
     );
 
   }
+
 );
 
 
 viewport.addEventListener(
+
   'pointermove',
+
   e=>{
 
     if(!isDragging){
@@ -3790,15 +3853,21 @@ viewport.addEventListener(
 
 
     const dx =
+
       e.clientX -
       dragStartX;
 
 
     targetScroll =
+
       clamp(
+
         dragStartScroll - dx,
+
         0,
+
         maxScroll
+
       );
 
 
@@ -3818,6 +3887,7 @@ viewport.addEventListener(
     if(dt > 0){
 
       velocity =
+
         (
           lastPointerX -
           e.clientX
@@ -3834,6 +3904,7 @@ viewport.addEventListener(
       now;
 
   }
+
 );
 
 
@@ -3860,18 +3931,28 @@ function endDrag(){
 
 
   const momentum =
+
     clamp(
+
       velocity * 160,
+
       -500,
+
       500
+
     );
 
 
   targetScroll =
+
     clamp(
+
       targetScroll + momentum,
+
       0,
+
       maxScroll
+
     );
 
 }
@@ -3894,7 +3975,9 @@ viewport.addEventListener(
    ========================================================= */
 
 document.addEventListener(
+
   'keydown',
+
   e=>{
 
     if(modalOpen){
@@ -3928,10 +4011,15 @@ document.addEventListener(
     ){
 
       targetScroll =
+
         clamp(
+
           targetScroll + step,
+
           0,
+
           maxScroll
+
         );
 
     }
@@ -3942,10 +4030,15 @@ document.addEventListener(
     ){
 
       targetScroll =
+
         clamp(
+
           targetScroll - step,
+
           0,
+
           maxScroll
+
         );
 
     }
@@ -3955,8 +4048,7 @@ document.addEventListener(
       e.key === 'Home'
     ){
 
-      targetScroll =
-        0;
+      targetScroll = 0;
 
     }
 
@@ -3971,11 +4063,12 @@ document.addEventListener(
     }
 
   }
+
 );
 
 
 /* =========================================================
-   GO TO NEXT / PREVIOUS EVENT
+   GO TO NEAREST EVENT
    ========================================================= */
 
 function goToNearestEvent(
@@ -3983,6 +4076,7 @@ function goToNearestEvent(
 ){
 
   const centerX =
+
     targetScroll +
     window.innerWidth / 2;
 
@@ -4004,10 +4098,13 @@ function goToNearestEvent(
   if(direction > 0){
 
     target =
+
       candidates.find(
+
         x =>
           x >
           centerX + 20
+
       );
 
   }
@@ -4016,12 +4113,17 @@ function goToNearestEvent(
   else{
 
     target =
+
       [...candidates]
+
         .reverse()
+
         .find(
+
           x =>
             x <
             centerX - 20
+
         );
 
   }
@@ -4032,8 +4134,11 @@ function goToNearestEvent(
   ){
 
     target =
+
       direction > 0
+
         ? maxScroll
+
         : 0;
 
   }
@@ -4042,11 +4147,16 @@ function goToNearestEvent(
   else{
 
     target =
+
       clamp(
+
         target -
         window.innerWidth / 2,
+
         0,
+
         maxScroll
+
       );
 
   }
@@ -4059,13 +4169,15 @@ function goToNearestEvent(
 
 
 /* =========================================================
-   NAVIGATION BUTTONS
+   NEXT BUTTON
    ========================================================= */
 
 document
   .getElementById('nextBtn')
   .addEventListener(
+
     'click',
+
     ()=>{
 
       startJourney();
@@ -4073,13 +4185,20 @@ document
       goToNearestEvent(1);
 
     }
+
   );
 
+
+/* =========================================================
+   PREVIOUS BUTTON
+   ========================================================= */
 
 document
   .getElementById('prevBtn')
   .addEventListener(
+
     'click',
+
     ()=>{
 
       startJourney();
@@ -4087,6 +4206,7 @@ document
       goToNearestEvent(-1);
 
     }
+
   );
 
 
@@ -4122,11 +4242,16 @@ function startJourney(){
 
 
   targetScroll =
+
     clamp(
+
       introX -
       window.innerWidth / 2,
+
       0,
+
       maxScroll
+
     );
 
 
@@ -4156,7 +4281,9 @@ document
     '[data-action="go-start"]'
   )
   .addEventListener(
+
     'click',
+
     ()=>{
 
       hasStarted =
@@ -4181,6 +4308,7 @@ document
         0;
 
     }
+
   );
 
 
@@ -4193,12 +4321,15 @@ document
     '[data-action="go-timeline"]'
   )
   .addEventListener(
+
     'click',
+
     ()=>{
 
       startJourney();
 
     }
+
   );
 
 
@@ -4211,8 +4342,18 @@ document
     '[data-action="go-about"]'
   )
   .addEventListener(
+
     'click',
+
     ()=>{
+
+      /*
+         IMPORTANT:
+
+         About has its OWN image.
+
+         It does NOT use the background image.
+      */
 
       openModal({
 
@@ -4223,7 +4364,7 @@ document
           `About ${timelineConfig.personName}`,
 
         image:
-          timelineConfig.BACKGROUND_IMAGE,
+          timelineConfig.aboutImage,
 
         description:
           timelineConfig.about
@@ -4231,6 +4372,7 @@ document
       });
 
     }
+
   );
 
 
@@ -4239,13 +4381,17 @@ document
    ========================================================= */
 
 track.addEventListener(
+
   'click',
+
   e=>{
 
     if(
+
       e.target.closest(
         '#backToStartBtn'
       )
+
     ){
 
       targetScroll =
@@ -4254,26 +4400,30 @@ track.addEventListener(
     }
 
   }
+
 );
 
 
 /* =========================================================
-   MOBILE MENU
+   MENU
    ========================================================= */
 
 const menuToggle =
+
   document.getElementById(
     'menuToggle'
   );
 
 
 const overviewPanel =
+
   document.getElementById(
     'overviewPanel'
   );
 
 
 const overviewBackdrop =
+
   document.getElementById(
     'overviewBackdrop'
   );
@@ -4296,34 +4446,45 @@ function toggleOverview(
 
 
   menuToggle.setAttribute(
+
     'aria-expanded',
+
     String(open)
+
   );
 
 }
 
 
 menuToggle.addEventListener(
+
   'click',
+
   ()=>{
 
     toggleOverview(
+
       !overviewPanel.classList.contains(
         'open'
       )
+
     );
 
   }
+
 );
 
 
 overviewBackdrop.addEventListener(
+
   'click',
+
   ()=>{
 
     toggleOverview(false);
 
   }
+
 );
 
 
@@ -4334,10 +4495,13 @@ overviewBackdrop.addEventListener(
 document
   .getElementById('overviewList')
   .addEventListener(
+
     'click',
+
     e=>{
 
       const btn =
+
         e.target.closest(
           '[data-goto]'
         );
@@ -4357,23 +4521,30 @@ document
 
 
       const x =
+
         parseFloat(
           btn.dataset.goto
         );
 
 
       targetScroll =
+
         clamp(
+
           x -
           window.innerWidth / 2,
+
           0,
+
           maxScroll
+
         );
 
 
       toggleOverview(false);
 
     }
+
   );
 
 
@@ -4382,36 +4553,42 @@ document
    ========================================================= */
 
 const modalOverlay =
+
   document.getElementById(
     'modalOverlay'
   );
 
 
 const modalImage =
+
   document.getElementById(
     'modalImage'
   );
 
 
 const modalYear =
+
   document.getElementById(
     'modalYear'
   );
 
 
 const modalTitle =
+
   document.getElementById(
     'modalTitle'
   );
 
 
 const modalDesc =
+
   document.getElementById(
     'modalDesc'
   );
 
 
 const modalClose =
+
   document.getElementById(
     'modalClose'
   );
@@ -4460,12 +4637,15 @@ function openModal(ev){
 
 
   setTimeout(
+
     ()=>{
 
       modalClose.focus();
 
     },
+
     20
+
   );
 
 }
@@ -4493,10 +4673,13 @@ function closeModal(){
    ========================================================= */
 
 track.addEventListener(
+
   'click',
+
   e=>{
 
     const btn =
+
       e.target.closest(
         '.event-more'
       );
@@ -4515,14 +4698,18 @@ track.addEventListener(
 
 
     const index =
+
       Number(
         btn.dataset.eventIndex
       );
 
 
     if(
+
       !Number.isInteger(index) ||
+
       !timelineEvents[index]
+
     ){
 
       return;
@@ -4535,6 +4722,7 @@ track.addEventListener(
     );
 
   }
+
 );
 
 
@@ -4543,7 +4731,9 @@ track.addEventListener(
    ========================================================= */
 
 modalClose.addEventListener(
+
   'click',
+
   e=>{
 
     e.preventDefault();
@@ -4553,6 +4743,7 @@ modalClose.addEventListener(
     closeModal();
 
   }
+
 );
 
 
@@ -4561,12 +4752,16 @@ modalClose.addEventListener(
    ========================================================= */
 
 modalOverlay.addEventListener(
+
   'click',
+
   e=>{
 
     if(
+
       e.target ===
       modalOverlay
+
     ){
 
       closeModal();
@@ -4574,6 +4769,7 @@ modalOverlay.addEventListener(
     }
 
   }
+
 );
 
 
@@ -4582,12 +4778,16 @@ modalOverlay.addEventListener(
    ========================================================= */
 
 document.addEventListener(
+
   'keydown',
+
   e=>{
 
     if(
+
       e.key === 'Escape' &&
       modalOpen
+
     ){
 
       closeModal();
@@ -4595,6 +4795,7 @@ document.addEventListener(
     }
 
   }
+
 );
 
 
@@ -4603,31 +4804,44 @@ document.addEventListener(
    ========================================================= */
 
 window.addEventListener(
+
   'resize',
+
   ()=>{
 
     const trackWidth =
+
       parseFloat(
         track.style.width
       );
 
 
     maxScroll =
+
       Math.max(
+
         0,
+
         trackWidth -
         window.innerWidth
+
       );
 
 
     targetScroll =
+
       clamp(
+
         targetScroll,
+
         0,
+
         maxScroll
+
       );
 
   }
+
 );
 
 
@@ -4636,10 +4850,13 @@ window.addEventListener(
    ========================================================= */
 
 window.addEventListener(
+
   'load',
+
   ()=>{
 
     setTimeout(
+
       ()=>{
 
         document
@@ -4651,10 +4868,13 @@ window.addEventListener(
           );
 
       },
+
       900
+
     );
 
   }
+
 );
 
 </script>
