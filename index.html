@@ -2802,14 +2802,13 @@ a:focus-visible,
 
 <!-- =======================================================
      BACKGROUND MUSIC
-     Substitua o "src" abaixo pelo caminho do seu arquivo
-     de música (ex: "audio/musica.mp3").
+     The playlist (which files play, and in what order)
+     is configured in the JavaScript below, in the
+     "musicPlaylist" array. No need to edit this tag.
      ======================================================= -->
 
 <audio
   id="bgMusic"
-  src="audio/billie-eilish-theme.mp3"
-  loop
   preload="none"
 ></audio>
 
@@ -4739,6 +4738,31 @@ document
    MUTE / UNMUTE MUSIC
    ========================================================= */
 
+/*
+   ===========================================================
+   MUSIC PLAYLIST
+
+   Add as many tracks as you want, in the order they
+   should play. When one track ends, the next one starts
+   automatically. After the last track, it goes back to
+   the first one.
+
+   Just make sure the files exist at these paths (inside
+   an "audio" folder next to index.html, for example).
+   ===========================================================
+*/
+
+const musicPlaylist = [
+
+  "audio/billie-eilish-theme.mp3",
+
+  "audio/billie-eilish-theme-2.mp3"
+
+];
+
+let currentTrackIndex = 0;
+
+
 const bgMusic =
   document.getElementById('bgMusic');
 
@@ -4765,6 +4789,73 @@ let musicIsMuted = false;
 bgMusic.muted = false;
 
 bgMusic.volume = 0.6;
+
+
+/*
+   Loads a track from the playlist by its index and
+   plays it (if the music is not muted).
+*/
+
+function loadTrack(index,autoplay){
+
+  if(
+    !musicPlaylist.length
+  ){
+
+    return;
+
+  }
+
+  currentTrackIndex =
+    (
+      (
+        index %
+        musicPlaylist.length
+      ) +
+      musicPlaylist.length
+    ) %
+    musicPlaylist.length;
+
+  bgMusic.src =
+    musicPlaylist[
+      currentTrackIndex
+    ];
+
+  if(
+    autoplay &&
+    !musicIsMuted
+  ){
+
+    bgMusic.play().catch(
+      ()=>{}
+    );
+
+  }
+
+}
+
+
+/*
+   When a track finishes, automatically move on to the
+   next one in the playlist (looping back to the first
+   track after the last one).
+*/
+
+bgMusic.addEventListener(
+  'ended',
+  ()=>{
+
+    loadTrack(
+      currentTrackIndex + 1,
+      true
+    );
+
+  }
+);
+
+
+loadTrack(0,false);
+
 
 /*
    Browsers block audio with sound from starting
