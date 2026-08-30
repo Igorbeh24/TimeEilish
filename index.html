@@ -569,10 +569,26 @@ a:focus-visible,
 
 @media(max-width:620px){
 
+  .site-header{
+    padding:12px clamp(12px,4vw,24px);
+    min-height:58px;
+  }
+
+  .brand{
+    font-size:14px;
+  }
+
   .main-nav{
+    display:flex;
+    gap:clamp(7px,2.2vw,14px);
+    margin-left:auto;
+  }
 
-    display:none;
-
+  .main-nav button{
+    font-size:9px;
+    letter-spacing:.09em;
+    padding:5px 1px;
+    white-space:nowrap;
   }
 
 }
@@ -620,13 +636,242 @@ a:focus-visible,
 @media(min-width:621px){
 
   .menu-toggle{
-
     display:none;
-
   }
 
 }
 
+/* The main navigation is now available on every device/orientation. */
+@media(max-width:560px){
+
+  .menu-toggle{
+    display:none !important;
+  }
+
+}
+
+
+/* =========================================================
+   ALWAYS-VISIBLE NAVIGATION — SMALL SCREENS
+   ========================================================= */
+
+@media(max-width:430px){
+
+  .site-header{
+    padding:10px 12px;
+    min-height:54px;
+  }
+
+  .brand{
+    font-size:13px;
+    letter-spacing:.02em;
+  }
+
+  .main-nav{
+    gap:8px;
+  }
+
+  .main-nav button{
+    font-size:8px;
+    letter-spacing:.055em;
+    padding:5px 0;
+  }
+
+}
+
+/* =========================================================
+   FRAGRANCE
+   ========================================================= */
+
+.fragrance-panel{
+  position:fixed;
+  inset:0;
+  z-index:150;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(25,29,29,.82),
+      rgba(8,10,10,.98) 78%
+    );
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:
+    opacity .4s ease,
+    visibility .4s ease;
+  overflow-y:auto;
+  padding:90px clamp(18px,5vw,70px) 110px;
+}
+
+.fragrance-panel.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.fragrance-header{
+  width:min(1100px,100%);
+  margin:0 auto 34px;
+  text-align:center;
+}
+
+.fragrance-label{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--secondary);
+}
+
+.fragrance-header h2{
+  font-family:var(--font-title);
+  font-weight:300;
+  font-size:clamp(32px,5vw,54px);
+  margin-top:10px;
+}
+
+.fragrance-header p{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:10px;
+}
+
+.fragrance-close{
+  position:fixed;
+  top:20px;
+  right:clamp(14px,4vw,34px);
+  z-index:10;
+  width:38px;
+  height:38px;
+  border:1px solid var(--event-border);
+  border-radius:50%;
+  background:rgba(15,17,17,.78);
+  backdrop-filter:blur(8px);
+  font-size:20px;
+  color:var(--text);
+}
+
+.fragrance-close:hover{
+  color:var(--primary);
+  border-color:var(--primary);
+}
+
+.fragrance-grid{
+  width:min(1100px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:30px 22px;
+}
+
+.fragrance-card{
+  text-align:center;
+}
+
+.fragrance-figure{
+  width:100%;
+  aspect-ratio:1 / 1;
+  overflow:hidden;
+  border:1px solid var(--event-border);
+  border-radius:var(--event-radius);
+  background:var(--event-background);
+  box-shadow:
+    0 18px 40px -14px
+    var(--event-shadow);
+}
+
+.fragrance-figure img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(45%) contrast(1.04);
+  transition:
+    filter .5s ease,
+    transform .5s cubic-bezier(.4,0,.2,1);
+}
+
+.fragrance-card:hover .fragrance-figure img{
+  filter:grayscale(5%) contrast(1.02);
+  transform:scale(1.045);
+}
+
+.fragrance-name{
+  font-family:var(--font-title);
+  font-weight:600;
+  font-size:17px;
+  line-height:1.25;
+  margin-top:12px;
+}
+
+.fragrance-more{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text);
+  margin-top:9px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border-bottom:1px solid var(--secondary);
+  padding-bottom:3px;
+  transition:
+    border-color .3s,
+    color .3s,
+    gap .3s;
+}
+
+.fragrance-more:hover{
+  color:var(--primary);
+  border-color:var(--primary);
+  gap:10px;
+}
+
+@media(max-width:800px){
+  .fragrance-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:24px 16px;
+  }
+}
+
+@media(max-width:560px){
+  .fragrance-panel{
+    padding:76px 14px 90px;
+  }
+
+  .fragrance-header{
+    margin-bottom:24px;
+  }
+
+  .fragrance-header p{
+    font-size:11px;
+  }
+
+  .fragrance-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px 12px;
+  }
+
+  .fragrance-name{
+    font-size:14px;
+    margin-top:9px;
+  }
+
+  .fragrance-more{
+    font-size:8px;
+    margin-top:7px;
+  }
+
+  .fragrance-close{
+    top:12px;
+    right:12px;
+    width:34px;
+    height:34px;
+    font-size:18px;
+  }
+}
 
 /* =========================================================
    OVERVIEW
@@ -2440,6 +2685,10 @@ a:focus-visible,
       About
     </button>
 
+    <button data-action="go-fragrance">
+      Fragrance
+    </button>
+
   </nav>
 
 </header>
@@ -2614,6 +2863,50 @@ a:focus-visible,
   </button>
 
 </div>
+
+
+<!-- =======================================================
+     FRAGRANCE
+     ======================================================= -->
+
+<section
+  class="fragrance-panel"
+  id="fragrancePanel"
+  aria-label="Billie Eilish fragrances"
+  aria-hidden="true"
+>
+
+  <button
+    type="button"
+    class="fragrance-close"
+    id="fragranceClose"
+    aria-label="Close fragrances"
+  >
+    ×
+  </button>
+
+  <div class="fragrance-header">
+
+    <div class="fragrance-label">
+      Billie Eilish
+    </div>
+
+    <h2>
+      Fragrance
+    </h2>
+
+    <p>
+      Explore Billie Eilish's fragrance collection.
+    </p>
+
+  </div>
+
+  <div
+    class="fragrance-grid"
+    id="fragranceGrid"
+  ></div>
+
+</section>
 
 
 <!-- =======================================================
@@ -2958,6 +3251,58 @@ Although she had a strong interest in music, Eilish initially wanted to become a
 
     description: 
       '"been here." Billie shares an post, indicating she is working on new music.'
+  }
+
+];
+
+
+
+/* =========================================================
+   FRAGRANCES
+   ========================================================= */
+
+const fragranceProducts = [
+
+  {
+    name:"Eilish",
+    image:"imagens/eilish-fragrance.jpe",
+    description:
+      "Eilish is Billie Eilish's debut fragrance. The scent was developed as an extension of her creative world, combining a warm, sweet and sensual character with a darker, more mysterious atmosphere. Its presentation and bottle design were created to feel like an object connected to Billie's visual identity."
+  },
+
+  {
+    name:"Eilish No. 2",
+    image:"imagens/eilish-no-2.jpe",
+    description:
+      "Eilish No. 2 explores a darker and more woody side of the fragrance collection. It was created as a contrasting companion to the original Eilish fragrance, with a deeper atmosphere and a more mysterious character."
+  },
+
+  {
+    name:"Eilish No. 3",
+    image:"imagens/eilish-no-3.jpe",
+    description:
+      "Eilish No. 3 continues Billie's fragrance universe with a warmer and more expressive interpretation. The fragrance expands the collection while keeping the distinctive artistic approach associated with Billie's perfumes."
+  },
+
+  {
+    name:"Your Turn",
+    image:"imagens/your-turn.jpe",
+    description:
+      "Your Turn expands Billie Eilish's fragrance collection with a new concept and identity. The fragrance is presented as part of a world built around individuality, self-expression and the idea that everyone has their own story to tell."
+  },
+
+  {
+    name:"Your Turn II",
+    image:"imagens/your-turn-2.jpe",
+    description:
+      "Your Turn II develops the Your Turn concept into another fragrance experience. Its presentation continues the collection's focus on individuality and creative self-expression."
+  },
+
+  {
+    name:"Eilish Eau de Parfum",
+    image:"imagens/eilish-eau-de-parfum.jpe",
+    description:
+      "Eilish Eau de Parfum represents the original fragrance concept at the center of Billie's perfume collection. Its identity combines a recognizable visual presentation with a scent designed to feel warm, intimate and distinctive."
   }
 
 ];
@@ -4139,6 +4484,154 @@ document
 
 
 /* =========================================================
+   FRAGRANCE
+   ========================================================= */
+
+const fragrancePanel =
+  document.getElementById('fragrancePanel');
+
+const fragranceGrid =
+  document.getElementById('fragranceGrid');
+
+const fragranceClose =
+  document.getElementById('fragranceClose');
+
+
+function buildFragrances(){
+
+  if(!fragranceGrid){
+    return;
+  }
+
+  fragranceGrid.innerHTML =
+    fragranceProducts.map(
+      (product,i)=>`
+
+        <article class="fragrance-card">
+
+          <div class="fragrance-figure">
+
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+              loading="lazy"
+              draggable="false"
+            >
+
+          </div>
+
+          <h3 class="fragrance-name">
+            ${product.name}
+          </h3>
+
+          <button
+            type="button"
+            class="fragrance-more"
+            data-fragrance-index="${i}"
+          >
+            Read more →
+          </button>
+
+        </article>
+
+      `
+    ).join('');
+
+}
+
+
+function openFragrance(){
+
+  if(!fragrancePanel){
+    return;
+  }
+
+  fragrancePanel.classList.add('open');
+
+  fragrancePanel.setAttribute(
+    'aria-hidden',
+    'false'
+  );
+
+  document.body.style.overflow = 'hidden';
+
+}
+
+
+function closeFragrance(){
+
+  if(!fragrancePanel){
+    return;
+  }
+
+  fragrancePanel.classList.remove('open');
+
+  fragrancePanel.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  document.body.style.overflow = '';
+
+}
+
+
+buildFragrances();
+
+
+document
+  .querySelector(
+    '[data-action="go-fragrance"]'
+  )
+  .addEventListener(
+    'click',
+    openFragrance
+  );
+
+
+fragranceClose.addEventListener(
+  'click',
+  closeFragrance
+);
+
+
+fragranceGrid.addEventListener(
+  'click',
+  e=>{
+
+    const btn =
+      e.target.closest(
+        '.fragrance-more'
+      );
+
+    if(!btn){
+      return;
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const index =
+      Number(
+        btn.dataset.fragranceIndex
+      );
+
+    if(
+      !Number.isInteger(index) ||
+      !fragranceProducts[index]
+    ){
+      return;
+    }
+
+    openModal(
+      fragranceProducts[index]
+    );
+
+  }
+);
+
+
+/* =========================================================
    HEADER — HOME
    ========================================================= */
 
@@ -4583,6 +5076,27 @@ document.addEventListener(
 
       closeModal();
 
+    }
+
+  }
+);
+
+
+/* =========================================================
+   FRAGRANCE — ESCAPE
+   ========================================================= */
+
+document.addEventListener(
+  'keydown',
+  e=>{
+
+    if(
+      e.key === 'Escape' &&
+      fragrancePanel &&
+      fragrancePanel.classList.contains('open') &&
+      !modalOpen
+    ){
+      closeFragrance();
     }
 
   }
