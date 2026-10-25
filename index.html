@@ -2455,11 +2455,9 @@ a:focus-visible,
 
 .instagram-followers{
   margin:0 0 14px;
-  padding:12px 14px 8px;
-  border:1px solid var(--event-border);
-  background:rgba(15,17,17,.42);
+  padding:12px 14px 11px;
   text-align:center;
-  overflow:hidden;
+  border-bottom:1px solid var(--event-border);
 }
 
 .instagram-followers[hidden]{
@@ -2469,44 +2467,77 @@ a:focus-visible,
 .instagram-followers-label{
   font-family:var(--font-mono);
   font-size:9px;
-  letter-spacing:.18em;
+  letter-spacing:.16em;
   text-transform:uppercase;
   color:var(--secondary);
-  margin-bottom:4px;
+  margin-bottom:7px;
 }
 
-.instagram-followers-frame{
-  display:block;
-  width:100%;
-  height:76px;
-  border:0;
-  background:transparent;
-}
-
-.instagram-followers-credit{
-  display:inline-block;
-  margin-top:2px;
+.instagram-followers-number{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  min-height:36px;
   font-family:var(--font-mono);
-  font-size:9px;
-  letter-spacing:.04em;
-  color:var(--muted);
-  text-decoration:none;
-  border-bottom:1px solid rgba(184,216,216,.25);
-  padding-bottom:2px;
+  font-size:clamp(21px,4vw,30px);
+  line-height:1.2;
+  letter-spacing:.025em;
+  color:var(--primary);
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
 }
 
-.instagram-followers-credit:hover{
+.instagram-digit{
+  display:inline-block;
+  min-width:.61em;
+  transition:transform .22s ease, opacity .22s ease, color .22s ease;
+}
+
+.instagram-digit.changed{
+  animation:instagramDigitChange .42s ease both;
+}
+
+.instagram-followers-status{
+  min-height:13px;
+  margin-top:5px;
+  font-family:var(--font-mono);
+  font-size:8px;
+  letter-spacing:.05em;
+  color:var(--secondary);
+}
+
+.instagram-followers-status::before{
+  content:'';
+  display:inline-block;
+  width:5px;
+  height:5px;
+  margin:0 6px 1px 0;
+  border-radius:50%;
+  background:currentColor;
+}
+
+.instagram-followers-status.live{
   color:var(--primary);
-  border-color:var(--primary);
+}
+
+@keyframes instagramDigitChange{
+  0%{opacity:.25;transform:translateY(-5px)}
+  55%{opacity:1;transform:translateY(2px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .instagram-digit.changed{animation:none}
 }
 
 @media(max-width:560px){
   .instagram-followers{
     margin-bottom:10px;
-    padding:10px 8px 7px;
+    padding:9px 4px 10px;
   }
-  .instagram-followers-frame{
-    height:68px;
+  .instagram-followers-number{
+    font-size:clamp(19px,6vw,26px);
   }
 }
 
@@ -3339,26 +3370,20 @@ a:focus-visible,
         hidden
       >
         <div class="instagram-followers-label">
-          Instagram · Followers
+          Número de seguidores Instagram
         </div>
 
-        <iframe
-          class="instagram-followers-frame"
-          id="instagramFollowersFrame"
-          title="Billie Eilish live Instagram follower count"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-          src="https://livecounts.org/overlay/embed?c=instagram%3Abillieeilish&theme=dark&layout=horizontal&transparent=1&animated=1&glow=none&radius=0&scale=100&w=500&h=100"
-        ></iframe>
+        <div
+          class="instagram-followers-number"
+          id="instagramFollowersNumber"
+          role="status"
+          aria-live="polite"
+          aria-label="Contagem de seguidores do Instagram"
+        >Carregando…</div>
 
-        <a
-          class="instagram-followers-credit"
-          href="https://livecounts.org/instagram-live"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Live count by Livecounts.org ↗
-        </a>
+        <div class="instagram-followers-status" id="instagramFollowersStatus">
+          Buscando contagem atual
+        </div>
       </section>
 
       <div
@@ -5723,12 +5748,128 @@ const instagramFollowers =
     'instagramFollowers'
   );
 
+const instagramFollowersNumber =
+  document.getElementById('instagramFollowersNumber');
+
+const instagramFollowersStatus =
+  document.getElementById('instagramFollowersStatus');
+
+let lastInstagramFollowerCount = null;
+let instagramFollowerRefreshTimer = null;
+let instagramFollowerRequestInProgress = false;
+
 
 const modalClose =
   document.getElementById(
     'modalClose'
   );
 
+
+/* =========================================================
+   INSTAGRAM FOLLOWER COUNT
+   Uses a text-only request; no embedded counter/iframe.
+   The source may block requests or change its response format.
+   ========================================================= */
+
+function renderInstagramFollowerCount(count){
+  const formatted = new Intl.NumberFormat('pt-BR').format(count);
+  const previous = instagramFollowersNumber.dataset.count || '';
+  instagramFollowersNumber.replaceChildren();
+
+  for(let index = 0; index < formatted.length; index++){
+    const character = formatted[index];
+    const digit = document.createElement('span');
+    digit.className = 'instagram-digit';
+    digit.textContent = character;
+
+    if(previous && previous[index] !== character && /\\d/.test(character)){
+      digit.classList.add('changed');
+    }
+
+    instagramFollowersNumber.appendChild(digit);
+  }
+
+  instagramFollowersNumber.dataset.count = formatted;
+  instagramFollowersNumber.setAttribute('aria-label',
+    `${formatted} seguidores no Instagram`);
+  lastInstagramFollowerCount = count;
+}
+
+async function refreshInstagramFollowers(){
+  if(instagramFollowerRequestInProgress) return;
+  instagramFollowerRequestInProgress = true;
+
+  try{
+    // Instagram does not offer an unrestricted public follower-count API.
+    // This public reader is attempted as a lightweight text/JSON source.
+    const endpoint =
+      'https://r.jina.ai/http://www.instagram.com/api/v1/users/web_profile_info/?username=billieeilish';
+
+    const response = await fetch(endpoint, {
+      method:'GET',
+      cache:'no-store',
+      headers:{'Accept':'text/plain, application/json'}
+    });
+
+    if(!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const body = await response.text();
+    let count = null;
+
+    try{
+      const data = JSON.parse(body);
+      count =
+        data?.data?.user?.edge_followed_by?.count ??
+        data?.data?.user?.follower_count ??
+        data?.user?.edge_followed_by?.count ??
+        data?.edge_followed_by?.count ??
+        null;
+    }catch(_){}
+
+    if(!Number.isFinite(Number(count))){
+      const patterns = [
+        /"edge_followed_by"\\s*:\\s*\\{\\s*"count"\\s*:\\s*(\\d+)/,
+        /"follower_count"\\s*:\\s*(\\d+)/
+      ];
+      for(const pattern of patterns){
+        const match = body.match(pattern);
+        if(match){ count = Number(match[1]); break; }
+      }
+    }
+
+    if(!Number.isFinite(Number(count)) || Number(count) <= 0){
+      throw new Error('Contagem não encontrada na resposta');
+    }
+
+    renderInstagramFollowerCount(Number(count));
+    instagramFollowersStatus.textContent = 'Contagem atualizada · Billie Eilish';
+    instagramFollowersStatus.classList.add('live');
+  }catch(error){
+    if(lastInstagramFollowerCount === null){
+      instagramFollowersNumber.textContent = 'Indisponível';
+      instagramFollowersStatus.textContent =
+        'Não foi possível obter a contagem agora';
+    }else{
+      instagramFollowersStatus.textContent =
+        'Última contagem disponível · tentando atualizar';
+    }
+    instagramFollowersStatus.classList.remove('live');
+  }finally{
+    instagramFollowerRequestInProgress = false;
+  }
+}
+
+function startInstagramFollowerUpdates(){
+  refreshInstagramFollowers();
+  if(instagramFollowerRefreshTimer){
+    clearInterval(instagramFollowerRefreshTimer);
+  }
+  // Refresh every 60 seconds; the source itself may update less frequently.
+  instagramFollowerRefreshTimer = setInterval(
+    refreshInstagramFollowers,
+    60000
+  );
+}
 
 /* =========================================================
    OPEN MODAL
@@ -5773,6 +5914,13 @@ function openModal(ev){
   instagramFollowers.hidden =
     !ev.showFollowers;
 
+  if(ev.showFollowers){
+    startInstagramFollowerUpdates();
+  }else if(instagramFollowerRefreshTimer){
+    clearInterval(instagramFollowerRefreshTimer);
+    instagramFollowerRefreshTimer = null;
+  }
+
 
   if(ev.extraHtml){
 
@@ -5816,6 +5964,10 @@ function closeModal(){
     'open'
   );
 
+  if(instagramFollowerRefreshTimer){
+    clearInterval(instagramFollowerRefreshTimer);
+    instagramFollowerRefreshTimer = null;
+  }
 
   modalOpen =
     false;
