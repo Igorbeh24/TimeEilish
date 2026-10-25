@@ -2453,6 +2453,63 @@ a:focus-visible,
 }
 
 
+.instagram-followers{
+  margin:0 0 14px;
+  padding:12px 14px 8px;
+  border:1px solid var(--event-border);
+  background:rgba(15,17,17,.42);
+  text-align:center;
+  overflow:hidden;
+}
+
+.instagram-followers[hidden]{
+  display:none !important;
+}
+
+.instagram-followers-label{
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--secondary);
+  margin-bottom:4px;
+}
+
+.instagram-followers-frame{
+  display:block;
+  width:100%;
+  height:76px;
+  border:0;
+  background:transparent;
+}
+
+.instagram-followers-credit{
+  display:inline-block;
+  margin-top:2px;
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:.04em;
+  color:var(--muted);
+  text-decoration:none;
+  border-bottom:1px solid rgba(184,216,216,.25);
+  padding-bottom:2px;
+}
+
+.instagram-followers-credit:hover{
+  color:var(--primary);
+  border-color:var(--primary);
+}
+
+@media(max-width:560px){
+  .instagram-followers{
+    margin-bottom:10px;
+    padding:10px 8px 7px;
+  }
+  .instagram-followers-frame{
+    height:68px;
+  }
+}
+
 .modal-year{
 
   font-family:var(--font-mono);
@@ -3274,6 +3331,35 @@ a:focus-visible,
 
 
     <div class="modal-body">
+
+      <section
+        class="instagram-followers"
+        id="instagramFollowers"
+        aria-label="Billie Eilish Instagram live follower count"
+        hidden
+      >
+        <div class="instagram-followers-label">
+          Instagram · Followers
+        </div>
+
+        <iframe
+          class="instagram-followers-frame"
+          id="instagramFollowersFrame"
+          title="Billie Eilish live Instagram follower count"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          src="https://livecounts.org/overlay/embed?c=instagram%3Abillieeilish&theme=dark&layout=horizontal&transparent=1&animated=1&glow=none&radius=0&scale=100&w=500&h=100"
+        ></iframe>
+
+        <a
+          class="instagram-followers-credit"
+          href="https://livecounts.org/instagram-live"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Live count by Livecounts.org ↗
+        </a>
+      </section>
 
       <div
         class="modal-year"
@@ -5369,7 +5455,9 @@ document
           timelineConfig.ABOUT_IMAGE,
 
         description:
-          timelineConfig.about
+          timelineConfig.about,
+
+        showFollowers:true
 
       });
 
@@ -5630,6 +5718,11 @@ const modalExtra =
     'modalExtra'
   );
 
+const instagramFollowers =
+  document.getElementById(
+    'instagramFollowers'
+  );
+
 
 const modalClose =
   document.getElementById(
@@ -5676,6 +5769,9 @@ function openModal(ev){
 
   modalExtra.hidden =
     true;
+
+  instagramFollowers.hidden =
+    !ev.showFollowers;
 
 
   if(ev.extraHtml){
